@@ -22,17 +22,17 @@ jobs:
           flutter-version: '3.24.0'
           channel: 'stable'
 
-      - name: Install Melos
-        run: dart pub global activate melos
+      - name: Install dependencies
+        run: dart pub get
 
       - name: Bootstrap
-        run: melos bootstrap
+        run: dart run melos bootstrap
 
       - name: Format
-        run: melos run format
+        run: dart run melos run format
 
       - name: Analyze
-        run: melos run analyze
+        run: dart run melos run analyze
 
       - name: Test
-        run: melos run test
+        run: dart run melos run test
