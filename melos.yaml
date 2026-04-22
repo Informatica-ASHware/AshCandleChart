@@ -5,21 +5,21 @@ packages:
 
 scripts:
   format:
-    run: melos exec -- "dart format ."
+    run: dart run melos exec -- "dart format ."
     description: Run `dart format` in all packages.
 
   analyze:
-    run: melos exec -- "dart analyze --fatal-infos"
+    run: dart run melos exec -- "dart analyze --fatal-infos"
     description: Run `dart analyze` in all packages.
 
   test:
-    run: melos exec --dir-exists="test" -- "flutter test || dart test"
+    run: dart run melos exec --dir-exists="test" -- "flutter test || dart test"
     description: Run tests in all packages.
 
   pana:
-    run: melos exec -- "pana --no-warning"
+    run: dart run melos exec -- "pana --no-warning"
     description: Run `pana` in all packages.
 
   bootstrap:
-    run: melos bootstrap
+    run: dart run melos bootstrap
     description: Bootstrap the workspace.
