@@ -3,8 +3,16 @@ import 'dart:io';
 import 'dart:isolate';
 import 'isolate_messages.dart';
 
+import '../indicators/indicator.dart';
+import '../indicators/indicator_registry.dart';
+import '../indicators/indicator_pipeline.dart';
+import '../series/series.dart';
+
 /// Function signature for the task handler running in the worker isolate.
 typedef WorkerHandler = FutureOr<Object?> Function(String method, Object? payload);
+
+/// A function that returns an [IndicatorRegistry]. MUST be a top-level or static function.
+typedef RegistryProvider = IndicatorRegistry Function();
 
 /// A pool of Isolates to perform heavy computations off the UI thread.
 ///
@@ -27,13 +35,15 @@ class IsolatePool {
   /// Initializes the pool by spawning the workers.
   ///
   /// The [handler] MUST be a top-level or static function to be sent to the isolates.
-  Future<void> initialize(WorkerHandler handler) async {
+  /// The [registryProvider] is optional and used for indicator batch processing.
+  /// It MUST also be a top-level or static function.
+  Future<void> initialize(WorkerHandler handler, {RegistryProvider? registryProvider}) async {
     if (_isDisposed) throw StateError('IsolatePool is disposed');
     if (_workers.isNotEmpty) return;
 
     for (int i = 0; i < _workerCount; i++) {
       final worker = _Worker();
-      await worker.start(handler);
+      await worker.start(handler, registryProvider);
       worker.responses.listen(_handleResponse);
       _workers.add(worker);
     }
@@ -62,6 +72,36 @@ class IsolatePool {
     worker.send(request);
 
     return completer.future;
+  }
+
+  /// Computes a batch of indicators in one of the isolates.
+  Future<Map<String, Object>> computeIndicatorBatch(
+    List<IndicatorConfig> configs,
+    Series series, {
+    String? requestId,
+  }) async {
+    if (_isDisposed) throw StateError('IsolatePool is disposed');
+    if (_workers.isEmpty) throw StateError('IsolatePool is not initialized');
+
+    final id = requestId ?? _generateId();
+    final completer = Completer<Object?>();
+    _pendingRequests[id] = completer;
+
+    final request = ComputeRequest.indicatorBatch(
+      requestId: id,
+      configs: configs,
+      series: series,
+    );
+
+    // Simple round-robin load balancing
+    final worker = _workers[_nextWorkerIndex];
+    _nextWorkerIndex = (_nextWorkerIndex + 1) % _workers.length;
+
+    _requestToWorker[id] = worker;
+    worker.send(request);
+
+    final result = await completer.future;
+    return result as Map<String, Object>;
   }
 
   /// Cancels a pending request by its [requestId].
@@ -128,9 +168,13 @@ class _Worker {
 
   Stream<ComputeResponse> get responses => _responsesController.stream;
 
-  Future<void> start(WorkerHandler handler) async {
+  Future<void> start(WorkerHandler handler, RegistryProvider? registryProvider) async {
     _fromIsolate = ReceivePort();
-    _isolate = await Isolate.spawn(_workerEntry, [_fromIsolate.sendPort, handler]);
+    _isolate = await Isolate.spawn(_workerEntry, [
+      _fromIsolate.sendPort,
+      handler,
+      if (registryProvider != null) registryProvider,
+    ]);
 
     final completer = Completer<SendPort>();
     _fromIsolate.listen((message) {
@@ -164,6 +208,10 @@ class _Worker {
 
     final canceledRequests = <String>{};
 
+    final registryProvider = args.length > 2 ? args[2] as RegistryProvider : null;
+    final registry = registryProvider?.call();
+    final pipeline = IndicatorPipeline();
+
     receivePort.listen((message) async {
       if (message is ControlMessage) {
         message.when(
@@ -183,15 +231,24 @@ class _Worker {
         }
 
         try {
-          final result = await handler(message.method, message.payload);
+          final result = await message.when(
+            (requestId, method, payload) => handler(method, payload),
+            indicatorBatch: (requestId, configs, series) {
+              if (registry == null) {
+                throw StateError('Indicator batch processing requested but no RegistryProvider was provided during initialization.');
+              }
+              return pipeline.executeBatch(configs, series, registry);
+            },
+          );
+
           if (!canceledRequests.contains(message.requestId)) {
             sendPort.send(ComputeResponse(requestId: message.requestId, payload: result));
           } else {
             canceledRequests.remove(message.requestId);
           }
-        } catch (e) {
+        } catch (e, stack) {
           if (!canceledRequests.contains(message.requestId)) {
-            sendPort.send(ComputeResponse(requestId: message.requestId, error: e.toString()));
+            sendPort.send(ComputeResponse(requestId: message.requestId, error: '$e\n$stack'));
           } else {
             canceledRequests.remove(message.requestId);
           }

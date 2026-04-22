@@ -18,13 +18,53 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ComputeRequest {
   /// Unique identifier for the request, used for correlation and cancellation.
   String get requestId => throw _privateConstructorUsedError;
-
-  /// The method or operation to perform.
-  String get method => throw _privateConstructorUsedError;
-
-  /// The payload for the request.
-  /// Should ideally contain [TransferableTypedData] for large data.
-  Object? get payload => throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String requestId, String method, Object? payload)
+        $default, {
+    required TResult Function(
+            String requestId, List<IndicatorConfig> configs, Series series)
+        indicatorBatch,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(String requestId, String method, Object? payload)?
+        $default, {
+    TResult? Function(
+            String requestId, List<IndicatorConfig> configs, Series series)?
+        indicatorBatch,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String requestId, String method, Object? payload)?
+        $default, {
+    TResult Function(
+            String requestId, List<IndicatorConfig> configs, Series series)?
+        indicatorBatch,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_ComputeRequest value) $default, {
+    required TResult Function(_IndicatorBatchRequest value) indicatorBatch,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_ComputeRequest value)? $default, {
+    TResult? Function(_IndicatorBatchRequest value)? indicatorBatch,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_ComputeRequest value)? $default, {
+    TResult Function(_IndicatorBatchRequest value)? indicatorBatch,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of ComputeRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -39,7 +79,7 @@ abstract class $ComputeRequestCopyWith<$Res> {
           ComputeRequest value, $Res Function(ComputeRequest) then) =
       _$ComputeRequestCopyWithImpl<$Res, ComputeRequest>;
   @useResult
-  $Res call({String requestId, String method, Object? payload});
+  $Res call({String requestId});
 }
 
 /// @nodoc
@@ -58,19 +98,12 @@ class _$ComputeRequestCopyWithImpl<$Res, $Val extends ComputeRequest>
   @override
   $Res call({
     Object? requestId = null,
-    Object? method = null,
-    Object? payload = freezed,
   }) {
     return _then(_value.copyWith(
       requestId: null == requestId
           ? _value.requestId
           : requestId // ignore: cast_nullable_to_non_nullable
               as String,
-      method: null == method
-          ? _value.method
-          : method // ignore: cast_nullable_to_non_nullable
-              as String,
-      payload: freezed == payload ? _value.payload : payload,
     ) as $Val);
   }
 }
@@ -164,6 +197,77 @@ class _$ComputeRequestImpl implements _ComputeRequest {
   _$$ComputeRequestImplCopyWith<_$ComputeRequestImpl> get copyWith =>
       __$$ComputeRequestImplCopyWithImpl<_$ComputeRequestImpl>(
           this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String requestId, String method, Object? payload)
+        $default, {
+    required TResult Function(
+            String requestId, List<IndicatorConfig> configs, Series series)
+        indicatorBatch,
+  }) {
+    return $default(requestId, method, payload);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(String requestId, String method, Object? payload)?
+        $default, {
+    TResult? Function(
+            String requestId, List<IndicatorConfig> configs, Series series)?
+        indicatorBatch,
+  }) {
+    return $default?.call(requestId, method, payload);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String requestId, String method, Object? payload)?
+        $default, {
+    TResult Function(
+            String requestId, List<IndicatorConfig> configs, Series series)?
+        indicatorBatch,
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(requestId, method, payload);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_ComputeRequest value) $default, {
+    required TResult Function(_IndicatorBatchRequest value) indicatorBatch,
+  }) {
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_ComputeRequest value)? $default, {
+    TResult? Function(_IndicatorBatchRequest value)? indicatorBatch,
+  }) {
+    return $default?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_ComputeRequest value)? $default, {
+    TResult Function(_IndicatorBatchRequest value)? indicatorBatch,
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
 }
 
 abstract class _ComputeRequest implements ComputeRequest {
@@ -177,12 +281,10 @@ abstract class _ComputeRequest implements ComputeRequest {
   String get requestId;
 
   /// The method or operation to perform.
-  @override
   String get method;
 
   /// The payload for the request.
   /// Should ideally contain [TransferableTypedData] for large data.
-  @override
   Object? get payload;
 
   /// Create a copy of ComputeRequest
@@ -191,6 +293,194 @@ abstract class _ComputeRequest implements ComputeRequest {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ComputeRequestImplCopyWith<_$ComputeRequestImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$IndicatorBatchRequestImplCopyWith<$Res>
+    implements $ComputeRequestCopyWith<$Res> {
+  factory _$$IndicatorBatchRequestImplCopyWith(
+          _$IndicatorBatchRequestImpl value,
+          $Res Function(_$IndicatorBatchRequestImpl) then) =
+      __$$IndicatorBatchRequestImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String requestId, List<IndicatorConfig> configs, Series series});
+}
+
+/// @nodoc
+class __$$IndicatorBatchRequestImplCopyWithImpl<$Res>
+    extends _$ComputeRequestCopyWithImpl<$Res, _$IndicatorBatchRequestImpl>
+    implements _$$IndicatorBatchRequestImplCopyWith<$Res> {
+  __$$IndicatorBatchRequestImplCopyWithImpl(_$IndicatorBatchRequestImpl _value,
+      $Res Function(_$IndicatorBatchRequestImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ComputeRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? requestId = null,
+    Object? configs = null,
+    Object? series = null,
+  }) {
+    return _then(_$IndicatorBatchRequestImpl(
+      requestId: null == requestId
+          ? _value.requestId
+          : requestId // ignore: cast_nullable_to_non_nullable
+              as String,
+      configs: null == configs
+          ? _value._configs
+          : configs // ignore: cast_nullable_to_non_nullable
+              as List<IndicatorConfig>,
+      series: null == series
+          ? _value.series
+          : series // ignore: cast_nullable_to_non_nullable
+              as Series,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$IndicatorBatchRequestImpl implements _IndicatorBatchRequest {
+  const _$IndicatorBatchRequestImpl(
+      {required this.requestId,
+      required final List<IndicatorConfig> configs,
+      required this.series})
+      : _configs = configs;
+
+  @override
+  final String requestId;
+  final List<IndicatorConfig> _configs;
+  @override
+  List<IndicatorConfig> get configs {
+    if (_configs is EqualUnmodifiableListView) return _configs;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_configs);
+  }
+
+  @override
+  final Series series;
+
+  @override
+  String toString() {
+    return 'ComputeRequest.indicatorBatch(requestId: $requestId, configs: $configs, series: $series)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$IndicatorBatchRequestImpl &&
+            (identical(other.requestId, requestId) ||
+                other.requestId == requestId) &&
+            const DeepCollectionEquality().equals(other._configs, _configs) &&
+            (identical(other.series, series) || other.series == series));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, requestId,
+      const DeepCollectionEquality().hash(_configs), series);
+
+  /// Create a copy of ComputeRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$IndicatorBatchRequestImplCopyWith<_$IndicatorBatchRequestImpl>
+      get copyWith => __$$IndicatorBatchRequestImplCopyWithImpl<
+          _$IndicatorBatchRequestImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String requestId, String method, Object? payload)
+        $default, {
+    required TResult Function(
+            String requestId, List<IndicatorConfig> configs, Series series)
+        indicatorBatch,
+  }) {
+    return indicatorBatch(requestId, configs, series);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(String requestId, String method, Object? payload)?
+        $default, {
+    TResult? Function(
+            String requestId, List<IndicatorConfig> configs, Series series)?
+        indicatorBatch,
+  }) {
+    return indicatorBatch?.call(requestId, configs, series);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String requestId, String method, Object? payload)?
+        $default, {
+    TResult Function(
+            String requestId, List<IndicatorConfig> configs, Series series)?
+        indicatorBatch,
+    required TResult orElse(),
+  }) {
+    if (indicatorBatch != null) {
+      return indicatorBatch(requestId, configs, series);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_ComputeRequest value) $default, {
+    required TResult Function(_IndicatorBatchRequest value) indicatorBatch,
+  }) {
+    return indicatorBatch(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_ComputeRequest value)? $default, {
+    TResult? Function(_IndicatorBatchRequest value)? indicatorBatch,
+  }) {
+    return indicatorBatch?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_ComputeRequest value)? $default, {
+    TResult Function(_IndicatorBatchRequest value)? indicatorBatch,
+    required TResult orElse(),
+  }) {
+    if (indicatorBatch != null) {
+      return indicatorBatch(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _IndicatorBatchRequest implements ComputeRequest {
+  const factory _IndicatorBatchRequest(
+      {required final String requestId,
+      required final List<IndicatorConfig> configs,
+      required final Series series}) = _$IndicatorBatchRequestImpl;
+
+  @override
+  String get requestId;
+  List<IndicatorConfig> get configs;
+  Series get series;
+
+  /// Create a copy of ComputeRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$IndicatorBatchRequestImplCopyWith<_$IndicatorBatchRequestImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
