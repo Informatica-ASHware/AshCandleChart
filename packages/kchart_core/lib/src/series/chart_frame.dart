@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'annotation.dart';
 import 'series.dart';
 import 'viewport.dart';
 
@@ -20,6 +21,9 @@ class ChartFrame with _$ChartFrame {
 
     /// The current [Viewport] state.
     required Viewport viewport,
+
+    /// The collection of annotations (drawings) in the chart.
+    @Default(AnnotationDocument()) AnnotationDocument annotations,
 
     /// List of overlays (e.g., drawings, alerts, etc.) to be rendered.
     required List<dynamic> overlays,
