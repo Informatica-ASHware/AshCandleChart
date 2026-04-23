@@ -114,7 +114,9 @@ void main() {
     final double avgTimeMs = times.reduce((a, b) => a + b) / times.length / 1000.0;
     final double maxTimeMs = times.reduce((a, b) => a > b ? a : b) / 1000.0;
 
+    // ignore: avoid_print
     print('Average paint time: ${avgTimeMs.toStringAsFixed(3)}ms');
+    // ignore: avoid_print
     print('Maximum paint time: ${maxTimeMs.toStringAsFixed(3)}ms');
 
     // Threshold increased to 32ms to account for CI environment noise/outliers.

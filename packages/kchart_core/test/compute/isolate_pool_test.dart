@@ -57,6 +57,7 @@ void main() {
     final result = await pool.compute('float_transfer', transferable);
     stopwatch.stop();
 
+    // ignore: avoid_print
     print('Transfer and sum of $count floats took ${stopwatch.elapsedMilliseconds}ms');
 
     expect(result, isA<TransferableTypedData>());
