@@ -8,8 +8,12 @@ class IndicatorPipeline {
   ///
   /// Throws a [StateError] if a circular dependency is detected.
   List<IndicatorConfig> sortTopologically(List<IndicatorConfig> configs) {
-    final Map<String, IndicatorConfig> configMap = {for (var c in configs) c.id: c};
-    final Map<String, List<String>> adj = {for (var c in configs) c.id: c.dependsOn};
+    final Map<String, IndicatorConfig> configMap = {
+      for (var c in configs) c.id: c
+    };
+    final Map<String, List<String>> adj = {
+      for (var c in configs) c.id: c.dependsOn
+    };
 
     final List<IndicatorConfig> sorted = [];
     final Set<String> visiting = {};
@@ -17,7 +21,8 @@ class IndicatorPipeline {
 
     void visit(String id) {
       if (visiting.contains(id)) {
-        throw StateError('Circular dependency detected involving indicator: $id');
+        throw StateError(
+            'Circular dependency detected involving indicator: $id');
       }
       if (!visited.contains(id)) {
         visiting.add(id);

@@ -23,8 +23,10 @@ class MACDConfig with _$MACDConfig implements IndicatorConfig {
 class MACDResult {
   /// MACD line.
   final Float64List macd;
+
   /// Signal line.
   final Float64List signal;
+
   /// Histogram (MACD line - Signal line).
   final Float64List histogram;
 
@@ -49,8 +51,12 @@ class MACDIndicator extends Indicator<MACDConfig> {
     final n = input.length;
 
     // We compute internal EMAs to get the MACD line
-    final fastEma = EMAIndicator(EMAConfig(id: 'fast', period: config.fastPeriod)).compute(input, {});
-    final slowEma = EMAIndicator(EMAConfig(id: 'slow', period: config.slowPeriod)).compute(input, {});
+    final fastEma =
+        EMAIndicator(EMAConfig(id: 'fast', period: config.fastPeriod))
+            .compute(input, {});
+    final slowEma =
+        EMAIndicator(EMAConfig(id: 'slow', period: config.slowPeriod))
+            .compute(input, {});
 
     final macdLine = Float64List(n);
     for (int i = 0; i < n; i++) {
@@ -70,24 +76,29 @@ class MACDIndicator extends Indicator<MACDConfig> {
   }
 
   @override
-  MACDResult computeAppend(Series input, Map<String, Object> dependencies, Object previousResults) {
+  MACDResult computeAppend(
+      Series input, Map<String, Object> dependencies, Object previousResults) {
     final n = input.length;
     final prev = previousResults as MACDResult;
     if (n <= prev.length) return prev;
 
     // Fast EMA
-    final fastEmaFull = EMAIndicator(EMAConfig(id: 'fast', period: config.fastPeriod)).compute(input, {});
+    final fastEmaFull =
+        EMAIndicator(EMAConfig(id: 'fast', period: config.fastPeriod))
+            .compute(input, {});
     final fastEma = fastEmaFull[n - 1];
 
     // Slow EMA
-    final slowEmaFull = EMAIndicator(EMAConfig(id: 'slow', period: config.slowPeriod)).compute(input, {});
+    final slowEmaFull =
+        EMAIndicator(EMAConfig(id: 'slow', period: config.slowPeriod))
+            .compute(input, {});
     final slowEma = slowEmaFull[n - 1];
 
     final newMacdLine = fastEma - slowEma;
 
     final macdList = Float64List(n);
     macdList.setRange(0, prev.macd.length, prev.macd);
-    macdList[n-1] = newMacdLine;
+    macdList[n - 1] = newMacdLine;
 
     // Signal EMA
     final double alpha = 2.0 / (config.signalPeriod + 1);
@@ -104,13 +115,14 @@ class MACDIndicator extends Indicator<MACDConfig> {
 
     final signalList = Float64List(n);
     signalList.setRange(0, prev.signal.length, prev.signal);
-    signalList[n-1] = newSignal;
+    signalList[n - 1] = newSignal;
 
     final histogramList = Float64List(n);
     histogramList.setRange(0, prev.histogram.length, prev.histogram);
-    histogramList[n-1] = newMacdLine - newSignal;
+    histogramList[n - 1] = newMacdLine - newSignal;
 
-    return MACDResult(macd: macdList, signal: signalList, histogram: histogramList);
+    return MACDResult(
+        macd: macdList, signal: signalList, histogram: histogramList);
   }
 
   Float64List _computeEma(Float64List data, int period) {

@@ -184,20 +184,32 @@ class MainPanelPainter extends CustomPainter {
           final double bodyBottom = isBullish ? yOpen : yClose;
 
           // Wick (2 triangles)
-          targetVertices[offset++] = wx1; targetVertices[offset++] = yHigh;
-          targetVertices[offset++] = wx2; targetVertices[offset++] = yHigh;
-          targetVertices[offset++] = wx2; targetVertices[offset++] = yLow;
-          targetVertices[offset++] = wx1; targetVertices[offset++] = yHigh;
-          targetVertices[offset++] = wx2; targetVertices[offset++] = yLow;
-          targetVertices[offset++] = wx1; targetVertices[offset++] = yLow;
+          targetVertices[offset++] = wx1;
+          targetVertices[offset++] = yHigh;
+          targetVertices[offset++] = wx2;
+          targetVertices[offset++] = yHigh;
+          targetVertices[offset++] = wx2;
+          targetVertices[offset++] = yLow;
+          targetVertices[offset++] = wx1;
+          targetVertices[offset++] = yHigh;
+          targetVertices[offset++] = wx2;
+          targetVertices[offset++] = yLow;
+          targetVertices[offset++] = wx1;
+          targetVertices[offset++] = yLow;
 
           // Body (2 triangles)
-          targetVertices[offset++] = x1; targetVertices[offset++] = bodyTop;
-          targetVertices[offset++] = x2; targetVertices[offset++] = bodyTop;
-          targetVertices[offset++] = x2; targetVertices[offset++] = bodyBottom;
-          targetVertices[offset++] = x1; targetVertices[offset++] = bodyTop;
-          targetVertices[offset++] = x2; targetVertices[offset++] = bodyBottom;
-          targetVertices[offset++] = x1; targetVertices[offset++] = bodyBottom;
+          targetVertices[offset++] = x1;
+          targetVertices[offset++] = bodyTop;
+          targetVertices[offset++] = x2;
+          targetVertices[offset++] = bodyTop;
+          targetVertices[offset++] = x2;
+          targetVertices[offset++] = bodyBottom;
+          targetVertices[offset++] = x1;
+          targetVertices[offset++] = bodyTop;
+          targetVertices[offset++] = x2;
+          targetVertices[offset++] = bodyBottom;
+          targetVertices[offset++] = x1;
+          targetVertices[offset++] = bodyBottom;
 
           if (isBullish) {
             bullishOffset = offset;
@@ -206,10 +218,8 @@ class MainPanelPainter extends CustomPainter {
           }
         }
 
-        final Paint bullishPaint = paintPool.borrow()
-          ..color = theme.bullColor;
-        final Paint bearishPaint = paintPool.borrow()
-          ..color = theme.bearColor;
+        final Paint bullishPaint = paintPool.borrow()..color = theme.bullColor;
+        final Paint bearishPaint = paintPool.borrow()..color = theme.bearColor;
 
         if (bullishOffset > 0) {
           candleCanvas.drawVertices(

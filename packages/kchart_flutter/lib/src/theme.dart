@@ -9,9 +9,6 @@ part 'theme.freezed.dart';
 /// painters and UI components.
 @freezed
 class ChartTheme with _$ChartTheme {
-  /// Base constructor for [ChartTheme].
-  const ChartTheme._();
-
   /// Creates a [ChartTheme] with the specified colors and styles.
   const factory ChartTheme({
     /// Color for the grid lines.

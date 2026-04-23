@@ -7,7 +7,8 @@ import 'package:kchart_flutter/kchart_flutter.dart';
 void main() {
   /// US 3.02: Performance Lab - Golden Test
   /// Ensures visual rendering remains consistent across changes.
-  testWidgets('Golden Test - 50k candles viewport rendering', (WidgetTester tester) async {
+  testWidgets('Golden Test - 50k candles viewport rendering',
+      (WidgetTester tester) async {
     final int n = 50000;
     final timestamps = Int64List(n);
     final open = Float64List(n);
@@ -40,7 +41,8 @@ void main() {
         volume: volume,
       ),
       indicators: {},
-      viewport: const Viewport(startIdx: 25000, endIdx: 25100, scale: 1.0, scrollX: 0.0),
+      viewport: const Viewport(
+          startIdx: 25000, endIdx: 25100, scale: 1.0, scrollX: 0.0),
       overlays: [],
       sequenceNumber: 0,
       panelSequenceNumbers: const {'main': 0},

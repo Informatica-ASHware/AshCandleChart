@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: public_member_api_docs
+import 'package:flutter/material.dart' hide Viewport;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kchart_core/kchart_core.dart';
 import 'package:kchart_flutter/kchart_flutter.dart';
@@ -44,7 +45,14 @@ class DashboardScreen extends ConsumerWidget {
     final series = Series.fromCandles(candles);
 
     final controller = ref.watch(kchartControllerProvider(
-      initialSeries: series,
+      ChartFrame(
+        series: series,
+        viewport: Viewport(startIdx: series.length - 100, endIdx: series.length - 1, scale: 1.0, scrollX: 0.0),
+        indicators: {},
+        overlays: [],
+        sequenceNumber: 0,
+        panelSequenceNumbers: {'main': 0, 'volume': 0},
+      ),
     ));
 
     return Scaffold(

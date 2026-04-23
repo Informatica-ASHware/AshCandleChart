@@ -5,7 +5,8 @@ import 'package:kchart_core/kchart_core.dart';
 import 'package:kchart_flutter/kchart_flutter.dart';
 
 void main() {
-  testWidgets('Modifying RSI does not trigger MainPanel repaint', (WidgetTester tester) async {
+  testWidgets('Modifying RSI does not trigger MainPanel repaint',
+      (WidgetTester tester) async {
     final frame1 = ChartFrame(
       series: Series(
         timestamps: Int64List.fromList([1000]),
@@ -25,7 +26,8 @@ void main() {
           volume: Float64List.fromList([0.0]),
         ),
       },
-      viewport: const Viewport(startIdx: 0, endIdx: 0, scale: 1.0, scrollX: 0.0),
+      viewport:
+          const Viewport(startIdx: 0, endIdx: 0, scale: 1.0, scrollX: 0.0),
       overlays: [],
       sequenceNumber: 0,
       panelSequenceNumbers: const {'main': 0, 'rsi': 0},
@@ -46,8 +48,10 @@ void main() {
     );
 
     // Find RepaintBoundaries
-    final mainPanelFinder = find.byWidgetPredicate((widget) => widget.runtimeType.toString() == '_MainPanelWidget');
-    final secondaryPanelFinder = find.byWidgetPredicate((widget) => widget.runtimeType.toString() == '_SecondaryPanelWidget');
+    final mainPanelFinder = find.byWidgetPredicate(
+        (widget) => widget.runtimeType.toString() == '_MainPanelWidget');
+    final secondaryPanelFinder = find.byWidgetPredicate(
+        (widget) => widget.runtimeType.toString() == '_SecondaryPanelWidget');
 
     expect(mainPanelFinder, findsOneWidget);
     expect(secondaryPanelFinder, findsOneWidget);

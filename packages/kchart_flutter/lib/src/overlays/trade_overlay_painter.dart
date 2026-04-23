@@ -56,7 +56,8 @@ class TradeOverlayPainter {
         textDirection: TextDirection.ltr,
       );
       textPainter.layout();
-      textPainter.paint(canvas, Offset(x + marker.size, y - textPainter.height / 2));
+      textPainter.paint(
+          canvas, Offset(x + marker.size, y - textPainter.height / 2));
     }
   }
 
@@ -74,15 +75,22 @@ class TradeOverlayPainter {
       final top = yTP < yEntry ? yTP : yEntry;
       final bottom = yTP < yEntry ? yEntry : yTP;
 
-      final profitPaint = paintPool.borrow()..color = Color(position.profitColor);
+      final profitPaint = paintPool.borrow()
+        ..color = Color(position.profitColor);
 
       final vertices = Float32List.fromList([
-        0, top,
-        size.width, top,
-        size.width, bottom,
-        0, top,
-        size.width, bottom,
-        0, bottom,
+        0,
+        top,
+        size.width,
+        top,
+        size.width,
+        bottom,
+        0,
+        top,
+        size.width,
+        bottom,
+        0,
+        bottom,
       ]);
 
       canvas.drawVertices(
@@ -108,12 +116,18 @@ class TradeOverlayPainter {
       final lossPaint = paintPool.borrow()..color = Color(position.lossColor);
 
       final vertices = Float32List.fromList([
-        0, top,
-        size.width, top,
-        size.width, bottom,
-        0, top,
-        size.width, bottom,
-        0, bottom,
+        0,
+        top,
+        size.width,
+        top,
+        size.width,
+        bottom,
+        0,
+        top,
+        size.width,
+        bottom,
+        0,
+        bottom,
       ]);
 
       canvas.drawVertices(

@@ -1,9 +1,10 @@
 name: kchart_core
 description: Core logic for kchart, including data structures and compute engine. Optimized for high-performance financial charting.
 version: 0.1.0-dev.1
-repository: https://github.com/your-repo/kchart
-homepage: https://github.com/your-repo/kchart/tree/main/packages/kchart_core
-issue_tracker: https://github.com/your-repo/kchart/issues
+publish_to: none
+repository: https://github.com/Informatica-ASHware/KChart2
+homepage: https://github.com/Informatica-ASHware/KChart2/tree/main/packages/kchart_core
+issue_tracker: https://github.com/Informatica-ASHware/KChart2/issues
 
 environment:
   sdk: '>=3.5.0 <4.0.0'

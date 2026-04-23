@@ -84,7 +84,8 @@ class RSIIndicator extends Indicator<RSIConfig> {
   }
 
   @override
-  Float64List computeAppend(Series input, Map<String, Object> dependencies, Object previousResults) {
+  Float64List computeAppend(
+      Series input, Map<String, Object> dependencies, Object previousResults) {
     final data = input.close;
     final n = data.length;
     final period = config.period;

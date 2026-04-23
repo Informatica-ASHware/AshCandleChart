@@ -6,7 +6,8 @@ import 'package:kchart_core/src/series/series.dart';
 void main() {
   group('MACDIndicator', () {
     // Need enough data for MACD (default 12, 26)
-    final close = Float64List.fromList(List.generate(50, (i) => i.toDouble() + 1));
+    final close =
+        Float64List.fromList(List.generate(50, (i) => i.toDouble() + 1));
     final series = Series(
       timestamps: Int64List(50),
       open: Float64List(50),
@@ -17,7 +18,8 @@ void main() {
     );
 
     test('computes MACD correctly', () {
-      final config = MACDConfig(id: 'macd', fastPeriod: 12, slowPeriod: 26, signalPeriod: 9);
+      final config = MACDConfig(
+          id: 'macd', fastPeriod: 12, slowPeriod: 26, signalPeriod: 9);
       final indicator = MACDIndicator(config);
       final results = indicator.compute(series, {});
 
@@ -31,7 +33,8 @@ void main() {
 
       for (int i = 0; i < 50; i++) {
         if (!results.macd[i].isNaN && !results.signal[i].isNaN) {
-          expect(results.histogram[i], closeTo(results.macd[i] - results.signal[i], 1e-10));
+          expect(results.histogram[i],
+              closeTo(results.macd[i] - results.signal[i], 1e-10));
         }
       }
     });
@@ -64,13 +67,15 @@ void main() {
         if (resultsFull.signal[i].isNaN) {
           expect(resultsAppend.signal[i], isNaN);
         } else {
-          expect(resultsAppend.signal[i], closeTo(resultsFull.signal[i], 1e-10));
+          expect(
+              resultsAppend.signal[i], closeTo(resultsFull.signal[i], 1e-10));
         }
 
         if (resultsFull.histogram[i].isNaN) {
           expect(resultsAppend.histogram[i], isNaN);
         } else {
-          expect(resultsAppend.histogram[i], closeTo(resultsFull.histogram[i], 1e-10));
+          expect(resultsAppend.histogram[i],
+              closeTo(resultsFull.histogram[i], 1e-10));
         }
       }
     });

@@ -1,20 +1,34 @@
-# kchart_riverpod
+# KChart Riverpod
 
 Riverpod 3 integration for KChart.
 
 ## Features
 
-- **Reactive State**: Seamlessly bind `KChartController` to Riverpod providers.
-- **Lifecycle Management**: Automatic disposal and resource optimization.
+- **Reactive State Management**: Synchronize chart state across your app with ease.
+- **Auto-Pausing**: Optimized stream providers that pause when not in use.
+- **Provider-based Architecture**: Clean separation of concerns.
 
-## Usage
+## Quick Start (3 Minutes)
 
-```dart
-import 'package:kchart_riverpod/kchart_riverpod.dart';
+1. **Add dependencies**:
+   ```yaml
+   dependencies:
+     kchart_riverpod: ^0.1.0
+   ```
 
-final chartProvider = kchartControllerProvider(initialSeries);
+2. **Wrap your app**:
+   ```dart
+   void main() {
+     runApp(const ProviderScope(child: MyApp()));
+   }
+   ```
 
-// In your Widget
-final controller = ref.watch(chartProvider);
-KChart(controller: controller);
-```
+3. **Use providers**:
+   ```dart
+   final controller = ref.watch(kchartControllerProvider(myInitialFrame));
+   KChart(controller: controller)
+   ```
+
+## Example
+
+Check out the [example directory](./example) for a basic implementation.

@@ -25,7 +25,8 @@ class MockIndicator extends Indicator<MockConfig> {
   }
 
   @override
-  Object computeAppend(Series input, Map<String, Object> dependencies, Object previousResults) {
+  Object computeAppend(
+      Series input, Map<String, Object> dependencies, Object previousResults) {
     return Float64List(input.length);
   }
 }

@@ -17,7 +17,8 @@ void main() {
         volume: Float64List.fromList([1000.0]),
       ),
       indicators: {},
-      viewport: const Viewport(startIdx: 0, endIdx: 0, scale: 1.0, scrollX: 0.0),
+      viewport:
+          const Viewport(startIdx: 0, endIdx: 0, scale: 1.0, scrollX: 0.0),
       overlays: [],
       sequenceNumber: 0,
       panelSequenceNumbers: const {'main': 0},
@@ -48,7 +49,8 @@ void main() {
       );
 
       // We use .future to wait for the first data
-      final initialFrame = await container.read(chartFrameProvider(controller).future);
+      final initialFrame =
+          await container.read(chartFrameProvider(controller).future);
       expect(initialFrame, testFrame);
 
       // Update frame
@@ -88,13 +90,15 @@ void main() {
 
       container.dispose();
     });
-   group('autoPause implementation', () {
-    test('detaches listener when cancelled (paused) and re-attaches on resume', () async {
-      // Since ProviderSubscription.pause() is inconsistent in CI environment's Riverpod 3.0.0-dev,
-      // we verify the logic manually by looking at the code which uses ref.onCancel and ref.onResume.
-      // The implementation in kchart_riverpod.dart is verified to exist and use these hooks.
+    group('autoPause implementation', () {
+      test(
+          'detaches listener when cancelled (paused) and re-attaches on resume',
+          () async {
+        // Since ProviderSubscription.pause() is inconsistent in CI environment's Riverpod 3.0.0-dev,
+        // we verify the logic manually by looking at the code which uses ref.onCancel and ref.onResume.
+        // The implementation in kchart_riverpod.dart is verified to exist and use these hooks.
+      });
     });
-  });
   });
 }
 

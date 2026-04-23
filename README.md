@@ -10,7 +10,7 @@ A high-performance financial charting library for Flutter, optimized for Desktop
 
 ## Status
 
-[![CI](https://github.com/your-repo/kchart/actions/workflows/ci.yml/badge.svg)](https://github.com/your-repo/kchart/actions/workflows/ci.yml)
+[![CI](https://github.com/Informatica-ASHware/KChart2/actions/workflows/ci.yml/badge.svg)](https://github.com/Informatica-ASHware/KChart2/actions/workflows/ci.yml)
 
 ## Quick Start (3 Minutes)
 
@@ -18,12 +18,20 @@ A high-performance financial charting library for Flutter, optimized for Desktop
    ```yaml
    dependencies:
      kchart_flutter: ^0.1.0
+     kchart_core: ^0.1.0
    ```
 
 2. **Initialize Controller**:
    ```dart
    final controller = KChartController(
-     initialSeries: mySeries,
+     frame: ChartFrame(
+       series: mySeries,
+       viewport: Viewport(startIdx: 0, endIdx: 100, scale: 1.0, scrollX: 0.0),
+       indicators: {},
+       overlays: [],
+       sequenceNumber: 0,
+       panelSequenceNumbers: {'main': 0, 'volume': 0},
+     ),
    );
    ```
 
@@ -36,12 +44,18 @@ A high-performance financial charting library for Flutter, optimized for Desktop
 
 - **High Performance**: Renders 100k+ candles at 60fps using `canvas.drawVertices`.
 - **Multithreading**: Offloads heavy indicator calculations to a pool of Isolates.
-- **Interactive**: Smooth zooming, panning, and inertial scrolling.
+- **Interactive**: Smooth zooming, panning, and inertial scrolling with Snap-to-Candle logic.
 - **Customizable**: Flexible theme system and modular panel architecture.
+- **Advanced Overlays**: Support for trades, positions, and custom drawings.
 
 ## Screenshots / GIFs
 
-![KChart Demo](https://raw.githubusercontent.com/your-repo/kchart/main/docs/assets/demo.gif)
+![KChart Demo](https://raw.githubusercontent.com/Informatica-ASHware/KChart2/main/docs/assets/demo.gif)
+
+## Examples
+
+- [Minimal Flutter Example](./packages/kchart_flutter/example)
+- [Crypto Dashboard (Complex)](./examples/crypto_dashboard) - Shows multi-chart setup, indicators, and trade overlays.
 
 ## Development
 
@@ -50,4 +64,5 @@ This project uses [Melos](https://melos.invertase.dev/) to manage the monorepo.
 ```bash
 dart pub get
 dart run melos bootstrap
+dart run melos run test
 ```

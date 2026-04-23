@@ -5,8 +5,20 @@ import 'package:kchart_core/src/indicators/sma.dart';
 void main() async {
   // 1. Setup Data
   final candles = [
-    Candle(timestamp: 1600000000000, open: 100, high: 110, low: 90, close: 105, volume: 1000),
-    Candle(timestamp: 1600000060000, open: 105, high: 115, low: 100, close: 110, volume: 1200),
+    Candle(
+        timestamp: 1600000000000,
+        open: 100,
+        high: 110,
+        low: 90,
+        close: 105,
+        volume: 1000),
+    Candle(
+        timestamp: 1600000060000,
+        open: 105,
+        high: 115,
+        low: 100,
+        close: 110,
+        volume: 1200),
   ];
   final series = Series.fromCandles(candles);
 
@@ -22,6 +34,7 @@ void main() async {
   ];
 
   final results = await pool.computeIndicatorBatch(configs, series);
+  // ignore: avoid_print
   print('Computed SMA: ${results['sma20']}');
 
   await pool.dispose();

@@ -9,8 +9,8 @@ import '../indicators/indicator_pipeline.dart';
 import '../series/series.dart';
 
 /// Function signature for the task handler running in the worker isolate.
-typedef WorkerHandler =
-    FutureOr<Object?> Function(String method, Object? payload);
+typedef WorkerHandler = FutureOr<Object?> Function(
+    String method, Object? payload);
 
 /// A function that returns an [IndicatorRegistry]. MUST be a top-level or static function.
 typedef RegistryProvider = IndicatorRegistry Function();
@@ -23,11 +23,10 @@ class IsolatePool {
   ///
   /// Defaults to [Platform.numberOfProcessors] - 1, or 1 if only one processor is available.
   IsolatePool({int? workerCount})
-    : _workerCount =
-          workerCount ??
-          (Platform.numberOfProcessors > 1
-              ? Platform.numberOfProcessors - 1
-              : 1);
+      : _workerCount = workerCount ??
+            (Platform.numberOfProcessors > 1
+                ? Platform.numberOfProcessors - 1
+                : 1);
 
   final int _workerCount;
   final List<_Worker> _workers = [];
@@ -229,9 +228,8 @@ class _Worker {
 
     final canceledRequests = <String>{};
 
-    final registryProvider = args.length > 2
-        ? args[2] as RegistryProvider
-        : null;
+    final registryProvider =
+        args.length > 2 ? args[2] as RegistryProvider : null;
     final registry = registryProvider?.call();
     final pipeline = IndicatorPipeline();
 

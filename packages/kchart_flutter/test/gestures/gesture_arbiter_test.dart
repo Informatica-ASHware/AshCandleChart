@@ -37,15 +37,18 @@ void main() {
     });
 
     testWidgets('handles tap', (tester) async {
-      arbiter.handleEvent(const PointerDownEvent(pointer: 1, position: Offset(10, 10)));
-      arbiter.handleEvent(const PointerUpEvent(pointer: 1, position: Offset(10, 10)));
+      arbiter.handleEvent(
+          const PointerDownEvent(pointer: 1, position: Offset(10, 10)));
+      arbiter.handleEvent(
+          const PointerUpEvent(pointer: 1, position: Offset(10, 10)));
 
       expect(tapPosition, const Offset(10, 10));
       expect(panDeltas, isEmpty);
     });
 
     testWidgets('handles pan', (tester) async {
-      arbiter.handleEvent(const PointerDownEvent(pointer: 1, position: Offset(10, 10)));
+      arbiter.handleEvent(
+          const PointerDownEvent(pointer: 1, position: Offset(10, 10)));
       arbiter.handleEvent(const PointerMoveEvent(
         pointer: 1,
         position: Offset(25, 10),
@@ -57,28 +60,34 @@ void main() {
     });
 
     testWidgets('handles long press', (tester) async {
-      arbiter.handleEvent(const PointerDownEvent(pointer: 1, position: Offset(10, 10)));
+      arbiter.handleEvent(
+          const PointerDownEvent(pointer: 1, position: Offset(10, 10)));
 
       await tester.pump(const Duration(milliseconds: 150));
 
       expect(longPressPosition, const Offset(10, 10));
 
-      arbiter.handleEvent(const PointerUpEvent(pointer: 1, position: Offset(10, 10)));
+      arbiter.handleEvent(
+          const PointerUpEvent(pointer: 1, position: Offset(10, 10)));
       expect(longPressEnded, isTrue);
     });
 
     testWidgets('handles long press cancel', (tester) async {
-      arbiter.handleEvent(const PointerDownEvent(pointer: 1, position: Offset(10, 10)));
+      arbiter.handleEvent(
+          const PointerDownEvent(pointer: 1, position: Offset(10, 10)));
       await tester.pump(const Duration(milliseconds: 150));
       expect(longPressPosition, const Offset(10, 10));
 
-      arbiter.handleEvent(const PointerCancelEvent(pointer: 1, position: Offset(10, 10)));
+      arbiter.handleEvent(
+          const PointerCancelEvent(pointer: 1, position: Offset(10, 10)));
       expect(longPressEnded, isTrue);
     });
 
     testWidgets('handles multi-touch zoom', (tester) async {
-      arbiter.handleEvent(const PointerDownEvent(pointer: 1, position: Offset(10, 10)));
-      arbiter.handleEvent(const PointerDownEvent(pointer: 2, position: Offset(20, 10)));
+      arbiter.handleEvent(
+          const PointerDownEvent(pointer: 1, position: Offset(10, 10)));
+      arbiter.handleEvent(
+          const PointerDownEvent(pointer: 2, position: Offset(20, 10)));
 
       // Initial distance is 10.
       arbiter.handleEvent(const PointerMoveEvent(
@@ -141,9 +150,11 @@ void main() {
     });
 
     testWidgets('dispose clears state', (tester) async {
-      arbiter.handleEvent(const PointerDownEvent(pointer: 1, position: Offset(10, 10)));
+      arbiter.handleEvent(
+          const PointerDownEvent(pointer: 1, position: Offset(10, 10)));
       arbiter.dispose();
-      arbiter.handleEvent(const PointerUpEvent(pointer: 1, position: Offset(10, 10)));
+      arbiter.handleEvent(
+          const PointerUpEvent(pointer: 1, position: Offset(10, 10)));
       expect(tapPosition, isNull);
     });
 
@@ -180,7 +191,8 @@ void main() {
       expect(flingVelocity!.pixelsPerSecond.dx, greaterThan(0));
     });
 
-    testWidgets('ignores move events for pointers not tracked from start', (tester) async {
+    testWidgets('ignores move events for pointers not tracked from start',
+        (tester) async {
       // Move event without Down event
       arbiter.handleEvent(const PointerMoveEvent(
         pointer: 1,

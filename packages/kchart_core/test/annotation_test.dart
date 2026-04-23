@@ -23,7 +23,8 @@ void main() {
       );
     });
 
-    test('findNearestPoint snaps to closest timestamp and closest OHLC price', () {
+    test('findNearestPoint snaps to closest timestamp and closest OHLC price',
+        () {
       // Near first candle, close to 'high'
       var point = series.findNearestPoint(1100, 14.0);
       expect(point.timestamp, equals(1000));

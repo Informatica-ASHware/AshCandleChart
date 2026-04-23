@@ -1,11 +1,14 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: public_member_api_docs
+import 'package:flutter/material.dart' hide Viewport;
 import 'package:kchart_flutter/kchart_flutter.dart';
 import 'package:kchart_core/kchart_core.dart';
 
+/// Example application class.
 void main() {
   runApp(const MyApp());
 }
 
+/// Example application class.
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -18,6 +21,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+/// Example application class.
 class ChartScreen extends StatefulWidget {
   const ChartScreen({super.key});
 
@@ -25,6 +29,7 @@ class ChartScreen extends StatefulWidget {
   State<ChartScreen> createState() => _ChartScreenState();
 }
 
+/// Example application class.
 class _ChartScreenState extends State<ChartScreen> {
   late KChartController controller;
 
@@ -45,7 +50,15 @@ class _ChartScreenState extends State<ChartScreen> {
     });
 
     controller = KChartController(
-      initialSeries: Series.fromCandles(candles),
+      frame: ChartFrame(
+        series: Series.fromCandles(candles),
+        viewport: Viewport(
+            startIdx: 0, endIdx: candles.length - 1, scale: 1.0, scrollX: 0.0),
+        indicators: {},
+        overlays: [],
+        sequenceNumber: 0,
+        panelSequenceNumbers: {'main': 0, 'volume': 0},
+      ),
     );
   }
 

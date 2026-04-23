@@ -311,11 +311,11 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
     _lastAnimationValue = 0.0;
     final Animation<double> animation =
         Tween<double>(begin: 0.0, end: targetDelta).animate(
-          CurvedAnimation(
-            parent: _animationController,
-            curve: Curves.easeOutCubic,
-          ),
-        );
+      CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.easeOutCubic,
+      ),
+    );
 
     void snapTick() {
       final double currentValue = animation.value;
@@ -348,8 +348,7 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
         return ListenableBuilder(
           listenable: widget.controller,
           builder: (context, child) {
-            final theme =
-                widget.theme ??
+            final theme = widget.theme ??
                 (Theme.of(context).brightness == Brightness.dark
                     ? ChartTheme.dark()
                     : ChartTheme.light());
@@ -407,8 +406,7 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
                                 size: Size.infinite,
                                 painter: CrosshairPainter(
                                   state: CrosshairState(dx: state.dx),
-                                  color:
-                                      scope?.theme.crosshairColor ??
+                                  color: scope?.theme.crosshairColor ??
                                       Colors.grey,
                                 ),
                               ),
