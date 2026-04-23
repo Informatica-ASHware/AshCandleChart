@@ -17,7 +17,8 @@ void main() {
           volume: Float64List(0),
         ),
         indicators: {},
-        viewport: const Viewport(startIdx: 0, endIdx: 0, scale: 1.0, scrollX: 0.0),
+        viewport:
+            const Viewport(startIdx: 0, endIdx: 0, scale: 1.0, scrollX: 0.0),
         overlays: [],
         sequenceNumber: 0,
       );
@@ -36,7 +37,8 @@ void main() {
           volume: Float64List(0),
         ),
         indicators: {},
-        viewport: const Viewport(startIdx: 0, endIdx: 0, scale: 1.0, scrollX: 0.0),
+        viewport:
+            const Viewport(startIdx: 0, endIdx: 0, scale: 1.0, scrollX: 0.0),
         overlays: [],
         sequenceNumber: 0,
       );
@@ -59,7 +61,8 @@ void main() {
       expect(MainPanelPainter.findIndexAtTimestamp(timestamps, 300), 2);
       expect(MainPanelPainter.findIndexAtTimestamp(timestamps, 100), 0);
       expect(MainPanelPainter.findIndexAtTimestamp(timestamps, 500), 4);
-      expect(MainPanelPainter.findIndexAtTimestamp(timestamps, 250), 2); // Insertion point
+      expect(MainPanelPainter.findIndexAtTimestamp(timestamps, 250),
+          2); // Insertion point
       expect(MainPanelPainter.findIndexAtTimestamp(timestamps, 50), 0);
       expect(MainPanelPainter.findIndexAtTimestamp(timestamps, 600), 5);
     });
@@ -75,7 +78,8 @@ void main() {
           volume: Float64List(0),
         ),
         indicators: {},
-        viewport: const Viewport(startIdx: 0, endIdx: 0, scale: 1.0, scrollX: 0.0),
+        viewport:
+            const Viewport(startIdx: 0, endIdx: 0, scale: 1.0, scrollX: 0.0),
         overlays: [],
         sequenceNumber: 0,
       );
@@ -101,7 +105,8 @@ void main() {
           volume: Float64List.fromList([100.0, 150.0]),
         ),
         indicators: {},
-        viewport: const Viewport(startIdx: 0, endIdx: 1, scale: 1.0, scrollX: 0.0),
+        viewport:
+            const Viewport(startIdx: 0, endIdx: 1, scale: 1.0, scrollX: 0.0),
         overlays: [],
         sequenceNumber: 0,
       );
@@ -123,7 +128,8 @@ void main() {
       expect(find.byType(CustomPaint), findsAtLeastNWidgets(1));
     });
 
-    testWidgets('Golden Test - 100k candles rendering performance mock', (WidgetTester tester) async {
+    testWidgets('Golden Test - 100k candles rendering performance mock',
+        (WidgetTester tester) async {
       final int n = 100000;
       final timestamps = Int64List(n);
       final open = Float64List(n);
@@ -152,7 +158,8 @@ void main() {
         ),
         indicators: {},
         // Rendering only a window of 100 candles out of 100k, as per viewport logic.
-        viewport: const Viewport(startIdx: 50000, endIdx: 50100, scale: 1.0, scrollX: 0.0),
+        viewport: const Viewport(
+            startIdx: 50000, endIdx: 50100, scale: 1.0, scrollX: 0.0),
         overlays: [],
         sequenceNumber: 0,
       );

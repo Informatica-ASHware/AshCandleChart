@@ -73,7 +73,8 @@ class MainPanelPainter extends CustomPainter {
       final double low = series.low[i];
 
       final bool isBullish = close >= open;
-      final Float32List targetVertices = isBullish ? bullishVertices : bearishVertices;
+      final Float32List targetVertices =
+          isBullish ? bullishVertices : bearishVertices;
       int offset = isBullish ? bullishOffset : bearishOffset;
 
       final double centerX = (i - startIdx) * candleWidth + candleWidth / 2;
@@ -92,23 +93,35 @@ class MainPanelPainter extends CustomPainter {
 
       // Wick (2 triangles)
       // Triangle 1
-      targetVertices[offset++] = wx1; targetVertices[offset++] = yHigh;
-      targetVertices[offset++] = wx2; targetVertices[offset++] = yHigh;
-      targetVertices[offset++] = wx2; targetVertices[offset++] = yLow;
+      targetVertices[offset++] = wx1;
+      targetVertices[offset++] = yHigh;
+      targetVertices[offset++] = wx2;
+      targetVertices[offset++] = yHigh;
+      targetVertices[offset++] = wx2;
+      targetVertices[offset++] = yLow;
       // Triangle 2
-      targetVertices[offset++] = wx1; targetVertices[offset++] = yHigh;
-      targetVertices[offset++] = wx2; targetVertices[offset++] = yLow;
-      targetVertices[offset++] = wx1; targetVertices[offset++] = yLow;
+      targetVertices[offset++] = wx1;
+      targetVertices[offset++] = yHigh;
+      targetVertices[offset++] = wx2;
+      targetVertices[offset++] = yLow;
+      targetVertices[offset++] = wx1;
+      targetVertices[offset++] = yLow;
 
       // Body (2 triangles)
       // Triangle 1
-      targetVertices[offset++] = x1; targetVertices[offset++] = bodyTop;
-      targetVertices[offset++] = x2; targetVertices[offset++] = bodyTop;
-      targetVertices[offset++] = x2; targetVertices[offset++] = bodyBottom;
+      targetVertices[offset++] = x1;
+      targetVertices[offset++] = bodyTop;
+      targetVertices[offset++] = x2;
+      targetVertices[offset++] = bodyTop;
+      targetVertices[offset++] = x2;
+      targetVertices[offset++] = bodyBottom;
       // Triangle 2
-      targetVertices[offset++] = x1; targetVertices[offset++] = bodyTop;
-      targetVertices[offset++] = x2; targetVertices[offset++] = bodyBottom;
-      targetVertices[offset++] = x1; targetVertices[offset++] = bodyBottom;
+      targetVertices[offset++] = x1;
+      targetVertices[offset++] = bodyTop;
+      targetVertices[offset++] = x2;
+      targetVertices[offset++] = bodyBottom;
+      targetVertices[offset++] = x1;
+      targetVertices[offset++] = bodyBottom;
 
       if (isBullish) {
         bullishOffset = offset;

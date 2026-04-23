@@ -51,16 +51,19 @@ void main() {
       floats[i] = i.toDouble();
     }
 
-    final transferable = TransferableTypedData.fromList([floats.buffer.asUint8List()]);
+    final transferable =
+        TransferableTypedData.fromList([floats.buffer.asUint8List()]);
 
     final stopwatch = Stopwatch()..start();
     final result = await pool.compute('float_transfer', transferable);
     stopwatch.stop();
 
-    print('Transfer and sum of $count floats took ${stopwatch.elapsedMilliseconds}ms');
+    print(
+        'Transfer and sum of $count floats took ${stopwatch.elapsedMilliseconds}ms');
 
     expect(result, isA<TransferableTypedData>());
-    final resultFloats = (result as TransferableTypedData).materialize().asFloat64List();
+    final resultFloats =
+        (result as TransferableTypedData).materialize().asFloat64List();
 
     // Sum of 0..499999 is (n-1)*n/2
     const expectedSum = (count - 1) * count / 2.0;

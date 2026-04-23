@@ -9,7 +9,8 @@ import '../indicators/indicator_pipeline.dart';
 import '../series/series.dart';
 
 /// Function signature for the task handler running in the worker isolate.
-typedef WorkerHandler = FutureOr<Object?> Function(String method, Object? payload);
+typedef WorkerHandler = FutureOr<Object?> Function(
+    String method, Object? payload);
 
 /// A function that returns an [IndicatorRegistry]. MUST be a top-level or static function.
 typedef RegistryProvider = IndicatorRegistry Function();
@@ -22,7 +23,10 @@ class IsolatePool {
   ///
   /// Defaults to [Platform.numberOfProcessors] - 1, or 1 if only one processor is available.
   IsolatePool({int? workerCount})
-      : _workerCount = workerCount ?? (Platform.numberOfProcessors > 1 ? Platform.numberOfProcessors - 1 : 1);
+      : _workerCount = workerCount ??
+            (Platform.numberOfProcessors > 1
+                ? Platform.numberOfProcessors - 1
+                : 1);
 
   final int _workerCount;
   final List<_Worker> _workers = [];
@@ -37,7 +41,8 @@ class IsolatePool {
   /// The [handler] MUST be a top-level or static function to be sent to the isolates.
   /// The [registryProvider] is optional and used for indicator batch processing.
   /// It MUST also be a top-level or static function.
-  Future<void> initialize(WorkerHandler handler, {RegistryProvider? registryProvider}) async {
+  Future<void> initialize(WorkerHandler handler,
+      {RegistryProvider? registryProvider}) async {
     if (_isDisposed) throw StateError('IsolatePool is disposed');
     if (_workers.isNotEmpty) return;
 
@@ -54,7 +59,8 @@ class IsolatePool {
   /// [method] identifies the operation to perform.
   /// [payload] is the data to process.
   /// [requestId] is an optional unique identifier. If not provided, one will be generated.
-  Future<Object?> compute(String method, Object? payload, {String? requestId}) async {
+  Future<Object?> compute(String method, Object? payload,
+      {String? requestId}) async {
     if (_isDisposed) throw StateError('IsolatePool is disposed');
     if (_workers.isEmpty) throw StateError('IsolatePool is not initialized');
 
@@ -62,7 +68,8 @@ class IsolatePool {
     final completer = Completer<Object?>();
     _pendingRequests[id] = completer;
 
-    final request = ComputeRequest(requestId: id, method: method, payload: payload);
+    final request =
+        ComputeRequest(requestId: id, method: method, payload: payload);
 
     // Simple round-robin load balancing
     final worker = _workers[_nextWorkerIndex];
@@ -157,18 +164,21 @@ class OperationCanceledException implements Exception {
   final String requestId;
 
   @override
-  String toString() => 'OperationCanceledException: Request $requestId was canceled';
+  String toString() =>
+      'OperationCanceledException: Request $requestId was canceled';
 }
 
 class _Worker {
   late Isolate _isolate;
   late SendPort _toIsolate;
   late ReceivePort _fromIsolate;
-  final StreamController<ComputeResponse> _responsesController = StreamController.broadcast();
+  final StreamController<ComputeResponse> _responsesController =
+      StreamController.broadcast();
 
   Stream<ComputeResponse> get responses => _responsesController.stream;
 
-  Future<void> start(WorkerHandler handler, RegistryProvider? registryProvider) async {
+  Future<void> start(
+      WorkerHandler handler, RegistryProvider? registryProvider) async {
     _fromIsolate = ReceivePort();
     _isolate = await Isolate.spawn(_workerEntry, [
       _fromIsolate.sendPort,
@@ -208,7 +218,8 @@ class _Worker {
 
     final canceledRequests = <String>{};
 
-    final registryProvider = args.length > 2 ? args[2] as RegistryProvider : null;
+    final registryProvider =
+        args.length > 2 ? args[2] as RegistryProvider : null;
     final registry = registryProvider?.call();
     final pipeline = IndicatorPipeline();
 
@@ -235,20 +246,23 @@ class _Worker {
             (requestId, method, payload) => handler(method, payload),
             indicatorBatch: (requestId, configs, series) {
               if (registry == null) {
-                throw StateError('Indicator batch processing requested but no RegistryProvider was provided during initialization.');
+                throw StateError(
+                    'Indicator batch processing requested but no RegistryProvider was provided during initialization.');
               }
               return pipeline.executeBatch(configs, series, registry);
             },
           );
 
           if (!canceledRequests.contains(message.requestId)) {
-            sendPort.send(ComputeResponse(requestId: message.requestId, payload: result));
+            sendPort.send(
+                ComputeResponse(requestId: message.requestId, payload: result));
           } else {
             canceledRequests.remove(message.requestId);
           }
         } catch (e, stack) {
           if (!canceledRequests.contains(message.requestId)) {
-            sendPort.send(ComputeResponse(requestId: message.requestId, error: '$e\n$stack'));
+            sendPort.send(ComputeResponse(
+                requestId: message.requestId, error: '$e\n$stack'));
           } else {
             canceledRequests.remove(message.requestId);
           }

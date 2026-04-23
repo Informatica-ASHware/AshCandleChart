@@ -1,7 +1,8 @@
 import 'indicator.dart';
 
 /// A function that creates an [Indicator] from an [IndicatorConfig].
-typedef IndicatorFactory<T extends IndicatorConfig> = Indicator<T> Function(T config);
+typedef IndicatorFactory<T extends IndicatorConfig> = Indicator<T> Function(
+    T config);
 
 /// Registry for managing indicator implementations.
 ///
@@ -20,7 +21,8 @@ class IndicatorRegistry {
   Indicator create(IndicatorConfig config) {
     final factory = _factories[config.runtimeType];
     if (factory == null) {
-      throw ArgumentError('No indicator factory registered for config type: ${config.runtimeType}');
+      throw ArgumentError(
+          'No indicator factory registered for config type: ${config.runtimeType}');
     }
     return factory(config);
   }
