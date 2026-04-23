@@ -25,6 +25,7 @@ class CrosshairOverlay extends StatelessWidget {
     return _CrosshairRenderWidget(
       state: currentState,
       chartKey: scope.chartKey,
+      color: scope.theme.crosshairColor,
     );
   }
 }
@@ -32,28 +33,32 @@ class CrosshairOverlay extends StatelessWidget {
 class _CrosshairRenderWidget extends LeafRenderObjectWidget {
   final CrosshairState state;
   final GlobalKey chartKey;
+  final Color color;
 
   const _CrosshairRenderWidget({
     required this.state,
     required this.chartKey,
+    required this.color,
   });
 
   @override
   RenderObject createRenderObject(BuildContext context) =>
-      _RenderCrosshair(state, chartKey);
+      _RenderCrosshair(state, chartKey, color);
 
   @override
   void updateRenderObject(BuildContext context, _RenderCrosshair renderObject) {
     renderObject.state = state;
     renderObject.chartKey = chartKey;
+    renderObject.color = color;
   }
 }
 
 class _RenderCrosshair extends RenderBox {
   CrosshairState _state;
   GlobalKey _chartKey;
+  Color _color;
 
-  _RenderCrosshair(this._state, this._chartKey);
+  _RenderCrosshair(this._state, this._chartKey, this._color);
 
   CrosshairState get state => _state;
   set state(CrosshairState value) {
@@ -69,6 +74,13 @@ class _RenderCrosshair extends RenderBox {
     markNeedsPaint();
   }
 
+  Color get color => _color;
+  set color(Color value) {
+    if (_color == value) return;
+    _color = value;
+    markNeedsPaint();
+  }
+
   @override
   bool get sizedByParent => true;
 
@@ -79,7 +91,7 @@ class _RenderCrosshair extends RenderBox {
     final canvas = context.canvas;
 
     final paint = Paint()
-      ..color = Colors.grey
+      ..color = _color
       ..strokeWidth = 1.0
       ..style = PaintingStyle.stroke;
 

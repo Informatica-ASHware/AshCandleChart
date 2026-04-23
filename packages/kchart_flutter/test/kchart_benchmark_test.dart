@@ -5,7 +5,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart' hide Viewport;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kchart_core/kchart_core.dart';
-import 'package:kchart_flutter/src/painting/main_panel_painter.dart';
+import 'package:kchart_flutter/kchart_flutter.dart';
 import 'package:kchart_flutter/src/painting/layer_cache.dart';
 import 'package:kchart_flutter/src/painting/paint_pool.dart';
 
@@ -75,6 +75,7 @@ void main() {
         paintPool: paintPool,
         gridCache: gridCache,
         candleCache: candleCache,
+        theme: ChartTheme.light(),
       );
       painter.paint(canvas, size);
     }
@@ -100,6 +101,7 @@ void main() {
         paintPool: paintPool,
         gridCache: gridCache,
         candleCache: candleCache,
+        theme: ChartTheme.light(),
       );
 
       final sw = Stopwatch()..start();

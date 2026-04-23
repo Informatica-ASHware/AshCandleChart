@@ -95,12 +95,14 @@ void main() {
         paintPool: paintPool,
         gridCache: gridCache,
         candleCache: candleCache,
+        theme: ChartTheme.light(),
       );
       final painter2 = MainPanelPainter(
         frame: frame2,
         paintPool: paintPool,
         gridCache: gridCache,
         candleCache: candleCache,
+        theme: ChartTheme.light(),
       );
 
       expect(painter2.shouldRepaint(painter1), isTrue);

@@ -5,6 +5,7 @@ import 'package:kchart_core/kchart_core.dart';
 import 'layer_cache.dart';
 import 'paint_pool.dart';
 import '../overlays/trade_overlay_painter.dart';
+import '../theme.dart';
 
 /// Painter for the main chart panel that renders candles and a grid.
 ///
@@ -30,12 +31,16 @@ class MainPanelPainter extends CustomPainter {
   /// Optional pre-allocated buffer for bearish vertices to reduce GC pressure.
   final Float32List? bearishBuffer;
 
+  /// The theme to use for painting.
+  final ChartTheme theme;
+
   /// Creates a [MainPanelPainter] with the given [frame], [paintPool], and caches.
   MainPanelPainter({
     required this.frame,
     required this.paintPool,
     required this.gridCache,
     required this.candleCache,
+    required this.theme,
     this.bullishBuffer,
     this.bearishBuffer,
   });
@@ -59,7 +64,7 @@ class MainPanelPainter extends CustomPainter {
       size: size,
       paint: (ui.Canvas gridCanvas) {
         final paint = paintPool.borrow()
-          ..color = const Color(0xFFE0E0E0)
+          ..color = theme.gridColor
           ..strokeWidth = 1.0
           ..style = PaintingStyle.stroke;
 
@@ -100,6 +105,10 @@ class MainPanelPainter extends CustomPainter {
       viewport.endIdx,
       size.width,
       size.height,
+      // ignore: deprecated_member_use
+      theme.bullColor.value,
+      // ignore: deprecated_member_use
+      theme.bearColor.value,
     );
 
     candleCache.updateIfNeeded(
@@ -198,9 +207,9 @@ class MainPanelPainter extends CustomPainter {
         }
 
         final Paint bullishPaint = paintPool.borrow()
-          ..color = const Color(0xFF4CAF50);
+          ..color = theme.bullColor;
         final Paint bearishPaint = paintPool.borrow()
-          ..color = const Color(0xFFE91E63);
+          ..color = theme.bearColor;
 
         if (bullishOffset > 0) {
           candleCanvas.drawVertices(

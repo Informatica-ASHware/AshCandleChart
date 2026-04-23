@@ -5,6 +5,7 @@ import '../painting/secondary_panel_painter.dart';
 import 'crosshair_overlay.dart';
 import '../painting/paint_pool.dart';
 import '../painting/layer_cache.dart';
+import '../widgets/kchart_scope.dart';
 import 'chart_panel.dart';
 
 /// Panel for displaying trading volume.
@@ -58,11 +59,15 @@ class _VolumePanelWidgetState extends State<_VolumePanelWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final scope = KChartScope.of(context);
+    final theme = scope?.theme;
+
     return Stack(
       children: [
         ListenableBuilder(
           listenable: widget.controller,
           builder: (context, child) {
+            if (theme == null) return const SizedBox.shrink();
             return CustomPaint(
               size: Size.infinite,
               painter: SecondaryPanelPainter(
@@ -70,6 +75,7 @@ class _VolumePanelWidgetState extends State<_VolumePanelWidget> {
                 paintPool: _paintPool,
                 cache: _cache,
                 indicatorId: 'volume',
+                theme: theme,
               ),
             );
           },

@@ -10,6 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  intl: ^0.19.0
   kchart_core:
     path: ../kchart_core
   meta: ^1.11.0

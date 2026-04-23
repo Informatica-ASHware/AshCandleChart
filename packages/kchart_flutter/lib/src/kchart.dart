@@ -7,6 +7,8 @@ import 'painting/crosshair_painter.dart';
 import 'panels/panel_stack.dart';
 import 'widgets/kchart_scope.dart';
 import 'package:flutter/physics.dart';
+import 'theme.dart';
+import 'i18n/number_formatters.dart';
 
 /// The main KChart widget.
 ///
@@ -16,10 +18,18 @@ class KChart extends StatefulWidget {
   /// The controller for this chart.
   final KChartController controller;
 
+  /// The theme to use for the chart. If null, uses [ChartTheme.light()].
+  final ChartTheme? theme;
+
+  /// The locale to use for formatting numbers. If null, uses 'en_US'.
+  final String? locale;
+
   /// Creates a [KChart] with the given [controller].
   const KChart({
     super.key,
     required this.controller,
+    this.theme,
+    this.locale,
   });
 
   @override
@@ -336,6 +346,10 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
         return ListenableBuilder(
           listenable: widget.controller,
           builder: (context, child) {
+            final theme = widget.theme ??
+                (Theme.of(context).brightness == Brightness.dark
+                    ? ChartTheme.dark()
+                    : ChartTheme.light());
             return Listener(
               onPointerDown: _arbiter.handleEvent,
               onPointerMove: (event) {
@@ -354,39 +368,47 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
               onPointerPanZoomEnd: _arbiter.handleEvent,
               child: KChartScope(
                 chartKey: _chartKey,
-                child: MouseRegion(
-                  key: _chartKey,
-                  cursor: SystemMouseCursors.precise,
-                  onExit: (_) => widget.controller.crosshair.clear(),
-                  child: Stack(
-                    children: [
-                      PanelStack(
-                        panels: widget.controller.panels,
-                        onResize: (index, delta) {
-                          widget.controller.resizePanels(
-                            index,
-                            delta,
-                            constraints.maxHeight,
-                          );
-                        },
-                      ),
-                      ValueListenableBuilder<CrosshairState?>(
-                        valueListenable: widget.controller.crosshair.state,
-                        builder: (context, state, child) {
-                          if (state == null || state.dx == null) {
-                            return const SizedBox.shrink();
-                          }
-                          return IgnorePointer(
-                            child: CustomPaint(
-                              size: Size.infinite,
-                              painter: CrosshairPainter(
-                                state: CrosshairState(dx: state.dx),
+                theme: theme,
+                formatters: ChartNumberFormatters(
+                    widget.locale ?? Localizations.maybeLocaleOf(context)?.toString() ?? 'en_US'),
+                child: Container(
+                  color: theme.backgroundColor,
+                  child: MouseRegion(
+                    key: _chartKey,
+                    cursor: SystemMouseCursors.precise,
+                    onExit: (_) => widget.controller.crosshair.clear(),
+                    child: Stack(
+                      children: [
+                        PanelStack(
+                          panels: widget.controller.panels,
+                          onResize: (index, delta) {
+                            widget.controller.resizePanels(
+                              index,
+                              delta,
+                              constraints.maxHeight,
+                            );
+                          },
+                        ),
+                        ValueListenableBuilder<CrosshairState?>(
+                          valueListenable: widget.controller.crosshair.state,
+                          builder: (context, state, child) {
+                            if (state == null || state.dx == null) {
+                              return const SizedBox.shrink();
+                            }
+                            final scope = KChartScope.of(context);
+                            return IgnorePointer(
+                              child: CustomPaint(
+                                size: Size.infinite,
+                                painter: CrosshairPainter(
+                                  state: CrosshairState(dx: state.dx),
+                                  color: scope?.theme.crosshairColor ?? Colors.grey,
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                      ),
-                    ],
+                            );
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
