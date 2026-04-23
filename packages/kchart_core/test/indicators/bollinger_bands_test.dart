@@ -5,7 +5,8 @@ import 'package:kchart_core/src/series/series.dart';
 
 void main() {
   group('BollingerBandsIndicator', () {
-    final close = Float64List.fromList([10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]);
+    final close =
+        Float64List.fromList([10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]);
     final series = Series(
       timestamps: Int64List(11),
       open: Float64List(11),
@@ -58,7 +59,8 @@ void main() {
         if (resultsFull.middle[i].isNaN) {
           expect(resultsAppend.middle[i], isNaN);
         } else {
-          expect(resultsAppend.middle[i], closeTo(resultsFull.middle[i], 1e-10));
+          expect(
+              resultsAppend.middle[i], closeTo(resultsFull.middle[i], 1e-10));
         }
 
         if (resultsFull.upper[i].isNaN) {

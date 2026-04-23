@@ -25,12 +25,7 @@ class KChart extends StatefulWidget {
   final String? locale;
 
   /// Creates a [KChart] with the given [controller].
-  const KChart({
-    super.key,
-    required this.controller,
-    this.theme,
-    this.locale,
-  });
+  const KChart({super.key, required this.controller, this.theme, this.locale});
 
   @override
   State<KChart> createState() => _KChartState();
@@ -66,11 +61,7 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
       onZoomUpdate: (scale, focalPoint) {
         if (_activeAnnotationId != null) return;
         _stopAnimation();
-        widget.controller.zoom(
-          scale,
-          focalPoint.dx,
-          _lastSize?.width ?? 0.0,
-        );
+        widget.controller.zoom(scale, focalPoint.dx, _lastSize?.width ?? 0.0);
       },
       onLongPressStart: (position) {
         _updateCrosshair(position);
@@ -144,9 +135,13 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
     for (final annotation in annotations) {
       if (annotation is TrendLine) {
         final p1 = Offset(
-            timestampToX(annotation.start.timestamp), priceToY(annotation.start.price));
+          timestampToX(annotation.start.timestamp),
+          priceToY(annotation.start.price),
+        );
         final p2 = Offset(
-            timestampToX(annotation.end.timestamp), priceToY(annotation.end.price));
+          timestampToX(annotation.end.timestamp),
+          priceToY(annotation.end.price),
+        );
 
         if ((position - p1).distance <= hitBoxSize) {
           setState(() {
@@ -175,11 +170,9 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
       // Start new drawing if not hitting anything
       final id = 'trendline_${DateTime.now().millisecondsSinceEpoch}';
       final point = widget.controller.pixelToPoint(position, size);
-      widget.controller.setAnnotation(Annotation.trendLine(
-        id: id,
-        start: point,
-        end: point,
-      ));
+      widget.controller.setAnnotation(
+        Annotation.trendLine(id: id, start: point, end: point),
+      );
       setState(() {
         _activeAnnotationId = id;
         _activePointIndex = 1;
@@ -199,8 +192,10 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
     final double candleWidth = size.width / visibleCount;
 
     final double relativeIdx = localPosition.dx / candleWidth;
-    final int index =
-        (startIdx + relativeIdx.floor()).clamp(0, series.length - 1);
+    final int index = (startIdx + relativeIdx.floor()).clamp(
+      0,
+      series.length - 1,
+    );
     final int timestamp = series.timestamps[index];
 
     // Snapped dx to candle center
@@ -212,21 +207,27 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
     // Note: pixelToPoint assumes size of the main panel.
     final point = widget.controller.pixelToPoint(localPosition, size);
 
-    widget.controller.crosshair.update(CrosshairState(
-      dx: snappedDx,
-      dy: localPosition.dy, // Relative to KChart widget
-      timestamp: timestamp,
-      price: point.price,
-    ));
+    widget.controller.crosshair.update(
+      CrosshairState(
+        dx: snappedDx,
+        dy: localPosition.dy, // Relative to KChart widget
+        timestamp: timestamp,
+        price: point.price,
+      ),
+    );
   }
 
   void _handlePointerMove(PointerMoveEvent event) {
     final size = _lastSize ?? Size.zero;
     if (_activeAnnotationId != null && _activePointIndex != null) {
       final annotations = widget.controller.frame.annotations.annotations;
-      final annotation =
-          annotations.firstWhere((a) => a.id == _activeAnnotationId);
-      final newPoint = widget.controller.pixelToPoint(event.localPosition, size);
+      final annotation = annotations.firstWhere(
+        (a) => a.id == _activeAnnotationId,
+      );
+      final newPoint = widget.controller.pixelToPoint(
+        event.localPosition,
+        size,
+      );
 
       if (annotation is TrendLine) {
         if (_activePointIndex == 0) {
@@ -277,7 +278,8 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
     final elapsedDuration = _animationController.lastElapsedDuration;
     if (elapsedDuration == null) return;
 
-    final elapsed = elapsedDuration.inMicroseconds / Duration.microsecondsPerSecond;
+    final elapsed =
+        elapsedDuration.inMicroseconds / Duration.microsecondsPerSecond;
     final double currentValue = _flingSimulation!.x(elapsed);
     final double delta = currentValue - _lastAnimationValue;
     _lastAnimationValue = currentValue;
@@ -307,13 +309,13 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
     if (targetDelta == 0) return;
 
     _lastAnimationValue = 0.0;
-    final Animation<double> animation = Tween<double>(
-      begin: 0.0,
-      end: targetDelta,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeOutCubic,
-    ));
+    final Animation<double> animation =
+        Tween<double>(begin: 0.0, end: targetDelta).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.easeOutCubic,
+      ),
+    );
 
     void snapTick() {
       final double currentValue = animation.value;
@@ -370,7 +372,10 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
                 chartKey: _chartKey,
                 theme: theme,
                 formatters: ChartNumberFormatters(
-                    widget.locale ?? Localizations.maybeLocaleOf(context)?.toString() ?? 'en_US'),
+                  widget.locale ??
+                      Localizations.maybeLocaleOf(context)?.toString() ??
+                      'en_US',
+                ),
                 child: Container(
                   color: theme.backgroundColor,
                   child: MouseRegion(
@@ -401,7 +406,8 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
                                 size: Size.infinite,
                                 painter: CrosshairPainter(
                                   state: CrosshairState(dx: state.dx),
-                                  color: scope?.theme.crosshairColor ?? Colors.grey,
+                                  color: scope?.theme.crosshairColor ??
+                                      Colors.grey,
                                 ),
                               ),
                             );

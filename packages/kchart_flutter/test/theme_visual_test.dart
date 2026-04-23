@@ -36,7 +36,8 @@ void main() {
           volume: volume,
         ),
         indicators: {},
-        viewport: const Viewport(startIdx: 0, endIdx: 49, scale: 1.0, scrollX: 0.0),
+        viewport:
+            const Viewport(startIdx: 0, endIdx: 49, scale: 1.0, scrollX: 0.0),
         overlays: [],
         sequenceNumber: 0,
         panelSequenceNumbers: const {'main': 0, 'volume': 0},

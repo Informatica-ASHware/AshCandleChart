@@ -6,7 +6,8 @@ import 'package:kchart_core/src/series/series.dart';
 void main() {
   group('RSIIndicator', () {
     // Need enough data for RSI (default 14)
-    final close = Float64List.fromList(List.generate(30, (i) => i.toDouble() + 1));
+    final close =
+        Float64List.fromList(List.generate(30, (i) => i.toDouble() + 1));
     final series = Series(
       timestamps: Int64List(30),
       open: Float64List(30),

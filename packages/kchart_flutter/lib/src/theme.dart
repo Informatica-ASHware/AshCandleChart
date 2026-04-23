@@ -4,6 +4,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'theme.freezed.dart';
 
 /// Defines the visual appearance of the KChart.
+///
+/// Contains all color and text style configurations used by the chart
+/// painters and UI components.
 @freezed
 class ChartTheme with _$ChartTheme {
   /// Creates a [ChartTheme] with the specified colors and styles.

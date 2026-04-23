@@ -186,7 +186,7 @@ class SecondaryPanelPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant SecondaryPanelPainter oldDelegate) {
     return oldDelegate.frame.panelSequenceNumbers[indicatorId] !=
-        frame.panelSequenceNumbers[indicatorId] ||
+            frame.panelSequenceNumbers[indicatorId] ||
         oldDelegate.indicatorId != indicatorId;
   }
 }

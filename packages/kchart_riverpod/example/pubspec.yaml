@@ -1,0 +1,22 @@
+name: kchart_riverpod_example
+description: Minimal example for kchart_riverpod.
+publish_to: none
+
+environment:
+  sdk: '>=3.5.0 <4.0.0'
+  flutter: '>=3.24.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_riverpod: ^3.0.0-dev.0
+  kchart_riverpod:
+    path: ..
+  kchart_flutter:
+    path: ../../kchart_flutter
+  kchart_core:
+    path: ../../kchart_core
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter

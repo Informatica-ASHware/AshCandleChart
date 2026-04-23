@@ -1,7 +1,10 @@
 name: kchart_flutter
-description: Flutter implementation of kchart, optimized for high performance.
+description: Flutter implementation of kchart, optimized for high performance. Features high-fps rendering and multi-threaded calculations.
 version: 0.1.0-dev.1
 publish_to: none
+repository: https://github.com/Informatica-ASHware/KChart2
+homepage: https://github.com/Informatica-ASHware/KChart2/tree/main/packages/kchart_flutter
+issue_tracker: https://github.com/Informatica-ASHware/KChart2/issues
 
 environment:
   sdk: '>=3.5.0 <4.0.0'

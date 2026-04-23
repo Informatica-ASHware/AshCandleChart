@@ -1,7 +1,10 @@
 name: kchart_riverpod
-description: Riverpod integration for kchart.
+description: Riverpod 3 integration for kchart, providing easy-to-use providers for controllers and chart frames. Optimized for reactive financial applications.
 version: 0.1.0-dev.1
 publish_to: none
+repository: https://github.com/Informatica-ASHware/KChart2
+homepage: https://github.com/Informatica-ASHware/KChart2/tree/main/packages/kchart_riverpod
+issue_tracker: https://github.com/Informatica-ASHware/KChart2/issues
 
 environment:
   sdk: '>=3.5.0 <4.0.0'

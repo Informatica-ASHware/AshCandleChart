@@ -1,5 +1,7 @@
 ## [Unreleased]
 
+## [0.1.0-dev.1]
+
 - Implemented `PaintPool` to reuse `Paint` objects and reduce GC pressure.
 - Implemented `LayerCache` using `ui.Picture` to cache static components like grid and candle history.
 - Added grid rendering to `MainPanelPainter`.
@@ -23,10 +25,6 @@
     - Injected theme and formatters via `KChartScope` (InheritedWidget).
     - Updated all painters and UI components to respect the current theme.
     - Added comprehensive Golden tests for Light and Dark themes.
-
-## [0.1.0-dev.1]
-
-- Added `KChartController` to manage chart state.
 - Implemented `KChart` widget for high-performance rendering.
 - Added `MainPanelPainter` using `canvas.drawVertices` with `VertexMode.triangles` for optimized candle rendering.
 - Implemented O(log N) binary search for visible range determination.

@@ -14,7 +14,8 @@ void main() {
       expect(painter1.shouldRepaint(painter3), isFalse);
     });
 
-    testWidgets('should render vertical and horizontal lines', (WidgetTester tester) async {
+    testWidgets('should render vertical and horizontal lines',
+        (WidgetTester tester) async {
       final state = const CrosshairState(dx: 50, dy: 60);
       final painter = CrosshairPainter(state: state, color: Colors.red);
 

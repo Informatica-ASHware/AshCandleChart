@@ -9,7 +9,9 @@ part 'bollinger_bands.freezed.dart';
 
 /// Configuration for the Bollinger Bands indicator.
 @freezed
-class BollingerBandsConfig with _$BollingerBandsConfig implements IndicatorConfig {
+class BollingerBandsConfig
+    with _$BollingerBandsConfig
+    implements IndicatorConfig {
   /// Creates a [BollingerBandsConfig].
   const factory BollingerBandsConfig({
     required String id,
@@ -23,8 +25,10 @@ class BollingerBandsConfig with _$BollingerBandsConfig implements IndicatorConfi
 class BollingerBandsResult {
   /// Middle band (usually an SMA).
   final Float64List middle;
+
   /// Upper band.
   final Float64List upper;
+
   /// Lower band.
   final Float64List lower;
 
@@ -50,7 +54,9 @@ class BollingerBandsIndicator extends Indicator<BollingerBandsConfig> {
     final n = data.length;
     final period = config.period;
 
-    final middle = SMAIndicator(SMAConfig(id: 'sma', period: period)).compute(input, {});
+    final middle = SMAIndicator(
+      SMAConfig(id: 'sma', period: period),
+    ).compute(input, {});
     final upper = Float64List(n);
     final lower = Float64List(n);
 
@@ -76,7 +82,11 @@ class BollingerBandsIndicator extends Indicator<BollingerBandsConfig> {
   }
 
   @override
-  BollingerBandsResult computeAppend(Series input, Map<String, Object> dependencies, Object previousResults) {
+  BollingerBandsResult computeAppend(
+    Series input,
+    Map<String, Object> dependencies,
+    Object previousResults,
+  ) {
     final data = input.close;
     final n = data.length;
     final period = config.period;
@@ -84,7 +94,9 @@ class BollingerBandsIndicator extends Indicator<BollingerBandsConfig> {
 
     if (n <= prev.length) return prev;
 
-    final middleFull = SMAIndicator(SMAConfig(id: 'sma', period: period)).computeAppend(input, {}, prev.middle);
+    final middleFull = SMAIndicator(
+      SMAConfig(id: 'sma', period: period),
+    ).computeAppend(input, {}, prev.middle);
     final newMiddle = middleFull[n - 1];
 
     final upperList = Float64List(n);
@@ -107,6 +119,10 @@ class BollingerBandsIndicator extends Indicator<BollingerBandsConfig> {
       lowerList[n - 1] = newMiddle - config.stdDev * sd;
     }
 
-    return BollingerBandsResult(middle: middleFull, upper: upperList, lower: lowerList);
+    return BollingerBandsResult(
+      middle: middleFull,
+      upper: upperList,
+      lower: lowerList,
+    );
   }
 }

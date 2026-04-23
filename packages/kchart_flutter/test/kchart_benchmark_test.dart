@@ -111,7 +111,8 @@ void main() {
       times.add(sw.elapsedMicroseconds);
     }
 
-    final double avgTimeMs = times.reduce((a, b) => a + b) / times.length / 1000.0;
+    final double avgTimeMs =
+        times.reduce((a, b) => a + b) / times.length / 1000.0;
     final double maxTimeMs = times.reduce((a, b) => a > b ? a : b) / 1000.0;
 
     // ignore: avoid_print

@@ -29,7 +29,8 @@ void main() {
     final frame = ChartFrame(
       series: series,
       indicators: {},
-      viewport: const Viewport(startIdx: 40, endIdx: 50, scale: 1.0, scrollX: 0.0),
+      viewport:
+          const Viewport(startIdx: 40, endIdx: 50, scale: 1.0, scrollX: 0.0),
       overlays: [],
       sequenceNumber: 0,
       panelSequenceNumbers: const {'main': 0},
@@ -37,7 +38,8 @@ void main() {
     controller = KChartController(frame: frame);
   });
 
-  testWidgets('Fling continues to pan the chart and then snaps', (WidgetTester tester) async {
+  testWidgets('Fling continues to pan the chart and then snaps',
+      (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
@@ -67,7 +69,8 @@ void main() {
     expect(controller.frame.viewport.scrollX, 0.0);
   });
 
-  testWidgets('Small drag snaps to candle without fling', (WidgetTester tester) async {
+  testWidgets('Small drag snaps to candle without fling',
+      (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(

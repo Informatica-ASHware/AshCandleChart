@@ -42,5 +42,6 @@ abstract class Indicator<T extends IndicatorConfig> {
   /// [previousResults] is the result of the previous call to [compute] or [computeAppend].
   ///
   /// This method is intended to optimize performance for real-time updates.
-  Object computeAppend(Series input, Map<String, Object> dependencies, Object previousResults);
+  Object computeAppend(
+      Series input, Map<String, Object> dependencies, Object previousResults);
 }

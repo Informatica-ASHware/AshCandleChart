@@ -41,7 +41,8 @@ void main() {
       final frame = ChartFrame(
         series: series,
         indicators: {},
-        viewport: const Viewport(startIdx: 0, endIdx: 0, scale: 1.0, scrollX: 0.0),
+        viewport:
+            const Viewport(startIdx: 0, endIdx: 0, scale: 1.0, scrollX: 0.0),
         overlays: [],
         sequenceNumber: 0,
         panelSequenceNumbers: {'main': 0},

@@ -49,7 +49,8 @@ class SMAIndicator extends Indicator<SMAConfig> {
   }
 
   @override
-  Float64List computeAppend(Series input, Map<String, Object> dependencies, Object previousResults) {
+  Float64List computeAppend(
+      Series input, Map<String, Object> dependencies, Object previousResults) {
     final data = input.close;
     final n = data.length;
     final period = config.period;
@@ -79,7 +80,8 @@ class SMAIndicator extends Indicator<SMAConfig> {
         }
         results[n - 1] = sum / period;
       } else {
-        results[n - 1] = prevSma + (data[n - 1] - data[n - 1 - period]) / period;
+        results[n - 1] =
+            prevSma + (data[n - 1] - data[n - 1 - period]) / period;
       }
     }
 
