@@ -12,7 +12,7 @@ set -euo pipefail
 # ---------------------------------------------------------------------------
 # CONFIGURACIÓN — Edita estas variables con tu usuario/organización y repo
 # ---------------------------------------------------------------------------
-ORG_NAME="Informatica-ASHware"
+OWNER="Informatica-ASHware"
 REPO="KChart2"
 FULL_REPO="${OWNER}/${REPO}"
 
