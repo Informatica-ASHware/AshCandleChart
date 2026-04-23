@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart' hide Viewport;
 import 'package:kchart_core/kchart_core.dart';
+import 'crosshair_coordinator.dart';
 import 'panels/chart_panel.dart';
 import 'panels/main_panel.dart';
 import 'panels/volume_panel.dart';
@@ -10,6 +11,9 @@ import 'panels/secondary_panel.dart';
 /// Manages the [ChartFrame] and notifies listeners of changes.
 class KChartController extends ChangeNotifier {
   ChartFrame _frame;
+
+  /// Coordinator for the synchronized crosshair.
+  final CrosshairCoordinator crosshair = CrosshairCoordinator();
 
   /// Flexible factors for panel heights.
   List<double> _panelFlexFactors = [3.0, 1.0];
@@ -266,5 +270,11 @@ class KChartController extends ChangeNotifier {
       _panelFlexFactors[index + 1] = newFlexBelow;
       notifyListeners();
     }
+  }
+
+  @override
+  void dispose() {
+    crosshair.dispose();
+    super.dispose();
   }
 }

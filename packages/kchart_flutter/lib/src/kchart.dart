@@ -46,10 +46,10 @@ class _KChartState extends State<KChart> {
         );
       },
       onLongPressStart: (position) {
-        // Handle long press (e.g., show tooltip/crosshair)
+        _updateCrosshair(position);
       },
       onLongPressEnd: () {
-        // Hide tooltip/crosshair
+        widget.controller.crosshair.clear();
       },
       onTap: (position) {
         _handleTap(position);
@@ -153,6 +153,32 @@ class _KChartState extends State<KChart> {
     }
   }
 
+  void _updateCrosshair(Offset localPosition) {
+    final size = context.size ?? Size.zero;
+    if (size.isEmpty) return;
+
+    final series = widget.controller.frame.series;
+    final viewport = widget.controller.frame.viewport;
+    final int startIdx = viewport.startIdx.clamp(0, series.length - 1);
+    final int endIdx = viewport.endIdx.clamp(0, series.length - 1);
+    final int visibleCount = endIdx - startIdx + 1;
+    final double candleWidth = size.width / visibleCount;
+
+    final double relativeIdx = localPosition.dx / candleWidth;
+    final int index =
+        (startIdx + relativeIdx.floor()).clamp(0, series.length - 1);
+    final int timestamp = series.timestamps[index];
+
+    // Snapped dx to candle center
+    final double snappedDx = (index - startIdx) * candleWidth + candleWidth / 2;
+
+    widget.controller.crosshair.update(CrosshairState(
+      dx: snappedDx,
+      dy: localPosition.dy, // Relative to KChart widget
+      timestamp: timestamp,
+    ));
+  }
+
   void _handlePointerMove(PointerMoveEvent event) {
     if (_activeAnnotationId != null && _activePointIndex != null) {
       final annotations = widget.controller.frame.annotations.annotations;
@@ -168,6 +194,10 @@ class _KChartState extends State<KChart> {
           widget.controller.setAnnotation(annotation.copyWith(end: newPoint));
         }
       }
+    }
+
+    if (event.kind == PointerDeviceKind.mouse) {
+      _updateCrosshair(event.localPosition);
     }
   }
 
@@ -202,6 +232,7 @@ class _KChartState extends State<KChart> {
               onPointerPanZoomEnd: _arbiter.handleEvent,
               child: MouseRegion(
                 cursor: SystemMouseCursors.precise,
+                onExit: (_) => widget.controller.crosshair.clear(),
                 child: PanelStack(
                   panels: widget.controller.panels,
                   onResize: (index, delta) {

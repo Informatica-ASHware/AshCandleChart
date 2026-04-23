@@ -1,7 +1,9 @@
 import 'dart:typed_data';
 import 'package:flutter/widgets.dart';
+import 'package:kchart_core/kchart_core.dart';
 import '../controller.dart';
 import '../painting/main_panel_painter.dart';
+import 'crosshair_overlay.dart';
 import '../painting/paint_pool.dart';
 import '../painting/layer_cache.dart';
 import 'chart_panel.dart';
@@ -63,21 +65,31 @@ class _MainPanelWidgetState extends State<_MainPanelWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return ListenableBuilder(
-      listenable: widget.controller,
-      builder: (context, child) {
-        return CustomPaint(
-          size: Size.infinite,
-          painter: MainPanelPainter(
-            frame: widget.controller.frame,
-            paintPool: _paintPool,
-            gridCache: _gridCache,
-            candleCache: _candleCache,
-            bullishBuffer: _bullishBuffer,
-            bearishBuffer: _bearishBuffer,
-          ),
-        );
-      },
+    return Stack(
+      children: [
+        ListenableBuilder(
+          listenable: widget.controller,
+          builder: (context, child) {
+            return CustomPaint(
+              size: Size.infinite,
+              painter: MainPanelPainter(
+                frame: widget.controller.frame,
+                paintPool: _paintPool,
+                gridCache: _gridCache,
+                candleCache: _candleCache,
+                bullishBuffer: _bullishBuffer,
+                bearishBuffer: _bearishBuffer,
+              ),
+            );
+          },
+        ),
+        ValueListenableBuilder<CrosshairState?>(
+          valueListenable: widget.controller.crosshair.state,
+          builder: (context, state, child) {
+            return CrosshairOverlay(state: state);
+          },
+        ),
+      ],
     );
   }
 }
