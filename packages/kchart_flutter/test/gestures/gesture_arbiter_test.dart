@@ -59,7 +59,7 @@ void main() {
     testWidgets('handles long press', (tester) async {
       arbiter.handleEvent(const PointerDownEvent(pointer: 1, position: Offset(10, 10)));
 
-      await Future.delayed(const Duration(milliseconds: 150));
+      await tester.pump(const Duration(milliseconds: 150));
 
       expect(longPressPosition, const Offset(10, 10));
 
@@ -69,7 +69,7 @@ void main() {
 
     testWidgets('handles long press cancel', (tester) async {
       arbiter.handleEvent(const PointerDownEvent(pointer: 1, position: Offset(10, 10)));
-      await Future.delayed(const Duration(milliseconds: 150));
+      await tester.pump(const Duration(milliseconds: 150));
       expect(longPressPosition, const Offset(10, 10));
 
       arbiter.handleEvent(const PointerCancelEvent(pointer: 1, position: Offset(10, 10)));
