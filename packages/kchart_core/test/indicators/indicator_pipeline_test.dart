@@ -12,6 +12,8 @@ class MockConfig implements IndicatorConfig {
   final List<String> dependsOn;
 
   MockConfig(this.id, [this.dependsOn = const []]);
+
+  Map<String, dynamic> toJson() => {};
 }
 
 class MockIndicator extends Indicator<MockConfig> {

@@ -37,5 +37,6 @@ void main() {
   }
 
   File('packages/kchart_flutter/test/fixtures/candles_50k.json').writeAsStringSync(jsonString);
+  // ignore: avoid_print
   print('Generated 50000 candles to packages/kchart_flutter/test/fixtures/candles_50k.json');
 }
