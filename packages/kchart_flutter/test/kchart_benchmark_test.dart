@@ -6,6 +6,8 @@ import 'package:flutter/material.dart' hide Viewport;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kchart_core/kchart_core.dart';
 import 'package:kchart_flutter/src/painting/main_panel_painter.dart';
+import 'package:kchart_flutter/src/painting/layer_cache.dart';
+import 'package:kchart_flutter/src/painting/paint_pool.dart';
 
 void main() {
   /// US 3.02: Performance Lab - Benchmark
@@ -50,6 +52,10 @@ void main() {
     final int step = 100;
     final List<int> times = [];
 
+    final paintPool = PaintPool();
+    final gridCache = LayerCache();
+    final candleCache = LayerCache();
+
     for (int start = 0; start <= n - windowSize; start += step) {
       final frame = ChartFrame(
         series: series,
@@ -64,7 +70,12 @@ void main() {
         sequenceNumber: start,
       );
 
-      final painter = MainPanelPainter(frame: frame);
+      final painter = MainPanelPainter(
+        frame: frame,
+        paintPool: paintPool,
+        gridCache: gridCache,
+        candleCache: candleCache,
+      );
 
       final sw = Stopwatch()..start();
       painter.paint(canvas, size);

@@ -3,6 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:kchart_core/kchart_core.dart';
 import 'package:kchart_flutter/kchart_flutter.dart';
 import 'package:flutter/material.dart' hide Viewport;
+import 'package:kchart_flutter/src/painting/layer_cache.dart';
+import 'package:kchart_flutter/src/painting/paint_pool.dart';
 
 void main() {
   group('KChartController', () {
@@ -81,8 +83,22 @@ void main() {
       );
       final frame2 = frame1.copyWith(sequenceNumber: 1);
 
-      final painter1 = MainPanelPainter(frame: frame1);
-      final painter2 = MainPanelPainter(frame: frame2);
+      final paintPool = PaintPool();
+      final gridCache = LayerCache();
+      final candleCache = LayerCache();
+
+      final painter1 = MainPanelPainter(
+        frame: frame1,
+        paintPool: paintPool,
+        gridCache: gridCache,
+        candleCache: candleCache,
+      );
+      final painter2 = MainPanelPainter(
+        frame: frame2,
+        paintPool: paintPool,
+        gridCache: gridCache,
+        candleCache: candleCache,
+      );
 
       expect(painter2.shouldRepaint(painter1), isTrue);
       expect(painter1.shouldRepaint(painter1), isFalse);
@@ -151,7 +167,6 @@ void main() {
           volume: volume,
         ),
         indicators: {},
-        // Rendering only a window of 100 candles out of 100k, as per viewport logic.
         viewport: const Viewport(startIdx: 50000, endIdx: 50100, scale: 1.0, scrollX: 0.0),
         overlays: [],
         sequenceNumber: 0,
