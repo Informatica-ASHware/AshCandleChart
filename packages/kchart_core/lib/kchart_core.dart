@@ -6,6 +6,7 @@ export 'src/series/candle.dart';
 export 'src/series/chart_frame.dart';
 export 'src/series/crosshair_state.dart';
 export 'src/series/series.dart';
+export 'src/series/trade_overlay.dart';
 export 'src/series/viewport.dart';
 export 'src/compute/isolate_messages.dart';
 export 'src/compute/isolate_pool.dart';

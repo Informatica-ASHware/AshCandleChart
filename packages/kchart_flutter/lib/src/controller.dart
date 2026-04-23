@@ -57,6 +57,41 @@ class KChartController extends ChangeNotifier {
     );
   }
 
+  /// Adds or updates a trade overlay.
+  void setTradeOverlay(TradeOverlay overlay) {
+    final overlays = List<TradeOverlay>.from(_frame.tradeOverlays.overlays);
+    final index = overlays.indexWhere((o) => o.id == overlay.id);
+    if (index != -1) {
+      overlays[index] = overlay;
+    } else {
+      overlays.add(overlay);
+    }
+
+    final newPanelSeqs = Map<String, int>.from(_frame.panelSequenceNumbers);
+    newPanelSeqs['main'] = (newPanelSeqs['main'] ?? 0) + 1;
+
+    frame = _frame.copyWith(
+      tradeOverlays: _frame.tradeOverlays.copyWith(overlays: overlays),
+      panelSequenceNumbers: newPanelSeqs,
+      sequenceNumber: _frame.sequenceNumber + 1,
+    );
+  }
+
+  /// Removes a trade overlay by ID.
+  void removeTradeOverlay(String id) {
+    final overlays = List<TradeOverlay>.from(_frame.tradeOverlays.overlays);
+    overlays.removeWhere((o) => o.id == id);
+
+    final newPanelSeqs = Map<String, int>.from(_frame.panelSequenceNumbers);
+    newPanelSeqs['main'] = (newPanelSeqs['main'] ?? 0) + 1;
+
+    frame = _frame.copyWith(
+      tradeOverlays: _frame.tradeOverlays.copyWith(overlays: overlays),
+      panelSequenceNumbers: newPanelSeqs,
+      sequenceNumber: _frame.sequenceNumber + 1,
+    );
+  }
+
   /// Removes an annotation by ID.
   void removeAnnotation(String id) {
     final annotations = List<Annotation>.from(_frame.annotations.annotations);

@@ -28,6 +28,9 @@ mixin _$ChartFrame {
   /// The collection of annotations (drawings) in the chart.
   AnnotationDocument get annotations => throw _privateConstructorUsedError;
 
+  /// The collection of trade-related overlays.
+  TradeOverlayDocument get tradeOverlays => throw _privateConstructorUsedError;
+
   /// List of overlays (e.g., drawings, alerts, etc.) to be rendered.
   List<dynamic> get overlays => throw _privateConstructorUsedError;
 
@@ -57,12 +60,14 @@ abstract class $ChartFrameCopyWith<$Res> {
       Map<String, Series> indicators,
       Viewport viewport,
       AnnotationDocument annotations,
+      TradeOverlayDocument tradeOverlays,
       List<dynamic> overlays,
       int sequenceNumber,
       Map<String, int> panelSequenceNumbers});
 
   $ViewportCopyWith<$Res> get viewport;
   $AnnotationDocumentCopyWith<$Res> get annotations;
+  $TradeOverlayDocumentCopyWith<$Res> get tradeOverlays;
 }
 
 /// @nodoc
@@ -84,6 +89,7 @@ class _$ChartFrameCopyWithImpl<$Res, $Val extends ChartFrame>
     Object? indicators = null,
     Object? viewport = null,
     Object? annotations = null,
+    Object? tradeOverlays = null,
     Object? overlays = null,
     Object? sequenceNumber = null,
     Object? panelSequenceNumbers = null,
@@ -105,6 +111,10 @@ class _$ChartFrameCopyWithImpl<$Res, $Val extends ChartFrame>
           ? _value.annotations
           : annotations // ignore: cast_nullable_to_non_nullable
               as AnnotationDocument,
+      tradeOverlays: null == tradeOverlays
+          ? _value.tradeOverlays
+          : tradeOverlays // ignore: cast_nullable_to_non_nullable
+              as TradeOverlayDocument,
       overlays: null == overlays
           ? _value.overlays
           : overlays // ignore: cast_nullable_to_non_nullable
@@ -139,6 +149,16 @@ class _$ChartFrameCopyWithImpl<$Res, $Val extends ChartFrame>
       return _then(_value.copyWith(annotations: value) as $Val);
     });
   }
+
+  /// Create a copy of ChartFrame
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $TradeOverlayDocumentCopyWith<$Res> get tradeOverlays {
+    return $TradeOverlayDocumentCopyWith<$Res>(_value.tradeOverlays, (value) {
+      return _then(_value.copyWith(tradeOverlays: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -154,6 +174,7 @@ abstract class _$$ChartFrameImplCopyWith<$Res>
       Map<String, Series> indicators,
       Viewport viewport,
       AnnotationDocument annotations,
+      TradeOverlayDocument tradeOverlays,
       List<dynamic> overlays,
       int sequenceNumber,
       Map<String, int> panelSequenceNumbers});
@@ -162,6 +183,8 @@ abstract class _$$ChartFrameImplCopyWith<$Res>
   $ViewportCopyWith<$Res> get viewport;
   @override
   $AnnotationDocumentCopyWith<$Res> get annotations;
+  @override
+  $TradeOverlayDocumentCopyWith<$Res> get tradeOverlays;
 }
 
 /// @nodoc
@@ -181,6 +204,7 @@ class __$$ChartFrameImplCopyWithImpl<$Res>
     Object? indicators = null,
     Object? viewport = null,
     Object? annotations = null,
+    Object? tradeOverlays = null,
     Object? overlays = null,
     Object? sequenceNumber = null,
     Object? panelSequenceNumbers = null,
@@ -202,6 +226,10 @@ class __$$ChartFrameImplCopyWithImpl<$Res>
           ? _value.annotations
           : annotations // ignore: cast_nullable_to_non_nullable
               as AnnotationDocument,
+      tradeOverlays: null == tradeOverlays
+          ? _value.tradeOverlays
+          : tradeOverlays // ignore: cast_nullable_to_non_nullable
+              as TradeOverlayDocument,
       overlays: null == overlays
           ? _value._overlays
           : overlays // ignore: cast_nullable_to_non_nullable
@@ -226,6 +254,7 @@ class _$ChartFrameImpl implements _ChartFrame {
       required final Map<String, Series> indicators,
       required this.viewport,
       this.annotations = const AnnotationDocument(),
+      this.tradeOverlays = const TradeOverlayDocument(),
       required final List<dynamic> overlays,
       required this.sequenceNumber,
       required final Map<String, int> panelSequenceNumbers})
@@ -256,6 +285,11 @@ class _$ChartFrameImpl implements _ChartFrame {
   @override
   @JsonKey()
   final AnnotationDocument annotations;
+
+  /// The collection of trade-related overlays.
+  @override
+  @JsonKey()
+  final TradeOverlayDocument tradeOverlays;
 
   /// List of overlays (e.g., drawings, alerts, etc.) to be rendered.
   final List<dynamic> _overlays;
@@ -288,7 +322,7 @@ class _$ChartFrameImpl implements _ChartFrame {
 
   @override
   String toString() {
-    return 'ChartFrame(series: $series, indicators: $indicators, viewport: $viewport, annotations: $annotations, overlays: $overlays, sequenceNumber: $sequenceNumber, panelSequenceNumbers: $panelSequenceNumbers)';
+    return 'ChartFrame(series: $series, indicators: $indicators, viewport: $viewport, annotations: $annotations, tradeOverlays: $tradeOverlays, overlays: $overlays, sequenceNumber: $sequenceNumber, panelSequenceNumbers: $panelSequenceNumbers)';
   }
 
   @override
@@ -303,6 +337,8 @@ class _$ChartFrameImpl implements _ChartFrame {
                 other.viewport == viewport) &&
             (identical(other.annotations, annotations) ||
                 other.annotations == annotations) &&
+            (identical(other.tradeOverlays, tradeOverlays) ||
+                other.tradeOverlays == tradeOverlays) &&
             const DeepCollectionEquality().equals(other._overlays, _overlays) &&
             (identical(other.sequenceNumber, sequenceNumber) ||
                 other.sequenceNumber == sequenceNumber) &&
@@ -317,6 +353,7 @@ class _$ChartFrameImpl implements _ChartFrame {
       const DeepCollectionEquality().hash(_indicators),
       viewport,
       annotations,
+      tradeOverlays,
       const DeepCollectionEquality().hash(_overlays),
       sequenceNumber,
       const DeepCollectionEquality().hash(_panelSequenceNumbers));
@@ -336,6 +373,7 @@ abstract class _ChartFrame implements ChartFrame {
       required final Map<String, Series> indicators,
       required final Viewport viewport,
       final AnnotationDocument annotations,
+      final TradeOverlayDocument tradeOverlays,
       required final List<dynamic> overlays,
       required final int sequenceNumber,
       required final Map<String, int> panelSequenceNumbers}) = _$ChartFrameImpl;
@@ -355,6 +393,10 @@ abstract class _ChartFrame implements ChartFrame {
   /// The collection of annotations (drawings) in the chart.
   @override
   AnnotationDocument get annotations;
+
+  /// The collection of trade-related overlays.
+  @override
+  TradeOverlayDocument get tradeOverlays;
 
   /// List of overlays (e.g., drawings, alerts, etc.) to be rendered.
   @override

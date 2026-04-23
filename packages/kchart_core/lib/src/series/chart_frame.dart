@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'annotation.dart';
 import 'series.dart';
+import 'trade_overlay.dart';
 import 'viewport.dart';
 
 part 'chart_frame.freezed.dart';
@@ -24,6 +25,9 @@ class ChartFrame with _$ChartFrame {
 
     /// The collection of annotations (drawings) in the chart.
     @Default(AnnotationDocument()) AnnotationDocument annotations,
+
+    /// The collection of trade-related overlays.
+    @Default(TradeOverlayDocument()) TradeOverlayDocument tradeOverlays,
 
     /// List of overlays (e.g., drawings, alerts, etc.) to be rendered.
     required List<dynamic> overlays,
