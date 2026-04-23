@@ -79,11 +79,13 @@ void main() {
       expect(controller.hasListeners, isTrue);
 
       // Cancel (pause)
-      subscription.pause();
+      // ignore: undefined_method
+      (subscription as dynamic).pause();
       await Future.delayed(Duration.zero);
 
       // Resume
-      subscription.resume();
+      // ignore: undefined_method
+      (subscription as dynamic).resume();
       await Future.delayed(Duration.zero);
       // ignore: invalid_use_of_protected_member
       expect(controller.hasListeners, isTrue);
