@@ -4,6 +4,8 @@
 - Implemented `LayerCache` using `ui.Picture` to cache static components like grid and candle history.
 - Added grid rendering to `MainPanelPainter`.
 - Optimized `KChart` widget to manage the lifecycle of pools and caches.
+- Implemented `PanelStack` and `DraggableDivider` architecture for vertical chart stacking.
+- Added granular repaint isolation using `RepaintBoundary` and `panelSequenceNumbers`.
 
 ## [0.1.0-dev.1]
 

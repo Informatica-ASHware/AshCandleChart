@@ -22,6 +22,7 @@ void main() {
         viewport: const Viewport(startIdx: 0, endIdx: 0, scale: 1.0, scrollX: 0.0),
         overlays: [],
         sequenceNumber: 0,
+        panelSequenceNumbers: const {'main': 0},
       );
       final controller = KChartController(frame: frame);
       expect(controller.frame, frame);
@@ -41,8 +42,9 @@ void main() {
         viewport: const Viewport(startIdx: 0, endIdx: 0, scale: 1.0, scrollX: 0.0),
         overlays: [],
         sequenceNumber: 0,
+        panelSequenceNumbers: const {'main': 0},
       );
-      final frame2 = frame1.copyWith(sequenceNumber: 1);
+      final frame2 = frame1.copyWith(sequenceNumber: 1, panelSequenceNumbers: {'main': 1});
       final controller = KChartController(frame: frame1);
 
       bool notified = false;
@@ -80,8 +82,9 @@ void main() {
         viewport: const Viewport(startIdx: 0, endIdx: 0, scale: 1.0, scrollX: 0.0),
         overlays: [],
         sequenceNumber: 0,
+        panelSequenceNumbers: const {'main': 0},
       );
-      final frame2 = frame1.copyWith(sequenceNumber: 1);
+      final frame2 = frame1.copyWith(sequenceNumber: 1, panelSequenceNumbers: {'main': 1});
 
       final paintPool = PaintPool();
       final gridCache = LayerCache();
@@ -120,6 +123,7 @@ void main() {
         viewport: const Viewport(startIdx: 0, endIdx: 1, scale: 1.0, scrollX: 0.0),
         overlays: [],
         sequenceNumber: 0,
+        panelSequenceNumbers: const {'main': 0},
       );
       final controller = KChartController(frame: frame);
 
@@ -170,6 +174,7 @@ void main() {
         viewport: const Viewport(startIdx: 50000, endIdx: 50100, scale: 1.0, scrollX: 0.0),
         overlays: [],
         sequenceNumber: 0,
+        panelSequenceNumbers: const {'main': 0},
       );
       final controller = KChartController(frame: frame);
 

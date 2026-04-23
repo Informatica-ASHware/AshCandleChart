@@ -31,6 +31,11 @@ mixin _$ChartFrame {
   /// Sequential number to track frame updates and ensure consistent state.
   int get sequenceNumber => throw _privateConstructorUsedError;
 
+  /// Granular sequence numbers per panel to optimize repaints.
+  /// Key can be 'main', 'volume', or indicator IDs.
+  Map<String, int> get panelSequenceNumbers =>
+      throw _privateConstructorUsedError;
+
   /// Create a copy of ChartFrame
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +54,8 @@ abstract class $ChartFrameCopyWith<$Res> {
       Map<String, Series> indicators,
       Viewport viewport,
       List<dynamic> overlays,
-      int sequenceNumber});
+      int sequenceNumber,
+      Map<String, int> panelSequenceNumbers});
 
   $ViewportCopyWith<$Res> get viewport;
 }
@@ -74,6 +80,7 @@ class _$ChartFrameCopyWithImpl<$Res, $Val extends ChartFrame>
     Object? viewport = null,
     Object? overlays = null,
     Object? sequenceNumber = null,
+    Object? panelSequenceNumbers = null,
   }) {
     return _then(_value.copyWith(
       series: null == series
@@ -96,6 +103,10 @@ class _$ChartFrameCopyWithImpl<$Res, $Val extends ChartFrame>
           ? _value.sequenceNumber
           : sequenceNumber // ignore: cast_nullable_to_non_nullable
               as int,
+      panelSequenceNumbers: null == panelSequenceNumbers
+          ? _value.panelSequenceNumbers
+          : panelSequenceNumbers // ignore: cast_nullable_to_non_nullable
+              as Map<String, int>,
     ) as $Val);
   }
 
@@ -123,7 +134,8 @@ abstract class _$$ChartFrameImplCopyWith<$Res>
       Map<String, Series> indicators,
       Viewport viewport,
       List<dynamic> overlays,
-      int sequenceNumber});
+      int sequenceNumber,
+      Map<String, int> panelSequenceNumbers});
 
   @override
   $ViewportCopyWith<$Res> get viewport;
@@ -147,6 +159,7 @@ class __$$ChartFrameImplCopyWithImpl<$Res>
     Object? viewport = null,
     Object? overlays = null,
     Object? sequenceNumber = null,
+    Object? panelSequenceNumbers = null,
   }) {
     return _then(_$ChartFrameImpl(
       series: null == series
@@ -169,6 +182,10 @@ class __$$ChartFrameImplCopyWithImpl<$Res>
           ? _value.sequenceNumber
           : sequenceNumber // ignore: cast_nullable_to_non_nullable
               as int,
+      panelSequenceNumbers: null == panelSequenceNumbers
+          ? _value._panelSequenceNumbers
+          : panelSequenceNumbers // ignore: cast_nullable_to_non_nullable
+              as Map<String, int>,
     ));
   }
 }
@@ -181,9 +198,11 @@ class _$ChartFrameImpl implements _ChartFrame {
       required final Map<String, Series> indicators,
       required this.viewport,
       required final List<dynamic> overlays,
-      required this.sequenceNumber})
+      required this.sequenceNumber,
+      required final Map<String, int> panelSequenceNumbers})
       : _indicators = indicators,
-        _overlays = overlays;
+        _overlays = overlays,
+        _panelSequenceNumbers = panelSequenceNumbers;
 
   /// The main price [Series].
   @override
@@ -219,9 +238,23 @@ class _$ChartFrameImpl implements _ChartFrame {
   @override
   final int sequenceNumber;
 
+  /// Granular sequence numbers per panel to optimize repaints.
+  /// Key can be 'main', 'volume', or indicator IDs.
+  final Map<String, int> _panelSequenceNumbers;
+
+  /// Granular sequence numbers per panel to optimize repaints.
+  /// Key can be 'main', 'volume', or indicator IDs.
+  @override
+  Map<String, int> get panelSequenceNumbers {
+    if (_panelSequenceNumbers is EqualUnmodifiableMapView)
+      return _panelSequenceNumbers;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_panelSequenceNumbers);
+  }
+
   @override
   String toString() {
-    return 'ChartFrame(series: $series, indicators: $indicators, viewport: $viewport, overlays: $overlays, sequenceNumber: $sequenceNumber)';
+    return 'ChartFrame(series: $series, indicators: $indicators, viewport: $viewport, overlays: $overlays, sequenceNumber: $sequenceNumber, panelSequenceNumbers: $panelSequenceNumbers)';
   }
 
   @override
@@ -236,7 +269,9 @@ class _$ChartFrameImpl implements _ChartFrame {
                 other.viewport == viewport) &&
             const DeepCollectionEquality().equals(other._overlays, _overlays) &&
             (identical(other.sequenceNumber, sequenceNumber) ||
-                other.sequenceNumber == sequenceNumber));
+                other.sequenceNumber == sequenceNumber) &&
+            const DeepCollectionEquality()
+                .equals(other._panelSequenceNumbers, _panelSequenceNumbers));
   }
 
   @override
@@ -246,7 +281,8 @@ class _$ChartFrameImpl implements _ChartFrame {
       const DeepCollectionEquality().hash(_indicators),
       viewport,
       const DeepCollectionEquality().hash(_overlays),
-      sequenceNumber);
+      sequenceNumber,
+      const DeepCollectionEquality().hash(_panelSequenceNumbers));
 
   /// Create a copy of ChartFrame
   /// with the given fields replaced by the non-null parameter values.
@@ -263,7 +299,8 @@ abstract class _ChartFrame implements ChartFrame {
       required final Map<String, Series> indicators,
       required final Viewport viewport,
       required final List<dynamic> overlays,
-      required final int sequenceNumber}) = _$ChartFrameImpl;
+      required final int sequenceNumber,
+      required final Map<String, int> panelSequenceNumbers}) = _$ChartFrameImpl;
 
   /// The main price [Series].
   @override
@@ -284,6 +321,11 @@ abstract class _ChartFrame implements ChartFrame {
   /// Sequential number to track frame updates and ensure consistent state.
   @override
   int get sequenceNumber;
+
+  /// Granular sequence numbers per panel to optimize repaints.
+  /// Key can be 'main', 'volume', or indicator IDs.
+  @override
+  Map<String, int> get panelSequenceNumbers;
 
   /// Create a copy of ChartFrame
   /// with the given fields replaced by the non-null parameter values.
