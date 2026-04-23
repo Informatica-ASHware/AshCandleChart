@@ -5,6 +5,7 @@ import '../painting/secondary_panel_painter.dart';
 import 'crosshair_overlay.dart';
 import '../painting/paint_pool.dart';
 import '../painting/layer_cache.dart';
+import '../widgets/kchart_scope.dart';
 import 'chart_panel.dart';
 
 /// Panel for displaying secondary indicators (e.g., RSI, MACD).
@@ -69,11 +70,15 @@ class _SecondaryPanelWidgetState extends State<_SecondaryPanelWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final scope = KChartScope.of(context);
+    final theme = scope?.theme;
+
     return Stack(
       children: [
         ListenableBuilder(
           listenable: widget.controller,
           builder: (context, child) {
+            if (theme == null) return const SizedBox.shrink();
             return CustomPaint(
               size: Size.infinite,
               painter: SecondaryPanelPainter(
@@ -81,6 +86,7 @@ class _SecondaryPanelWidgetState extends State<_SecondaryPanelWidget> {
                 paintPool: _paintPool,
                 cache: _cache,
                 indicatorId: widget.indicatorId,
+                theme: theme,
               ),
             );
           },

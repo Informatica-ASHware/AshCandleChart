@@ -6,6 +6,7 @@ import '../painting/main_panel_painter.dart';
 import 'crosshair_overlay.dart';
 import '../painting/paint_pool.dart';
 import '../painting/layer_cache.dart';
+import '../widgets/kchart_scope.dart';
 import 'chart_panel.dart';
 
 /// The main price panel that displays candles and the grid.
@@ -65,11 +66,15 @@ class _MainPanelWidgetState extends State<_MainPanelWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final scope = KChartScope.of(context);
+    final theme = scope?.theme;
+
     return Stack(
       children: [
         ListenableBuilder(
           listenable: widget.controller,
           builder: (context, child) {
+            if (theme == null) return const SizedBox.shrink();
             return CustomPaint(
               size: Size.infinite,
               painter: MainPanelPainter(
@@ -77,6 +82,7 @@ class _MainPanelWidgetState extends State<_MainPanelWidget> {
                 paintPool: _paintPool,
                 gridCache: _gridCache,
                 candleCache: _candleCache,
+                theme: theme,
                 bullishBuffer: _bullishBuffer,
                 bearishBuffer: _bearishBuffer,
               ),

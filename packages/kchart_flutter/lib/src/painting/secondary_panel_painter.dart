@@ -3,6 +3,7 @@ import 'package:flutter/material.dart' hide Viewport;
 import 'package:kchart_core/kchart_core.dart';
 import 'layer_cache.dart';
 import 'paint_pool.dart';
+import '../theme.dart';
 
 /// Painter for secondary panels (Volume, RSI, etc.).
 class SecondaryPanelPainter extends CustomPainter {
@@ -18,12 +19,16 @@ class SecondaryPanelPainter extends CustomPainter {
   /// The ID of the indicator to render.
   final String indicatorId;
 
+  /// The theme to use for painting.
+  final ChartTheme theme;
+
   /// Creates a [SecondaryPanelPainter].
   SecondaryPanelPainter({
     required this.frame,
     required this.paintPool,
     required this.cache,
     required this.indicatorId,
+    required this.theme,
   });
 
   @override
@@ -52,6 +57,10 @@ class SecondaryPanelPainter extends CustomPainter {
       size.width,
       size.height,
       'volume',
+      // ignore: deprecated_member_use
+      theme.bullColor.value,
+      // ignore: deprecated_member_use
+      theme.bearColor.value,
     );
 
     cache.updateIfNeeded(
@@ -71,8 +80,12 @@ class SecondaryPanelPainter extends CustomPainter {
         final double barWidth = viewWidth / visibleCount;
         final double bodyWidth = barWidth * 0.8;
 
-        final Paint bullPaint = paintPool.borrow()..color = const Color(0x804CAF50);
-        final Paint bearPaint = paintPool.borrow()..color = const Color(0x80E91E63);
+        final Paint bullPaint = paintPool.borrow()
+          // ignore: deprecated_member_use
+          ..color = theme.bullColor.withOpacity(0.5);
+        final Paint bearPaint = paintPool.borrow()
+          // ignore: deprecated_member_use
+          ..color = theme.bearColor.withOpacity(0.5);
 
         for (int i = startIdx; i <= endIdx; i++) {
           final double vol = series.volume[i];
@@ -157,7 +170,7 @@ class SecondaryPanelPainter extends CustomPainter {
         }
 
         final Paint paint = paintPool.borrow()
-          ..color = Colors.blue
+          ..color = theme.tradeLineColor
           ..style = PaintingStyle.stroke
           ..strokeWidth = 2.0;
 

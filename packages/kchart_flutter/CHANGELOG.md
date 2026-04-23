@@ -17,6 +17,12 @@
     - Added `TradeOverlayPainter` using `canvas.drawVertices` for high-performance zone rendering.
     - Integrated trade overlays into `MainPanelPainter` with logical price/time anchoring.
     - Added overlay management methods to `KChartController`.
+- [US 8.01] Implementation of Theming and i18n system.
+    - Introduced `ChartTheme` for light/dark modes and custom visual configuration.
+    - Added `ChartNumberFormatters` for locale-aware price and volume formatting.
+    - Injected theme and formatters via `KChartScope` (InheritedWidget).
+    - Updated all painters and UI components to respect the current theme.
+    - Added comprehensive Golden tests for Light and Dark themes.
 
 ## [0.1.0-dev.1]
 
