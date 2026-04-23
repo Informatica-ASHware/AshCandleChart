@@ -1,5 +1,7 @@
 import 'dart:isolate';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import '../indicators/indicator.dart';
+import '../series/series.dart';
 
 part 'isolate_messages.freezed.dart';
 
@@ -18,6 +20,13 @@ class ComputeRequest with _$ComputeRequest {
     /// Should ideally contain [TransferableTypedData] for large data.
     required Object? payload,
   }) = _ComputeRequest;
+
+  /// Request to calculate a batch of indicators.
+  const factory ComputeRequest.indicatorBatch({
+    required String requestId,
+    required List<IndicatorConfig> configs,
+    required Series series,
+  }) = _IndicatorBatchRequest;
 }
 
 /// Base class for messages received from the isolate.
