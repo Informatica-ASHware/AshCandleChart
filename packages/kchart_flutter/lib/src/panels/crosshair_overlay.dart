@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:kchart_core/kchart_core.dart';
 import '../widgets/kchart_scope.dart';
 
@@ -73,7 +72,6 @@ class _RenderCrosshair extends RenderBox {
   @override
   bool get sizedByParent => true;
 
-  @override
   Size computeSizeForNoChild(BoxConstraints constraints) => constraints.biggest;
 
   @override

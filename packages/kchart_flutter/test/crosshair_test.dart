@@ -1,10 +1,8 @@
-import 'dart:ui';
 import 'package:flutter/material.dart' hide Viewport;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kchart_core/kchart_core.dart';
 import 'package:kchart_flutter/src/crosshair_coordinator.dart';
 import 'package:kchart_flutter/src/controller.dart';
-import 'package:kchart_flutter/src/kchart.dart';
 import 'package:kchart_flutter/src/panels/crosshair_overlay.dart';
 import 'dart:typed_data';
 
