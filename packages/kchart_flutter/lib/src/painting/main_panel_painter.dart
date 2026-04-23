@@ -43,6 +43,7 @@ class MainPanelPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     _drawGrid(canvas, size);
     _drawCandles(canvas, size);
+    _drawAnnotations(canvas, size);
 
     paintPool.releaseAll();
   }
@@ -225,6 +226,68 @@ class MainPanelPainter extends CustomPainter {
 
     if (candleCache.picture != null) {
       canvas.drawPicture(candleCache.picture!);
+    }
+  }
+
+  void _drawAnnotations(Canvas canvas, Size size) {
+    final series = frame.series;
+    final viewport = frame.viewport;
+    final annotations = frame.annotations.annotations;
+
+    if (annotations.isEmpty || series.length == 0) return;
+
+    final int startIdx = viewport.startIdx.clamp(0, series.length - 1);
+    final int endIdx = viewport.endIdx.clamp(0, series.length - 1);
+    final int visibleCount = endIdx - startIdx + 1;
+    final double viewWidth = size.width;
+    final double viewHeight = size.height;
+    final double candleWidth = viewWidth / visibleCount;
+
+    // We need price range to scale Y coordinates.
+    // Ideally this is pre-calculated or shared.
+    double minPrice = double.infinity;
+    double maxPrice = double.negativeInfinity;
+    for (int i = startIdx; i <= endIdx; i++) {
+      if (series.low[i] < minPrice) minPrice = series.low[i];
+      if (series.high[i] > maxPrice) maxPrice = series.high[i];
+    }
+    if (minPrice == maxPrice) {
+      minPrice -= 1.0;
+      maxPrice += 1.0;
+    }
+    final double priceRange = maxPrice - minPrice;
+
+    double priceToY(double price) {
+      return viewHeight - ((price - minPrice) / priceRange * viewHeight);
+    }
+
+    double timestampToX(int timestamp) {
+      // Find fractional index for timestamp
+      int idx = findIndexAtTimestamp(series.timestamps, timestamp);
+      return (idx - startIdx) * candleWidth + candleWidth / 2;
+    }
+
+    for (final annotation in annotations) {
+      if (annotation is TrendLine) {
+        final x1 = timestampToX(annotation.start.timestamp);
+        final y1 = priceToY(annotation.start.price);
+        final x2 = timestampToX(annotation.end.timestamp);
+        final y2 = priceToY(annotation.end.price);
+
+        final paint = paintPool.borrow()
+          ..color = Color(annotation.color)
+          ..strokeWidth = annotation.strokeWidth
+          ..style = PaintingStyle.stroke;
+
+        canvas.drawLine(Offset(x1, y1), Offset(x2, y2), paint);
+
+        // Draw circles at ends for easier identification
+        final dotPaint = paintPool.borrow()
+          ..color = Color(annotation.color)
+          ..style = PaintingStyle.fill;
+        canvas.drawCircle(Offset(x1, y1), 4, dotPaint);
+        canvas.drawCircle(Offset(x2, y2), 4, dotPaint);
+      }
     }
   }
 

@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 import 'package:meta/meta.dart';
+import 'annotation.dart';
 import 'candle.dart';
 
 /// An immutable columnar storage for financial series data.
@@ -102,5 +103,66 @@ class Series {
       close: close,
       volume: volume,
     );
+  }
+
+  /// Finds the nearest OHLC value to the given [targetTimestamp] and [targetPrice].
+  ///
+  /// Returns an [AnnotationPoint] with the snapped timestamp and price.
+  /// Snapping prioritizes the closest candle in time, then the closest
+  /// OHLC value (Open, High, Low, or Close) of that candle.
+  AnnotationPoint findNearestPoint(int targetTimestamp, double targetPrice) {
+    if (length == 0) {
+      return AnnotationPoint(timestamp: targetTimestamp, price: targetPrice);
+    }
+
+    // 1. Find nearest timestamp using binary search.
+    int left = 0;
+    int right = length - 1;
+    while (left <= right) {
+      final int mid = left + ((right - left) >> 1);
+      if (timestamps[mid] == targetTimestamp) {
+        left = mid;
+        break;
+      }
+      if (timestamps[mid] < targetTimestamp) {
+        left = mid + 1;
+      } else {
+        right = mid - 1;
+      }
+    }
+
+    // Check which one is closer: timestamps[left] or timestamps[left-1]
+    int index;
+    if (left >= length) {
+      index = length - 1;
+    } else if (left <= 0) {
+      index = 0;
+    } else {
+      final diff1 = (timestamps[left] - targetTimestamp).abs();
+      final diff2 = (timestamps[left - 1] - targetTimestamp).abs();
+      index = diff1 < diff2 ? left : left - 1;
+    }
+
+    final candleTimestamp = timestamps[index];
+    final prices = [
+      open[index],
+      high[index],
+      low[index],
+      close[index],
+    ];
+
+    // 2. Find nearest price among OHLC.
+    double nearestPrice = prices[0];
+    double minPriceDiff = (prices[0] - targetPrice).abs();
+
+    for (int i = 1; i < prices.length; i++) {
+      final diff = (prices[i] - targetPrice).abs();
+      if (diff < minPriceDiff) {
+        minPriceDiff = diff;
+        nearestPrice = prices[i];
+      }
+    }
+
+    return AnnotationPoint(timestamp: candleTimestamp, price: nearestPrice);
   }
 }

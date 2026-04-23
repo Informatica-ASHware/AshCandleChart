@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart' hide Viewport;
 import 'package:kchart_core/kchart_core.dart';
 import 'panels/chart_panel.dart';
 import 'panels/main_panel.dart';
@@ -28,6 +28,82 @@ class KChartController extends ChangeNotifier {
     _frame = newFrame;
     _ensureFlexFactors();
     notifyListeners();
+  }
+
+  /// Whether magnet mode (snapping) is enabled.
+  bool magnetMode = true;
+
+  /// Adds or updates an annotation.
+  void setAnnotation(Annotation annotation) {
+    final annotations = List<Annotation>.from(_frame.annotations.annotations);
+    final index = annotations.indexWhere((a) => a.id == annotation.id);
+    if (index != -1) {
+      annotations[index] = annotation;
+    } else {
+      annotations.add(annotation);
+    }
+
+    final newPanelSeqs = Map<String, int>.from(_frame.panelSequenceNumbers);
+    newPanelSeqs['main'] = (newPanelSeqs['main'] ?? 0) + 1;
+
+    frame = _frame.copyWith(
+      annotations: _frame.annotations.copyWith(annotations: annotations),
+      panelSequenceNumbers: newPanelSeqs,
+      sequenceNumber: _frame.sequenceNumber + 1,
+    );
+  }
+
+  /// Removes an annotation by ID.
+  void removeAnnotation(String id) {
+    final annotations = List<Annotation>.from(_frame.annotations.annotations);
+    annotations.removeWhere((a) => a.id == id);
+
+    final newPanelSeqs = Map<String, int>.from(_frame.panelSequenceNumbers);
+    newPanelSeqs['main'] = (newPanelSeqs['main'] ?? 0) + 1;
+
+    frame = _frame.copyWith(
+      annotations: _frame.annotations.copyWith(annotations: annotations),
+      panelSequenceNumbers: newPanelSeqs,
+      sequenceNumber: _frame.sequenceNumber + 1,
+    );
+  }
+
+  /// Converts a local pixel position to an [AnnotationPoint].
+  ///
+  /// If [magnetMode] is enabled, it snaps to the nearest OHLC value.
+  AnnotationPoint pixelToPoint(Offset localOffset, Size size) {
+    final series = _frame.series;
+    final viewport = _frame.viewport;
+
+    final int startIdx = viewport.startIdx.clamp(0, series.length - 1);
+    final int endIdx = viewport.endIdx.clamp(0, series.length - 1);
+    final int visibleCount = endIdx - startIdx + 1;
+    final double candleWidth = size.width / visibleCount;
+
+    // 1. Calculate approximate index and price from pixels
+    final double relativeIdx = localOffset.dx / candleWidth;
+    final int index = (startIdx + relativeIdx.floor()).clamp(0, series.length - 1);
+    final int timestamp = series.timestamps[index];
+
+    // Need price range for Y calculation
+    double minPrice = double.infinity;
+    double maxPrice = double.negativeInfinity;
+    for (int i = startIdx; i <= endIdx; i++) {
+      if (series.low[i] < minPrice) minPrice = series.low[i];
+      if (series.high[i] > maxPrice) maxPrice = series.high[i];
+    }
+    if (minPrice == maxPrice) {
+      minPrice -= 1.0;
+      maxPrice += 1.0;
+    }
+    final double priceRange = maxPrice - minPrice;
+    final double price = maxPrice - (localOffset.dy / size.height * priceRange);
+
+    if (magnetMode) {
+      return series.findNearestPoint(timestamp, price);
+    } else {
+      return AnnotationPoint(timestamp: timestamp, price: price);
+    }
   }
 
   void _ensureFlexFactors() {

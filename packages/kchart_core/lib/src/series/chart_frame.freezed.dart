@@ -25,6 +25,9 @@ mixin _$ChartFrame {
   /// The current [Viewport] state.
   Viewport get viewport => throw _privateConstructorUsedError;
 
+  /// The collection of annotations (drawings) in the chart.
+  AnnotationDocument get annotations => throw _privateConstructorUsedError;
+
   /// List of overlays (e.g., drawings, alerts, etc.) to be rendered.
   List<dynamic> get overlays => throw _privateConstructorUsedError;
 
@@ -53,11 +56,13 @@ abstract class $ChartFrameCopyWith<$Res> {
       {Series series,
       Map<String, Series> indicators,
       Viewport viewport,
+      AnnotationDocument annotations,
       List<dynamic> overlays,
       int sequenceNumber,
       Map<String, int> panelSequenceNumbers});
 
   $ViewportCopyWith<$Res> get viewport;
+  $AnnotationDocumentCopyWith<$Res> get annotations;
 }
 
 /// @nodoc
@@ -78,6 +83,7 @@ class _$ChartFrameCopyWithImpl<$Res, $Val extends ChartFrame>
     Object? series = null,
     Object? indicators = null,
     Object? viewport = null,
+    Object? annotations = null,
     Object? overlays = null,
     Object? sequenceNumber = null,
     Object? panelSequenceNumbers = null,
@@ -95,6 +101,10 @@ class _$ChartFrameCopyWithImpl<$Res, $Val extends ChartFrame>
           ? _value.viewport
           : viewport // ignore: cast_nullable_to_non_nullable
               as Viewport,
+      annotations: null == annotations
+          ? _value.annotations
+          : annotations // ignore: cast_nullable_to_non_nullable
+              as AnnotationDocument,
       overlays: null == overlays
           ? _value.overlays
           : overlays // ignore: cast_nullable_to_non_nullable
@@ -119,6 +129,16 @@ class _$ChartFrameCopyWithImpl<$Res, $Val extends ChartFrame>
       return _then(_value.copyWith(viewport: value) as $Val);
     });
   }
+
+  /// Create a copy of ChartFrame
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AnnotationDocumentCopyWith<$Res> get annotations {
+    return $AnnotationDocumentCopyWith<$Res>(_value.annotations, (value) {
+      return _then(_value.copyWith(annotations: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -133,12 +153,15 @@ abstract class _$$ChartFrameImplCopyWith<$Res>
       {Series series,
       Map<String, Series> indicators,
       Viewport viewport,
+      AnnotationDocument annotations,
       List<dynamic> overlays,
       int sequenceNumber,
       Map<String, int> panelSequenceNumbers});
 
   @override
   $ViewportCopyWith<$Res> get viewport;
+  @override
+  $AnnotationDocumentCopyWith<$Res> get annotations;
 }
 
 /// @nodoc
@@ -157,6 +180,7 @@ class __$$ChartFrameImplCopyWithImpl<$Res>
     Object? series = null,
     Object? indicators = null,
     Object? viewport = null,
+    Object? annotations = null,
     Object? overlays = null,
     Object? sequenceNumber = null,
     Object? panelSequenceNumbers = null,
@@ -174,6 +198,10 @@ class __$$ChartFrameImplCopyWithImpl<$Res>
           ? _value.viewport
           : viewport // ignore: cast_nullable_to_non_nullable
               as Viewport,
+      annotations: null == annotations
+          ? _value.annotations
+          : annotations // ignore: cast_nullable_to_non_nullable
+              as AnnotationDocument,
       overlays: null == overlays
           ? _value._overlays
           : overlays // ignore: cast_nullable_to_non_nullable
@@ -197,6 +225,7 @@ class _$ChartFrameImpl implements _ChartFrame {
       {required this.series,
       required final Map<String, Series> indicators,
       required this.viewport,
+      this.annotations = const AnnotationDocument(),
       required final List<dynamic> overlays,
       required this.sequenceNumber,
       required final Map<String, int> panelSequenceNumbers})
@@ -222,6 +251,11 @@ class _$ChartFrameImpl implements _ChartFrame {
   /// The current [Viewport] state.
   @override
   final Viewport viewport;
+
+  /// The collection of annotations (drawings) in the chart.
+  @override
+  @JsonKey()
+  final AnnotationDocument annotations;
 
   /// List of overlays (e.g., drawings, alerts, etc.) to be rendered.
   final List<dynamic> _overlays;
@@ -254,7 +288,7 @@ class _$ChartFrameImpl implements _ChartFrame {
 
   @override
   String toString() {
-    return 'ChartFrame(series: $series, indicators: $indicators, viewport: $viewport, overlays: $overlays, sequenceNumber: $sequenceNumber, panelSequenceNumbers: $panelSequenceNumbers)';
+    return 'ChartFrame(series: $series, indicators: $indicators, viewport: $viewport, annotations: $annotations, overlays: $overlays, sequenceNumber: $sequenceNumber, panelSequenceNumbers: $panelSequenceNumbers)';
   }
 
   @override
@@ -267,6 +301,8 @@ class _$ChartFrameImpl implements _ChartFrame {
                 .equals(other._indicators, _indicators) &&
             (identical(other.viewport, viewport) ||
                 other.viewport == viewport) &&
+            (identical(other.annotations, annotations) ||
+                other.annotations == annotations) &&
             const DeepCollectionEquality().equals(other._overlays, _overlays) &&
             (identical(other.sequenceNumber, sequenceNumber) ||
                 other.sequenceNumber == sequenceNumber) &&
@@ -280,6 +316,7 @@ class _$ChartFrameImpl implements _ChartFrame {
       series,
       const DeepCollectionEquality().hash(_indicators),
       viewport,
+      annotations,
       const DeepCollectionEquality().hash(_overlays),
       sequenceNumber,
       const DeepCollectionEquality().hash(_panelSequenceNumbers));
@@ -298,6 +335,7 @@ abstract class _ChartFrame implements ChartFrame {
       {required final Series series,
       required final Map<String, Series> indicators,
       required final Viewport viewport,
+      final AnnotationDocument annotations,
       required final List<dynamic> overlays,
       required final int sequenceNumber,
       required final Map<String, int> panelSequenceNumbers}) = _$ChartFrameImpl;
@@ -313,6 +351,10 @@ abstract class _ChartFrame implements ChartFrame {
   /// The current [Viewport] state.
   @override
   Viewport get viewport;
+
+  /// The collection of annotations (drawings) in the chart.
+  @override
+  AnnotationDocument get annotations;
 
   /// List of overlays (e.g., drawings, alerts, etc.) to be rendered.
   @override
