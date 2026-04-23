@@ -6,6 +6,7 @@ import 'gestures/gesture_arbiter.dart';
 import 'painting/crosshair_painter.dart';
 import 'panels/panel_stack.dart';
 import 'widgets/kchart_scope.dart';
+import 'package:flutter/physics.dart';
 
 /// The main KChart widget.
 ///
@@ -25,9 +26,14 @@ class KChart extends StatefulWidget {
   State<KChart> createState() => _KChartState();
 }
 
-class _KChartState extends State<KChart> {
+class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
   late final GestureArbiter _arbiter;
   final GlobalKey _chartKey = GlobalKey();
+
+  late final AnimationController _animationController;
+  Simulation? _flingSimulation;
+  double _lastAnimationValue = 0.0;
+  Size? _lastSize;
 
   String? _activeAnnotationId;
   int? _activePointIndex; // 0 for start, 1 for end
@@ -35,17 +41,25 @@ class _KChartState extends State<KChart> {
   @override
   void initState() {
     super.initState();
+    _animationController = AnimationController(vsync: this);
+
     _arbiter = GestureArbiter(
       onPanUpdate: (delta) {
         if (_activeAnnotationId != null) return;
-        widget.controller.pan(delta.dx, context.size?.width ?? 0.0);
+        _stopAnimation();
+        widget.controller.pan(delta.dx, _lastSize?.width ?? 0.0);
+      },
+      onFling: (velocity) {
+        if (_activeAnnotationId != null) return;
+        _handleFling(velocity);
       },
       onZoomUpdate: (scale, focalPoint) {
         if (_activeAnnotationId != null) return;
+        _stopAnimation();
         widget.controller.zoom(
           scale,
           focalPoint.dx,
-          context.size?.width ?? 0.0,
+          _lastSize?.width ?? 0.0,
         );
       },
       onLongPressStart: (position) {
@@ -54,6 +68,11 @@ class _KChartState extends State<KChart> {
       onLongPressEnd: () {
         widget.controller.crosshair.clear();
       },
+      onPointerUp: () {
+        if (_activeAnnotationId == null && !_animationController.isAnimating) {
+          _snapToCandle();
+        }
+      },
       onTap: (position) {
         _handleTap(position);
       },
@@ -61,9 +80,11 @@ class _KChartState extends State<KChart> {
   }
 
   void _handleTap(Offset position) {
+    final size = _lastSize ?? Size.zero;
+    if (size.isEmpty) return;
+
     // Basic hit testing for line ends
     final annotations = widget.controller.frame.annotations.annotations;
-    final size = context.size ?? Size.zero;
 
     // To hit test, we need to convert points to pixels
     // This is a bit redundant with painter logic, maybe move to controller or utility
@@ -157,7 +178,7 @@ class _KChartState extends State<KChart> {
   }
 
   void _updateCrosshair(Offset localPosition) {
-    final size = context.size ?? Size.zero;
+    final size = _lastSize ?? Size.zero;
     if (size.isEmpty) return;
 
     final series = widget.controller.frame.series;
@@ -190,11 +211,11 @@ class _KChartState extends State<KChart> {
   }
 
   void _handlePointerMove(PointerMoveEvent event) {
+    final size = _lastSize ?? Size.zero;
     if (_activeAnnotationId != null && _activePointIndex != null) {
       final annotations = widget.controller.frame.annotations.annotations;
       final annotation =
           annotations.firstWhere((a) => a.id == _activeAnnotationId);
-      final size = context.size ?? Size.zero;
       final newPoint = widget.controller.pixelToPoint(event.localPosition, size);
 
       if (annotation is TrendLine) {
@@ -211,9 +232,99 @@ class _KChartState extends State<KChart> {
     }
   }
 
+  void _stopAnimation() {
+    _animationController.stop();
+    _flingSimulation = null;
+  }
+
+  void _handleFling(Velocity velocity) {
+    _stopAnimation();
+
+    final size = _lastSize;
+    if (size == null) return;
+
+    final double vx = velocity.pixelsPerSecond.dx;
+    if (vx.abs() < 100) {
+      _snapToCandle();
+      return;
+    }
+
+    _lastAnimationValue = 0.0;
+    _flingSimulation = FrictionSimulation(0.135, 0.0, vx);
+
+    _animationController.addListener(_flingTick);
+    _animationController.animateWith(_flingSimulation!).then((_) {
+      if (mounted) {
+        _animationController.removeListener(_flingTick);
+        _flingSimulation = null;
+        _snapToCandle();
+      }
+    });
+  }
+
+  void _flingTick() {
+    if (_flingSimulation == null) return;
+    final elapsedDuration = _animationController.lastElapsedDuration;
+    if (elapsedDuration == null) return;
+
+    final elapsed = elapsedDuration.inMicroseconds / Duration.microsecondsPerSecond;
+    final double currentValue = _flingSimulation!.x(elapsed);
+    final double delta = currentValue - _lastAnimationValue;
+    _lastAnimationValue = currentValue;
+
+    widget.controller.pan(delta, _lastSize?.width ?? 0.0);
+  }
+
+  void _snapToCandle() {
+    final viewport = widget.controller.frame.viewport;
+    if (viewport.scrollX == 0) return;
+
+    final size = _lastSize;
+    if (size == null) return;
+
+    final int visibleCount = viewport.endIdx - viewport.startIdx + 1;
+    final double candleWidth = size.width / visibleCount;
+
+    double targetDelta;
+    if (viewport.scrollX > candleWidth / 2) {
+      targetDelta = candleWidth - viewport.scrollX;
+    } else if (viewport.scrollX < -candleWidth / 2) {
+      targetDelta = -candleWidth - viewport.scrollX;
+    } else {
+      targetDelta = -viewport.scrollX;
+    }
+
+    if (targetDelta == 0) return;
+
+    _lastAnimationValue = 0.0;
+    final Animation<double> animation = Tween<double>(
+      begin: 0.0,
+      end: targetDelta,
+    ).animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeOutCubic,
+    ));
+
+    void snapTick() {
+      final double currentValue = animation.value;
+      final double delta = currentValue - _lastAnimationValue;
+      _lastAnimationValue = currentValue;
+      widget.controller.pan(delta, size.width);
+    }
+
+    _animationController.duration = const Duration(milliseconds: 200);
+    _animationController.addListener(snapTick);
+    _animationController.forward(from: 0.0).then((_) {
+      if (mounted) {
+        _animationController.removeListener(snapTick);
+      }
+    });
+  }
+
   @override
   void dispose() {
     _arbiter.dispose();
+    _animationController.dispose();
     super.dispose();
   }
 
@@ -221,6 +332,7 @@ class _KChartState extends State<KChart> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
+        _lastSize = Size(constraints.maxWidth, constraints.maxHeight);
         return ListenableBuilder(
           listenable: widget.controller,
           builder: (context, child) {
