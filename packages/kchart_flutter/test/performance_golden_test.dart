@@ -43,6 +43,7 @@ void main() {
       viewport: const Viewport(startIdx: 25000, endIdx: 25100, scale: 1.0, scrollX: 0.0),
       overlays: [],
       sequenceNumber: 0,
+      panelSequenceNumbers: const {'main': 0},
     );
     final controller = KChartController(frame: frame);
 

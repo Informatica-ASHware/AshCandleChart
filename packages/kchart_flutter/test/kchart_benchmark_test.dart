@@ -68,6 +68,7 @@ void main() {
         ),
         overlays: [],
         sequenceNumber: start,
+        panelSequenceNumbers: const {'main': 0},
       );
       final painter = MainPanelPainter(
         frame: frame,
@@ -91,6 +92,7 @@ void main() {
         ),
         overlays: [],
         sequenceNumber: start,
+        panelSequenceNumbers: const {'main': 0},
       );
 
       final painter = MainPanelPainter(

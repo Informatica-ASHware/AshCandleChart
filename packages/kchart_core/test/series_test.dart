@@ -149,6 +149,7 @@ void main() {
         viewport: viewport,
         overlays: [],
         sequenceNumber: 1,
+        panelSequenceNumbers: const {'main': 0},
       );
 
       expect(frame.series, series);

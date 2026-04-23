@@ -3,9 +3,6 @@ import 'package:flutter/material.dart' hide Viewport;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kchart_core/kchart_core.dart';
 import 'package:kchart_flutter/kchart_flutter.dart';
-import 'package:kchart_flutter/src/panels/panel_stack.dart';
-import 'package:kchart_flutter/src/panels/main_panel.dart';
-import 'package:kchart_flutter/src/panels/secondary_panel.dart';
 
 void main() {
   testWidgets('Modifying RSI does not trigger MainPanel repaint', (WidgetTester tester) async {
@@ -31,6 +28,7 @@ void main() {
       viewport: const Viewport(startIdx: 0, endIdx: 0, scale: 1.0, scrollX: 0.0),
       overlays: [],
       sequenceNumber: 0,
+      panelSequenceNumbers: const {'main': 0, 'rsi': 0},
     );
 
     final controller = KChartController(frame: frame1);
@@ -54,12 +52,6 @@ void main() {
     expect(mainPanelFinder, findsOneWidget);
     expect(secondaryPanelFinder, findsOneWidget);
 
-    final RenderObject mainPanelRenderObject = tester.renderObject(mainPanelFinder);
-    final RenderObject secondaryPanelRenderObject = tester.renderObject(secondaryPanelFinder);
-
-    // We can't directly check "repainted" easily in standard flutter_test without some hacks
-    // But we know each is wrapped in a RepaintBoundary in PanelStack.
-
     final frame2 = frame1.copyWith(
       indicators: {
         'rsi': Series(
@@ -72,6 +64,7 @@ void main() {
         ),
       },
       sequenceNumber: 1,
+      panelSequenceNumbers: {'main': 0, 'rsi': 1},
     );
 
     controller.frame = frame2;
