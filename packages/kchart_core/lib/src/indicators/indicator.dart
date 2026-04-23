@@ -34,4 +34,13 @@ abstract class Indicator<T extends IndicatorConfig> {
   /// The returned value should be a [TypedData] (e.g., [Float64List]) or a container
   /// (like a Map or List) of [TypedData] to ensure efficient memory usage and transfer.
   Object compute(Series input, Map<String, Object> dependencies);
+
+  /// Computes the indicator results incrementally when a new data point is added.
+  ///
+  /// [input] is the OHLCV series data, including the new point at the end.
+  /// [dependencies] contains the updated results of indicators listed in [IndicatorConfig.dependsOn].
+  /// [previousResults] is the result of the previous call to [compute] or [computeAppend].
+  ///
+  /// This method is intended to optimize performance for real-time updates.
+  Object computeAppend(Series input, Map<String, Object> dependencies, Object previousResults);
 }
