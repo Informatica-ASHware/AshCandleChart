@@ -23,12 +23,20 @@ class MainPanelPainter extends CustomPainter {
   /// Cache for the candle layer (static history).
   final LayerCache candleCache;
 
+  /// Optional pre-allocated buffer for bullish vertices to reduce GC pressure.
+  final Float32List? bullishBuffer;
+
+  /// Optional pre-allocated buffer for bearish vertices to reduce GC pressure.
+  final Float32List? bearishBuffer;
+
   /// Creates a [MainPanelPainter] with the given [frame], [paintPool], and caches.
   MainPanelPainter({
     required this.frame,
     required this.paintPool,
     required this.gridCache,
     required this.candleCache,
+    this.bullishBuffer,
+    this.bearishBuffer,
   });
 
   @override
@@ -122,8 +130,19 @@ class MainPanelPainter extends CustomPainter {
           return viewHeight - ((price - minPrice) / priceRange * viewHeight);
         }
 
-        final Float32List bullishVertices = Float32List(visibleCount * 24);
-        final Float32List bearishVertices = Float32List(visibleCount * 24);
+        final int vertexCountPerCandle = 24;
+        final int requiredSize = visibleCount * vertexCountPerCandle;
+
+        final Float32List bullishVertices =
+            (bullishBuffer != null && bullishBuffer!.length >= requiredSize)
+                ? bullishBuffer!
+                : Float32List(requiredSize);
+
+        final Float32List bearishVertices =
+            (bearishBuffer != null && bearishBuffer!.length >= requiredSize)
+                ? bearishBuffer!
+                : Float32List(requiredSize);
+
         int bullishOffset = 0;
         int bearishOffset = 0;
 

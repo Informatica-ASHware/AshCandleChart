@@ -1,3 +1,4 @@
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'controller.dart';
 import 'painting/layer_cache.dart';
@@ -27,6 +28,11 @@ class _KChartState extends State<KChart> {
   late final LayerCache _gridCache;
   late final LayerCache _candleCache;
 
+  // Pre-allocated buffers for vertices to reduce GC pressure.
+  // Assuming a maximum of 1000 visible candles, each needing 24 vertices.
+  final Float32List _bullishBuffer = Float32List(1000 * 24);
+  final Float32List _bearishBuffer = Float32List(1000 * 24);
+
   @override
   void initState() {
     super.initState();
@@ -54,6 +60,8 @@ class _KChartState extends State<KChart> {
             paintPool: _paintPool,
             gridCache: _gridCache,
             candleCache: _candleCache,
+            bullishBuffer: _bullishBuffer,
+            bearishBuffer: _bearishBuffer,
           ),
         );
       },
