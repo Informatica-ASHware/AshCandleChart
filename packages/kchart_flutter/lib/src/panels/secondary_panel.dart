@@ -1,0 +1,85 @@
+import 'package:flutter/widgets.dart';
+import '../controller.dart';
+import '../painting/secondary_panel_painter.dart';
+import '../painting/paint_pool.dart';
+import '../painting/layer_cache.dart';
+import 'chart_panel.dart';
+
+/// Panel for displaying secondary indicators (e.g., RSI, MACD).
+class SecondaryPanel extends ChartPanel {
+  @override
+  final String id;
+
+  @override
+  final double flex;
+
+  /// The controller providing data for this panel.
+  final KChartController controller;
+
+  /// The ID of the indicator to display in this panel.
+  final String indicatorId;
+
+  /// Creates a [SecondaryPanel] with the given [controller], [indicatorId], and [flex].
+  SecondaryPanel({
+    required this.controller,
+    required this.indicatorId,
+    this.flex = 1.0,
+  }) : id = 'secondary_$indicatorId';
+
+  @override
+  Widget build(BuildContext context) {
+    return _SecondaryPanelWidget(
+      controller: controller,
+      indicatorId: indicatorId,
+    );
+  }
+}
+
+class _SecondaryPanelWidget extends StatefulWidget {
+  final KChartController controller;
+  final String indicatorId;
+
+  const _SecondaryPanelWidget({
+    required this.controller,
+    required this.indicatorId,
+  });
+
+  @override
+  State<_SecondaryPanelWidget> createState() => _SecondaryPanelWidgetState();
+}
+
+class _SecondaryPanelWidgetState extends State<_SecondaryPanelWidget> {
+  late final PaintPool _paintPool;
+  late final LayerCache _cache;
+
+  @override
+  void initState() {
+    super.initState();
+    _paintPool = PaintPool();
+    _cache = LayerCache();
+  }
+
+  @override
+  void dispose() {
+    _cache.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ListenableBuilder(
+      listenable: widget.controller,
+      builder: (context, child) {
+        return CustomPaint(
+          size: Size.infinite,
+          painter: SecondaryPanelPainter(
+            frame: widget.controller.frame,
+            paintPool: _paintPool,
+            cache: _cache,
+            indicatorId: widget.indicatorId,
+          ),
+        );
+      },
+    );
+  }
+}

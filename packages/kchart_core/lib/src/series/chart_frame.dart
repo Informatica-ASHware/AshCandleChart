@@ -26,5 +26,9 @@ class ChartFrame with _$ChartFrame {
 
     /// Sequential number to track frame updates and ensure consistent state.
     required int sequenceNumber,
+
+    /// Granular sequence numbers per panel to optimize repaints.
+    /// Key can be 'main', 'volume', or indicator IDs.
+    required Map<String, int> panelSequenceNumbers,
   }) = _ChartFrame;
 }

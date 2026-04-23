@@ -90,9 +90,9 @@ class MainPanelPainter extends CustomPainter {
 
     if (startIdx > endIdx) return;
 
-    // Cache key for candles depends on sequenceNumber and viewport state.
+    // Cache key for candles depends on panelSequenceNumber and viewport state.
     final Object cacheKey = (
-      frame.sequenceNumber,
+      frame.panelSequenceNumbers['main'] ?? 0,
       viewport.startIdx,
       viewport.endIdx,
       size.width,
@@ -249,6 +249,7 @@ class MainPanelPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant MainPanelPainter oldDelegate) {
-    return oldDelegate.frame.sequenceNumber != frame.sequenceNumber;
+    return oldDelegate.frame.panelSequenceNumbers['main'] !=
+        frame.panelSequenceNumbers['main'];
   }
 }
