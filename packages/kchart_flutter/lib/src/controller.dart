@@ -40,6 +40,90 @@ class KChartController extends ChangeNotifier {
     }
   }
 
+  /// Pans the viewport by the given delta in pixels.
+  void pan(double deltaX, double viewWidth) {
+    if (viewWidth <= 0) return;
+    final viewport = _frame.viewport;
+    final int visibleCount = viewport.endIdx - viewport.startIdx + 1;
+    if (visibleCount <= 0) return;
+
+    final double candleWidth = viewWidth / visibleCount;
+    double newScrollX = viewport.scrollX + deltaX;
+    int indexDelta = (newScrollX / candleWidth).truncate();
+
+    if (indexDelta != 0) {
+      int newStartIdx = viewport.startIdx - indexDelta;
+      int newEndIdx = viewport.endIdx - indexDelta;
+
+      final maxIdx = _frame.series.length - 1;
+      if (newStartIdx < 0) {
+        newEndIdx -= newStartIdx;
+        newStartIdx = 0;
+      }
+      if (newEndIdx > maxIdx) {
+        newStartIdx -= (newEndIdx - maxIdx);
+        newEndIdx = maxIdx;
+      }
+      newStartIdx = newStartIdx.clamp(0, maxIdx);
+      newEndIdx = newEndIdx.clamp(0, maxIdx);
+
+      newScrollX -= indexDelta * candleWidth;
+
+      updateViewport(viewport.copyWith(
+        startIdx: newStartIdx,
+        endIdx: newEndIdx,
+        scrollX: newScrollX,
+      ));
+    } else {
+      updateViewport(viewport.copyWith(scrollX: newScrollX));
+    }
+  }
+
+  /// Zooms the viewport by the given scale factor around a focal point.
+  void zoom(double scaleFactor, double focalPointX, double viewWidth) {
+    if (viewWidth <= 0 || scaleFactor == 1.0) return;
+    final viewport = _frame.viewport;
+    final int visibleCount = viewport.endIdx - viewport.startIdx + 1;
+    if (visibleCount <= 0) return;
+
+    int newVisibleCount = (visibleCount / scaleFactor).round();
+    if (newVisibleCount == visibleCount) {
+      if (scaleFactor > 1.0) {
+        newVisibleCount--;
+      } else {
+        newVisibleCount++;
+      }
+    }
+
+    newVisibleCount = newVisibleCount.clamp(5, _frame.series.length);
+    if (newVisibleCount == visibleCount) return;
+
+    final double candleWidth = viewWidth / visibleCount;
+    final double focalIdx = viewport.startIdx + (focalPointX / candleWidth);
+    final double relativePos = focalPointX / viewWidth;
+
+    int newStartIdx = (focalIdx - relativePos * newVisibleCount).round();
+    int newEndIdx = newStartIdx + newVisibleCount - 1;
+
+    final maxIdx = _frame.series.length - 1;
+    if (newStartIdx < 0) {
+      newEndIdx -= newStartIdx;
+      newStartIdx = 0;
+    }
+    if (newEndIdx > maxIdx) {
+      newStartIdx -= (newEndIdx - maxIdx);
+      newEndIdx = maxIdx;
+    }
+    newStartIdx = newStartIdx.clamp(0, maxIdx);
+    newEndIdx = newEndIdx.clamp(0, maxIdx);
+
+    updateViewport(viewport.copyWith(
+      startIdx: newStartIdx,
+      endIdx: newEndIdx,
+      scale: (viewport.scale * scaleFactor).clamp(0.1, 10.0),
+    ));
+  }
+
   /// Updates the viewport of the current frame and increments all panel sequences.
   void updateViewport(Viewport viewport) {
     final newPanelSeqs = Map<String, int>.from(_frame.panelSequenceNumbers);

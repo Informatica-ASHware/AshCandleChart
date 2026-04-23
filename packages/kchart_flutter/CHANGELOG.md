@@ -6,6 +6,9 @@
 - Optimized `KChart` widget to manage the lifecycle of pools and caches.
 - Implemented `PanelStack` and `DraggableDivider` architecture for vertical chart stacking.
 - Added granular repaint isolation using `RepaintBoundary` and `panelSequenceNumbers`.
+- Implemented `GestureArbiter` using raw `PointerEvent`s to handle Pan, Zoom, and Long Press gestures without `GestureDetector`.
+- Added support for Trackpad gestures and Mouse scroll wheel for chart navigation.
+- Replaced `GestureDetector` in `DraggableDivider` with raw pointer handling for panel resizing.
 
 ## [0.1.0-dev.1]
 

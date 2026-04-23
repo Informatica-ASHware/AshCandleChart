@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
 
 /// A divider that can be dragged to resize adjacent panels.
 class DraggableDivider extends StatelessWidget {
   /// Callback when the divider is dragged.
-  final ValueChanged<DragUpdateDetails> onDragUpdate;
+  final void Function(DragUpdateDetails) onDragUpdate;
 
   /// Creates a [DraggableDivider].
   const DraggableDivider({
@@ -13,8 +14,18 @@ class DraggableDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onVerticalDragUpdate: onDragUpdate,
+    return Listener(
+      behavior: HitTestBehavior.opaque,
+      onPointerMove: (event) {
+        if (event.buttons & kPrimaryButton != 0) {
+          onDragUpdate(DragUpdateDetails(
+            delta: event.delta,
+            primaryDelta: event.delta.dy,
+            globalPosition: event.position,
+            localPosition: event.localPosition,
+          ));
+        }
+      },
       child: MouseRegion(
         cursor: SystemMouseCursors.resizeUpDown,
         child: Container(
