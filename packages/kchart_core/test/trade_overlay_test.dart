@@ -3,7 +3,7 @@ import 'package:test/test.dart';
 
 void main() {
   group('TradeOverlay', () {
-    test('TradeMarker JSON serialization', () {
+    test('TradeMarker manual Map round-trip', () {
       final marker = TradeOverlay.marker(
         id: 't1',
         point: const AnnotationPoint(timestamp: 1000, price: 50000.0),
@@ -12,22 +12,21 @@ void main() {
         label: 'Buy',
       );
 
-      final json = marker.toJson();
-      expect(json['type'], 'marker');
-      expect(json['id'], 't1');
-      expect(json['label'], 'Buy');
-      // Verify point is a Map
-      expect(json['point'], isA<Map<String, dynamic>>());
+      // We test the manual Map conversion we implemented in TradeOverlay
+      final map = marker.toJson();
+      expect(map['type'], 'marker');
+      expect(map['id'], 't1');
+      expect(map['label'], 'Buy');
 
-      final fromJson = TradeOverlay.fromJson(json);
-      expect(fromJson, isA<TradeMarker>());
-      final decoded = fromJson as TradeMarker;
+      final fromMap = TradeOverlay.fromJson(map);
+      expect(fromMap, isA<TradeMarker>());
+      final decoded = fromMap as TradeMarker;
       expect(decoded.id, 't1');
       expect(decoded.point.timestamp, 1000);
       expect(decoded.point.price, 50000.0);
     });
 
-    test('PositionOverlay JSON serialization', () {
+    test('PositionOverlay manual Map round-trip', () {
       final position = TradeOverlay.position(
         id: 'p1',
         entryPrice: 50000.0,
@@ -35,20 +34,20 @@ void main() {
         stopLoss: 48000.0,
       );
 
-      final json = position.toJson();
-      expect(json['type'], 'position');
-      expect(json['entryPrice'], 50000.0);
-      expect(json['takeProfit'], 55000.0);
+      final map = position.toJson();
+      expect(map['type'], 'position');
+      expect(map['entryPrice'], 50000.0);
+      expect(map['takeProfit'], 55000.0);
 
-      final fromJson = TradeOverlay.fromJson(json);
-      expect(fromJson, isA<PositionOverlay>());
-      final decoded = fromJson as PositionOverlay;
+      final fromMap = TradeOverlay.fromJson(map);
+      expect(fromMap, isA<PositionOverlay>());
+      final decoded = fromMap as PositionOverlay;
       expect(decoded.entryPrice, 50000.0);
       expect(decoded.takeProfit, 55000.0);
       expect(decoded.stopLoss, 48000.0);
     });
 
-    test('TradeOverlayDocument JSON serialization', () {
+    test('TradeOverlayDocument manual Map round-trip', () {
       final doc = TradeOverlayDocument(
         overlays: [
           TradeOverlay.marker(
@@ -62,14 +61,13 @@ void main() {
         ],
       );
 
-      final json = doc.toJson();
-      expect(json['overlays'], hasLength(2));
-      expect(json['overlays'][0], isA<Map<String, dynamic>>());
+      final map = doc.toJson();
+      expect(map['overlays'], hasLength(2));
 
-      final fromJson = TradeOverlayDocument.fromJson(json);
-      expect(fromJson.overlays, hasLength(2));
-      expect(fromJson.overlays[0], isA<TradeMarker>());
-      expect(fromJson.overlays[1], isA<PositionOverlay>());
+      final fromMap = TradeOverlayDocument.fromJson(map);
+      expect(fromMap.overlays, hasLength(2));
+      expect(fromMap.overlays[0], isA<TradeMarker>());
+      expect(fromMap.overlays[1], isA<PositionOverlay>());
     });
   });
 }

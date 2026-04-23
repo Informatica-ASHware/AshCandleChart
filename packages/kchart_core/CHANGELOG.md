@@ -12,3 +12,6 @@
     - Implemented incremental computation (`computeAppend`) for all built-in indicators.
     - All calculations optimized using `double` and `Float64List`.
     - Added `registerBuiltIns` to `IndicatorRegistry` for easy setup.
+- [US 7.02] Implementation of Trade and Position Overlays domain models.
+    - Added `TradeMarker` for point events (Time X, Price Y).
+    - Added `PositionOverlay` for zone ranges (Entry, SL, TP) with infinite horizontal extension.

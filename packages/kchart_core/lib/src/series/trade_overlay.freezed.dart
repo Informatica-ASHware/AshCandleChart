@@ -14,19 +14,6 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-TradeOverlay _$TradeOverlayFromJson(Map<String, dynamic> json) {
-  switch (json['type']) {
-    case 'marker':
-      return TradeMarker.fromJson(json);
-    case 'position':
-      return PositionOverlay.fromJson(json);
-
-    default:
-      throw CheckedFromJsonException(json, 'type', 'TradeOverlay',
-          'Invalid union type "${json['type']}"!');
-  }
-}
-
 /// @nodoc
 mixin _$TradeOverlay {
   /// Unique identifier for the overlay.
@@ -81,9 +68,6 @@ mixin _$TradeOverlay {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
-  /// Serializes this TradeOverlay to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of TradeOverlay
   /// with the given fields replaced by the non-null parameter values.
@@ -200,20 +184,15 @@ class __$$TradeMarkerImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$TradeMarkerImpl extends TradeMarker {
   const _$TradeMarkerImpl(
       {required this.id,
       required this.point,
       this.color = 0xFF4CAF50,
       this.size = 8.0,
-      this.label,
-      final String? $type})
-      : $type = $type ?? 'marker',
-        super._();
-
-  factory _$TradeMarkerImpl.fromJson(Map<String, dynamic> json) =>
-      _$$TradeMarkerImplFromJson(json);
+      this.label})
+      : super._();
 
   /// Unique identifier for the overlay.
   @override
@@ -237,9 +216,6 @@ class _$TradeMarkerImpl extends TradeMarker {
   @override
   final String? label;
 
-  @JsonKey(name: 'type')
-  final String $type;
-
   @override
   String toString() {
     return 'TradeOverlay.marker(id: $id, point: $point, color: $color, size: $size, label: $label)';
@@ -257,7 +233,6 @@ class _$TradeMarkerImpl extends TradeMarker {
             (identical(other.label, label) || other.label == label));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, point, color, size, label);
 
@@ -342,13 +317,6 @@ class _$TradeMarkerImpl extends TradeMarker {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$TradeMarkerImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class TradeMarker extends TradeOverlay {
@@ -359,9 +327,6 @@ abstract class TradeMarker extends TradeOverlay {
       final double size,
       final String? label}) = _$TradeMarkerImpl;
   const TradeMarker._() : super._();
-
-  factory TradeMarker.fromJson(Map<String, dynamic> json) =
-      _$TradeMarkerImpl.fromJson;
 
   /// Unique identifier for the overlay.
   @override
@@ -460,7 +425,7 @@ class __$$PositionOverlayImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$PositionOverlayImpl extends PositionOverlay {
   const _$PositionOverlayImpl(
       {required this.id,
@@ -469,13 +434,8 @@ class _$PositionOverlayImpl extends PositionOverlay {
       this.takeProfit,
       this.profitColor = 0x334CAF50,
       this.lossColor = 0x33F44336,
-      this.entryColor = 0xFFFFFFFF,
-      final String? $type})
-      : $type = $type ?? 'position',
-        super._();
-
-  factory _$PositionOverlayImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PositionOverlayImplFromJson(json);
+      this.entryColor = 0xFFFFFFFF})
+      : super._();
 
   /// Unique identifier for the overlay.
   @override
@@ -508,9 +468,6 @@ class _$PositionOverlayImpl extends PositionOverlay {
   @JsonKey()
   final int entryColor;
 
-  @JsonKey(name: 'type')
-  final String $type;
-
   @override
   String toString() {
     return 'TradeOverlay.position(id: $id, entryPrice: $entryPrice, stopLoss: $stopLoss, takeProfit: $takeProfit, profitColor: $profitColor, lossColor: $lossColor, entryColor: $entryColor)';
@@ -536,7 +493,6 @@ class _$PositionOverlayImpl extends PositionOverlay {
                 other.entryColor == entryColor));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, entryPrice, stopLoss,
       takeProfit, profitColor, lossColor, entryColor);
@@ -626,13 +582,6 @@ class _$PositionOverlayImpl extends PositionOverlay {
     }
     return orElse();
   }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$PositionOverlayImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class PositionOverlay extends TradeOverlay {
@@ -645,9 +594,6 @@ abstract class PositionOverlay extends TradeOverlay {
       final int lossColor,
       final int entryColor}) = _$PositionOverlayImpl;
   const PositionOverlay._() : super._();
-
-  factory PositionOverlay.fromJson(Map<String, dynamic> json) =
-      _$PositionOverlayImpl.fromJson;
 
   /// Unique identifier for the overlay.
   @override
@@ -679,17 +625,10 @@ abstract class PositionOverlay extends TradeOverlay {
       throw _privateConstructorUsedError;
 }
 
-TradeOverlayDocument _$TradeOverlayDocumentFromJson(Map<String, dynamic> json) {
-  return _TradeOverlayDocument.fromJson(json);
-}
-
 /// @nodoc
 mixin _$TradeOverlayDocument {
   /// List of trade overlays in the document.
   List<TradeOverlay> get overlays => throw _privateConstructorUsedError;
-
-  /// Serializes this TradeOverlayDocument to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of TradeOverlayDocument
   /// with the given fields replaced by the non-null parameter values.
@@ -770,15 +709,12 @@ class __$$TradeOverlayDocumentImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$TradeOverlayDocumentImpl extends _TradeOverlayDocument {
   const _$TradeOverlayDocumentImpl(
       {final List<TradeOverlay> overlays = const []})
       : _overlays = overlays,
         super._();
-
-  factory _$TradeOverlayDocumentImpl.fromJson(Map<String, dynamic> json) =>
-      _$$TradeOverlayDocumentImplFromJson(json);
 
   /// List of trade overlays in the document.
   final List<TradeOverlay> _overlays;
@@ -805,7 +741,6 @@ class _$TradeOverlayDocumentImpl extends _TradeOverlayDocument {
             const DeepCollectionEquality().equals(other._overlays, _overlays));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_overlays));
@@ -819,22 +754,12 @@ class _$TradeOverlayDocumentImpl extends _TradeOverlayDocument {
       get copyWith =>
           __$$TradeOverlayDocumentImplCopyWithImpl<_$TradeOverlayDocumentImpl>(
               this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$TradeOverlayDocumentImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class _TradeOverlayDocument extends TradeOverlayDocument {
   const factory _TradeOverlayDocument({final List<TradeOverlay> overlays}) =
       _$TradeOverlayDocumentImpl;
   const _TradeOverlayDocument._() : super._();
-
-  factory _TradeOverlayDocument.fromJson(Map<String, dynamic> json) =
-      _$TradeOverlayDocumentImpl.fromJson;
 
   /// List of trade overlays in the document.
   @override

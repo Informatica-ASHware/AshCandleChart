@@ -92,7 +92,8 @@ class TradeOverlayPainter {
       );
 
       final tpLinePaint = paintPool.borrow()
-        ..color = Color(position.profitColor).withValues(alpha: 1.0)
+        // ignore: deprecated_member_use
+        ..color = Color(position.profitColor).withOpacity(1.0)
         ..strokeWidth = 1.0
         ..style = PaintingStyle.stroke;
       canvas.drawLine(Offset(0, yTP), Offset(size.width, yTP), tpLinePaint);
@@ -122,7 +123,8 @@ class TradeOverlayPainter {
       );
 
       final slLinePaint = paintPool.borrow()
-        ..color = Color(position.lossColor).withValues(alpha: 1.0)
+        // ignore: deprecated_member_use
+        ..color = Color(position.lossColor).withOpacity(1.0)
         ..strokeWidth = 1.0
         ..style = PaintingStyle.stroke;
       canvas.drawLine(Offset(0, ySL), Offset(size.width, ySL), slLinePaint);

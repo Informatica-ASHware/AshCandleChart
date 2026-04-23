@@ -92,5 +92,14 @@ void main() {
       find.byType(KChart),
       matchesGoldenFile('../goldens/trade_overlays_panned.png'),
     );
+
+    // Zoom in and verify anchoring
+    controller.zoom(2.0, 400.0, 800.0);
+    await tester.pump();
+
+    await expectLater(
+      find.byType(KChart),
+      matchesGoldenFile('../goldens/trade_overlays_zoomed.png'),
+    );
   });
 }
