@@ -1,6 +1,8 @@
 import 'package:flutter/widgets.dart';
+import 'package:kchart_core/kchart_core.dart';
 import '../controller.dart';
 import '../painting/secondary_panel_painter.dart';
+import 'crosshair_overlay.dart';
 import '../painting/paint_pool.dart';
 import '../painting/layer_cache.dart';
 import 'chart_panel.dart';
@@ -67,19 +69,29 @@ class _SecondaryPanelWidgetState extends State<_SecondaryPanelWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return ListenableBuilder(
-      listenable: widget.controller,
-      builder: (context, child) {
-        return CustomPaint(
-          size: Size.infinite,
-          painter: SecondaryPanelPainter(
-            frame: widget.controller.frame,
-            paintPool: _paintPool,
-            cache: _cache,
-            indicatorId: widget.indicatorId,
-          ),
-        );
-      },
+    return Stack(
+      children: [
+        ListenableBuilder(
+          listenable: widget.controller,
+          builder: (context, child) {
+            return CustomPaint(
+              size: Size.infinite,
+              painter: SecondaryPanelPainter(
+                frame: widget.controller.frame,
+                paintPool: _paintPool,
+                cache: _cache,
+                indicatorId: widget.indicatorId,
+              ),
+            );
+          },
+        ),
+        ValueListenableBuilder<CrosshairState?>(
+          valueListenable: widget.controller.crosshair.state,
+          builder: (context, state, child) {
+            return CrosshairOverlay(state: state);
+          },
+        ),
+      ],
     );
   }
 }

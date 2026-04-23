@@ -9,6 +9,8 @@
 - Implemented `GestureArbiter` using raw `PointerEvent`s to handle Pan, Zoom, and Long Press gestures without `GestureDetector`.
 - Added support for Trackpad gestures and Mouse scroll wheel for chart navigation.
 - Replaced `GestureDetector` in `DraggableDivider` with raw pointer handling for panel resizing.
+- Implemented synchronized crosshair across all panels using `CrosshairCoordinator`.
+- Optimized crosshair rendering to avoid invalidating the underlying candle layer.
 
 ## [0.1.0-dev.1]
 
