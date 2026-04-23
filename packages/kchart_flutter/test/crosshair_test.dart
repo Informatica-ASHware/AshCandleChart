@@ -1,7 +1,11 @@
+import 'dart:ui';
+import 'package:flutter/material.dart' hide Viewport;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kchart_core/kchart_core.dart';
 import 'package:kchart_flutter/src/crosshair_coordinator.dart';
 import 'package:kchart_flutter/src/controller.dart';
+import 'package:kchart_flutter/src/kchart.dart';
+import 'package:kchart_flutter/src/panels/crosshair_overlay.dart';
 import 'dart:typed_data';
 
 void main() {
@@ -49,6 +53,24 @@ void main() {
       // We can't easily check if it's disposed without a mock or exposing internals,
       // but we can ensure it doesn't throw when calling dispose.
       controller.dispose();
+    });
+  });
+
+  group('CrosshairOverlay', () {
+    testWidgets('should render without error', (WidgetTester tester) async {
+      const state = CrosshairState(dx: 50, dy: 50);
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            body: SizedBox(
+              width: 100,
+              height: 100,
+              child: CrosshairOverlay(state: state),
+            ),
+          ),
+        ),
+      );
+      expect(find.byType(CrosshairOverlay), findsOneWidget);
     });
   });
 }

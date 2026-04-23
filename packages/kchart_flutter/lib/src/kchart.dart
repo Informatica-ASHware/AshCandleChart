@@ -3,7 +3,9 @@ import 'package:flutter/gestures.dart';
 import 'package:kchart_core/kchart_core.dart';
 import 'controller.dart';
 import 'gestures/gesture_arbiter.dart';
+import 'painting/crosshair_painter.dart';
 import 'panels/panel_stack.dart';
+import 'widgets/kchart_scope.dart';
 
 /// The main KChart widget.
 ///
@@ -25,6 +27,7 @@ class KChart extends StatefulWidget {
 
 class _KChartState extends State<KChart> {
   late final GestureArbiter _arbiter;
+  final GlobalKey _chartKey = GlobalKey();
 
   String? _activeAnnotationId;
   int? _activePointIndex; // 0 for start, 1 for end
@@ -172,10 +175,17 @@ class _KChartState extends State<KChart> {
     // Snapped dx to candle center
     final double snappedDx = (index - startIdx) * candleWidth + candleWidth / 2;
 
+    // Price calculation (only if it's over the main panel)
+    // For now, we use a simple heuristic: if it's in the top 3/4 of the chart
+    // But since we have pixelToPoint in controller, we should use it.
+    // Note: pixelToPoint assumes size of the main panel.
+    final point = widget.controller.pixelToPoint(localPosition, size);
+
     widget.controller.crosshair.update(CrosshairState(
       dx: snappedDx,
       dy: localPosition.dy, // Relative to KChart widget
       timestamp: timestamp,
+      price: point.price,
     ));
   }
 
@@ -230,18 +240,42 @@ class _KChartState extends State<KChart> {
               onPointerPanZoomStart: _arbiter.handleEvent,
               onPointerPanZoomUpdate: _arbiter.handleEvent,
               onPointerPanZoomEnd: _arbiter.handleEvent,
-              child: MouseRegion(
-                cursor: SystemMouseCursors.precise,
-                onExit: (_) => widget.controller.crosshair.clear(),
-                child: PanelStack(
-                  panels: widget.controller.panels,
-                  onResize: (index, delta) {
-                    widget.controller.resizePanels(
-                      index,
-                      delta,
-                      constraints.maxHeight,
-                    );
-                  },
+              child: KChartScope(
+                chartKey: _chartKey,
+                child: MouseRegion(
+                  key: _chartKey,
+                  cursor: SystemMouseCursors.precise,
+                  onExit: (_) => widget.controller.crosshair.clear(),
+                  child: Stack(
+                    children: [
+                      PanelStack(
+                        panels: widget.controller.panels,
+                        onResize: (index, delta) {
+                          widget.controller.resizePanels(
+                            index,
+                            delta,
+                            constraints.maxHeight,
+                          );
+                        },
+                      ),
+                      ValueListenableBuilder<CrosshairState?>(
+                        valueListenable: widget.controller.crosshair.state,
+                        builder: (context, state, child) {
+                          if (state == null || state.dx == null) {
+                            return const SizedBox.shrink();
+                          }
+                          return IgnorePointer(
+                            child: CustomPaint(
+                              size: Size.infinite,
+                              painter: CrosshairPainter(
+                                state: CrosshairState(dx: state.dx),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );
