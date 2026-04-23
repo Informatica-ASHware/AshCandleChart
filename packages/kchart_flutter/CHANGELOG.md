@@ -11,6 +11,8 @@
 - Replaced `GestureDetector` in `DraggableDivider` with raw pointer handling for panel resizing.
 - Implemented synchronized crosshair across all panels using `CrosshairCoordinator`.
 - Optimized crosshair rendering to avoid invalidating the underlying candle layer.
+- Implemented inertial fling (fling) using `FrictionSimulation`.
+- Added Snap-to-Candle functionality to ensure the chart always aligns with candle boundaries when movement ends.
 
 ## [0.1.0-dev.1]
 

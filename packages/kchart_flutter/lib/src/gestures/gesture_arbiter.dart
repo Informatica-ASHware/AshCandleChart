@@ -16,6 +16,12 @@ typedef OnLongPressEnd = void Function();
 /// Callback for tap.
 typedef OnTap = void Function(Offset position);
 
+/// Callback for pointer up.
+typedef OnPointerUp = void Function();
+
+/// Callback for fling.
+typedef OnFling = void Function(Velocity velocity);
+
 /// Internal state for the [GestureArbiter].
 enum _GestureState { idle, possibleLongPress, longPress, panning, zooming }
 
@@ -40,12 +46,19 @@ class GestureArbiter {
   /// Callback when a tap occurs.
   final OnTap? onTap;
 
+  /// Callback when a pointer is released.
+  final OnPointerUp? onPointerUp;
+
+  /// Callback when a fling gesture occurs.
+  final OnFling? onFling;
+
   /// Duration before a press is considered a long press.
   final Duration longPressTimeout;
 
   _GestureState _state = _GestureState.idle;
   Timer? _longPressTimer;
   Offset? _initialPosition;
+  VelocityTracker? _velocityTracker;
   final Map<int, PointerDownEvent> _pointers = {};
   final Map<int, Offset> _pointerLocalPositions = {};
   double _lastTrackpadScale = 1.0;
@@ -57,6 +70,8 @@ class GestureArbiter {
     this.onLongPressStart,
     this.onLongPressEnd,
     this.onTap,
+    this.onPointerUp,
+    this.onFling,
     this.longPressTimeout = const Duration(milliseconds: 500),
   });
 
@@ -89,6 +104,8 @@ class GestureArbiter {
     _pointerLocalPositions[event.pointer] = event.localPosition;
 
     if (_pointers.length == 1) {
+      _velocityTracker = VelocityTracker.withKind(event.kind);
+      _velocityTracker?.addPosition(event.timeStamp, event.localPosition);
       _state = _GestureState.possibleLongPress;
       _initialPosition = event.localPosition;
       _longPressTimer?.cancel();
@@ -115,6 +132,7 @@ class GestureArbiter {
     }
 
     _pointerLocalPositions[event.pointer] = event.localPosition;
+    _velocityTracker?.addPosition(event.timeStamp, event.localPosition);
 
     if (_state == _GestureState.possibleLongPress) {
       final delta = (event.localPosition - _initialPosition!).distance;
@@ -132,6 +150,8 @@ class GestureArbiter {
   }
 
   void _handlePointerUp(PointerUpEvent event) {
+    _velocityTracker?.addPosition(event.timeStamp, event.localPosition);
+
     if (_state == _GestureState.possibleLongPress && _pointers.length == 1) {
       onTap?.call(event.localPosition);
     }
@@ -140,11 +160,20 @@ class GestureArbiter {
       onLongPressEnd?.call();
     }
 
+    if (_state == _GestureState.panning && _pointers.length == 1) {
+      final velocity = _velocityTracker?.getVelocity();
+      if (velocity != null && velocity != Velocity.zero) {
+        onFling?.call(velocity);
+      }
+    }
+
     _pointers.remove(event.pointer);
     _pointerLocalPositions.remove(event.pointer);
     _stopLongPressTimer();
+    _velocityTracker = null;
 
     if (_pointers.isEmpty) {
+      onPointerUp?.call();
       _state = _GestureState.idle;
     } else if (_pointers.length == 1) {
       _state = _GestureState.panning;
@@ -156,6 +185,7 @@ class GestureArbiter {
     _pointers.remove(event.pointer);
     _pointerLocalPositions.remove(event.pointer);
     _stopLongPressTimer();
+    _velocityTracker = null;
     if (_pointers.isEmpty) {
       if (_state == _GestureState.longPress) {
         onLongPressEnd?.call();

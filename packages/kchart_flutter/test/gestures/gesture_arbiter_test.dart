@@ -11,6 +11,7 @@ void main() {
     Offset? longPressPosition;
     bool longPressEnded = false;
     Offset? tapPosition;
+    Velocity? flingVelocity;
 
     setUp(() {
       panDeltas.clear();
@@ -19,6 +20,7 @@ void main() {
       longPressPosition = null;
       longPressEnded = false;
       tapPosition = null;
+      flingVelocity = null;
 
       arbiter = GestureArbiter(
         onPanUpdate: (delta) => panDeltas.add(delta),
@@ -29,11 +31,12 @@ void main() {
         onLongPressStart: (position) => longPressPosition = position,
         onLongPressEnd: () => longPressEnded = true,
         onTap: (position) => tapPosition = position,
+        onFling: (velocity) => flingVelocity = velocity,
         longPressTimeout: const Duration(milliseconds: 100),
       );
     });
 
-    test('handles tap', () {
+    testWidgets('handles tap', (tester) async {
       arbiter.handleEvent(const PointerDownEvent(pointer: 1, position: Offset(10, 10)));
       arbiter.handleEvent(const PointerUpEvent(pointer: 1, position: Offset(10, 10)));
 
@@ -41,7 +44,7 @@ void main() {
       expect(panDeltas, isEmpty);
     });
 
-    test('handles pan', () {
+    testWidgets('handles pan', (tester) async {
       arbiter.handleEvent(const PointerDownEvent(pointer: 1, position: Offset(10, 10)));
       arbiter.handleEvent(const PointerMoveEvent(
         pointer: 1,
@@ -53,10 +56,10 @@ void main() {
       expect(tapPosition, isNull);
     });
 
-    test('handles long press', () async {
+    testWidgets('handles long press', (tester) async {
       arbiter.handleEvent(const PointerDownEvent(pointer: 1, position: Offset(10, 10)));
 
-      await Future.delayed(const Duration(milliseconds: 150));
+      await tester.pump(const Duration(milliseconds: 150));
 
       expect(longPressPosition, const Offset(10, 10));
 
@@ -64,16 +67,16 @@ void main() {
       expect(longPressEnded, isTrue);
     });
 
-    test('handles long press cancel', () async {
+    testWidgets('handles long press cancel', (tester) async {
       arbiter.handleEvent(const PointerDownEvent(pointer: 1, position: Offset(10, 10)));
-      await Future.delayed(const Duration(milliseconds: 150));
+      await tester.pump(const Duration(milliseconds: 150));
       expect(longPressPosition, const Offset(10, 10));
 
       arbiter.handleEvent(const PointerCancelEvent(pointer: 1, position: Offset(10, 10)));
       expect(longPressEnded, isTrue);
     });
 
-    test('handles multi-touch zoom', () {
+    testWidgets('handles multi-touch zoom', (tester) async {
       arbiter.handleEvent(const PointerDownEvent(pointer: 1, position: Offset(10, 10)));
       arbiter.handleEvent(const PointerDownEvent(pointer: 2, position: Offset(20, 10)));
 
@@ -94,7 +97,7 @@ void main() {
       expect(zoomFocalPoint, const Offset(20, 10)); // (10,10) and (30,10)
     });
 
-    test('handles mouse scroll zoom', () {
+    testWidgets('handles mouse scroll zoom', (tester) async {
       arbiter.handleEvent(const PointerScrollEvent(
         position: Offset(50, 50),
         scrollDelta: Offset(0, 10), // Scroll down -> zoom out
@@ -110,7 +113,7 @@ void main() {
       expect(panDeltas.last, const Offset(-10, 0));
     });
 
-    test('handles trackpad pan zoom with scale delta', () {
+    testWidgets('handles trackpad pan zoom with scale delta', (tester) async {
       arbiter.handleEvent(const PointerPanZoomStartEvent(pointer: 1));
 
       // Scale from 1.0 to 1.5 -> delta 1.5
@@ -137,14 +140,47 @@ void main() {
       arbiter.handleEvent(const PointerPanZoomEndEvent(pointer: 1));
     });
 
-    test('dispose clears state', () {
+    testWidgets('dispose clears state', (tester) async {
       arbiter.handleEvent(const PointerDownEvent(pointer: 1, position: Offset(10, 10)));
       arbiter.dispose();
       arbiter.handleEvent(const PointerUpEvent(pointer: 1, position: Offset(10, 10)));
       expect(tapPosition, isNull);
     });
 
-    test('ignores move events for pointers not tracked from start', () {
+    testWidgets('handles fling', (tester) async {
+      const Duration interval = Duration(milliseconds: 16);
+
+      arbiter.handleEvent(PointerDownEvent(
+        pointer: 1,
+        position: const Offset(10, 10),
+        timeStamp: interval,
+      ));
+
+      arbiter.handleEvent(PointerMoveEvent(
+        pointer: 1,
+        position: const Offset(20, 10),
+        delta: const Offset(10, 0),
+        timeStamp: interval * 2,
+      ));
+
+      arbiter.handleEvent(PointerMoveEvent(
+        pointer: 1,
+        position: const Offset(40, 10),
+        delta: const Offset(20, 0),
+        timeStamp: interval * 3,
+      ));
+
+      arbiter.handleEvent(PointerUpEvent(
+        pointer: 1,
+        position: const Offset(40, 10),
+        timeStamp: interval * 4,
+      ));
+
+      expect(flingVelocity, isNotNull);
+      expect(flingVelocity!.pixelsPerSecond.dx, greaterThan(0));
+    });
+
+    testWidgets('ignores move events for pointers not tracked from start', (tester) async {
       // Move event without Down event
       arbiter.handleEvent(const PointerMoveEvent(
         pointer: 1,
