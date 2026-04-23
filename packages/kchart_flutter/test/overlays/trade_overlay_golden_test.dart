@@ -41,13 +41,12 @@ void main() {
             id: 'm1',
             point: const AnnotationPoint(timestamp: 10000, price: 110.0),
             color: 0xFF4CAF50,
-            label: 'Buy',
+            // Removed label to avoid platform-dependent text rendering in goldens
           ),
           TradeOverlay.marker(
             id: 'm2',
             point: const AnnotationPoint(timestamp: 30000, price: 130.0),
             color: 0xFFE91E63,
-            label: 'Sell',
           ),
           TradeOverlay.position(
             id: 'p1',
@@ -65,7 +64,6 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
-        theme: ThemeData.dark(),
         debugShowCheckedModeBanner: false,
         home: Scaffold(
           body: Center(
