@@ -1,0 +1,19 @@
+name: kchart_flutter_example
+description: Minimal example for kchart_flutter.
+publish_to: none
+
+environment:
+  sdk: '>=3.5.0 <4.0.0'
+  flutter: '>=3.24.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  kchart_flutter:
+    path: ..
+  kchart_core:
+    path: ../../kchart_core
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter

@@ -1,0 +1,216 @@
+2026-04-23 21:16:58.981173 INFO: Running `dart --version`...
+2026-04-23 21:16:59.200592 INFO: Running `git rev-parse --show-toplevel`...
+2026-04-23 21:16:59.568977 INFO: Running `dart pub get --no-example`...
+2026-04-23 21:16:59.908436 INFO: Running `dart pub outdated --json --up-to-date --no-dev-dependencies --no-dependency-overrides`...
+2026-04-23 21:17:00.219578 INFO: Analyzing package...
+2026-04-23 21:17:00.268945 INFO: Running `dart analyze --format machine .`...
+2026-04-23 21:17:05.512846 INFO: Running `git init`...
+2026-04-23 21:17:05.527269 INFO: Running `git remote add origin https://github.com/your-repo/kchart`...
+2026-04-23 21:17:05.541705 INFO: Running `git remote show origin`...
+2026-04-23 21:17:06.206037 INFO: Running `git remote show origin`...
+2026-04-23 21:17:07.200062 INFO: Running `git remote show origin`...
+2026-04-23 21:17:07.368165 INFO: Unable to access git repository: Failed to run `remote show origin`.
+                                 Failed to run `remote show origin`.
+                                 fatal: could not read Username for 'https://github.com': terminal prompts disabled
+                                 #0      _runGit (package:pana/src/tool/git_tool.dart:49:5)
+                                 <asynchronous suspension>
+                                 #1      GitTool._run (package:pana/src/tool/git_tool.dart:74:12)
+                                 <asynchronous suspension>
+                                 #2      RetryOptions.retry (package:retry/retry.dart:131:16)
+                                 <asynchronous suspension>
+                                 #3      GitTool._runWithRetry (package:pana/src/tool/git_tool.dart:91:12)
+                                 <asynchronous suspension>
+                                 #4      GitTool.detectDefaultBranch (package:pana/src/tool/git_tool.dart:128:16)
+                                 <asynchronous suspension>
+                                 #5      GitLocalRepository.detectDefaultBranch (package:pana/src/repository/git_local_repository.dart:100:12)
+                                 <asynchronous suspension>
+                                 #6      checkRepository (package:pana/src/repository/check_repository.dart:92:14)
+                                 <asynchronous suspension>
+                                 #7      SharedAnalysisContext.verifyRepository (package:pana/src/package_context.dart:83:24)
+                                 <asynchronous suspension>
+                                 #8      followsTemplate.checkPubspec (package:pana/src/report/template.dart:196:24)
+                                 <asynchronous suspension>
+                                 #9      followsTemplate (package:pana/src/report/template.dart:310:26)
+                                 <asynchronous suspension>
+                                 #10     createReport (package:pana/src/report/create_report.dart:36:26)
+                                 <asynchronous suspension>
+                                 #11     PackageAnalyzer._inspect (package:pana/src/package_analyzer.dart:235:20)
+                                 <asynchronous suspension>
+                                 #12     PackageAnalyzer.inspectDir.<anonymous closure>.<anonymous closure> (package:pana/src/package_analyzer.dart:108:16)
+                                 <asynchronous suspension>
+                                 #13     withTempDir (package:pana/src/utils.dart:123:12)
+                                 <asynchronous suspension>
+                                 #14     main (file:///home/jules/.pub-cache/hosted/pub.dev/pana-0.23.12/bin/pana.dart:254:19)
+                                 <asynchronous suspension>
+
+2026-04-23 21:17:08.232930 INFO: Running `dart pub get --no-example`...
+2026-04-23 21:17:08.348049 INFO: Running `dart format --output=none --set-exit-if-changed /tmp/pana_BSPHTB/packages/kchart_core`...
+2026-04-23 21:17:08.609938 FINE: Downloading: https://pub.dartlang.org/api/packages/freezed_annotation
+2026-04-23 21:17:28.067353 INFO: Analyzing pub downgrade...
+2026-04-23 21:17:28.076162 INFO: Running `dart pub downgrade --no-example`...
+2026-04-23 21:17:47.746467 INFO: Running `dart analyze --format machine .`...
+2026-04-23 21:17:48.623876 INFO: [pub-downgrade-success]
+2026-04-23 21:17:48.629179 INFO: Running `dart pub upgrade --no-example`...
+2026-04-23 21:17:52.881900 INFO: Running `dart pub global activate dartdoc`...
+2026-04-23 21:18:05.968460 INFO: Running `dart pub global run dartdoc --output /tmp/pana.1776979018935.JJXRSC/doc --sanitize-html --max-file-count 10000000 --max-total-size 2147483648 --no-validate-links`...
+2026-04-23 21:18:38.358270 INFO: `dartdoc` completed:
+                                 Documenting kchart_core...
+                                 Discovering libraries...
+                                 Linking elements...
+                                 Precaching local docs for 145980 elements...
+                                 Initialized dartdoc with 110 libraries
+                                 Generating docs for library kchart_core.dart from package:kchart_core/kchart_core.dart...
+                                 Documented 1 public library in 31.2 seconds
+                                 Success! Docs generated into /tmp/pana.1776979018935.JJXRSC/doc
+                                 Found 0 warnings and 0 errors.
+
+## ✗ Follow Dart file conventions (20 / 30)
+### [~] 10/10 points: Provide a valid `pubspec.yaml`
+
+<details>
+<summary>
+Homepage URL doesn't exist.
+</summary>
+
+At the time of the analysis `https://github.com/your-repo/kchart/tree/main/packages/kchart_core` was unreachable. Make sure that the website is reachable via [`HEAD`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/HEAD) requests.
+</details>
+
+<details>
+<summary>
+Repository URL doesn't exist.
+</summary>
+
+At the time of the analysis `https://github.com/your-repo/kchart` was unreachable. Make sure that the website is reachable via [`HEAD`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/HEAD) requests.
+</details>
+
+<details>
+<summary>
+Issue tracker URL doesn't exist.
+</summary>
+
+At the time of the analysis `https://github.com/your-repo/kchart/issues` was unreachable. Make sure that the website is reachable via [`HEAD`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/HEAD) requests.
+</details>
+
+### [*] 5/5 points: Provide a valid `README.md`
+
+### [*] 5/5 points: Provide a valid `CHANGELOG.md`
+
+### [x] 0/10 points: Use an OSI-approved license
+
+<details>
+<summary>
+No license was recognized.
+</summary>
+
+Consider using an [OSI-approved license](https://opensource.org/licenses) in the `LICENSE` file to make it more accessible to the community.
+</details>
+
+
+## ✗ Provide documentation (10 / 20)
+### [*] 10/10 points: 20% or more of the public API has dartdoc comments
+
+129 out of 159 API elements (81.1 %) have documentation comments.
+
+Some symbols that are missing documentation: `kchart_core.Annotation.map`, `kchart_core.Annotation.mapOrNull`, `kchart_core.Annotation.maybeMap`, `kchart_core.Annotation.maybeWhen`, `kchart_core.Annotation.when`.
+
+### [x] 0/10 points: Package has an example
+
+<details>
+<summary>
+No example found.
+</summary>
+
+See [package layout](https://dart.dev/tools/pub/package-layout#examples) guidelines on how to add an example.
+</details>
+
+
+## ✓ Platform support (20 / 20)
+### [*] 20/20 points: Supports 5 of 6 possible platforms (**iOS**, **Android**, Web, **Windows**, **macOS**, **Linux**)
+
+* ✓ Android
+
+* ✓ iOS
+
+* ✓ Windows
+
+* ✓ Linux
+
+* ✓ macOS
+
+
+These platforms are not supported:
+
+<details>
+<summary>
+Package not compatible with platform Web
+</summary>
+
+Because:
+* `package:kchart_core/kchart_core.dart` that imports:
+* `package:kchart_core/src/compute/isolate_pool.dart` that imports:
+* `package:kchart_core/src/compute/isolate_messages.dart` that imports:
+* `dart:isolate`
+</details>
+
+
+## ✗ Pass static analysis (40 / 50)
+### [~] 40/50 points: code has no errors, warnings, lints, or formatting issues
+
+Found 8 issues. Showing the first 2:
+
+<details>
+<summary>
+lib/src/compute/isolate_pool.dart doesn't match the Dart formatter.
+</summary>
+
+To format your files run: `dart format .`
+</details>
+
+<details>
+<summary>
+lib/src/indicators/ema.dart doesn't match the Dart formatter.
+</summary>
+
+To format your files run: `dart format .`
+</details>
+
+
+## ✗ Support up-to-date dependencies (30 / 40)
+### [x] 0/10 points: All of the package dependencies are supported in the latest version
+
+|Package|Constraint|Compatible|Latest|Notes|
+|:-|:-|:-|:-|:-|
+|[`freezed_annotation`]|`^2.4.4`|2.4.4|**3.1.0**||
+|[`json_annotation`]|`^4.9.0`|4.11.0|4.11.0||
+|[`meta`]|`^1.11.0`|1.18.2|1.18.2||
+
+<details><summary>Transitive dependencies</summary>
+
+|Package|Constraint|Compatible|Latest|Notes|
+|:-|:-|:-|:-|:-|
+|[`collection`]|-|1.19.1|1.19.1||
+</details>
+
+To reproduce run `dart pub outdated --no-dev-dependencies --up-to-date --no-dependency-overrides`.
+
+[`freezed_annotation`]: https://pub.dev/packages/freezed_annotation
+[`json_annotation`]: https://pub.dev/packages/json_annotation
+[`meta`]: https://pub.dev/packages/meta
+[`collection`]: https://pub.dev/packages/collection
+
+<details>
+<summary>
+The constraint `^2.4.4` on freezed_annotation does not support the stable version `3.0.0`.
+</summary>
+
+Try running `dart pub upgrade --major-versions freezed_annotation` to update the constraint.
+</details>
+
+### [*] 10/10 points: Package supports latest stable Dart and Flutter SDKs
+
+### [*] 20/20 points: Compatible with dependency constraint lower bounds
+
+`pub downgrade` does not expose any static analysis error.
+
+
+Points: 120/160.

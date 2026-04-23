@@ -4,11 +4,15 @@ import 'annotation.dart';
 part 'trade_overlay.freezed.dart';
 
 /// Represents a trade-related overlay on the chart.
+///
+/// Trade overlays provide visual information about trades, orders, or positions
+/// directly on the price chart.
 @Freezed(
   unionKey: 'type',
   unionValueCase: FreezedUnionCase.snake,
 )
 class TradeOverlay with _$TradeOverlay {
+  /// Base constructor for [TradeOverlay].
   const TradeOverlay._();
 
   /// A marker representing a single trade event (e.g., execution).
@@ -107,8 +111,12 @@ class TradeOverlay with _$TradeOverlay {
 }
 
 /// A collection of trade overlays.
+///
+/// Used to group multiple [TradeOverlay] objects for efficient serialization
+/// and state management.
 @freezed
 class TradeOverlayDocument with _$TradeOverlayDocument {
+  /// Base constructor for [TradeOverlayDocument].
   const TradeOverlayDocument._();
 
   /// Creates a [TradeOverlayDocument] with a list of [overlays].

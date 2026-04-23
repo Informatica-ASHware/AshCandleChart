@@ -1,25 +1,25 @@
-# kchart_core
+# KChart Core
 
-Core logic and compute engine for KChart.
+Core logic, data structures, and compute engine for KChart.
 
 ## Features
 
-- **Columnar Data Storage**: Optimized memory layout using `Float64List` and `Int64List`.
-- **Isolate Pool**: Zero-copy memory transfers for heavy calculations.
-- **Indicator Pipeline**: Topological dependency resolution for technical indicators.
-- **Immutable Models**: Powered by `freezed`.
+- **Columnar Storage**: Optimized `Series` using `Float64List` and `Int64List` for high performance.
+- **Multithreading**: `IsolatePool` for offloading heavy computations.
+- **Indicator Engine**: Flexible DAG-based indicator pipeline with topological sorting.
+- **Incremental Updates**: Support for `computeAppend` to handle real-time data efficiently.
 
-## Usage
+## Getting Started
 
 ```dart
 import 'package:kchart_core/kchart_core.dart';
 
-final series = Series(
-  timestamps: Int64List.fromList([...]),
-  open: Float64List.fromList([...]),
-  high: Float64List.fromList([...]),
-  low: Float64List.fromList([...]),
-  close: Float64List.fromList([...]),
-  volume: Float64List.fromList([...]),
-);
+final candles = [
+  Candle(timestamp: 1600000000000, open: 100, high: 110, low: 90, close: 105, volume: 1000),
+];
+final series = Series.fromCandles(candles);
 ```
+
+## Documentation
+
+See the [API Reference](https://pub.dev/documentation/kchart_core/latest/) for detailed documentation.

@@ -21,8 +21,12 @@ class AnnotationPoint with _$AnnotationPoint {
 }
 
 /// Base class for all drawing annotations.
+///
+/// Annotations are visual elements drawn on the chart that are anchored
+/// to specific time and price coordinates.
 @Freezed(unionKey: 'type', unionValueCase: FreezedUnionCase.snake)
 class Annotation with _$Annotation {
+  /// Base constructor for [Annotation].
   const Annotation._();
 
   /// A trend line defined by two points.

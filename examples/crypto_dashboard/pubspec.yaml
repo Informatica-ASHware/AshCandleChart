@@ -1,0 +1,22 @@
+name: crypto_dashboard
+description: A complex crypto dashboard example using KChart.
+publish_to: none
+
+environment:
+  sdk: '>=3.5.0 <4.0.0'
+  flutter: '>=3.24.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  kchart_core:
+    path: ../../packages/kchart_core
+  kchart_flutter:
+    path: ../../packages/kchart_flutter
+  kchart_riverpod:
+    path: ../../packages/kchart_riverpod
+  flutter_riverpod: ^3.0.0-dev.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter

@@ -121,7 +121,10 @@ class KChartController extends ChangeNotifier {
 
     // 1. Calculate approximate index and price from pixels
     final double relativeIdx = localOffset.dx / candleWidth;
-    final int index = (startIdx + relativeIdx.floor()).clamp(0, series.length - 1);
+    final int index = (startIdx + relativeIdx.floor()).clamp(
+      0,
+      series.length - 1,
+    );
     final int timestamp = series.timestamps[index];
 
     // Need price range for Y calculation
@@ -146,7 +149,8 @@ class KChartController extends ChangeNotifier {
   }
 
   void _ensureFlexFactors() {
-    final panelCount = 2 + _frame.indicators.keys.where((k) => k != 'volume').length;
+    final panelCount =
+        2 + _frame.indicators.keys.where((k) => k != 'volume').length;
     if (_panelFlexFactors.length < panelCount) {
       final additionalNeeded = panelCount - _panelFlexFactors.length;
       _panelFlexFactors.addAll(List.generate(additionalNeeded, (_) => 1.0));
@@ -184,11 +188,13 @@ class KChartController extends ChangeNotifier {
 
       newScrollX -= indexDelta * candleWidth;
 
-      updateViewport(viewport.copyWith(
-        startIdx: newStartIdx,
-        endIdx: newEndIdx,
-        scrollX: newScrollX,
-      ));
+      updateViewport(
+        viewport.copyWith(
+          startIdx: newStartIdx,
+          endIdx: newEndIdx,
+          scrollX: newScrollX,
+        ),
+      );
     } else {
       updateViewport(viewport.copyWith(scrollX: newScrollX));
     }
@@ -232,11 +238,13 @@ class KChartController extends ChangeNotifier {
     newStartIdx = newStartIdx.clamp(0, maxIdx);
     newEndIdx = newEndIdx.clamp(0, maxIdx);
 
-    updateViewport(viewport.copyWith(
-      startIdx: newStartIdx,
-      endIdx: newEndIdx,
-      scale: (viewport.scale * scaleFactor).clamp(0.1, 10.0),
-    ));
+    updateViewport(
+      viewport.copyWith(
+        startIdx: newStartIdx,
+        endIdx: newEndIdx,
+        scale: (viewport.scale * scaleFactor).clamp(0.1, 10.0),
+      ),
+    );
   }
 
   /// Updates the viewport of the current frame and increments all panel sequences.
