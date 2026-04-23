@@ -13,6 +13,10 @@
 - Optimized crosshair rendering to avoid invalidating the underlying candle layer.
 - Implemented inertial fling (fling) using `FrictionSimulation`.
 - Added Snap-to-Candle functionality to ensure the chart always aligns with candle boundaries when movement ends.
+- [US 7.02] Implementation of Domain Overlays (Trades and Positions).
+    - Added `TradeOverlayPainter` using `canvas.drawVertices` for high-performance zone rendering.
+    - Integrated trade overlays into `MainPanelPainter` with logical price/time anchoring.
+    - Added overlay management methods to `KChartController`.
 
 ## [0.1.0-dev.1]
 

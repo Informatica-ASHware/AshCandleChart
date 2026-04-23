@@ -34,6 +34,7 @@ class DraggableDivider extends StatelessWidget {
           child: Center(
             child: Container(
               height: 1.0,
+              // ignore: deprecated_member_use
               color: Colors.grey.withOpacity(0.5),
             ),
           ),

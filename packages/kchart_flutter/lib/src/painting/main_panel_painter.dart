@@ -4,6 +4,7 @@ import 'package:flutter/material.dart' hide Viewport;
 import 'package:kchart_core/kchart_core.dart';
 import 'layer_cache.dart';
 import 'paint_pool.dart';
+import '../overlays/trade_overlay_painter.dart';
 
 /// Painter for the main chart panel that renders candles and a grid.
 ///
@@ -44,6 +45,7 @@ class MainPanelPainter extends CustomPainter {
     _drawGrid(canvas, size);
     _drawCandles(canvas, size);
     _drawAnnotations(canvas, size);
+    _drawTradeOverlays(canvas, size);
 
     paintPool.releaseAll();
   }
@@ -227,6 +229,44 @@ class MainPanelPainter extends CustomPainter {
     if (candleCache.picture != null) {
       canvas.drawPicture(candleCache.picture!);
     }
+  }
+
+  void _drawTradeOverlays(Canvas canvas, Size size) {
+    final series = frame.series;
+    final viewport = frame.viewport;
+
+    if (series.length == 0) return;
+
+    final int startIdx = viewport.startIdx.clamp(0, series.length - 1);
+    final int endIdx = viewport.endIdx.clamp(0, series.length - 1);
+    final int visibleCount = endIdx - startIdx + 1;
+    final double viewWidth = size.width;
+    final double viewHeight = size.height;
+    final double candleWidth = viewWidth / visibleCount;
+
+    double minPrice = double.infinity;
+    double maxPrice = double.negativeInfinity;
+    for (int i = startIdx; i <= endIdx; i++) {
+      if (series.low[i] < minPrice) minPrice = series.low[i];
+      if (series.high[i] > maxPrice) maxPrice = series.high[i];
+    }
+    if (minPrice == maxPrice) {
+      minPrice -= 1.0;
+      maxPrice += 1.0;
+    }
+    final double priceRange = maxPrice - minPrice;
+
+    double priceToY(double price) {
+      return viewHeight - ((price - minPrice) / priceRange * viewHeight);
+    }
+
+    double timestampToX(int timestamp) {
+      int idx = findIndexAtTimestamp(series.timestamps, timestamp);
+      return (idx - startIdx) * candleWidth + candleWidth / 2;
+    }
+
+    final tradePainter = TradeOverlayPainter(paintPool: paintPool);
+    tradePainter.draw(canvas, size, frame, priceToY, timestampToX);
   }
 
   void _drawAnnotations(Canvas canvas, Size size) {
