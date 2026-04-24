@@ -387,50 +387,53 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
                     key: _chartKey,
                     cursor: SystemMouseCursors.precise,
                     onExit: (_) => widget.controller.crosshair.clear(),
-                    child: Stack(
-                      children: [
-                        Column(
-                          children: [
-                            Expanded(
-                              child: PanelStack(
-                                panels: widget.controller.panels,
-                                onResize: (index, delta) {
-                                  widget.controller.resizePanels(
-                                    index,
-                                    delta,
-                                    constraints.maxHeight,
-                                  );
-                                },
-                              ),
-                            ),
-                            if (widget.controller.replayCoordinator != null)
-                              ReplaySlider(
-                                coordinator:
-                                    widget.controller.replayCoordinator!,
-                              ),
-                            AiInsightsPanel(controller: widget.controller),
-                          ],
-                        ),
-                        ValueListenableBuilder<CrosshairState?>(
-                          valueListenable: widget.controller.crosshair.state,
-                          builder: (context, state, child) {
-                            if (state == null || state.dx == null) {
-                              return const SizedBox.shrink();
-                            }
-                            final scope = KChartScope.of(context);
-                            return IgnorePointer(
-                              child: CustomPaint(
-                                size: Size.infinite,
-                                painter: CrosshairPainter(
-                                  state: CrosshairState(dx: state.dx),
-                                  color: scope?.theme.crosshairColor ??
-                                      Colors.grey,
+                    child: RepaintBoundary(
+                      key: widget.controller.exportKey,
+                      child: Stack(
+                        children: [
+                          Column(
+                            children: [
+                              Expanded(
+                                child: PanelStack(
+                                  panels: widget.controller.panels,
+                                  onResize: (index, delta) {
+                                    widget.controller.resizePanels(
+                                      index,
+                                      delta,
+                                      constraints.maxHeight,
+                                    );
+                                  },
                                 ),
                               ),
-                            );
-                          },
-                        ),
-                      ],
+                              if (widget.controller.replayCoordinator != null)
+                                ReplaySlider(
+                                  coordinator:
+                                      widget.controller.replayCoordinator!,
+                                ),
+                              AiInsightsPanel(controller: widget.controller),
+                            ],
+                          ),
+                          ValueListenableBuilder<CrosshairState?>(
+                            valueListenable: widget.controller.crosshair.state,
+                            builder: (context, state, child) {
+                              if (state == null || state.dx == null) {
+                                return const SizedBox.shrink();
+                              }
+                              final scope = KChartScope.of(context);
+                              return IgnorePointer(
+                                child: CustomPaint(
+                                  size: Size.infinite,
+                                  painter: CrosshairPainter(
+                                    state: CrosshairState(dx: state.dx),
+                                    color: scope?.theme.crosshairColor ??
+                                        Colors.grey,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

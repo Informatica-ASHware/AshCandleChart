@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:typed_data';
 import 'package:flutter/material.dart' hide Viewport;
+import 'package:flutter/rendering.dart';
 import 'package:kchart_core/kchart_core.dart';
 import 'panels/ai/ai_models.dart';
 import 'panels/ai/ai_provider.dart';
@@ -12,6 +14,8 @@ import 'panels/secondary_panel.dart';
 import 'panels/advanced/volume_profile_panel.dart';
 import 'panels/advanced/depth_panel.dart';
 import 'panels/advanced/liquidation_heatmap_panel.dart';
+import 'utils/export/export_config.dart';
+import 'utils/export/image_exporter.dart';
 
 /// Controller for the KChart widget.
 ///
@@ -42,6 +46,22 @@ class KChartController extends ChangeNotifier {
 
   /// The last measured size of the chart widget.
   Size? lastViewSize;
+
+  /// Global key to access the [RenderRepaintBoundary] for exporting images.
+  final GlobalKey exportKey = GlobalKey();
+
+  /// Exports the current chart view to a PNG image.
+  ///
+  /// Returns a [Uint8List] containing the PNG data.
+  Future<Uint8List> exportToImage({ExportConfig? config}) async {
+    final boundary =
+        exportKey.currentContext?.findRenderObject() as RenderRepaintBoundary?;
+    if (boundary == null) {
+      throw Exception(
+          'Could not find RenderRepaintBoundary. Is the KChart widget mounted?');
+    }
+    return ImageExporter.export(boundary, config ?? const ExportConfig());
+  }
 
   /// Coordinator for the synchronized crosshair.
   final CrosshairCoordinator crosshair = CrosshairCoordinator();
