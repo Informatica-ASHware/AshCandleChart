@@ -84,7 +84,13 @@ class _RenderCrosshair extends RenderBox {
   @override
   bool get sizedByParent => true;
 
-  Size computeSizeForNoChild(BoxConstraints constraints) => constraints.biggest;
+  @override
+  Size computePreferredSize(BoxConstraints constraints) => constraints.biggest;
+
+  @override
+  void performResize() {
+    size = constraints.biggest;
+  }
 
   @override
   void paint(PaintingContext context, Offset offset) {
