@@ -136,12 +136,13 @@ class __$$ViewportImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ViewportImpl implements _Viewport {
+class _$ViewportImpl extends _Viewport {
   const _$ViewportImpl(
       {required this.startIdx,
       required this.endIdx,
       required this.scale,
-      required this.scrollX});
+      required this.scrollX})
+      : super._();
 
   /// Index of the first visible data point in the [Series].
   @override
@@ -189,12 +190,13 @@ class _$ViewportImpl implements _Viewport {
       __$$ViewportImplCopyWithImpl<_$ViewportImpl>(this, _$identity);
 }
 
-abstract class _Viewport implements Viewport {
+abstract class _Viewport extends Viewport {
   const factory _Viewport(
       {required final int startIdx,
       required final int endIdx,
       required final double scale,
       required final double scrollX}) = _$ViewportImpl;
+  const _Viewport._() : super._();
 
   /// Index of the first visible data point in the [Series].
   @override
