@@ -13,6 +13,9 @@ import 'panels/secondary_panel.dart';
 class KChartController extends ChangeNotifier {
   ChartFrame _frame;
 
+  /// The last measured size of the chart widget.
+  Size? lastViewSize;
+
   /// Coordinator for the synchronized crosshair.
   final CrosshairCoordinator crosshair = CrosshairCoordinator();
 
@@ -280,6 +283,94 @@ class KChartController extends ChangeNotifier {
       sequenceNumber: _frame.sequenceNumber + 1,
       panelSequenceNumbers: newPanelSeqs,
     );
+  }
+
+  /// Converts a horizontal pixel position to a timestamp.
+  int? getTimestampAt(double dx) {
+    final size = lastViewSize;
+    if (size == null || size.width <= 0) return null;
+
+    final series = _frame.series;
+    if (series.length == 0) return null;
+
+    final viewport = _frame.viewport;
+    final int startIdx = viewport.startIdx.clamp(0, series.length - 1);
+    final int endIdx = viewport.endIdx.clamp(0, series.length - 1);
+    final int visibleCount = endIdx - startIdx + 1;
+    final double candleWidth = (size.width / visibleCount);
+
+    final double relativeIdx = dx / candleWidth;
+    final int index = (startIdx + relativeIdx.floor()).clamp(
+      0,
+      series.length - 1,
+    );
+    return series.timestamps[index];
+  }
+
+  /// Converts a timestamp to a horizontal pixel position.
+  double? getDxAt(int timestamp) {
+    final size = lastViewSize;
+    if (size == null || size.width <= 0) return null;
+
+    final series = _frame.series;
+    if (series.length == 0) return null;
+
+    final viewport = _frame.viewport;
+    final index = _findTimestampIndex(timestamp);
+
+    if (index == -1) return null;
+
+    final int startIdx = viewport.startIdx.clamp(0, series.length - 1);
+    final int endIdx = viewport.endIdx.clamp(0, series.length - 1);
+    final int visibleCount = endIdx - startIdx + 1;
+    final double candleWidth = (size.width / visibleCount);
+
+    return (index - startIdx) * candleWidth + candleWidth / 2;
+  }
+
+  /// Returns the start and end timestamps of the visible range.
+  (int, int) getVisibleTimeRange() {
+    final series = _frame.series;
+    final viewport = _frame.viewport;
+    if (series.length == 0) return (0, 0);
+
+    final int startIdx = viewport.startIdx.clamp(0, series.length - 1);
+    final int endIdx = viewport.endIdx.clamp(0, series.length - 1);
+
+    return (series.timestamps[startIdx], series.timestamps[endIdx]);
+  }
+
+  /// Updates the viewport to match the given time range as closely as possible.
+  void setVisibleTimeRange(int startTimestamp, int endTimestamp) {
+    final series = _frame.series;
+    if (series.length == 0) return;
+
+    final int startIdx = _findTimestampIndex(startTimestamp, nearest: true);
+    final int endIdx = _findTimestampIndex(endTimestamp, nearest: true);
+
+    updateViewport(
+      _frame.viewport.copyWith(
+        startIdx: startIdx,
+        endIdx: endIdx,
+        scrollX: 0, // Reset scroll offset when syncing by time
+      ),
+    );
+  }
+
+  int _findTimestampIndex(int timestamp, {bool nearest = false}) {
+    final series = _frame.series;
+    int low = 0;
+    int high = series.length - 1;
+    while (low <= high) {
+      final int mid = low + ((high - low) >> 1);
+      if (series.timestamps[mid] == timestamp) return mid;
+      if (series.timestamps[mid] < timestamp) {
+        low = mid + 1;
+      } else {
+        high = mid - 1;
+      }
+    }
+    return nearest ? low.clamp(0, series.length - 1) : -1;
   }
 
   /// Updates a specific indicator and only its sequence number.

@@ -6,6 +6,10 @@
     - Added support for multiple speeds (1x, 2x, 5x, 10x).
     - Ensures future data, trade overlays, and annotations are hidden during replay.
     - Guaranteed indicator recalculation consistency with "fake now".
+- [US 9.02] Multi-Chart Grid and Synchronization.
+    - Implemented `KChartGrid` for configurable multi-chart layouts (Grid, Main + Secondary).
+    - Added `SyncEngine` for cross-chart coordination of time-axis and crosshair.
+    - Enhanced `KChartController` with time-based viewport management and pixel/timestamp conversion.
 
 ## [0.1.0-dev.1]
 

@@ -185,27 +185,10 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
     final size = _lastSize ?? Size.zero;
     if (size.isEmpty) return;
 
-    final series = widget.controller.frame.series;
-    final viewport = widget.controller.frame.viewport;
-    final int startIdx = viewport.startIdx.clamp(0, series.length - 1);
-    final int endIdx = viewport.endIdx.clamp(0, series.length - 1);
-    final int visibleCount = endIdx - startIdx + 1;
-    final double candleWidth = size.width / visibleCount;
+    final timestamp = widget.controller.getTimestampAt(localPosition.dx);
+    if (timestamp == null) return;
 
-    final double relativeIdx = localPosition.dx / candleWidth;
-    final int index = (startIdx + relativeIdx.floor()).clamp(
-      0,
-      series.length - 1,
-    );
-    final int timestamp = series.timestamps[index];
-
-    // Snapped dx to candle center
-    final double snappedDx = (index - startIdx) * candleWidth + candleWidth / 2;
-
-    // Price calculation (only if it's over the main panel)
-    // For now, we use a simple heuristic: if it's in the top 3/4 of the chart
-    // But since we have pixelToPoint in controller, we should use it.
-    // Note: pixelToPoint assumes size of the main panel.
+    final snappedDx = widget.controller.getDxAt(timestamp);
     final point = widget.controller.pixelToPoint(localPosition, size);
 
     widget.controller.crosshair.update(
@@ -346,6 +329,7 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
     return LayoutBuilder(
       builder: (context, constraints) {
         _lastSize = Size(constraints.maxWidth, constraints.maxHeight);
+        widget.controller.lastViewSize = _lastSize;
         return ListenableBuilder(
           listenable: widget.controller,
           builder: (context, child) {
