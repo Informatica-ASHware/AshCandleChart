@@ -54,6 +54,7 @@ class AiInsightsPanel extends StatelessWidget {
                   ),
                   IconButton(
                     icon: Icon(Icons.close, size: 16, color: textColor),
+                    tooltip: 'Cerrar AI Insights',
                     padding: EdgeInsets.zero,
                     constraints: const BoxConstraints(),
                     onPressed: controller.clearSelection,
@@ -129,42 +130,48 @@ class _InsightTile extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            margin: const EdgeInsets.only(top: 4, right: 8),
-            width: 8,
-            height: 8,
-            decoration: BoxDecoration(
-              color: severityColor,
-              shape: BoxShape.circle,
-            ),
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  insight.patternType.toUpperCase(),
-                  style: TextStyle(
-                    color: severityColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 10,
-                  ),
+      child: Semantics(
+        container: true,
+        label: 'Insight: ${insight.patternType}. ${insight.text}',
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ExcludeSemantics(
+              child: Container(
+                margin: const EdgeInsets.only(top: 4, right: 8),
+                width: 8,
+                height: 8,
+                decoration: BoxDecoration(
+                  color: severityColor,
+                  shape: BoxShape.circle,
                 ),
-                Text(
-                  insight.text,
-                  style: TextStyle(
-                    // ignore: deprecated_member_use
-                    color: textColor.withOpacity(0.9),
-                    fontSize: 13,
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
-        ],
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    insight.patternType.toUpperCase(),
+                    style: TextStyle(
+                      color: severityColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 10,
+                    ),
+                  ),
+                  Text(
+                    insight.text,
+                    style: TextStyle(
+                      // ignore: deprecated_member_use
+                      color: textColor.withOpacity(0.9),
+                      fontSize: 13,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

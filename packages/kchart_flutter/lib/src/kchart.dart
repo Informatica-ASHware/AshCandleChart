@@ -4,13 +4,24 @@ import 'package:kchart_core/kchart_core.dart';
 import 'controller.dart';
 import 'gestures/gesture_arbiter.dart';
 import 'painting/crosshair_painter.dart';
+import 'painting/main_panel_painter.dart';
 import 'panels/panel_stack.dart';
 import 'panels/ai/ai_insights_panel.dart';
 import 'widgets/kchart_scope.dart';
 import 'interaction/replay/replay_slider.dart';
 import 'package:flutter/physics.dart';
+import 'package:flutter/services.dart';
 import 'theme.dart';
 import 'i18n/number_formatters.dart';
+
+/// Intent for moving the crosshair.
+class MoveCrosshairIntent extends Intent {
+  /// The direction to move.
+  final int direction; // -1 for left, 1 for right
+
+  /// Creates a [MoveCrosshairIntent].
+  const MoveCrosshairIntent(this.direction);
+}
 
 /// The main KChart widget.
 ///
@@ -188,6 +199,14 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
         _activePointIndex = null;
       });
     } else {
+      final timestamp = widget.controller.getTimestampAt(position.dx);
+      if (timestamp != null) {
+        final scope = KChartScope.of(context);
+        if (scope != null) {
+          widget.controller.announceCandle(timestamp, scope.formatters);
+        }
+      }
+
       // Start new drawing if not hitting anything
       final id = 'trendline_${DateTime.now().millisecondsSinceEpoch}';
       final point = widget.controller.pixelToPoint(position, size);
@@ -201,6 +220,45 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
     }
   }
 
+  void _handleMoveCrosshair(int direction) {
+    final state = widget.controller.crosshair.state.value;
+    final timestamps = widget.controller.frame.series.timestamps;
+    if (timestamps.isEmpty) return;
+
+    int newTimestamp;
+    if (state == null || state.timestamp == null) {
+      newTimestamp = timestamps[widget.controller.frame.viewport.startIdx];
+    } else {
+      final currentIndex =
+          MainPanelPainter.findIndexAtTimestamp(timestamps, state.timestamp!);
+      final newIndex =
+          (currentIndex + direction).clamp(0, timestamps.length - 1);
+      newTimestamp = timestamps[newIndex];
+    }
+
+    final dx = widget.controller.getDxAt(newTimestamp);
+    if (dx == null) return;
+
+    // Maintain current dy if possible, otherwise center
+    final dy = state?.dy ?? (_lastSize?.height ?? 0) / 2;
+
+    widget.controller.crosshair.update(
+      CrosshairState(
+        dx: dx,
+        dy: dy,
+        timestamp: newTimestamp,
+        price: widget.controller.frame.series
+            .findNearestPoint(newTimestamp, 0)
+            .price, // Price not strictly needed for navigation but nice to have
+      ),
+    );
+
+    final scope = KChartScope.of(context);
+    if (scope != null) {
+      widget.controller.announceCandle(newTimestamp, scope.formatters);
+    }
+  }
+
   void _updateCrosshair(Offset localPosition) {
     final size = _lastSize ?? Size.zero;
     if (size.isEmpty) return;
@@ -211,6 +269,8 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
     final snappedDx = widget.controller.getDxAt(timestamp);
     final point = widget.controller.pixelToPoint(localPosition, size);
 
+    final oldTimestamp = widget.controller.crosshair.state.value?.timestamp;
+
     widget.controller.crosshair.update(
       CrosshairState(
         dx: snappedDx,
@@ -219,6 +279,13 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
         price: point.price,
       ),
     );
+
+    if (oldTimestamp != timestamp) {
+      final scope = KChartScope.of(context);
+      if (scope != null) {
+        widget.controller.announceCandle(timestamp, scope.formatters);
+      }
+    }
   }
 
   void _handlePointerMove(PointerMoveEvent event) {
@@ -260,6 +327,11 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
 
     final double vx = velocity.pixelsPerSecond.dx;
     if (vx.abs() < 100) {
+      _snapToCandle();
+      return;
+    }
+
+    if (MediaQuery.disableAnimationsOf(context)) {
       _snapToCandle();
       return;
     }
@@ -311,6 +383,11 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
     }
 
     if (targetDelta == 0) return;
+
+    if (MediaQuery.disableAnimationsOf(context)) {
+      widget.controller.pan(targetDelta, size.width);
+      return;
+    }
 
     _lastAnimationValue = 0.0;
     final Animation<double> animation =
@@ -373,66 +450,81 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
               onPointerPanZoomStart: _arbiter.handleEvent,
               onPointerPanZoomUpdate: _arbiter.handleEvent,
               onPointerPanZoomEnd: _arbiter.handleEvent,
-              child: KChartScope(
-                chartKey: _chartKey,
-                theme: theme,
-                formatters: ChartNumberFormatters(
-                  widget.locale ??
-                      Localizations.maybeLocaleOf(context)?.toString() ??
-                      'en_US',
-                ),
-                child: Container(
-                  color: theme.backgroundColor,
-                  child: MouseRegion(
-                    key: _chartKey,
-                    cursor: SystemMouseCursors.precise,
-                    onExit: (_) => widget.controller.crosshair.clear(),
-                    child: RepaintBoundary(
-                      key: widget.controller.exportKey,
-                      child: Stack(
-                        children: [
-                          Column(
-                            children: [
-                              Expanded(
-                                child: PanelStack(
-                                  panels: widget.controller.panels,
-                                  onResize: (index, delta) {
-                                    widget.controller.resizePanels(
-                                      index,
-                                      delta,
-                                      constraints.maxHeight,
-                                    );
-                                  },
-                                ),
-                              ),
-                              if (widget.controller.replayCoordinator != null)
-                                ReplaySlider(
-                                  coordinator:
-                                      widget.controller.replayCoordinator!,
-                                ),
-                              AiInsightsPanel(controller: widget.controller),
-                            ],
-                          ),
-                          ValueListenableBuilder<CrosshairState?>(
-                            valueListenable: widget.controller.crosshair.state,
-                            builder: (context, state, child) {
-                              if (state == null || state.dx == null) {
-                                return const SizedBox.shrink();
-                              }
-                              final scope = KChartScope.of(context);
-                              return IgnorePointer(
-                                child: CustomPaint(
-                                  size: Size.infinite,
-                                  painter: CrosshairPainter(
-                                    state: CrosshairState(dx: state.dx),
-                                    color: scope?.theme.crosshairColor ??
-                                        Colors.grey,
+              child: FocusableActionDetector(
+                shortcuts: {
+                  LogicalKeySet(LogicalKeyboardKey.arrowLeft):
+                      const MoveCrosshairIntent(-1),
+                  LogicalKeySet(LogicalKeyboardKey.arrowRight):
+                      const MoveCrosshairIntent(1),
+                },
+                actions: {
+                  MoveCrosshairIntent: CallbackAction<MoveCrosshairIntent>(
+                    onInvoke: (intent) =>
+                        _handleMoveCrosshair(intent.direction),
+                  ),
+                },
+                child: KChartScope(
+                  chartKey: _chartKey,
+                  theme: theme,
+                  formatters: ChartNumberFormatters(
+                    widget.locale ??
+                        Localizations.maybeLocaleOf(context)?.toString() ??
+                        'en_US',
+                  ),
+                  child: Container(
+                    color: theme.backgroundColor,
+                    child: MouseRegion(
+                      key: _chartKey,
+                      cursor: SystemMouseCursors.precise,
+                      onExit: (_) => widget.controller.crosshair.clear(),
+                      child: RepaintBoundary(
+                        key: widget.controller.exportKey,
+                        child: Stack(
+                          children: [
+                            Column(
+                              children: [
+                                Expanded(
+                                  child: PanelStack(
+                                    panels: widget.controller.panels,
+                                    onResize: (index, delta) {
+                                      widget.controller.resizePanels(
+                                        index,
+                                        delta,
+                                        constraints.maxHeight,
+                                      );
+                                    },
                                   ),
                                 ),
-                              );
-                            },
-                          ),
-                        ],
+                                if (widget.controller.replayCoordinator != null)
+                                  ReplaySlider(
+                                    coordinator:
+                                        widget.controller.replayCoordinator!,
+                                  ),
+                                AiInsightsPanel(controller: widget.controller),
+                              ],
+                            ),
+                            ValueListenableBuilder<CrosshairState?>(
+                              valueListenable:
+                                  widget.controller.crosshair.state,
+                              builder: (context, state, child) {
+                                if (state == null || state.dx == null) {
+                                  return const SizedBox.shrink();
+                                }
+                                final scope = KChartScope.of(context);
+                                return IgnorePointer(
+                                  child: CustomPaint(
+                                    size: Size.infinite,
+                                    painter: CrosshairPainter(
+                                      state: CrosshairState(dx: state.dx),
+                                      color: scope?.theme.crosshairColor ??
+                                          Colors.grey,
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

@@ -1,7 +1,14 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kchart_flutter/src/i18n/number_formatters.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 void main() {
+  setUpAll(() async {
+    await initializeDateFormatting('en_US', null);
+    await initializeDateFormatting('es_ES', null);
+    await initializeDateFormatting('pt_BR', null);
+  });
+
   group('ChartNumberFormatters', () {
     test('formats price and volume for en_US', () {
       final formatters = ChartNumberFormatters('en_US');

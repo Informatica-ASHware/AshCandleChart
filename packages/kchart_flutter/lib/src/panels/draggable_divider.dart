@@ -14,28 +14,36 @@ class DraggableDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Listener(
-      behavior: HitTestBehavior.opaque,
-      onPointerMove: (event) {
-        if (event.buttons & kPrimaryButton != 0) {
-          onDragUpdate(DragUpdateDetails(
-            delta: event.delta,
-            primaryDelta: event.delta.dy,
-            globalPosition: event.position,
-            localPosition: event.localPosition,
-          ));
-        }
-      },
-      child: MouseRegion(
-        cursor: SystemMouseCursors.resizeUpDown,
-        child: Container(
-          height: 8.0,
-          color: Colors.transparent,
-          child: Center(
+    return Focus(
+      debugLabel: 'DraggableDivider',
+      child: Semantics(
+        label: 'Dividir paneles',
+        container: true,
+        slider: true, // It acts like a one-dimensional slider for resize
+        child: Listener(
+          behavior: HitTestBehavior.opaque,
+          onPointerMove: (event) {
+            if (event.buttons & kPrimaryButton != 0) {
+              onDragUpdate(DragUpdateDetails(
+                delta: event.delta,
+                primaryDelta: event.delta.dy,
+                globalPosition: event.position,
+                localPosition: event.localPosition,
+              ));
+            }
+          },
+          child: MouseRegion(
+            cursor: SystemMouseCursors.resizeUpDown,
             child: Container(
-              height: 1.0,
-              // ignore: deprecated_member_use
-              color: Colors.grey.withOpacity(0.5),
+              height: 8.0,
+              color: Colors.transparent,
+              child: Center(
+                child: Container(
+                  height: 1.0,
+                  // ignore: deprecated_member_use
+                  color: Colors.grey.withOpacity(0.5),
+                ),
+              ),
             ),
           ),
         ),

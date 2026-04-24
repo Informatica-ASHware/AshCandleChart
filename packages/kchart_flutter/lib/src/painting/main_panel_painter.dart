@@ -1,7 +1,9 @@
 import 'dart:typed_data';
 import 'dart:ui' as ui;
-import 'package:flutter/material.dart' hide Viewport;
+import 'package:flutter/rendering.dart';
 import 'package:kchart_core/kchart_core.dart';
+import '../accessibility/chart_semantics_builder.dart';
+import '../i18n/number_formatters.dart';
 import 'layer_cache.dart';
 import 'paint_pool.dart';
 import '../overlays/trade_overlay_painter.dart';
@@ -37,6 +39,9 @@ class MainPanelPainter extends CustomPainter {
   /// Optional selection range (start and end timestamps).
   final (int, int)? selectionRange;
 
+  /// Formatters for semantic labels.
+  final ChartNumberFormatters? formatters;
+
   /// Creates a [MainPanelPainter] with the given [frame], [paintPool], and caches.
   MainPanelPainter({
     required this.frame,
@@ -47,6 +52,7 @@ class MainPanelPainter extends CustomPainter {
     this.bullishBuffer,
     this.bearishBuffer,
     this.selectionRange,
+    this.formatters,
   });
 
   @override
@@ -407,6 +413,53 @@ class MainPanelPainter extends CustomPainter {
       }
     }
     return low;
+  }
+
+  @override
+  SemanticsBuilderCallback? get semanticsBuilder => _buildSemantics;
+
+  List<CustomPainterSemantics> _buildSemantics(Size size) {
+    final series = frame.series;
+    final viewport = frame.viewport;
+    final currentFormatters = formatters;
+
+    if (series.length == 0 || currentFormatters == null) return [];
+
+    final int startIdx = viewport.startIdx.clamp(0, series.length - 1);
+    final int endIdx = viewport.endIdx.clamp(0, series.length - 1);
+    final int visibleCount = endIdx - startIdx + 1;
+    final double candleWidth = size.width / visibleCount;
+
+    final List<CustomPainterSemantics> nodes = [];
+
+    for (int i = startIdx; i <= endIdx; i++) {
+      final label = ChartSemanticsBuilder.buildCandleDescription(
+        timestamp: series.timestamps[i],
+        open: series.open[i],
+        high: series.high[i],
+        low: series.low[i],
+        close: series.close[i],
+        formatters: currentFormatters,
+      );
+
+      nodes.add(
+        CustomPainterSemantics(
+          rect: Rect.fromLTWH(
+            (i - startIdx) * candleWidth,
+            0,
+            candleWidth,
+            size.height,
+          ),
+          properties: SemanticsProperties(
+            label: label,
+            readOnly: true,
+            textDirection: TextDirection.ltr,
+          ),
+        ),
+      );
+    }
+
+    return nodes;
   }
 
   @override
