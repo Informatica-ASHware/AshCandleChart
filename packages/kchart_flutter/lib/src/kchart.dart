@@ -231,7 +231,8 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
     } else {
       final currentIndex =
           MainPanelPainter.findIndexAtTimestamp(timestamps, state.timestamp!);
-      final newIndex = (currentIndex + direction).clamp(0, timestamps.length - 1);
+      final newIndex =
+          (currentIndex + direction).clamp(0, timestamps.length - 1);
       newTimestamp = timestamps[newIndex];
     }
 
@@ -246,7 +247,9 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
         dx: dx,
         dy: dy,
         timestamp: newTimestamp,
-        price: widget.controller.frame.series.findNearestPoint(newTimestamp, 0).price, // Price not strictly needed for navigation but nice to have
+        price: widget.controller.frame.series
+            .findNearestPoint(newTimestamp, 0)
+            .price, // Price not strictly needed for navigation but nice to have
       ),
     );
 
@@ -456,7 +459,8 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
                 },
                 actions: {
                   MoveCrosshairIntent: CallbackAction<MoveCrosshairIntent>(
-                    onInvoke: (intent) => _handleMoveCrosshair(intent.direction),
+                    onInvoke: (intent) =>
+                        _handleMoveCrosshair(intent.direction),
                   ),
                 },
                 child: KChartScope(
@@ -500,7 +504,8 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
                               ],
                             ),
                             ValueListenableBuilder<CrosshairState?>(
-                              valueListenable: widget.controller.crosshair.state,
+                              valueListenable:
+                                  widget.controller.crosshair.state,
                               builder: (context, state, child) {
                                 if (state == null || state.dx == null) {
                                   return const SizedBox.shrink();
