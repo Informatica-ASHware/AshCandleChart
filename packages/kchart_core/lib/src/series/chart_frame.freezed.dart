@@ -327,7 +327,7 @@ class __$$ChartFrameImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ChartFrameImpl implements _ChartFrame {
+class _$ChartFrameImpl extends _ChartFrame {
   const _$ChartFrameImpl(
       {required this.series,
       required final Map<String, Series> indicators,
@@ -343,7 +343,8 @@ class _$ChartFrameImpl implements _ChartFrame {
       : _indicators = indicators,
         _overlays = overlays,
         _liquidations = liquidations,
-        _panelSequenceNumbers = panelSequenceNumbers;
+        _panelSequenceNumbers = panelSequenceNumbers,
+        super._();
 
   /// The main price [Series].
   @override
@@ -479,7 +480,7 @@ class _$ChartFrameImpl implements _ChartFrame {
       __$$ChartFrameImplCopyWithImpl<_$ChartFrameImpl>(this, _$identity);
 }
 
-abstract class _ChartFrame implements ChartFrame {
+abstract class _ChartFrame extends ChartFrame {
   const factory _ChartFrame(
       {required final Series series,
       required final Map<String, Series> indicators,
@@ -492,6 +493,7 @@ abstract class _ChartFrame implements ChartFrame {
       final List<LiquidationArea> liquidations,
       required final int sequenceNumber,
       required final Map<String, int> panelSequenceNumbers}) = _$ChartFrameImpl;
+  const _ChartFrame._() : super._();
 
   /// The main price [Series].
   @override

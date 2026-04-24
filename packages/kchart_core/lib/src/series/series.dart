@@ -3,6 +3,18 @@ import 'package:meta/meta.dart';
 import 'annotation.dart';
 import 'candle.dart';
 
+/// Exception thrown when binary deserialization fails.
+class SeriesDeserializationException implements Exception {
+  /// Message describing the error.
+  final String message;
+
+  /// Creates a [SeriesDeserializationException].
+  SeriesDeserializationException(this.message);
+
+  @override
+  String toString() => 'SeriesDeserializationException: $message';
+}
+
 /// An immutable columnar storage for financial series data.
 ///
 /// [Series] stores data using [Float64List] and [Int64List] to ensure
@@ -178,6 +190,126 @@ class Series {
       low: low.sublist(start, end),
       close: close.sublist(start, end),
       volume: volume.sublist(start, end),
+    );
+  }
+
+  /// Serializes the [Series] to a binary format (Uint8List).
+  ///
+  /// Format:
+  /// - int32: length (N)
+  /// - N * int64: timestamps
+  /// - N * float64: open
+  /// - N * float64: high
+  /// - N * float64: low
+  /// - N * float64: close
+  /// - N * float64: volume
+  Uint8List toBinary() {
+    final n = length;
+    final totalBytes = 4 + // length
+        n * 8 + // timestamps (int64)
+        n * 8 * 5; // OHLCV (float64)
+
+    final bytes = Uint8List(totalBytes);
+    final bd = ByteData.view(bytes.buffer);
+
+    int offset = 0;
+    bd.setInt32(offset, n);
+    offset += 4;
+
+    for (int i = 0; i < n; i++) {
+      bd.setInt64(offset, timestamps[i]);
+      offset += 8;
+    }
+    for (int i = 0; i < n; i++) {
+      bd.setFloat64(offset, open[i]);
+      offset += 8;
+    }
+    for (int i = 0; i < n; i++) {
+      bd.setFloat64(offset, high[i]);
+      offset += 8;
+    }
+    for (int i = 0; i < n; i++) {
+      bd.setFloat64(offset, low[i]);
+      offset += 8;
+    }
+    for (int i = 0; i < n; i++) {
+      bd.setFloat64(offset, close[i]);
+      offset += 8;
+    }
+    for (int i = 0; i < n; i++) {
+      bd.setFloat64(offset, volume[i]);
+      offset += 8;
+    }
+
+    return bytes;
+  }
+
+  /// Reconstructs a [Series] from a binary format.
+  ///
+  /// Throws [SeriesDeserializationException] if the input is malformed.
+  factory Series.fromBinary(Uint8List bytes) {
+    if (bytes.length < 4) {
+      throw SeriesDeserializationException(
+          'Input too short: expected at least 4 bytes for length, got ${bytes.length}');
+    }
+
+    final bd = ByteData.view(bytes.buffer, bytes.offsetInBytes, bytes.length);
+    final n = bd.getInt32(0);
+
+    if (n < 0) {
+      throw SeriesDeserializationException('Invalid series length: $n');
+    }
+
+    final expectedBytes = 4 + n * 8 * 6;
+    if (bytes.length < expectedBytes) {
+      throw SeriesDeserializationException(
+          'Input too short for $n elements: expected $expectedBytes bytes, got ${bytes.length}');
+    }
+
+    int offset = 4;
+    final timestamps = Int64List(n);
+    for (int i = 0; i < n; i++) {
+      timestamps[i] = bd.getInt64(offset);
+      offset += 8;
+    }
+
+    final open = Float64List(n);
+    for (int i = 0; i < n; i++) {
+      open[i] = bd.getFloat64(offset);
+      offset += 8;
+    }
+
+    final high = Float64List(n);
+    for (int i = 0; i < n; i++) {
+      high[i] = bd.getFloat64(offset);
+      offset += 8;
+    }
+
+    final low = Float64List(n);
+    for (int i = 0; i < n; i++) {
+      low[i] = bd.getFloat64(offset);
+      offset += 8;
+    }
+
+    final close = Float64List(n);
+    for (int i = 0; i < n; i++) {
+      close[i] = bd.getFloat64(offset);
+      offset += 8;
+    }
+
+    final volume = Float64List(n);
+    for (int i = 0; i < n; i++) {
+      volume[i] = bd.getFloat64(offset);
+      offset += 8;
+    }
+
+    return Series(
+      timestamps: timestamps,
+      open: open,
+      high: high,
+      low: low,
+      close: close,
+      volume: volume,
     );
   }
 }
