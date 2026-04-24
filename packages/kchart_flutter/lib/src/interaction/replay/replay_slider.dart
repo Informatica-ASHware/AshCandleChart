@@ -29,6 +29,7 @@ class ReplaySlider extends StatelessWidget {
         return Container(
           height: 60,
           padding: const EdgeInsets.symmetric(horizontal: 16),
+          // ignore: deprecated_member_use
           color: Colors.black.withOpacity(0.8),
           child: Row(
             children: [
