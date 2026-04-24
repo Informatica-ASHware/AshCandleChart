@@ -118,7 +118,8 @@ class _KChartGridState extends State<KChartGrid> {
         Expanded(
           flex: 1,
           child: Column(
-            children: widget.charts.skip(1).map((c) => Expanded(child: c)).toList(),
+            children:
+                widget.charts.skip(1).map((c) => Expanded(child: c)).toList(),
           ),
         ),
       ],

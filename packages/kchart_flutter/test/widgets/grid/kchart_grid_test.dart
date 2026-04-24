@@ -7,7 +7,8 @@ import 'package:flutter/material.dart' hide Viewport;
 void main() {
   Series createSeries(int count, {int startTs = 0}) {
     return Series(
-      timestamps: Int64List.fromList(List.generate(count, (i) => startTs + i * 1000)),
+      timestamps:
+          Int64List.fromList(List.generate(count, (i) => startTs + i * 1000)),
       open: Float64List.fromList(List.generate(count, (i) => 100.0 + i)),
       high: Float64List.fromList(List.generate(count, (i) => 110.0 + i)),
       low: Float64List.fromList(List.generate(count, (i) => 90.0 + i)),
@@ -33,7 +34,8 @@ void main() {
     SyncEngine? syncEngine,
   }) {
     final charts = List.generate(count, (i) {
-      final controller = KChartController(frame: createFrame(createSeries(100)));
+      final controller =
+          KChartController(frame: createFrame(createSeries(100)));
       return KChart(
         key: ValueKey('chart_$i'),
         controller: controller,
@@ -57,7 +59,8 @@ void main() {
   }
 
   testWidgets('KChartGrid renders in grid layout', (WidgetTester tester) async {
-    await tester.pumpWidget(buildChartGrid(count: 4, layout: KChartGridLayout.grid));
+    await tester
+        .pumpWidget(buildChartGrid(count: 4, layout: KChartGridLayout.grid));
     await tester.pumpAndSettle();
 
     expect(find.byType(KChart), findsNWidgets(4));
@@ -75,8 +78,10 @@ void main() {
     expect(chart2.dy, greaterThan(0));
   });
 
-  testWidgets('KChartGrid renders in mainAndOthers layout', (WidgetTester tester) async {
-    await tester.pumpWidget(buildChartGrid(count: 3, layout: KChartGridLayout.mainAndOthers));
+  testWidgets('KChartGrid renders in mainAndOthers layout',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(
+        buildChartGrid(count: 3, layout: KChartGridLayout.mainAndOthers));
     await tester.pumpAndSettle();
 
     expect(find.byType(KChart), findsNWidgets(3));

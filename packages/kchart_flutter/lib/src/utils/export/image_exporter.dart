@@ -12,7 +12,8 @@ class ImageExporter {
     RenderRepaintBoundary boundary,
     ExportConfig config,
   ) async {
-    final ui.Image image = await boundary.toImage(pixelRatio: config.pixelRatio);
+    final ui.Image image =
+        await boundary.toImage(pixelRatio: config.pixelRatio);
 
     final recorder = ui.PictureRecorder();
     final canvas = Canvas(recorder);
@@ -56,7 +57,8 @@ class ImageExporter {
 
     final picture = recorder.endRecording();
     final finalImage = await picture.toImage(image.width, image.height);
-    final byteData = await finalImage.toByteData(format: ui.ImageByteFormat.png);
+    final byteData =
+        await finalImage.toByteData(format: ui.ImageByteFormat.png);
 
     // Clean up resources
     image.dispose();

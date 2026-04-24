@@ -71,7 +71,8 @@ class _DepthPanelWidgetState extends State<_DepthPanelWidget> {
             ValueListenableBuilder<CrosshairState?>(
               valueListenable: widget.controller.crosshair.state,
               builder: (context, state, child) {
-                if (state == null || orderBook == null) return const SizedBox.shrink();
+                if (state == null || orderBook == null)
+                  return const SizedBox.shrink();
                 return _buildCrosshairHighlight(state, orderBook, theme);
               },
             ),
@@ -81,7 +82,8 @@ class _DepthPanelWidgetState extends State<_DepthPanelWidget> {
     );
   }
 
-  Widget _buildCrosshairHighlight(CrosshairState state, OrderBook orderBook, ChartTheme theme) {
+  Widget _buildCrosshairHighlight(
+      CrosshairState state, OrderBook orderBook, ChartTheme theme) {
     // Logic to find and highlight the price level in order book matching the crosshair price.
     // For now, this is just a placeholder to fulfill the "sincronizado al crosshair" requirement.
     return Positioned(
@@ -101,12 +103,16 @@ class _DepthPanelWidgetState extends State<_DepthPanelWidget> {
 class DepthPainter extends CustomPainter {
   /// The order book data.
   final OrderBook orderBook;
+
   /// The current viewport.
   final Viewport viewport;
+
   /// The main series to calculate Y scaling.
   final Series series;
+
   /// The theme.
   final ChartTheme theme;
+
   /// Paint pool for reuse.
   final PaintPool paintPool;
 
@@ -146,8 +152,10 @@ class DepthPainter extends CustomPainter {
     }
 
     double maxTotalSize = 0;
-    if (orderBook.bids.isNotEmpty) maxTotalSize = math.max(maxTotalSize, orderBook.bids.last.cumulativeSize);
-    if (orderBook.asks.isNotEmpty) maxTotalSize = math.max(maxTotalSize, orderBook.asks.last.cumulativeSize);
+    if (orderBook.bids.isNotEmpty)
+      maxTotalSize = math.max(maxTotalSize, orderBook.bids.last.cumulativeSize);
+    if (orderBook.asks.isNotEmpty)
+      maxTotalSize = math.max(maxTotalSize, orderBook.asks.last.cumulativeSize);
 
     if (maxTotalSize == 0) return;
 

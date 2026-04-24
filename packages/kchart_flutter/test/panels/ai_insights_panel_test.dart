@@ -41,7 +41,8 @@ void main() {
     );
   });
 
-  testWidgets('AiInsightsPanel shows nothing when no selection', (tester) async {
+  testWidgets('AiInsightsPanel shows nothing when no selection',
+      (tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: KChartScope(
@@ -116,7 +117,8 @@ void main() {
     await tester.pump(const Duration(milliseconds: 301));
     await tester.pumpAndSettle();
 
-    expect(find.text('PATTERN DETECTED'), findsNothing); // It's upper-cased in UI
+    expect(
+        find.text('PATTERN DETECTED'), findsNothing); // It's upper-cased in UI
     expect(find.text('TEST PATTERN'), findsOneWidget);
     expect(find.text('Pattern detected'), findsOneWidget);
   });

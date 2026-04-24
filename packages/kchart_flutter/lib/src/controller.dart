@@ -110,7 +110,8 @@ class KChartController extends ChangeNotifier {
     if (provider == null) return;
 
     _selectionDebounceTimer?.cancel();
-    _selectionDebounceTimer = Timer(const Duration(milliseconds: 300), () async {
+    _selectionDebounceTimer =
+        Timer(const Duration(milliseconds: 300), () async {
       final requestId = ++_currentSelectionRequestId;
       isInsightsLoading.value = true;
 

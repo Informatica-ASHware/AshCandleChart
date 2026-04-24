@@ -29,7 +29,8 @@ void main() {
     test('calculates volume profile correctly for full range', () {
       // price range: min 95 (low of index 0) to max 114 (high of index 9)
       // range = 19. 19 bins means bin size = 1.0
-      final vp = series.calculateVolumeProfile(startIdx: 0, endIdx: 9, binCount: 19);
+      final vp =
+          series.calculateVolumeProfile(startIdx: 0, endIdx: 9, binCount: 19);
 
       expect(vp.bins.length, 19);
       // Each candle has volume 100. Close prices are 100 to 109.
@@ -45,7 +46,8 @@ void main() {
       volume[5] = 500.0; // Price 105
       final series2 = series.copyWith(volume: volume);
 
-      final vp = series2.calculateVolumeProfile(startIdx: 0, endIdx: 9, binCount: 19);
+      final vp =
+          series2.calculateVolumeProfile(startIdx: 0, endIdx: 9, binCount: 19);
 
       expect(vp.maxVolume, 500.0);
       expect(vp.pocPrice, closeTo(105.5, 0.5));

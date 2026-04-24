@@ -36,7 +36,8 @@ class _LiquidationHeatmapWidget extends StatefulWidget {
   const _LiquidationHeatmapWidget({required this.controller});
 
   @override
-  State<_LiquidationHeatmapWidget> createState() => _LiquidationHeatmapWidgetState();
+  State<_LiquidationHeatmapWidget> createState() =>
+      _LiquidationHeatmapWidgetState();
 }
 
 class _LiquidationHeatmapWidgetState extends State<_LiquidationHeatmapWidget> {
@@ -73,12 +74,16 @@ class _LiquidationHeatmapWidgetState extends State<_LiquidationHeatmapWidget> {
 class LiquidationHeatmapPainter extends CustomPainter {
   /// The list of liquidation areas.
   final List<LiquidationArea> liquidations;
+
   /// The current viewport.
   final Viewport viewport;
+
   /// The main series to calculate Y scaling.
   final Series series;
+
   /// The theme.
   final ChartTheme theme;
+
   /// Paint pool for reuse.
   final PaintPool paintPool;
 
@@ -122,7 +127,8 @@ class LiquidationHeatmapPainter extends CustomPainter {
       final double y = priceToY(liq.price);
       if (y < 0 || y > viewHeight) continue;
 
-      final double height = (liq.size / 100.0).clamp(2.0, 20.0); // Size-based height
+      final double height =
+          (liq.size / 100.0).clamp(2.0, 20.0); // Size-based height
 
       final paint = paintPool.borrow()
         ..shader = ui.Gradient.linear(

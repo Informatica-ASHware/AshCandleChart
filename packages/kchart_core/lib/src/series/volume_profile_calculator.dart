@@ -47,7 +47,8 @@ extension VolumeProfileCalculator on Series {
 
       // For simplicity, we assign the entire candle volume to its close price bin.
       // A more advanced implementation could distribute volume across the high-low range.
-      final int binIdx = ((c - minPrice) / binSize).floor().clamp(0, binCount - 1);
+      final int binIdx =
+          ((c - minPrice) / binSize).floor().clamp(0, binCount - 1);
 
       totalVolumes[binIdx] += v;
       if (isBullish) {
