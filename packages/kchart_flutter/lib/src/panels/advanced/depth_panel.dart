@@ -1,7 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/widgets.dart' hide Viewport;
 import 'package:kchart_core/kchart_core.dart';
-import 'package:flutter/material.dart' show CustomPainter, Canvas, Size, Offset, PaintingStyle, Path, Rect;
 import '../../controller.dart';
 import '../../painting/paint_pool.dart';
 import '../../theme.dart';
@@ -91,6 +90,7 @@ class _DepthPanelWidgetState extends State<_DepthPanelWidget> {
       right: 0,
       child: Container(
         height: 1,
+        // ignore: deprecated_member_use
         color: theme.crosshairColor.withOpacity(0.5),
       ),
     );
@@ -152,10 +152,12 @@ class DepthPainter extends CustomPainter {
     if (maxTotalSize == 0) return;
 
     final bidPaint = paintPool.borrow()
+      // ignore: deprecated_member_use
       ..color = theme.bidColor.withOpacity(0.3)
       ..style = PaintingStyle.fill;
 
     final askPaint = paintPool.borrow()
+      // ignore: deprecated_member_use
       ..color = theme.askColor.withOpacity(0.3)
       ..style = PaintingStyle.fill;
 

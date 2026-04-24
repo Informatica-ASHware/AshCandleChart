@@ -18,6 +18,7 @@ class VolumeProfileBin with _$VolumeProfileBin {
     @Default(0.0) double sellVolume,
   }) = _VolumeProfileBin;
 
+  /// Creates a [VolumeProfileBin] from a JSON map.
   factory VolumeProfileBin.fromJson(Map<String, dynamic> json) =>
       _$VolumeProfileBinFromJson(json);
 }
@@ -35,6 +36,7 @@ class VolumeProfile with _$VolumeProfile {
     required double maxVolume,
   }) = _VolumeProfile;
 
+  /// Creates a [VolumeProfile] from a JSON map.
   factory VolumeProfile.fromJson(Map<String, dynamic> json) =>
       _$VolumeProfileFromJson(json);
 }
@@ -52,6 +54,7 @@ class OrderBookEntry with _$OrderBookEntry {
     @Default(0.0) double cumulativeSize,
   }) = _OrderBookEntry;
 
+  /// Creates an [OrderBookEntry] from a JSON map.
   factory OrderBookEntry.fromJson(Map<String, dynamic> json) =>
       _$OrderBookEntryFromJson(json);
 }
@@ -69,6 +72,7 @@ class OrderBook with _$OrderBook {
     required int timestamp,
   }) = _OrderBook;
 
+  /// Creates an [OrderBook] from a JSON map.
   factory OrderBook.fromJson(Map<String, dynamic> json) =>
       _$OrderBookFromJson(json);
 }
@@ -86,6 +90,7 @@ class LiquidationArea with _$LiquidationArea {
     required double intensity,
   }) = _LiquidationArea;
 
+  /// Creates a [LiquidationArea] from a JSON map.
   factory LiquidationArea.fromJson(Map<String, dynamic> json) =>
       _$LiquidationAreaFromJson(json);
 }

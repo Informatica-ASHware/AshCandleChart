@@ -1,9 +1,7 @@
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/widgets.dart' hide Viewport;
-import 'package:flutter/material.dart' show Widget;
 import 'package:kchart_core/kchart_core.dart';
-import 'package:flutter/material.dart' show CustomPainter, Canvas, Size, Offset, PaintingStyle, Rect;
 import '../../controller.dart';
 import '../../painting/paint_pool.dart';
 import '../../theme.dart';

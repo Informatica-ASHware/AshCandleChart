@@ -11,4 +11,3 @@
 - Updated `ChartTheme` with institutional color schemes.
 - AI Annotations Plugin Contract: `AiAnnotationProvider`, `AiInsight` models, and `AiInsightsPanel`.
 - Range selection support via Shift+Drag gesture.
-- Snapshot Export: Added `exportToImage()` to `KChartController` for capturing chart snapshots as PNG. Supports custom watermarks, background colors, and pixel ratios.

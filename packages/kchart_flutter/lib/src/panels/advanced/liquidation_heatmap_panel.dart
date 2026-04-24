@@ -1,7 +1,6 @@
 import 'dart:ui' as ui;
 import 'package:flutter/widgets.dart' hide Viewport;
 import 'package:kchart_core/kchart_core.dart';
-import 'package:flutter/material.dart' show CustomPainter, Canvas, Size, Offset, Rect;
 import '../../controller.dart';
 import '../../painting/paint_pool.dart';
 import '../../theme.dart';
@@ -130,13 +129,17 @@ class LiquidationHeatmapPainter extends CustomPainter {
           Offset(0, y - height / 2),
           Offset(0, y + height / 2),
           [
+            // ignore: deprecated_member_use
             theme.liquidationColor.withOpacity(0.0),
+            // ignore: deprecated_member_use
             theme.liquidationColor.withOpacity(liq.intensity),
+            // ignore: deprecated_member_use
             theme.liquidationColor.withOpacity(0.0),
           ],
         );
 
-      canvas.drawRect(Rect.fromLTWH(0, y - height / 2, viewWidth, height), paint);
+      canvas.drawRect(
+          ui.Rect.fromLTWH(0, y - height / 2, viewWidth, height), paint);
     }
 
     paintPool.releaseAll();
