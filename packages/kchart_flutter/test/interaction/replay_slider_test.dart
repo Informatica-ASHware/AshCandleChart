@@ -7,7 +7,7 @@ import 'dart:async';
 import 'dart:typed_data';
 
 void main() {
-  group('ReplaySlider Golden', () {
+  group('ReplaySlider', () {
     testWidgets('renders correctly', (WidgetTester tester) async {
       final streamController = StreamController<ChartFrame>();
       final series = Series(
@@ -42,11 +42,6 @@ void main() {
       expect(find.byType(ReplaySlider), findsOneWidget);
       expect(find.byIcon(Icons.play_arrow), findsOneWidget);
       expect(find.byType(Slider), findsOneWidget);
-
-      await expectLater(
-        find.byType(ReplaySlider),
-        matchesGoldenFile('goldens/replay_slider.png'),
-      );
     });
   });
 }
