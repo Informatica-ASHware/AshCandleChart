@@ -34,6 +34,24 @@ class ChartTheme with _$ChartTheme {
 
     /// Color for the chart background.
     required Color backgroundColor,
+
+    /// Color for Volume Profile buy bars.
+    required Color vpBuyColor,
+
+    /// Color for Volume Profile sell bars.
+    required Color vpSellColor,
+
+    /// Color for the Point of Control line in Volume Profile.
+    required Color vpPocColor,
+
+    /// Color for Order Book bids.
+    required Color bidColor,
+
+    /// Color for Order Book asks.
+    required Color askColor,
+
+    /// Primary color for Liquidation Heatmap.
+    required Color liquidationColor,
   }) = _ChartTheme;
 
   /// Default light theme for [KChart].
@@ -46,6 +64,12 @@ class ChartTheme with _$ChartTheme {
         crosshairTextStyle: const TextStyle(fontSize: 10, color: Colors.white),
         tradeLineColor: Colors.blue,
         backgroundColor: Colors.white,
+        vpBuyColor: const Color(0x804CAF50),
+        vpSellColor: const Color(0x80E91E63),
+        vpPocColor: Colors.orange,
+        bidColor: const Color(0xFF4CAF50),
+        askColor: const Color(0xFFE91E63),
+        liquidationColor: Colors.yellow,
       );
 
   /// Default dark theme for [KChart].
@@ -58,5 +82,11 @@ class ChartTheme with _$ChartTheme {
         crosshairTextStyle: const TextStyle(fontSize: 10, color: Colors.black),
         tradeLineColor: Colors.blueAccent,
         backgroundColor: const Color(0xFF121212),
+        vpBuyColor: const Color(0x8026A69A),
+        vpSellColor: const Color(0x80EF5350),
+        vpPocColor: Colors.orangeAccent,
+        bidColor: const Color(0xFF26A69A),
+        askColor: const Color(0xFFEF5350),
+        liquidationColor: Colors.yellowAccent,
       );
 }

@@ -40,6 +40,24 @@ mixin _$ChartTheme {
   /// Color for the chart background.
   Color get backgroundColor => throw _privateConstructorUsedError;
 
+  /// Color for Volume Profile buy bars.
+  Color get vpBuyColor => throw _privateConstructorUsedError;
+
+  /// Color for Volume Profile sell bars.
+  Color get vpSellColor => throw _privateConstructorUsedError;
+
+  /// Color for the Point of Control line in Volume Profile.
+  Color get vpPocColor => throw _privateConstructorUsedError;
+
+  /// Color for Order Book bids.
+  Color get bidColor => throw _privateConstructorUsedError;
+
+  /// Color for Order Book asks.
+  Color get askColor => throw _privateConstructorUsedError;
+
+  /// Primary color for Liquidation Heatmap.
+  Color get liquidationColor => throw _privateConstructorUsedError;
+
   /// Create a copy of ChartTheme
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -61,7 +79,13 @@ abstract class $ChartThemeCopyWith<$Res> {
       TextStyle axisTextStyle,
       TextStyle crosshairTextStyle,
       Color tradeLineColor,
-      Color backgroundColor});
+      Color backgroundColor,
+      Color vpBuyColor,
+      Color vpSellColor,
+      Color vpPocColor,
+      Color bidColor,
+      Color askColor,
+      Color liquidationColor});
 }
 
 /// @nodoc
@@ -87,6 +111,12 @@ class _$ChartThemeCopyWithImpl<$Res, $Val extends ChartTheme>
     Object? crosshairTextStyle = null,
     Object? tradeLineColor = null,
     Object? backgroundColor = null,
+    Object? vpBuyColor = null,
+    Object? vpSellColor = null,
+    Object? vpPocColor = null,
+    Object? bidColor = null,
+    Object? askColor = null,
+    Object? liquidationColor = null,
   }) {
     return _then(_value.copyWith(
       gridColor: null == gridColor
@@ -121,6 +151,30 @@ class _$ChartThemeCopyWithImpl<$Res, $Val extends ChartTheme>
           ? _value.backgroundColor
           : backgroundColor // ignore: cast_nullable_to_non_nullable
               as Color,
+      vpBuyColor: null == vpBuyColor
+          ? _value.vpBuyColor
+          : vpBuyColor // ignore: cast_nullable_to_non_nullable
+              as Color,
+      vpSellColor: null == vpSellColor
+          ? _value.vpSellColor
+          : vpSellColor // ignore: cast_nullable_to_non_nullable
+              as Color,
+      vpPocColor: null == vpPocColor
+          ? _value.vpPocColor
+          : vpPocColor // ignore: cast_nullable_to_non_nullable
+              as Color,
+      bidColor: null == bidColor
+          ? _value.bidColor
+          : bidColor // ignore: cast_nullable_to_non_nullable
+              as Color,
+      askColor: null == askColor
+          ? _value.askColor
+          : askColor // ignore: cast_nullable_to_non_nullable
+              as Color,
+      liquidationColor: null == liquidationColor
+          ? _value.liquidationColor
+          : liquidationColor // ignore: cast_nullable_to_non_nullable
+              as Color,
     ) as $Val);
   }
 }
@@ -141,7 +195,13 @@ abstract class _$$ChartThemeImplCopyWith<$Res>
       TextStyle axisTextStyle,
       TextStyle crosshairTextStyle,
       Color tradeLineColor,
-      Color backgroundColor});
+      Color backgroundColor,
+      Color vpBuyColor,
+      Color vpSellColor,
+      Color vpPocColor,
+      Color bidColor,
+      Color askColor,
+      Color liquidationColor});
 }
 
 /// @nodoc
@@ -165,6 +225,12 @@ class __$$ChartThemeImplCopyWithImpl<$Res>
     Object? crosshairTextStyle = null,
     Object? tradeLineColor = null,
     Object? backgroundColor = null,
+    Object? vpBuyColor = null,
+    Object? vpSellColor = null,
+    Object? vpPocColor = null,
+    Object? bidColor = null,
+    Object? askColor = null,
+    Object? liquidationColor = null,
   }) {
     return _then(_$ChartThemeImpl(
       gridColor: null == gridColor
@@ -199,6 +265,30 @@ class __$$ChartThemeImplCopyWithImpl<$Res>
           ? _value.backgroundColor
           : backgroundColor // ignore: cast_nullable_to_non_nullable
               as Color,
+      vpBuyColor: null == vpBuyColor
+          ? _value.vpBuyColor
+          : vpBuyColor // ignore: cast_nullable_to_non_nullable
+              as Color,
+      vpSellColor: null == vpSellColor
+          ? _value.vpSellColor
+          : vpSellColor // ignore: cast_nullable_to_non_nullable
+              as Color,
+      vpPocColor: null == vpPocColor
+          ? _value.vpPocColor
+          : vpPocColor // ignore: cast_nullable_to_non_nullable
+              as Color,
+      bidColor: null == bidColor
+          ? _value.bidColor
+          : bidColor // ignore: cast_nullable_to_non_nullable
+              as Color,
+      askColor: null == askColor
+          ? _value.askColor
+          : askColor // ignore: cast_nullable_to_non_nullable
+              as Color,
+      liquidationColor: null == liquidationColor
+          ? _value.liquidationColor
+          : liquidationColor // ignore: cast_nullable_to_non_nullable
+              as Color,
     ));
   }
 }
@@ -214,7 +304,13 @@ class _$ChartThemeImpl implements _ChartTheme {
       required this.axisTextStyle,
       required this.crosshairTextStyle,
       required this.tradeLineColor,
-      required this.backgroundColor});
+      required this.backgroundColor,
+      required this.vpBuyColor,
+      required this.vpSellColor,
+      required this.vpPocColor,
+      required this.bidColor,
+      required this.askColor,
+      required this.liquidationColor});
 
   /// Color for the grid lines.
   @override
@@ -248,9 +344,33 @@ class _$ChartThemeImpl implements _ChartTheme {
   @override
   final Color backgroundColor;
 
+  /// Color for Volume Profile buy bars.
+  @override
+  final Color vpBuyColor;
+
+  /// Color for Volume Profile sell bars.
+  @override
+  final Color vpSellColor;
+
+  /// Color for the Point of Control line in Volume Profile.
+  @override
+  final Color vpPocColor;
+
+  /// Color for Order Book bids.
+  @override
+  final Color bidColor;
+
+  /// Color for Order Book asks.
+  @override
+  final Color askColor;
+
+  /// Primary color for Liquidation Heatmap.
+  @override
+  final Color liquidationColor;
+
   @override
   String toString() {
-    return 'ChartTheme(gridColor: $gridColor, bullColor: $bullColor, bearColor: $bearColor, crosshairColor: $crosshairColor, axisTextStyle: $axisTextStyle, crosshairTextStyle: $crosshairTextStyle, tradeLineColor: $tradeLineColor, backgroundColor: $backgroundColor)';
+    return 'ChartTheme(gridColor: $gridColor, bullColor: $bullColor, bearColor: $bearColor, crosshairColor: $crosshairColor, axisTextStyle: $axisTextStyle, crosshairTextStyle: $crosshairTextStyle, tradeLineColor: $tradeLineColor, backgroundColor: $backgroundColor, vpBuyColor: $vpBuyColor, vpSellColor: $vpSellColor, vpPocColor: $vpPocColor, bidColor: $bidColor, askColor: $askColor, liquidationColor: $liquidationColor)';
   }
 
   @override
@@ -273,7 +393,19 @@ class _$ChartThemeImpl implements _ChartTheme {
             (identical(other.tradeLineColor, tradeLineColor) ||
                 other.tradeLineColor == tradeLineColor) &&
             (identical(other.backgroundColor, backgroundColor) ||
-                other.backgroundColor == backgroundColor));
+                other.backgroundColor == backgroundColor) &&
+            (identical(other.vpBuyColor, vpBuyColor) ||
+                other.vpBuyColor == vpBuyColor) &&
+            (identical(other.vpSellColor, vpSellColor) ||
+                other.vpSellColor == vpSellColor) &&
+            (identical(other.vpPocColor, vpPocColor) ||
+                other.vpPocColor == vpPocColor) &&
+            (identical(other.bidColor, bidColor) ||
+                other.bidColor == bidColor) &&
+            (identical(other.askColor, askColor) ||
+                other.askColor == askColor) &&
+            (identical(other.liquidationColor, liquidationColor) ||
+                other.liquidationColor == liquidationColor));
   }
 
   @override
@@ -286,7 +418,13 @@ class _$ChartThemeImpl implements _ChartTheme {
       axisTextStyle,
       crosshairTextStyle,
       tradeLineColor,
-      backgroundColor);
+      backgroundColor,
+      vpBuyColor,
+      vpSellColor,
+      vpPocColor,
+      bidColor,
+      askColor,
+      liquidationColor);
 
   /// Create a copy of ChartTheme
   /// with the given fields replaced by the non-null parameter values.
@@ -306,7 +444,13 @@ abstract class _ChartTheme implements ChartTheme {
       required final TextStyle axisTextStyle,
       required final TextStyle crosshairTextStyle,
       required final Color tradeLineColor,
-      required final Color backgroundColor}) = _$ChartThemeImpl;
+      required final Color backgroundColor,
+      required final Color vpBuyColor,
+      required final Color vpSellColor,
+      required final Color vpPocColor,
+      required final Color bidColor,
+      required final Color askColor,
+      required final Color liquidationColor}) = _$ChartThemeImpl;
 
   /// Color for the grid lines.
   @override
@@ -339,6 +483,30 @@ abstract class _ChartTheme implements ChartTheme {
   /// Color for the chart background.
   @override
   Color get backgroundColor;
+
+  /// Color for Volume Profile buy bars.
+  @override
+  Color get vpBuyColor;
+
+  /// Color for Volume Profile sell bars.
+  @override
+  Color get vpSellColor;
+
+  /// Color for the Point of Control line in Volume Profile.
+  @override
+  Color get vpPocColor;
+
+  /// Color for Order Book bids.
+  @override
+  Color get bidColor;
+
+  /// Color for Order Book asks.
+  @override
+  Color get askColor;
+
+  /// Primary color for Liquidation Heatmap.
+  @override
+  Color get liquidationColor;
 
   /// Create a copy of ChartTheme
   /// with the given fields replaced by the non-null parameter values.

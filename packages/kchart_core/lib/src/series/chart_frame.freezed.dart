@@ -34,6 +34,15 @@ mixin _$ChartFrame {
   /// List of overlays (e.g., drawings, alerts, etc.) to be rendered.
   List<dynamic> get overlays => throw _privateConstructorUsedError;
 
+  /// Optional volume profile data.
+  VolumeProfile? get volumeProfile => throw _privateConstructorUsedError;
+
+  /// Optional order book data.
+  OrderBook? get orderBook => throw _privateConstructorUsedError;
+
+  /// Optional list of liquidation areas for heatmap.
+  List<LiquidationArea> get liquidations => throw _privateConstructorUsedError;
+
   /// Sequential number to track frame updates and ensure consistent state.
   int get sequenceNumber => throw _privateConstructorUsedError;
 
@@ -62,12 +71,17 @@ abstract class $ChartFrameCopyWith<$Res> {
       AnnotationDocument annotations,
       TradeOverlayDocument tradeOverlays,
       List<dynamic> overlays,
+      VolumeProfile? volumeProfile,
+      OrderBook? orderBook,
+      List<LiquidationArea> liquidations,
       int sequenceNumber,
       Map<String, int> panelSequenceNumbers});
 
   $ViewportCopyWith<$Res> get viewport;
   $AnnotationDocumentCopyWith<$Res> get annotations;
   $TradeOverlayDocumentCopyWith<$Res> get tradeOverlays;
+  $VolumeProfileCopyWith<$Res>? get volumeProfile;
+  $OrderBookCopyWith<$Res>? get orderBook;
 }
 
 /// @nodoc
@@ -91,6 +105,9 @@ class _$ChartFrameCopyWithImpl<$Res, $Val extends ChartFrame>
     Object? annotations = null,
     Object? tradeOverlays = null,
     Object? overlays = null,
+    Object? volumeProfile = freezed,
+    Object? orderBook = freezed,
+    Object? liquidations = null,
     Object? sequenceNumber = null,
     Object? panelSequenceNumbers = null,
   }) {
@@ -119,6 +136,18 @@ class _$ChartFrameCopyWithImpl<$Res, $Val extends ChartFrame>
           ? _value.overlays
           : overlays // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
+      volumeProfile: freezed == volumeProfile
+          ? _value.volumeProfile
+          : volumeProfile // ignore: cast_nullable_to_non_nullable
+              as VolumeProfile?,
+      orderBook: freezed == orderBook
+          ? _value.orderBook
+          : orderBook // ignore: cast_nullable_to_non_nullable
+              as OrderBook?,
+      liquidations: null == liquidations
+          ? _value.liquidations
+          : liquidations // ignore: cast_nullable_to_non_nullable
+              as List<LiquidationArea>,
       sequenceNumber: null == sequenceNumber
           ? _value.sequenceNumber
           : sequenceNumber // ignore: cast_nullable_to_non_nullable
@@ -159,6 +188,34 @@ class _$ChartFrameCopyWithImpl<$Res, $Val extends ChartFrame>
       return _then(_value.copyWith(tradeOverlays: value) as $Val);
     });
   }
+
+  /// Create a copy of ChartFrame
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $VolumeProfileCopyWith<$Res>? get volumeProfile {
+    if (_value.volumeProfile == null) {
+      return null;
+    }
+
+    return $VolumeProfileCopyWith<$Res>(_value.volumeProfile!, (value) {
+      return _then(_value.copyWith(volumeProfile: value) as $Val);
+    });
+  }
+
+  /// Create a copy of ChartFrame
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $OrderBookCopyWith<$Res>? get orderBook {
+    if (_value.orderBook == null) {
+      return null;
+    }
+
+    return $OrderBookCopyWith<$Res>(_value.orderBook!, (value) {
+      return _then(_value.copyWith(orderBook: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -176,6 +233,9 @@ abstract class _$$ChartFrameImplCopyWith<$Res>
       AnnotationDocument annotations,
       TradeOverlayDocument tradeOverlays,
       List<dynamic> overlays,
+      VolumeProfile? volumeProfile,
+      OrderBook? orderBook,
+      List<LiquidationArea> liquidations,
       int sequenceNumber,
       Map<String, int> panelSequenceNumbers});
 
@@ -185,6 +245,10 @@ abstract class _$$ChartFrameImplCopyWith<$Res>
   $AnnotationDocumentCopyWith<$Res> get annotations;
   @override
   $TradeOverlayDocumentCopyWith<$Res> get tradeOverlays;
+  @override
+  $VolumeProfileCopyWith<$Res>? get volumeProfile;
+  @override
+  $OrderBookCopyWith<$Res>? get orderBook;
 }
 
 /// @nodoc
@@ -206,6 +270,9 @@ class __$$ChartFrameImplCopyWithImpl<$Res>
     Object? annotations = null,
     Object? tradeOverlays = null,
     Object? overlays = null,
+    Object? volumeProfile = freezed,
+    Object? orderBook = freezed,
+    Object? liquidations = null,
     Object? sequenceNumber = null,
     Object? panelSequenceNumbers = null,
   }) {
@@ -234,6 +301,18 @@ class __$$ChartFrameImplCopyWithImpl<$Res>
           ? _value._overlays
           : overlays // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
+      volumeProfile: freezed == volumeProfile
+          ? _value.volumeProfile
+          : volumeProfile // ignore: cast_nullable_to_non_nullable
+              as VolumeProfile?,
+      orderBook: freezed == orderBook
+          ? _value.orderBook
+          : orderBook // ignore: cast_nullable_to_non_nullable
+              as OrderBook?,
+      liquidations: null == liquidations
+          ? _value._liquidations
+          : liquidations // ignore: cast_nullable_to_non_nullable
+              as List<LiquidationArea>,
       sequenceNumber: null == sequenceNumber
           ? _value.sequenceNumber
           : sequenceNumber // ignore: cast_nullable_to_non_nullable
@@ -256,10 +335,14 @@ class _$ChartFrameImpl implements _ChartFrame {
       this.annotations = const AnnotationDocument(),
       this.tradeOverlays = const TradeOverlayDocument(),
       required final List<dynamic> overlays,
+      this.volumeProfile,
+      this.orderBook,
+      final List<LiquidationArea> liquidations = const [],
       required this.sequenceNumber,
       required final Map<String, int> panelSequenceNumbers})
       : _indicators = indicators,
         _overlays = overlays,
+        _liquidations = liquidations,
         _panelSequenceNumbers = panelSequenceNumbers;
 
   /// The main price [Series].
@@ -302,6 +385,26 @@ class _$ChartFrameImpl implements _ChartFrame {
     return EqualUnmodifiableListView(_overlays);
   }
 
+  /// Optional volume profile data.
+  @override
+  final VolumeProfile? volumeProfile;
+
+  /// Optional order book data.
+  @override
+  final OrderBook? orderBook;
+
+  /// Optional list of liquidation areas for heatmap.
+  final List<LiquidationArea> _liquidations;
+
+  /// Optional list of liquidation areas for heatmap.
+  @override
+  @JsonKey()
+  List<LiquidationArea> get liquidations {
+    if (_liquidations is EqualUnmodifiableListView) return _liquidations;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_liquidations);
+  }
+
   /// Sequential number to track frame updates and ensure consistent state.
   @override
   final int sequenceNumber;
@@ -322,7 +425,7 @@ class _$ChartFrameImpl implements _ChartFrame {
 
   @override
   String toString() {
-    return 'ChartFrame(series: $series, indicators: $indicators, viewport: $viewport, annotations: $annotations, tradeOverlays: $tradeOverlays, overlays: $overlays, sequenceNumber: $sequenceNumber, panelSequenceNumbers: $panelSequenceNumbers)';
+    return 'ChartFrame(series: $series, indicators: $indicators, viewport: $viewport, annotations: $annotations, tradeOverlays: $tradeOverlays, overlays: $overlays, volumeProfile: $volumeProfile, orderBook: $orderBook, liquidations: $liquidations, sequenceNumber: $sequenceNumber, panelSequenceNumbers: $panelSequenceNumbers)';
   }
 
   @override
@@ -340,6 +443,12 @@ class _$ChartFrameImpl implements _ChartFrame {
             (identical(other.tradeOverlays, tradeOverlays) ||
                 other.tradeOverlays == tradeOverlays) &&
             const DeepCollectionEquality().equals(other._overlays, _overlays) &&
+            (identical(other.volumeProfile, volumeProfile) ||
+                other.volumeProfile == volumeProfile) &&
+            (identical(other.orderBook, orderBook) ||
+                other.orderBook == orderBook) &&
+            const DeepCollectionEquality()
+                .equals(other._liquidations, _liquidations) &&
             (identical(other.sequenceNumber, sequenceNumber) ||
                 other.sequenceNumber == sequenceNumber) &&
             const DeepCollectionEquality()
@@ -355,6 +464,9 @@ class _$ChartFrameImpl implements _ChartFrame {
       annotations,
       tradeOverlays,
       const DeepCollectionEquality().hash(_overlays),
+      volumeProfile,
+      orderBook,
+      const DeepCollectionEquality().hash(_liquidations),
       sequenceNumber,
       const DeepCollectionEquality().hash(_panelSequenceNumbers));
 
@@ -375,6 +487,9 @@ abstract class _ChartFrame implements ChartFrame {
       final AnnotationDocument annotations,
       final TradeOverlayDocument tradeOverlays,
       required final List<dynamic> overlays,
+      final VolumeProfile? volumeProfile,
+      final OrderBook? orderBook,
+      final List<LiquidationArea> liquidations,
       required final int sequenceNumber,
       required final Map<String, int> panelSequenceNumbers}) = _$ChartFrameImpl;
 
@@ -401,6 +516,18 @@ abstract class _ChartFrame implements ChartFrame {
   /// List of overlays (e.g., drawings, alerts, etc.) to be rendered.
   @override
   List<dynamic> get overlays;
+
+  /// Optional volume profile data.
+  @override
+  VolumeProfile? get volumeProfile;
+
+  /// Optional order book data.
+  @override
+  OrderBook? get orderBook;
+
+  /// Optional list of liquidation areas for heatmap.
+  @override
+  List<LiquidationArea> get liquidations;
 
   /// Sequential number to track frame updates and ensure consistent state.
   @override

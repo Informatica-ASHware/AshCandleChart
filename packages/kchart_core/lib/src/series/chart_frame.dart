@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'annotation.dart';
+import 'institutional_models.dart';
 import 'series.dart';
 import 'trade_overlay.dart';
 import 'viewport.dart';
@@ -31,6 +32,15 @@ class ChartFrame with _$ChartFrame {
 
     /// List of overlays (e.g., drawings, alerts, etc.) to be rendered.
     required List<dynamic> overlays,
+
+    /// Optional volume profile data.
+    VolumeProfile? volumeProfile,
+
+    /// Optional order book data.
+    OrderBook? orderBook,
+
+    /// Optional list of liquidation areas for heatmap.
+    @Default([]) List<LiquidationArea> liquidations,
 
     /// Sequential number to track frame updates and ensure consistent state.
     required int sequenceNumber,
