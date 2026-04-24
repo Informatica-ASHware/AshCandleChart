@@ -1,5 +1,12 @@
 ## [Unreleased]
 
+- [US 9.01] Time Machine / Replay Mode.
+    - Added `ReplayCoordinator` for historical price action playback.
+    - Implemented `ReplaySlider` UI for playback control and scrubbing.
+    - Added support for multiple speeds (1x, 2x, 5x, 10x).
+    - Ensures future data, trade overlays, and annotations are hidden during replay.
+    - Guaranteed indicator recalculation consistency with "fake now".
+
 ## [0.1.0-dev.1]
 
 - Implemented `PaintPool` to reuse `Paint` objects and reduce GC pressure.
