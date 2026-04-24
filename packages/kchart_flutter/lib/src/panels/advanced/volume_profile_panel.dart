@@ -1,9 +1,7 @@
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/widgets.dart' hide Viewport;
-import 'package:flutter/material.dart' show Widget;
 import 'package:kchart_core/kchart_core.dart';
-import 'package:flutter/material.dart' show CustomPainter, Canvas, Size, Offset, PaintingStyle, Rect;
 import '../../controller.dart';
 import '../../painting/paint_pool.dart';
 import '../../theme.dart';
@@ -84,12 +82,16 @@ class _VolumeProfileWidgetState extends State<_VolumeProfileWidget> {
 class VolumeProfilePainter extends CustomPainter {
   /// The volume profile data.
   final VolumeProfile volumeProfile;
+
   /// The current viewport.
   final Viewport viewport;
+
   /// The main series to calculate Y scaling.
   final Series series;
+
   /// The theme.
   final ChartTheme theme;
+
   /// Paint pool for reuse.
   final PaintPool paintPool;
 
@@ -132,7 +134,8 @@ class VolumeProfilePainter extends CustomPainter {
     final double binHeight = viewHeight / binCount;
 
     // Use Vertices for high performance rendering of the histogram
-    final int vertexCount = binCount * 12; // 2 triangles (6 vertices) per buy/sell side
+    final int vertexCount =
+        binCount * 12; // 2 triangles (6 vertices) per buy/sell side
     final Float32List buyVertices = Float32List(vertexCount * 2);
     final Float32List sellVertices = Float32List(vertexCount * 2);
 
@@ -145,7 +148,8 @@ class VolumeProfilePainter extends CustomPainter {
       final double yTop = yCenter - binHeight / 2;
       final double yBottom = yCenter + binHeight / 2;
 
-      final double totalVolWidth = (bin.volume / volumeProfile.maxVolume) * maxWidth;
+      final double totalVolWidth =
+          (bin.volume / volumeProfile.maxVolume) * maxWidth;
       final double buyRatio = bin.volume > 0 ? bin.buyVolume / bin.volume : 0.5;
       final double buyWidth = totalVolWidth * buyRatio;
       final double sellWidth = totalVolWidth * (1 - buyRatio);
@@ -155,7 +159,8 @@ class VolumeProfilePainter extends CustomPainter {
       bOffset += 12;
 
       // Sell side (right part of the bar)
-      _addRectToVertices(sellVertices, sOffset, buyWidth, yTop, buyWidth + sellWidth, yBottom);
+      _addRectToVertices(
+          sellVertices, sOffset, buyWidth, yTop, buyWidth + sellWidth, yBottom);
       sOffset += 12;
     }
 
@@ -185,14 +190,21 @@ class VolumeProfilePainter extends CustomPainter {
     paintPool.releaseAll();
   }
 
-  void _addRectToVertices(Float32List vertices, int offset, double x1, double y1, double x2, double y2) {
-    vertices[offset++] = x1; vertices[offset++] = y1;
-    vertices[offset++] = x2; vertices[offset++] = y1;
-    vertices[offset++] = x2; vertices[offset++] = y2;
+  void _addRectToVertices(Float32List vertices, int offset, double x1,
+      double y1, double x2, double y2) {
+    vertices[offset++] = x1;
+    vertices[offset++] = y1;
+    vertices[offset++] = x2;
+    vertices[offset++] = y1;
+    vertices[offset++] = x2;
+    vertices[offset++] = y2;
 
-    vertices[offset++] = x1; vertices[offset++] = y1;
-    vertices[offset++] = x2; vertices[offset++] = y2;
-    vertices[offset++] = x1; vertices[offset++] = y2;
+    vertices[offset++] = x1;
+    vertices[offset++] = y1;
+    vertices[offset++] = x2;
+    vertices[offset++] = y2;
+    vertices[offset++] = x1;
+    vertices[offset++] = y2;
   }
 
   @override

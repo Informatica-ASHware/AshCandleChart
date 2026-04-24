@@ -10,14 +10,18 @@ class VolumeProfileBin with _$VolumeProfileBin {
   const factory VolumeProfileBin({
     /// The center price of this bin.
     required double price,
+
     /// Total volume traded at this price level.
     required double volume,
+
     /// Volume from buy orders (if available).
     @Default(0.0) double buyVolume,
+
     /// Volume from sell orders (if available).
     @Default(0.0) double sellVolume,
   }) = _VolumeProfileBin;
 
+  /// Creates a [VolumeProfileBin] from a JSON map.
   factory VolumeProfileBin.fromJson(Map<String, dynamic> json) =>
       _$VolumeProfileBinFromJson(json);
 }
@@ -29,12 +33,15 @@ class VolumeProfile with _$VolumeProfile {
   const factory VolumeProfile({
     /// List of bins ordered by price.
     required List<VolumeProfileBin> bins,
+
     /// The price level with the highest volume (Point of Control).
     required double pocPrice,
+
     /// Maximum volume in a single bin (for scaling).
     required double maxVolume,
   }) = _VolumeProfile;
 
+  /// Creates a [VolumeProfile] from a JSON map.
   factory VolumeProfile.fromJson(Map<String, dynamic> json) =>
       _$VolumeProfileFromJson(json);
 }
@@ -46,12 +53,15 @@ class OrderBookEntry with _$OrderBookEntry {
   const factory OrderBookEntry({
     /// The price of the order.
     required double price,
+
     /// The amount/size at this price.
     required double size,
+
     /// Cumulative size up to this price level.
     @Default(0.0) double cumulativeSize,
   }) = _OrderBookEntry;
 
+  /// Creates an [OrderBookEntry] from a JSON map.
   factory OrderBookEntry.fromJson(Map<String, dynamic> json) =>
       _$OrderBookEntryFromJson(json);
 }
@@ -63,12 +73,15 @@ class OrderBook with _$OrderBook {
   const factory OrderBook({
     /// List of buy orders (bids), sorted by price descending.
     required List<OrderBookEntry> bids,
+
     /// List of sell orders (asks), sorted by price ascending.
     required List<OrderBookEntry> asks,
+
     /// Timestamp of the last update.
     required int timestamp,
   }) = _OrderBook;
 
+  /// Creates an [OrderBook] from a JSON map.
   factory OrderBook.fromJson(Map<String, dynamic> json) =>
       _$OrderBookFromJson(json);
 }
@@ -80,12 +93,15 @@ class LiquidationArea with _$LiquidationArea {
   const factory LiquidationArea({
     /// The price level of the liquidation.
     required double price,
+
     /// Total estimated value of liquidations at this level.
     required double size,
+
     /// Intensity or probability (0.0 to 1.0) for heatmap rendering.
     required double intensity,
   }) = _LiquidationArea;
 
+  /// Creates a [LiquidationArea] from a JSON map.
   factory LiquidationArea.fromJson(Map<String, dynamic> json) =>
       _$LiquidationAreaFromJson(json);
 }

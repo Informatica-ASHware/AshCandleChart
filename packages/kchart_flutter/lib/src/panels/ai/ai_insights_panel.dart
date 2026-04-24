@@ -94,10 +94,12 @@ class AiInsightsPanel extends StatelessWidget {
                       }
 
                       return Column(
-                        children: insights.map((insight) => _InsightTile(
-                          insight: insight,
-                          textColor: textColor,
-                        )).toList(),
+                        children: insights
+                            .map((insight) => _InsightTile(
+                                  insight: insight,
+                                  textColor: textColor,
+                                ))
+                            .toList(),
                       );
                     },
                   );

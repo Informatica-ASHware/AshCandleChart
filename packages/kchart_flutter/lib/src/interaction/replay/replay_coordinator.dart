@@ -6,8 +6,10 @@ import 'package:kchart_core/kchart_core.dart';
 enum ReplayState {
   /// Replay is currently playing.
   playing,
+
   /// Replay is paused.
   paused,
+
   /// User is scrubbing through the history.
   scrubbing,
 }
@@ -76,11 +78,13 @@ class ReplayCoordinator extends ChangeNotifier {
     final truncatedIndicators = <String, Series>{};
     full.indicators.forEach((id, series) {
       // Find the last index in the indicator series that is <= currentTimestamp
-      int indicatorIndex = _findTimestampIndexForSeries(series, _currentTimestamp!);
+      int indicatorIndex =
+          _findTimestampIndexForSeries(series, _currentTimestamp!);
 
       // If the series is empty or currentTimestamp is before the first element,
       // it should be an empty series.
-      if (indicatorIndex < 0 || series.timestamps[indicatorIndex] > _currentTimestamp!) {
+      if (indicatorIndex < 0 ||
+          series.timestamps[indicatorIndex] > _currentTimestamp!) {
         truncatedIndicators[id] = Series(
           timestamps: Int64List(0),
           open: Float64List(0),

@@ -29,7 +29,8 @@ class MockAiAnnotationProvider implements AiAnnotationProvider {
     if (isBullish) {
       return [
         const AiInsight(
-          text: 'The selected range shows a strong bullish momentum with increasing volume.',
+          text:
+              'The selected range shows a strong bullish momentum with increasing volume.',
           patternType: 'Bullish Trend',
           severity: InsightSeverity.info,
         ),
@@ -47,7 +48,8 @@ class MockAiAnnotationProvider implements AiAnnotationProvider {
           severity: InsightSeverity.danger,
         ),
         const AiInsight(
-          text: 'Volume is decreasing, suggesting exhaustion of the current move.',
+          text:
+              'Volume is decreasing, suggesting exhaustion of the current move.',
           patternType: 'Volume Exhaustion',
           severity: InsightSeverity.info,
         ),

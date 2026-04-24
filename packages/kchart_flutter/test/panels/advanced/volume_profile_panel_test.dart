@@ -41,7 +41,8 @@ void main() {
       controller = KChartController(frame: frame);
     });
 
-    testWidgets('VolumeProfilePanel renders correctly', (WidgetTester tester) async {
+    testWidgets('VolumeProfilePanel renders correctly',
+        (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -53,7 +54,8 @@ void main() {
                 child: SizedBox(
                   width: 400,
                   height: 300,
-                  child: VolumeProfilePanel(controller: controller).build(context),
+                  child:
+                      VolumeProfilePanel(controller: controller).build(context),
                 ),
               ),
             ),

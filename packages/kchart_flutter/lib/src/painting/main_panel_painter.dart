@@ -75,7 +75,8 @@ class MainPanelPainter extends CustomPainter {
     final double viewWidth = size.width;
     final double candleWidth = viewWidth / visibleCount;
 
-    final int selStartIdx = findIndexAtTimestamp(series.timestamps, selection.$1);
+    final int selStartIdx =
+        findIndexAtTimestamp(series.timestamps, selection.$1);
     final int selEndIdx = findIndexAtTimestamp(series.timestamps, selection.$2);
 
     final double xStart = (selStartIdx - startIdx) * candleWidth;

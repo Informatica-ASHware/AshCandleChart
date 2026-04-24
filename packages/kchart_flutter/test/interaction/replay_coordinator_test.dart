@@ -36,7 +36,8 @@ void main() {
     });
 
     test('truncates data based on currentTimestamp', () async {
-      final coordinator = ReplayCoordinator(inputStream: streamController.stream);
+      final coordinator =
+          ReplayCoordinator(inputStream: streamController.stream);
       streamController.add(initialFrame);
 
       await Future.delayed(Duration.zero);
@@ -67,7 +68,8 @@ void main() {
         ),
       );
 
-      final coordinator = ReplayCoordinator(inputStream: streamController.stream);
+      final coordinator =
+          ReplayCoordinator(inputStream: streamController.stream);
       streamController.add(frameWithAnnotations);
 
       await Future.delayed(Duration.zero);
@@ -93,7 +95,8 @@ void main() {
         ),
       );
 
-      final coordinator = ReplayCoordinator(inputStream: streamController.stream);
+      final coordinator =
+          ReplayCoordinator(inputStream: streamController.stream);
       streamController.add(frameWithOverlays);
 
       await Future.delayed(Duration.zero);

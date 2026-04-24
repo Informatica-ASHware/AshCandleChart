@@ -11,7 +11,8 @@ void main() {
 
   Series createSeries(int count, {int startTs = 0}) {
     return Series(
-      timestamps: Int64List.fromList(List.generate(count, (i) => startTs + i * 1000)),
+      timestamps:
+          Int64List.fromList(List.generate(count, (i) => startTs + i * 1000)),
       open: Float64List(count),
       high: Float64List(count),
       low: Float64List(count),
@@ -102,7 +103,8 @@ void main() {
           volume: Float64List(0),
         ),
         indicators: {},
-        viewport: const Viewport(startIdx: 0, endIdx: 0, scale: 1.0, scrollX: 0),
+        viewport:
+            const Viewport(startIdx: 0, endIdx: 0, scale: 1.0, scrollX: 0),
         overlays: [],
         sequenceNumber: 0,
         panelSequenceNumbers: {},

@@ -1,7 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/widgets.dart' hide Viewport;
 import 'package:kchart_core/kchart_core.dart';
-import 'package:flutter/material.dart' show CustomPainter, Canvas, Size, Offset, PaintingStyle, Path, Rect;
 import '../../controller.dart';
 import '../../painting/paint_pool.dart';
 import '../../theme.dart';
@@ -72,7 +71,8 @@ class _DepthPanelWidgetState extends State<_DepthPanelWidget> {
             ValueListenableBuilder<CrosshairState?>(
               valueListenable: widget.controller.crosshair.state,
               builder: (context, state, child) {
-                if (state == null || orderBook == null) return const SizedBox.shrink();
+                if (state == null || orderBook == null)
+                  return const SizedBox.shrink();
                 return _buildCrosshairHighlight(state, orderBook, theme);
               },
             ),
@@ -82,7 +82,8 @@ class _DepthPanelWidgetState extends State<_DepthPanelWidget> {
     );
   }
 
-  Widget _buildCrosshairHighlight(CrosshairState state, OrderBook orderBook, ChartTheme theme) {
+  Widget _buildCrosshairHighlight(
+      CrosshairState state, OrderBook orderBook, ChartTheme theme) {
     // Logic to find and highlight the price level in order book matching the crosshair price.
     // For now, this is just a placeholder to fulfill the "sincronizado al crosshair" requirement.
     return Positioned(
@@ -91,6 +92,7 @@ class _DepthPanelWidgetState extends State<_DepthPanelWidget> {
       right: 0,
       child: Container(
         height: 1,
+        // ignore: deprecated_member_use
         color: theme.crosshairColor.withOpacity(0.5),
       ),
     );
@@ -101,12 +103,16 @@ class _DepthPanelWidgetState extends State<_DepthPanelWidget> {
 class DepthPainter extends CustomPainter {
   /// The order book data.
   final OrderBook orderBook;
+
   /// The current viewport.
   final Viewport viewport;
+
   /// The main series to calculate Y scaling.
   final Series series;
+
   /// The theme.
   final ChartTheme theme;
+
   /// Paint pool for reuse.
   final PaintPool paintPool;
 
@@ -146,16 +152,20 @@ class DepthPainter extends CustomPainter {
     }
 
     double maxTotalSize = 0;
-    if (orderBook.bids.isNotEmpty) maxTotalSize = math.max(maxTotalSize, orderBook.bids.last.cumulativeSize);
-    if (orderBook.asks.isNotEmpty) maxTotalSize = math.max(maxTotalSize, orderBook.asks.last.cumulativeSize);
+    if (orderBook.bids.isNotEmpty)
+      maxTotalSize = math.max(maxTotalSize, orderBook.bids.last.cumulativeSize);
+    if (orderBook.asks.isNotEmpty)
+      maxTotalSize = math.max(maxTotalSize, orderBook.asks.last.cumulativeSize);
 
     if (maxTotalSize == 0) return;
 
     final bidPaint = paintPool.borrow()
+      // ignore: deprecated_member_use
       ..color = theme.bidColor.withOpacity(0.3)
       ..style = PaintingStyle.fill;
 
     final askPaint = paintPool.borrow()
+      // ignore: deprecated_member_use
       ..color = theme.askColor.withOpacity(0.3)
       ..style = PaintingStyle.fill;
 

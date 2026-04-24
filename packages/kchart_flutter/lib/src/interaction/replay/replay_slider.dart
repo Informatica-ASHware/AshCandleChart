@@ -22,7 +22,8 @@ class ReplaySlider extends StatelessWidget {
         final timestamps = fullFrame.series.timestamps;
         if (timestamps.isEmpty) return const SizedBox.shrink();
 
-        final currentTimestamp = coordinator.currentTimestamp ?? timestamps.last;
+        final currentTimestamp =
+            coordinator.currentTimestamp ?? timestamps.last;
         final firstTimestamp = timestamps.first;
         final lastTimestamp = timestamps.last;
 
