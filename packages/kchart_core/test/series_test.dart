@@ -113,6 +113,30 @@ void main() {
       expect(updated.timestamps, equals(newTimestamps));
       expect(updated.open, equals(series.open));
     });
+
+    test('slice should return a sub-series with correct range', () {
+      final candles = List.generate(
+        10,
+        (i) => Candle(
+          timestamp: i,
+          open: i.toDouble(),
+          high: (i + 1).toDouble(),
+          low: (i - 1).toDouble(),
+          close: i.toDouble(),
+          volume: (i * 10).toDouble(),
+        ),
+      );
+      final series = Series.fromCandles(candles);
+
+      final sliced = series.slice(2, 5);
+
+      expect(sliced.length, 3);
+      expect(sliced.timestamps[0], 2);
+      expect(sliced.timestamps[1], 3);
+      expect(sliced.timestamps[2], 4);
+      expect(sliced.open[0], 2.0);
+      expect(sliced.volume[2], 40.0);
+    });
   });
 
   group('Viewport', () {

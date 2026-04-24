@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/gestures.dart';
+import 'package:flutter/services.dart';
 
 /// Callback for pan updates.
 typedef OnPanUpdate = void Function(Offset delta);
@@ -22,8 +23,21 @@ typedef OnPointerUp = void Function();
 /// Callback for fling.
 typedef OnFling = void Function(Velocity velocity);
 
+/// Callback for selection update.
+typedef OnSelectionUpdate = void Function(Offset position);
+
+/// Callback for selection end.
+typedef OnSelectionEnd = void Function();
+
 /// Internal state for the [GestureArbiter].
-enum _GestureState { idle, possibleLongPress, longPress, panning, zooming }
+enum _GestureState {
+  idle,
+  possibleLongPress,
+  longPress,
+  panning,
+  zooming,
+  selecting
+}
 
 /// Arbitrates raw [PointerEvent]s into high-level gestures.
 ///
@@ -52,6 +66,12 @@ class GestureArbiter {
   /// Callback when a fling gesture occurs.
   final OnFling? onFling;
 
+  /// Callback when a selection gesture updates.
+  final OnSelectionUpdate? onSelectionUpdate;
+
+  /// Callback when a selection gesture ends.
+  final OnSelectionEnd? onSelectionEnd;
+
   /// Duration before a press is considered a long press.
   final Duration longPressTimeout;
 
@@ -72,6 +92,8 @@ class GestureArbiter {
     this.onTap,
     this.onPointerUp,
     this.onFling,
+    this.onSelectionUpdate,
+    this.onSelectionEnd,
     this.longPressTimeout = const Duration(milliseconds: 500),
   });
 
@@ -134,6 +156,19 @@ class GestureArbiter {
     _pointerLocalPositions[event.pointer] = event.localPosition;
     _velocityTracker?.addPosition(event.timeStamp, event.localPosition);
 
+    if (HardwareKeyboard.instance.isShiftPressed &&
+        (_state == _GestureState.possibleLongPress ||
+            _state == _GestureState.idle ||
+            _state == _GestureState.panning)) {
+      _state = _GestureState.selecting;
+      _stopLongPressTimer();
+    }
+
+    if (_state == _GestureState.selecting) {
+      onSelectionUpdate?.call(event.localPosition);
+      return;
+    }
+
     if (_state == _GestureState.possibleLongPress) {
       final delta = (event.localPosition - _initialPosition!).distance;
       if (delta > 10.0) {
@@ -167,6 +202,10 @@ class GestureArbiter {
       }
     }
 
+    if (_state == _GestureState.selecting && _pointers.length == 1) {
+      onSelectionEnd?.call();
+    }
+
     _pointers.remove(event.pointer);
     _pointerLocalPositions.remove(event.pointer);
     _stopLongPressTimer();
@@ -189,6 +228,9 @@ class GestureArbiter {
     if (_pointers.isEmpty) {
       if (_state == _GestureState.longPress) {
         onLongPressEnd?.call();
+      }
+      if (_state == _GestureState.selecting) {
+        onSelectionEnd?.call();
       }
       _state = _GestureState.idle;
     }

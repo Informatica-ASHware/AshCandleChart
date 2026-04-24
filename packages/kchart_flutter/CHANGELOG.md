@@ -9,3 +9,5 @@
 - Liquidation heatmap visualization using price-level gradients.
 - Updated `KChartController` to manage and toggle institutional panels.
 - Updated `ChartTheme` with institutional color schemes.
+- AI Annotations Plugin Contract: `AiAnnotationProvider`, `AiInsight` models, and `AiInsightsPanel`.
+- Range selection support via Shift+Drag gesture.
