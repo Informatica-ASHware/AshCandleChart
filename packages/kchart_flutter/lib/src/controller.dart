@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart' hide Viewport;
 import 'package:kchart_core/kchart_core.dart';
+import 'interaction/replay/replay_coordinator.dart';
 import 'crosshair_coordinator.dart';
 import 'panels/chart_panel.dart';
 import 'panels/main_panel.dart';
@@ -14,6 +15,28 @@ class KChartController extends ChangeNotifier {
 
   /// Coordinator for the synchronized crosshair.
   final CrosshairCoordinator crosshair = CrosshairCoordinator();
+
+  /// Optional coordinator for replay mode.
+  ReplayCoordinator? _replayCoordinator;
+
+  /// The current replay coordinator, if any.
+  ReplayCoordinator? get replayCoordinator => _replayCoordinator;
+
+  /// Enables or disables replay mode.
+  set replayCoordinator(ReplayCoordinator? coordinator) {
+    if (_replayCoordinator == coordinator) return;
+    _replayCoordinator?.removeListener(_onReplayUpdate);
+    _replayCoordinator = coordinator;
+    _replayCoordinator?.addListener(_onReplayUpdate);
+    _onReplayUpdate();
+  }
+
+  void _onReplayUpdate() {
+    final truncated = _replayCoordinator?.truncatedFrame;
+    if (truncated != null) {
+      frame = truncated;
+    }
+  }
 
   /// Flexible factors for panel heights.
   List<double> _panelFlexFactors = [3.0, 1.0];

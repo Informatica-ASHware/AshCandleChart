@@ -6,6 +6,7 @@ import 'gestures/gesture_arbiter.dart';
 import 'painting/crosshair_painter.dart';
 import 'panels/panel_stack.dart';
 import 'widgets/kchart_scope.dart';
+import 'interaction/replay/replay_slider.dart';
 import 'package:flutter/physics.dart';
 import 'theme.dart';
 import 'i18n/number_formatters.dart';
@@ -384,15 +385,26 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
                     onExit: (_) => widget.controller.crosshair.clear(),
                     child: Stack(
                       children: [
-                        PanelStack(
-                          panels: widget.controller.panels,
-                          onResize: (index, delta) {
-                            widget.controller.resizePanels(
-                              index,
-                              delta,
-                              constraints.maxHeight,
-                            );
-                          },
+                        Column(
+                          children: [
+                            Expanded(
+                              child: PanelStack(
+                                panels: widget.controller.panels,
+                                onResize: (index, delta) {
+                                  widget.controller.resizePanels(
+                                    index,
+                                    delta,
+                                    constraints.maxHeight,
+                                  );
+                                },
+                              ),
+                            ),
+                            if (widget.controller.replayCoordinator != null)
+                              ReplaySlider(
+                                coordinator:
+                                    widget.controller.replayCoordinator!,
+                              ),
+                          ],
                         ),
                         ValueListenableBuilder<CrosshairState?>(
                           valueListenable: widget.controller.crosshair.state,
