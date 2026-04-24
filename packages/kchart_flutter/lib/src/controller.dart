@@ -3,6 +3,8 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart' hide Viewport;
 import 'package:flutter/rendering.dart';
 import 'package:kchart_core/kchart_core.dart';
+import 'accessibility/chart_semantics_builder.dart';
+import 'i18n/number_formatters.dart';
 import 'panels/ai/ai_models.dart';
 import 'panels/ai/ai_provider.dart';
 import 'interaction/replay/replay_coordinator.dart';
@@ -563,6 +565,24 @@ class KChartController extends ChangeNotifier {
     }
 
     return result;
+  }
+
+  /// Announces candle data for accessibility.
+  void announceCandle(int timestamp, ChartNumberFormatters formatters) {
+    final index = _findTimestampIndex(timestamp, nearest: true);
+    if (index == -1) return;
+
+    final label = ChartSemanticsBuilder.buildCandleDescription(
+      timestamp: timestamp,
+      open: _frame.series.open[index],
+      high: _frame.series.high[index],
+      low: _frame.series.low[index],
+      close: _frame.series.close[index],
+      formatters: formatters,
+    );
+
+    // ignore: deprecated_member_use
+    SemanticsService.announce(label, TextDirection.ltr);
   }
 
   /// Resizes panels based on a drag delta.

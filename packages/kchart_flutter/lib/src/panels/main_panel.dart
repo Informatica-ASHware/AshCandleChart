@@ -86,6 +86,7 @@ class _MainPanelWidgetState extends State<_MainPanelWidget> {
                 bullishBuffer: _bullishBuffer,
                 bearishBuffer: _bearishBuffer,
                 selectionRange: widget.controller.selectionRange,
+                formatters: scope?.formatters,
               ),
             );
           },
