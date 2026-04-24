@@ -34,6 +34,9 @@ class MainPanelPainter extends CustomPainter {
   /// The theme to use for painting.
   final ChartTheme theme;
 
+  /// Optional selection range (start and end timestamps).
+  final (int, int)? selectionRange;
+
   /// Creates a [MainPanelPainter] with the given [frame], [paintPool], and caches.
   MainPanelPainter({
     required this.frame,
@@ -43,16 +46,52 @@ class MainPanelPainter extends CustomPainter {
     required this.theme,
     this.bullishBuffer,
     this.bearishBuffer,
+    this.selectionRange,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
     _drawGrid(canvas, size);
+    _drawSelection(canvas, size);
     _drawCandles(canvas, size);
     _drawAnnotations(canvas, size);
     _drawTradeOverlays(canvas, size);
 
     paintPool.releaseAll();
+  }
+
+  void _drawSelection(Canvas canvas, Size size) {
+    final selection = selectionRange;
+    if (selection == null) return;
+
+    final series = frame.series;
+    final viewport = frame.viewport;
+
+    if (series.length == 0) return;
+
+    final int startIdx = viewport.startIdx.clamp(0, series.length - 1);
+    final int endIdx = viewport.endIdx.clamp(0, series.length - 1);
+    final int visibleCount = endIdx - startIdx + 1;
+    final double viewWidth = size.width;
+    final double candleWidth = viewWidth / visibleCount;
+
+    final int selStartIdx = findIndexAtTimestamp(series.timestamps, selection.$1);
+    final int selEndIdx = findIndexAtTimestamp(series.timestamps, selection.$2);
+
+    final double xStart = (selStartIdx - startIdx) * candleWidth;
+    final double xEnd = (selEndIdx - startIdx) * candleWidth + candleWidth;
+
+    if (xEnd < 0 || xStart > viewWidth) return;
+
+    final double left = xStart.clamp(0.0, viewWidth);
+    final double right = xEnd.clamp(0.0, viewWidth);
+
+    final paint = paintPool.borrow()
+      // ignore: deprecated_member_use
+      ..color = theme.crosshairColor.withOpacity(0.2)
+      ..style = PaintingStyle.fill;
+
+    canvas.drawRect(Rect.fromLTRB(left, 0, right, size.height), paint);
   }
 
   void _drawGrid(Canvas canvas, Size size) {

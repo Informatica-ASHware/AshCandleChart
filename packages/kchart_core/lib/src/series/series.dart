@@ -165,4 +165,19 @@ class Series {
 
     return AnnotationPoint(timestamp: candleTimestamp, price: nearestPrice);
   }
+
+  /// Returns a new [Series] containing a sub-range of the data.
+  ///
+  /// The [start] and [end] indices follow [List.sublist] semantics:
+  /// [start] is inclusive, [end] is exclusive.
+  Series slice(int start, int end) {
+    return Series(
+      timestamps: timestamps.sublist(start, end),
+      open: open.sublist(start, end),
+      high: high.sublist(start, end),
+      low: low.sublist(start, end),
+      close: close.sublist(start, end),
+      volume: volume.sublist(start, end),
+    );
+  }
 }

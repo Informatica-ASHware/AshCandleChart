@@ -1,5 +1,8 @@
+import 'dart:async';
 import 'package:flutter/material.dart' hide Viewport;
 import 'package:kchart_core/kchart_core.dart';
+import 'panels/ai/ai_models.dart';
+import 'panels/ai/ai_provider.dart';
 import 'interaction/replay/replay_coordinator.dart';
 import 'crosshair_coordinator.dart';
 import 'panels/chart_panel.dart';
@@ -15,6 +18,27 @@ import 'panels/advanced/liquidation_heatmap_panel.dart';
 /// Manages the [ChartFrame] and notifies listeners of changes.
 class KChartController extends ChangeNotifier {
   ChartFrame _frame;
+
+  /// Provider for AI-based insights.
+  AiAnnotationProvider? aiProvider;
+
+  /// Range of timestamps currently selected on the chart.
+  (int, int)? _selectionRange;
+
+  /// Tracks the ID of the current selection request to avoid race conditions.
+  int _currentSelectionRequestId = 0;
+
+  /// Debounce timer for selection updates.
+  Timer? _selectionDebounceTimer;
+
+  /// The current selection range of timestamps.
+  (int, int)? get selectionRange => _selectionRange;
+
+  /// Notifier for insights generated for the current selection.
+  final ValueNotifier<List<AiInsight>> insights = ValueNotifier([]);
+
+  /// Notifier for the loading state of insights.
+  final ValueNotifier<bool> isInsightsLoading = ValueNotifier(false);
 
   /// The last measured size of the chart widget.
   Size? lastViewSize;
@@ -42,6 +66,71 @@ class KChartController extends ChangeNotifier {
     if (truncated != null) {
       frame = truncated;
     }
+  }
+
+  /// Sets the current selection range and fetches insights if a provider is set.
+  ///
+  /// This method includes debouncing and race condition protection.
+  void setSelection(int startTimestamp, int endTimestamp) {
+    if (startTimestamp > endTimestamp) {
+      final temp = startTimestamp;
+      startTimestamp = endTimestamp;
+      endTimestamp = temp;
+    }
+
+    if (_selectionRange?.$1 == startTimestamp &&
+        _selectionRange?.$2 == endTimestamp) {
+      return;
+    }
+
+    _selectionRange = (startTimestamp, endTimestamp);
+    notifyListeners();
+
+    final provider = aiProvider;
+    if (provider == null) return;
+
+    _selectionDebounceTimer?.cancel();
+    _selectionDebounceTimer = Timer(const Duration(milliseconds: 300), () async {
+      final requestId = ++_currentSelectionRequestId;
+      isInsightsLoading.value = true;
+
+      try {
+        final startIdx = _findTimestampIndex(startTimestamp, nearest: true);
+        final endIdx = _findTimestampIndex(endTimestamp, nearest: true);
+
+        // Ensure at least one element if startIdx == endIdx
+        final sliceEnd = (endIdx + 1).clamp(0, _frame.series.length);
+        if (startIdx < sliceEnd) {
+          final data = _frame.series.slice(startIdx, sliceEnd);
+          final result = await provider.getInsights(data);
+
+          if (requestId == _currentSelectionRequestId) {
+            insights.value = result;
+          }
+        } else {
+          if (requestId == _currentSelectionRequestId) {
+            insights.value = [];
+          }
+        }
+      } catch (e) {
+        if (requestId == _currentSelectionRequestId) {
+          insights.value = [];
+        }
+      } finally {
+        if (requestId == _currentSelectionRequestId) {
+          isInsightsLoading.value = false;
+        }
+      }
+    });
+  }
+
+  /// Clears the current selection and its insights.
+  void clearSelection() {
+    if (_selectionRange == null) return;
+    _selectionRange = null;
+    insights.value = [];
+    isInsightsLoading.value = false;
+    notifyListeners();
   }
 
   /// Flexible factors for panel heights.
@@ -475,6 +564,7 @@ class KChartController extends ChangeNotifier {
 
   @override
   void dispose() {
+    _selectionDebounceTimer?.cancel();
     crosshair.dispose();
     super.dispose();
   }

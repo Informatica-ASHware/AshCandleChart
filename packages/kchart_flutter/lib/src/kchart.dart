@@ -5,6 +5,7 @@ import 'controller.dart';
 import 'gestures/gesture_arbiter.dart';
 import 'painting/crosshair_painter.dart';
 import 'panels/panel_stack.dart';
+import 'panels/ai/ai_insights_panel.dart';
 import 'widgets/kchart_scope.dart';
 import 'interaction/replay/replay_slider.dart';
 import 'package:flutter/physics.dart';
@@ -43,6 +44,7 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
 
   String? _activeAnnotationId;
   int? _activePointIndex; // 0 for start, 1 for end
+  int? _selectionStartTimestamp;
 
   @override
   void initState() {
@@ -78,7 +80,25 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
       onTap: (position) {
         _handleTap(position);
       },
+      onSelectionUpdate: (position) {
+        _handleSelectionUpdate(position);
+      },
+      onSelectionEnd: () {
+        _selectionStartTimestamp = null;
+      },
     );
+  }
+
+  void _handleSelectionUpdate(Offset position) {
+    final timestamp = widget.controller.getTimestampAt(position.dx);
+    if (timestamp == null) return;
+
+    if (_selectionStartTimestamp == null) {
+      _selectionStartTimestamp = timestamp;
+      widget.controller.setSelection(timestamp, timestamp);
+    } else {
+      widget.controller.setSelection(_selectionStartTimestamp!, timestamp);
+    }
   }
 
   void _handleTap(Offset position) {
@@ -388,6 +408,7 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
                                 coordinator:
                                     widget.controller.replayCoordinator!,
                               ),
+                            AiInsightsPanel(controller: widget.controller),
                           ],
                         ),
                         ValueListenableBuilder<CrosshairState?>(
