@@ -6,6 +6,9 @@ import 'panels/chart_panel.dart';
 import 'panels/main_panel.dart';
 import 'panels/volume_panel.dart';
 import 'panels/secondary_panel.dart';
+import 'panels/advanced/volume_profile_panel.dart';
+import 'panels/advanced/depth_panel.dart';
+import 'panels/advanced/liquidation_heatmap_panel.dart';
 
 /// Controller for the KChart widget.
 ///
@@ -62,6 +65,20 @@ class KChartController extends ChangeNotifier {
 
   /// Whether magnet mode (snapping) is enabled.
   bool magnetMode = true;
+
+  /// Enabled institutional panels.
+  final Set<String> enabledInstitutionalPanels = {};
+
+  /// Toggles an institutional panel.
+  void toggleInstitutionalPanel(String id) {
+    if (enabledInstitutionalPanels.contains(id)) {
+      enabledInstitutionalPanels.remove(id);
+    } else {
+      enabledInstitutionalPanels.add(id);
+    }
+    _ensureFlexFactors();
+    notifyListeners();
+  }
 
   /// Adds or updates an annotation.
   void setAnnotation(Annotation annotation) {
@@ -175,8 +192,9 @@ class KChartController extends ChangeNotifier {
   }
 
   void _ensureFlexFactors() {
-    final panelCount =
-        2 + _frame.indicators.keys.where((k) => k != 'volume').length;
+    final panelCount = 2 +
+        enabledInstitutionalPanels.length +
+        _frame.indicators.keys.where((k) => k != 'volume').length;
     if (_panelFlexFactors.length < panelCount) {
       final additionalNeeded = panelCount - _panelFlexFactors.length;
       _panelFlexFactors.addAll(List.generate(additionalNeeded, (_) => 1.0));
@@ -396,13 +414,39 @@ class KChartController extends ChangeNotifier {
     ];
 
     int flexIdx = 2;
+
+    // Add institutional panels if enabled
+    if (enabledInstitutionalPanels.contains('volume_profile')) {
+      result.add(VolumeProfilePanel(
+          controller: this,
+          flex: _panelFlexFactors.length > flexIdx
+              ? _panelFlexFactors[flexIdx++]
+              : 1.0));
+    }
+    if (enabledInstitutionalPanels.contains('depth')) {
+      result.add(DepthPanel(
+          controller: this,
+          flex: _panelFlexFactors.length > flexIdx
+              ? _panelFlexFactors[flexIdx++]
+              : 1.0));
+    }
+    if (enabledInstitutionalPanels.contains('liquidation_heatmap')) {
+      result.add(LiquidationHeatmapPanel(
+          controller: this,
+          flex: _panelFlexFactors.length > flexIdx
+              ? _panelFlexFactors[flexIdx++]
+              : 1.0));
+    }
+
     for (final entry in _frame.indicators.entries) {
       if (entry.key != 'volume') {
         result.add(
           SecondaryPanel(
             controller: this,
             indicatorId: entry.key,
-            flex: _panelFlexFactors[flexIdx++],
+            flex: _panelFlexFactors.length > flexIdx
+                ? _panelFlexFactors[flexIdx++]
+                : 1.0,
           ),
         );
       }
