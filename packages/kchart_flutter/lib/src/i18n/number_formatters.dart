@@ -30,6 +30,21 @@ class ChartNumberFormatters {
   String formatTimestamp(int timestamp) => dateFormat
       .format(DateTime.fromMillisecondsSinceEpoch(timestamp, isUtc: true));
 
+  /// Formats a timestamp for the X-axis.
+  ///
+  /// Uses HH:mm if it's the same day, otherwise DD/MM.
+  String formatXAxisLabel(int timestamp, {bool isSameDay = true}) {
+    final date = DateTime.fromMillisecondsSinceEpoch(timestamp, isUtc: true);
+    if (isSameDay) {
+      return DateFormat.Hm(locale).format(date);
+    } else {
+      // We use a custom pattern for DD/MM as requested,
+      // but intl handles the locale-specific separator if we used Md().
+      // For strict DD/MM:
+      return DateFormat('dd/MM', locale).format(date);
+    }
+  }
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
