@@ -23,8 +23,8 @@ void main() {
         frame: ChartFrame(
           series: Series.fromCandles(candles),
           viewport: const Viewport(
-            startIdx: 80,
-            endIdx: 99,
+            startIdx: 50,
+            endIdx: 69,
             scale: 1.0,
             scrollX: 0.0,
           ),

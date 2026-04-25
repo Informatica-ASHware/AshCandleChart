@@ -125,8 +125,10 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
     final viewport = widget.controller.frame.viewport;
     final int startIdx = viewport.startIdx.clamp(0, series.length - 1);
     final int endIdx = viewport.endIdx.clamp(0, series.length - 1);
+    final double yAxisWidth = widget.theme?.yAxisWidth ?? 60.0;
+    final double chartWidth = size.width - yAxisWidth;
     final int visibleCount = endIdx - startIdx + 1;
-    final double candleWidth = size.width / visibleCount;
+    final double candleWidth = chartWidth / visibleCount;
 
     double minPrice = double.infinity;
     double maxPrice = double.negativeInfinity;
@@ -370,8 +372,10 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
     final size = _lastSize;
     if (size == null) return;
 
+    final double yAxisWidth = widget.theme?.yAxisWidth ?? 60.0;
+    final double chartWidth = size.width - yAxisWidth;
     final int visibleCount = viewport.endIdx - viewport.startIdx + 1;
-    final double candleWidth = size.width / visibleCount;
+    final double candleWidth = chartWidth / visibleCount;
 
     double targetDelta;
     if (viewport.scrollX > candleWidth / 2) {
@@ -434,6 +438,7 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
                 (Theme.of(context).brightness == Brightness.dark
                     ? ChartTheme.dark()
                     : ChartTheme.light());
+            widget.controller.yAxisWidth = theme.yAxisWidth;
             return Listener(
               onPointerDown: _arbiter.handleEvent,
               onPointerMove: (event) {
@@ -518,6 +523,7 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
                                       state: CrosshairState(dx: state.dx),
                                       color: scope?.theme.crosshairColor ??
                                           Colors.grey,
+                                      yAxisWidth: scope?.theme.yAxisWidth ?? 0.0,
                                     ),
                                   ),
                                 );

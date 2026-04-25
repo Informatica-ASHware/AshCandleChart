@@ -49,6 +49,9 @@ class KChartController extends ChangeNotifier {
   /// The last measured size of the chart widget.
   Size? lastViewSize;
 
+  /// Width of the Y-axis margin.
+  double yAxisWidth = 60.0;
+
   /// Global key to access the [RenderRepaintBoundary] for exporting images.
   final GlobalKey exportKey = GlobalKey();
 
@@ -272,7 +275,8 @@ class KChartController extends ChangeNotifier {
     final int startIdx = viewport.startIdx.clamp(0, series.length - 1);
     final int endIdx = viewport.endIdx.clamp(0, series.length - 1);
     final int visibleCount = endIdx - startIdx + 1;
-    final double candleWidth = size.width / visibleCount;
+    final double chartWidth = size.width - yAxisWidth;
+    final double candleWidth = chartWidth / visibleCount;
 
     // 1. Calculate approximate index and price from pixels
     final double relativeIdx = localOffset.dx / candleWidth;
@@ -296,7 +300,7 @@ class KChartController extends ChangeNotifier {
     final double priceRange = maxPrice - minPrice;
     final double price = maxPrice - (localOffset.dy / size.height * priceRange);
 
-    if (magnetMode) {
+    if (magnetMode && localOffset.dx <= chartWidth) {
       return series.findNearestPoint(timestamp, price);
     } else {
       return AnnotationPoint(timestamp: timestamp, price: price);
@@ -317,12 +321,13 @@ class KChartController extends ChangeNotifier {
 
   /// Pans the viewport by the given delta in pixels.
   void pan(double deltaX, double viewWidth) {
-    if (viewWidth <= 0) return;
+    final chartWidth = viewWidth - yAxisWidth;
+    if (chartWidth <= 0) return;
     final viewport = _frame.viewport;
     final int visibleCount = viewport.endIdx - viewport.startIdx + 1;
     if (visibleCount <= 0) return;
 
-    final double candleWidth = viewWidth / visibleCount;
+    final double candleWidth = chartWidth / visibleCount;
     double newScrollX = viewport.scrollX + deltaX;
     int indexDelta = (newScrollX / candleWidth).truncate();
 
@@ -358,7 +363,8 @@ class KChartController extends ChangeNotifier {
 
   /// Zooms the viewport by the given scale factor around a focal point.
   void zoom(double scaleFactor, double focalPointX, double viewWidth) {
-    if (viewWidth <= 0 || scaleFactor == 1.0) return;
+    final chartWidth = viewWidth - yAxisWidth;
+    if (chartWidth <= 0 || scaleFactor == 1.0) return;
     final viewport = _frame.viewport;
     final int visibleCount = viewport.endIdx - viewport.startIdx + 1;
     if (visibleCount <= 0) return;
@@ -375,9 +381,9 @@ class KChartController extends ChangeNotifier {
     newVisibleCount = newVisibleCount.clamp(5, _frame.series.length);
     if (newVisibleCount == visibleCount) return;
 
-    final double candleWidth = viewWidth / visibleCount;
+    final double candleWidth = chartWidth / visibleCount;
     final double focalIdx = viewport.startIdx + (focalPointX / candleWidth);
-    final double relativePos = focalPointX / viewWidth;
+    final double relativePos = focalPointX / chartWidth;
 
     int newStartIdx = (focalIdx - relativePos * newVisibleCount).round();
     int newEndIdx = newStartIdx + newVisibleCount - 1;
@@ -420,6 +426,9 @@ class KChartController extends ChangeNotifier {
     final size = lastViewSize;
     if (size == null || size.width <= 0) return null;
 
+    final double chartWidth = size.width - yAxisWidth;
+    if (dx > chartWidth) return null;
+
     final series = _frame.series;
     if (series.length == 0) return null;
 
@@ -427,7 +436,7 @@ class KChartController extends ChangeNotifier {
     final int startIdx = viewport.startIdx.clamp(0, series.length - 1);
     final int endIdx = viewport.endIdx.clamp(0, series.length - 1);
     final int visibleCount = endIdx - startIdx + 1;
-    final double candleWidth = (size.width / visibleCount);
+    final double candleWidth = (chartWidth / visibleCount);
 
     final double relativeIdx = dx / candleWidth;
     final int index = (startIdx + relativeIdx.floor()).clamp(
@@ -442,6 +451,8 @@ class KChartController extends ChangeNotifier {
     final size = lastViewSize;
     if (size == null || size.width <= 0) return null;
 
+    final double chartWidth = size.width - yAxisWidth;
+
     final series = _frame.series;
     if (series.length == 0) return null;
 
@@ -453,7 +464,7 @@ class KChartController extends ChangeNotifier {
     final int startIdx = viewport.startIdx.clamp(0, series.length - 1);
     final int endIdx = viewport.endIdx.clamp(0, series.length - 1);
     final int visibleCount = endIdx - startIdx + 1;
-    final double candleWidth = (size.width / visibleCount);
+    final double candleWidth = (chartWidth / visibleCount);
 
     return (index - startIdx) * candleWidth + candleWidth / 2;
   }

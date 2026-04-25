@@ -35,6 +35,9 @@ class ChartTheme with _$ChartTheme {
     /// Color for the chart background.
     required Color backgroundColor,
 
+    /// Width of the Y-axis (price scale) on the right.
+    @Default(60.0) double yAxisWidth,
+
     /// Color for Volume Profile buy bars.
     required Color vpBuyColor,
 
@@ -64,6 +67,7 @@ class ChartTheme with _$ChartTheme {
         crosshairTextStyle: const TextStyle(fontSize: 10, color: Colors.white),
         tradeLineColor: Colors.blue,
         backgroundColor: Colors.white,
+        yAxisWidth: 60.0,
         vpBuyColor: const Color(0x804CAF50),
         vpSellColor: const Color(0x80E91E63),
         vpPocColor: Colors.orange,
@@ -82,6 +86,7 @@ class ChartTheme with _$ChartTheme {
         crosshairTextStyle: const TextStyle(fontSize: 10, color: Colors.black),
         tradeLineColor: Colors.blueAccent,
         backgroundColor: const Color(0xFF121212),
+        yAxisWidth: 60.0,
         vpBuyColor: const Color(0x8026A69A),
         vpSellColor: const Color(0x80EF5350),
         vpPocColor: Colors.orangeAccent,

@@ -95,12 +95,14 @@ void main() {
       final paintPool = PaintPool();
       final gridCache = LayerCache();
       final candleCache = LayerCache();
+      final yAxisCache = LayerCache();
 
       final painter1 = MainPanelPainter(
         frame: frame1,
         paintPool: paintPool,
         gridCache: gridCache,
         candleCache: candleCache,
+        yAxisCache: yAxisCache,
         theme: ChartTheme.light(),
       );
       final painter2 = MainPanelPainter(
@@ -108,6 +110,7 @@ void main() {
         paintPool: paintPool,
         gridCache: gridCache,
         candleCache: candleCache,
+        yAxisCache: yAxisCache,
         theme: ChartTheme.light(),
       );
 

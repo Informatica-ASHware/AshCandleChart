@@ -45,6 +45,7 @@ class _MainPanelWidgetState extends State<_MainPanelWidget> {
   late final PaintPool _paintPool;
   late final LayerCache _gridCache;
   late final LayerCache _candleCache;
+  late final LayerCache _yAxisCache;
 
   final Float32List _bullishBuffer = Float32List(1000 * 24);
   final Float32List _bearishBuffer = Float32List(1000 * 24);
@@ -55,12 +56,14 @@ class _MainPanelWidgetState extends State<_MainPanelWidget> {
     _paintPool = PaintPool();
     _gridCache = LayerCache();
     _candleCache = LayerCache();
+    _yAxisCache = LayerCache();
   }
 
   @override
   void dispose() {
     _gridCache.dispose();
     _candleCache.dispose();
+    _yAxisCache.dispose();
     super.dispose();
   }
 
@@ -82,6 +85,7 @@ class _MainPanelWidgetState extends State<_MainPanelWidget> {
                 paintPool: _paintPool,
                 gridCache: _gridCache,
                 candleCache: _candleCache,
+                yAxisCache: _yAxisCache,
                 theme: theme,
                 bullishBuffer: _bullishBuffer,
                 bearishBuffer: _bearishBuffer,

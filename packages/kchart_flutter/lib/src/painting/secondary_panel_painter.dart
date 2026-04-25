@@ -74,10 +74,10 @@ class SecondaryPanelPainter extends CustomPainter {
 
         if (maxVolume == 0) return;
 
-        final double viewWidth = size.width;
+        final double chartWidth = size.width - theme.yAxisWidth;
         final double viewHeight = size.height;
         final int visibleCount = endIdx - startIdx + 1;
-        final double barWidth = viewWidth / visibleCount;
+        final double barWidth = chartWidth / visibleCount;
         final double bodyWidth = barWidth * 0.8;
 
         final Paint bullPaint = paintPool.borrow()
@@ -123,6 +123,7 @@ class SecondaryPanelPainter extends CustomPainter {
       viewport.endIdx,
       size.width,
       size.height,
+      theme.yAxisWidth,
       indicatorId,
     );
 
@@ -149,9 +150,9 @@ class SecondaryPanelPainter extends CustomPainter {
 
         final double range = maxValue - minValue;
         final double viewHeight = size.height;
-        final double viewWidth = size.width;
+        final double chartWidth = size.width - theme.yAxisWidth;
         final int visibleCount = endIdx - startIdx + 1;
-        final double stepX = viewWidth / visibleCount;
+        final double stepX = chartWidth / visibleCount;
 
         final Path path = Path();
         bool first = true;

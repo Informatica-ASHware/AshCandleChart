@@ -95,6 +95,9 @@ class _RenderCrosshair extends RenderBox {
   @override
   void paint(PaintingContext context, Offset offset) {
     final canvas = context.canvas;
+    final scope = KChartScope.of(_chartKey.currentContext!);
+    final yAxisWidth = scope?.theme.yAxisWidth ?? 0.0;
+    final chartWidth = size.width - yAxisWidth;
 
     final paint = Paint()
       ..color = _color
@@ -113,7 +116,7 @@ class _RenderCrosshair extends RenderBox {
           if (localDy >= 0 && localDy <= size.height) {
             canvas.drawLine(
               Offset(0, localDy) + offset,
-              Offset(size.width, localDy) + offset,
+              Offset(chartWidth, localDy) + offset,
               paint,
             );
           }
