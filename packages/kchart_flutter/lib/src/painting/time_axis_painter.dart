@@ -67,13 +67,16 @@ class TimeAxisPainter extends CustomPainter {
         // Simple approach: pick N labels distributed equitably
         final int step = (visibleCount / maxLabels).ceil();
 
+        // Determine if we should use time or date format for the entire axis
+        // If the visible range is less than 2 days, use time format.
+        final bool isIntraday =
+            (series.timestamps[endIdx] - series.timestamps[startIdx]) <
+                86400000 * 2;
+
         for (int i = startIdx; i <= endIdx; i += step) {
           final int timestamp = series.timestamps[i];
-
-          // Check if it's the same day as previous label (approximate for now)
-          // For a more robust approach, we could compare with the first visible candle's day
-          final bool isSameDay = _isSameDay(series.timestamps[startIdx], timestamp);
-          final String label = formatters.formatXAxisLabel(timestamp, isSameDay: isSameDay);
+          final String label =
+              formatters.formatXAxisLabel(timestamp, isSameDay: isIntraday);
 
           final textPainter = TextPainter(
             text: TextSpan(
@@ -97,12 +100,6 @@ class TimeAxisPainter extends CustomPainter {
     if (cache.picture != null) {
       canvas.drawPicture(cache.picture!);
     }
-  }
-
-  bool _isSameDay(int ts1, int ts2) {
-    final d1 = DateTime.fromMillisecondsSinceEpoch(ts1, isUtc: true);
-    final d2 = DateTime.fromMillisecondsSinceEpoch(ts2, isUtc: true);
-    return d1.year == d2.year && d1.month == d2.month && d1.day == d2.day;
   }
 
   @override

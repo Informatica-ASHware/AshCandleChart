@@ -84,7 +84,6 @@ class _RenderCrosshair extends RenderBox {
   @override
   bool get sizedByParent => true;
 
-  @override
   Size computePreferredSize(BoxConstraints constraints) => constraints.biggest;
 
   @override
