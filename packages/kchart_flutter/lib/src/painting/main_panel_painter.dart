@@ -1,5 +1,7 @@
+import 'dart:math' as math;
 import 'dart:typed_data';
 import 'dart:ui' as ui;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:kchart_core/kchart_core.dart';
 import '../accessibility/chart_semantics_builder.dart';
@@ -27,6 +29,9 @@ class MainPanelPainter extends CustomPainter {
   /// Cache for the candle layer (static history).
   final LayerCache candleCache;
 
+  /// Cache for the Y-axis layer.
+  final LayerCache yAxisCache;
+
   /// Optional pre-allocated buffer for bullish vertices to reduce GC pressure.
   final Float32List? bullishBuffer;
 
@@ -48,6 +53,7 @@ class MainPanelPainter extends CustomPainter {
     required this.paintPool,
     required this.gridCache,
     required this.candleCache,
+    required this.yAxisCache,
     required this.theme,
     this.bullishBuffer,
     this.bearishBuffer,
@@ -57,13 +63,59 @@ class MainPanelPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    _drawGrid(canvas, size);
+    final priceRange = calculateVisiblePriceRange();
+    final ticks = calculatePriceTicks(priceRange.$1, priceRange.$2, 5);
+
+    _drawGrid(canvas, size, ticks);
     _drawSelection(canvas, size);
     _drawCandles(canvas, size);
     _drawAnnotations(canvas, size);
     _drawTradeOverlays(canvas, size);
+    _drawYAxis(canvas, size, ticks);
 
     paintPool.releaseAll();
+  }
+
+  void _drawYAxis(Canvas canvas, Size size, List<double> ticks) {
+    if (theme.yAxisWidth <= 0 || formatters == null) return;
+
+    // Cache key for Y-axis depends on ticks and price range.
+    final priceRange = calculateVisiblePriceRange();
+    final Object cacheKey =
+        (size.width, size.height, Object.hashAll(ticks), priceRange);
+
+    yAxisCache.updateIfNeeded(
+      cacheKey: cacheKey,
+      size: size,
+      paint: (ui.Canvas yAxisCanvas) {
+        final double minPrice = priceRange.$1;
+        final double maxPrice = priceRange.$2;
+        final double range = maxPrice - minPrice;
+        final double viewHeight = size.height;
+
+        for (final tick in ticks) {
+          final double y = viewHeight - ((tick - minPrice) / range * viewHeight);
+          final String label = formatters!.formatPrice(tick);
+
+          final textPainter = TextPainter(
+            text: TextSpan(
+              text: label,
+              style: theme.axisTextStyle,
+            ),
+            textDirection: TextDirection.ltr,
+          );
+          textPainter.layout();
+
+          // Draw label aligned to the right margin with some padding
+          final double x = size.width - theme.yAxisWidth + 4;
+          textPainter.paint(yAxisCanvas, Offset(x, y - textPainter.height / 2));
+        }
+      },
+    );
+
+    if (yAxisCache.picture != null) {
+      canvas.drawPicture(yAxisCache.picture!);
+    }
   }
 
   void _drawSelection(Canvas canvas, Size size) {
@@ -78,8 +130,8 @@ class MainPanelPainter extends CustomPainter {
     final int startIdx = viewport.startIdx.clamp(0, series.length - 1);
     final int endIdx = viewport.endIdx.clamp(0, series.length - 1);
     final int visibleCount = endIdx - startIdx + 1;
-    final double viewWidth = size.width;
-    final double candleWidth = viewWidth / visibleCount;
+    final double chartWidth = size.width - theme.yAxisWidth;
+    final double candleWidth = chartWidth / visibleCount;
 
     final int selStartIdx =
         findIndexAtTimestamp(series.timestamps, selection.$1);
@@ -88,10 +140,10 @@ class MainPanelPainter extends CustomPainter {
     final double xStart = (selStartIdx - startIdx) * candleWidth;
     final double xEnd = (selEndIdx - startIdx) * candleWidth + candleWidth;
 
-    if (xEnd < 0 || xStart > viewWidth) return;
+    if (xEnd < 0 || xStart > chartWidth) return;
 
-    final double left = xStart.clamp(0.0, viewWidth);
-    final double right = xEnd.clamp(0.0, viewWidth);
+    final double left = xStart.clamp(0.0, chartWidth);
+    final double right = xEnd.clamp(0.0, chartWidth);
 
     final paint = paintPool.borrow()
       // ignore: deprecated_member_use
@@ -101,9 +153,11 @@ class MainPanelPainter extends CustomPainter {
     canvas.drawRect(Rect.fromLTRB(left, 0, right, size.height), paint);
   }
 
-  void _drawGrid(Canvas canvas, Size size) {
-    // Cache key for grid depends on size.
-    final Object cacheKey = (size.width, size.height);
+  void _drawGrid(Canvas canvas, Size size, List<double> ticks) {
+    // Cache key for grid depends on size and ticks.
+    // Use hashAll for ticks because List equality is referential.
+    final Object cacheKey =
+        (size.width, size.height, Object.hashAll(ticks), theme.yAxisWidth);
 
     gridCache.updateIfNeeded(
       cacheKey: cacheKey,
@@ -114,16 +168,33 @@ class MainPanelPainter extends CustomPainter {
           ..strokeWidth = 1.0
           ..style = PaintingStyle.stroke;
 
-        const int horizontalLines = 5;
-        for (int i = 0; i <= horizontalLines; i++) {
-          final double y = size.height * i / horizontalLines;
-          gridCanvas.drawLine(Offset(0, y), Offset(size.width, y), paint);
+        final double chartWidth = size.width - theme.yAxisWidth;
+        final double viewHeight = size.height;
+
+        // Draw horizontal lines based on price ticks
+        final priceRange = calculateVisiblePriceRange();
+        final double minPrice = priceRange.$1;
+        final double maxPrice = priceRange.$2;
+        final double range = maxPrice - minPrice;
+
+        for (final tick in ticks) {
+          final double y = viewHeight - ((tick - minPrice) / range * viewHeight);
+          gridCanvas.drawLine(Offset(0, y), Offset(chartWidth, y), paint);
         }
 
         const int verticalLines = 8;
         for (int i = 0; i <= verticalLines; i++) {
-          final double x = size.width * i / verticalLines;
-          gridCanvas.drawLine(Offset(x, 0), Offset(x, size.height), paint);
+          final double x = chartWidth * i / verticalLines;
+          gridCanvas.drawLine(Offset(x, 0), Offset(x, viewHeight), paint);
+        }
+
+        // Draw Y-axis border line
+        if (theme.yAxisWidth > 0) {
+          gridCanvas.drawLine(
+            Offset(chartWidth, 0),
+            Offset(chartWidth, viewHeight),
+            paint,
+          );
         }
       },
     );
@@ -151,6 +222,7 @@ class MainPanelPainter extends CustomPainter {
       viewport.endIdx,
       size.width,
       size.height,
+      theme.yAxisWidth,
       // ignore: deprecated_member_use
       theme.bullColor.value,
       // ignore: deprecated_member_use
@@ -177,10 +249,10 @@ class MainPanelPainter extends CustomPainter {
 
         final double priceRange = maxPrice - minPrice;
         final double viewHeight = size.height;
-        final double viewWidth = size.width;
+        final double chartWidth = size.width - theme.yAxisWidth;
 
         final int visibleCount = endIdx - startIdx + 1;
-        final double candleWidth = viewWidth / visibleCount;
+        final double candleWidth = chartWidth / visibleCount;
         final double bodyWidth = candleWidth * 0.8;
         final double wickWidth = (candleWidth * 0.1).clamp(1.0, 3.0);
 
@@ -305,9 +377,9 @@ class MainPanelPainter extends CustomPainter {
     final int startIdx = viewport.startIdx.clamp(0, series.length - 1);
     final int endIdx = viewport.endIdx.clamp(0, series.length - 1);
     final int visibleCount = endIdx - startIdx + 1;
-    final double viewWidth = size.width;
+    final double chartWidth = size.width - theme.yAxisWidth;
     final double viewHeight = size.height;
-    final double candleWidth = viewWidth / visibleCount;
+    final double candleWidth = chartWidth / visibleCount;
 
     double minPrice = double.infinity;
     double maxPrice = double.negativeInfinity;
@@ -344,9 +416,9 @@ class MainPanelPainter extends CustomPainter {
     final int startIdx = viewport.startIdx.clamp(0, series.length - 1);
     final int endIdx = viewport.endIdx.clamp(0, series.length - 1);
     final int visibleCount = endIdx - startIdx + 1;
-    final double viewWidth = size.width;
+    final double chartWidth = size.width - theme.yAxisWidth;
     final double viewHeight = size.height;
-    final double candleWidth = viewWidth / visibleCount;
+    final double candleWidth = chartWidth / visibleCount;
 
     // We need price range to scale Y coordinates.
     // Ideally this is pre-calculated or shared.
@@ -428,7 +500,8 @@ class MainPanelPainter extends CustomPainter {
     final int startIdx = viewport.startIdx.clamp(0, series.length - 1);
     final int endIdx = viewport.endIdx.clamp(0, series.length - 1);
     final int visibleCount = endIdx - startIdx + 1;
-    final double candleWidth = size.width / visibleCount;
+    final double chartWidth = size.width - theme.yAxisWidth;
+    final double candleWidth = chartWidth / visibleCount;
 
     final List<CustomPainterSemantics> nodes = [];
 
@@ -462,9 +535,84 @@ class MainPanelPainter extends CustomPainter {
     return nodes;
   }
 
+  /// Calculates the min and max price in the visible range.
+  @visibleForTesting
+  (double, double) calculateVisiblePriceRange() {
+    final series = frame.series;
+    final viewport = frame.viewport;
+    if (series.length == 0) return (0.0, 0.0);
+
+    final int startIdx = viewport.startIdx.clamp(0, series.length - 1);
+    final int endIdx = viewport.endIdx.clamp(0, series.length - 1);
+
+    double minPrice = double.infinity;
+    double maxPrice = double.negativeInfinity;
+
+    for (int i = startIdx; i <= endIdx; i++) {
+      if (series.low[i] < minPrice) minPrice = series.low[i];
+      if (series.high[i] > maxPrice) maxPrice = series.high[i];
+    }
+
+    if (minPrice == maxPrice) {
+      minPrice -= 1.0;
+      maxPrice += 1.0;
+    }
+    return (minPrice, maxPrice);
+  }
+
+  /// Calculates "nice" price ticks for the Y-axis.
+  @visibleForTesting
+  List<double> calculatePriceTicks(double min, double max, int maxTicks) {
+    if (min >= max || maxTicks <= 1) return [];
+
+    final double range = _niceNum(max - min, false);
+    final double step = _niceNum(range / (maxTicks - 1), true);
+    final double graphMin = (min / step).floor() * step;
+    final double graphMax = (max / step).ceil() * step;
+
+    final List<double> ticks = [];
+    for (double x = graphMin; x <= graphMax + (step / 10); x += step) {
+      if (x >= min && x <= max) {
+        ticks.add(x);
+      }
+    }
+    return ticks;
+  }
+
+  double _niceNum(double range, bool round) {
+    final double exponent = (math.log(range) / math.ln10).floorToDouble();
+    final double fraction = range / math.pow(10, exponent);
+    double niceFraction;
+
+    if (round) {
+      if (fraction < 1.5) {
+        niceFraction = 1;
+      } else if (fraction < 3) {
+        niceFraction = 2;
+      } else if (fraction < 7) {
+        niceFraction = 5;
+      } else {
+        niceFraction = 10;
+      }
+    } else {
+      if (fraction <= 1) {
+        niceFraction = 1;
+      } else if (fraction <= 2) {
+        niceFraction = 2;
+      } else if (fraction <= 5) {
+        niceFraction = 5;
+      } else {
+        niceFraction = 10;
+      }
+    }
+
+    return niceFraction * math.pow(10, exponent);
+  }
+
   @override
   bool shouldRepaint(covariant MainPanelPainter oldDelegate) {
     return oldDelegate.frame.panelSequenceNumbers['main'] !=
-        frame.panelSequenceNumbers['main'];
+            frame.panelSequenceNumbers['main'] ||
+        oldDelegate.theme.yAxisWidth != theme.yAxisWidth;
   }
 }

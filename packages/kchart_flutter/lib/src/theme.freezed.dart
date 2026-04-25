@@ -40,6 +40,9 @@ mixin _$ChartTheme {
   /// Color for the chart background.
   Color get backgroundColor => throw _privateConstructorUsedError;
 
+  /// Width of the Y-axis (price scale) on the right.
+  double get yAxisWidth => throw _privateConstructorUsedError;
+
   /// Color for Volume Profile buy bars.
   Color get vpBuyColor => throw _privateConstructorUsedError;
 
@@ -80,6 +83,7 @@ abstract class $ChartThemeCopyWith<$Res> {
       TextStyle crosshairTextStyle,
       Color tradeLineColor,
       Color backgroundColor,
+      double yAxisWidth,
       Color vpBuyColor,
       Color vpSellColor,
       Color vpPocColor,
@@ -111,6 +115,7 @@ class _$ChartThemeCopyWithImpl<$Res, $Val extends ChartTheme>
     Object? crosshairTextStyle = null,
     Object? tradeLineColor = null,
     Object? backgroundColor = null,
+    Object? yAxisWidth = null,
     Object? vpBuyColor = null,
     Object? vpSellColor = null,
     Object? vpPocColor = null,
@@ -151,6 +156,10 @@ class _$ChartThemeCopyWithImpl<$Res, $Val extends ChartTheme>
           ? _value.backgroundColor
           : backgroundColor // ignore: cast_nullable_to_non_nullable
               as Color,
+      yAxisWidth: null == yAxisWidth
+          ? _value.yAxisWidth
+          : yAxisWidth // ignore: cast_nullable_to_non_nullable
+              as double,
       vpBuyColor: null == vpBuyColor
           ? _value.vpBuyColor
           : vpBuyColor // ignore: cast_nullable_to_non_nullable
@@ -196,6 +205,7 @@ abstract class _$$ChartThemeImplCopyWith<$Res>
       TextStyle crosshairTextStyle,
       Color tradeLineColor,
       Color backgroundColor,
+      double yAxisWidth,
       Color vpBuyColor,
       Color vpSellColor,
       Color vpPocColor,
@@ -225,6 +235,7 @@ class __$$ChartThemeImplCopyWithImpl<$Res>
     Object? crosshairTextStyle = null,
     Object? tradeLineColor = null,
     Object? backgroundColor = null,
+    Object? yAxisWidth = null,
     Object? vpBuyColor = null,
     Object? vpSellColor = null,
     Object? vpPocColor = null,
@@ -265,6 +276,10 @@ class __$$ChartThemeImplCopyWithImpl<$Res>
           ? _value.backgroundColor
           : backgroundColor // ignore: cast_nullable_to_non_nullable
               as Color,
+      yAxisWidth: null == yAxisWidth
+          ? _value.yAxisWidth
+          : yAxisWidth // ignore: cast_nullable_to_non_nullable
+              as double,
       vpBuyColor: null == vpBuyColor
           ? _value.vpBuyColor
           : vpBuyColor // ignore: cast_nullable_to_non_nullable
@@ -305,6 +320,7 @@ class _$ChartThemeImpl implements _ChartTheme {
       required this.crosshairTextStyle,
       required this.tradeLineColor,
       required this.backgroundColor,
+      this.yAxisWidth = 60.0,
       required this.vpBuyColor,
       required this.vpSellColor,
       required this.vpPocColor,
@@ -344,6 +360,11 @@ class _$ChartThemeImpl implements _ChartTheme {
   @override
   final Color backgroundColor;
 
+  /// Width of the Y-axis (price scale) on the right.
+  @override
+  @JsonKey()
+  final double yAxisWidth;
+
   /// Color for Volume Profile buy bars.
   @override
   final Color vpBuyColor;
@@ -370,7 +391,7 @@ class _$ChartThemeImpl implements _ChartTheme {
 
   @override
   String toString() {
-    return 'ChartTheme(gridColor: $gridColor, bullColor: $bullColor, bearColor: $bearColor, crosshairColor: $crosshairColor, axisTextStyle: $axisTextStyle, crosshairTextStyle: $crosshairTextStyle, tradeLineColor: $tradeLineColor, backgroundColor: $backgroundColor, vpBuyColor: $vpBuyColor, vpSellColor: $vpSellColor, vpPocColor: $vpPocColor, bidColor: $bidColor, askColor: $askColor, liquidationColor: $liquidationColor)';
+    return 'ChartTheme(gridColor: $gridColor, bullColor: $bullColor, bearColor: $bearColor, crosshairColor: $crosshairColor, axisTextStyle: $axisTextStyle, crosshairTextStyle: $crosshairTextStyle, tradeLineColor: $tradeLineColor, backgroundColor: $backgroundColor, yAxisWidth: $yAxisWidth, vpBuyColor: $vpBuyColor, vpSellColor: $vpSellColor, vpPocColor: $vpPocColor, bidColor: $bidColor, askColor: $askColor, liquidationColor: $liquidationColor)';
   }
 
   @override
@@ -394,6 +415,8 @@ class _$ChartThemeImpl implements _ChartTheme {
                 other.tradeLineColor == tradeLineColor) &&
             (identical(other.backgroundColor, backgroundColor) ||
                 other.backgroundColor == backgroundColor) &&
+            (identical(other.yAxisWidth, yAxisWidth) ||
+                other.yAxisWidth == yAxisWidth) &&
             (identical(other.vpBuyColor, vpBuyColor) ||
                 other.vpBuyColor == vpBuyColor) &&
             (identical(other.vpSellColor, vpSellColor) ||
@@ -419,6 +442,7 @@ class _$ChartThemeImpl implements _ChartTheme {
       crosshairTextStyle,
       tradeLineColor,
       backgroundColor,
+      yAxisWidth,
       vpBuyColor,
       vpSellColor,
       vpPocColor,
@@ -445,6 +469,7 @@ abstract class _ChartTheme implements ChartTheme {
       required final TextStyle crosshairTextStyle,
       required final Color tradeLineColor,
       required final Color backgroundColor,
+      final double yAxisWidth,
       required final Color vpBuyColor,
       required final Color vpSellColor,
       required final Color vpPocColor,
@@ -483,6 +508,10 @@ abstract class _ChartTheme implements ChartTheme {
   /// Color for the chart background.
   @override
   Color get backgroundColor;
+
+  /// Width of the Y-axis (price scale) on the right.
+  @override
+  double get yAxisWidth;
 
   /// Color for Volume Profile buy bars.
   @override

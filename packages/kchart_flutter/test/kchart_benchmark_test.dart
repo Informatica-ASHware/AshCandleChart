@@ -75,6 +75,7 @@ void main() {
         paintPool: paintPool,
         gridCache: gridCache,
         candleCache: candleCache,
+          yAxisCache: LayerCache(),
         theme: ChartTheme.light(),
       );
       painter.paint(canvas, size);
@@ -101,6 +102,7 @@ void main() {
         paintPool: paintPool,
         gridCache: gridCache,
         candleCache: candleCache,
+          yAxisCache: LayerCache(),
         theme: ChartTheme.light(),
       );
 

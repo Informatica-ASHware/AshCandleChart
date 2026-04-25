@@ -15,11 +15,15 @@ class CrosshairPainter extends CustomPainter {
   /// The width of the crosshair lines.
   final double strokeWidth;
 
+  /// The width of the Y-axis margin to exclude from the crosshair lines.
+  final double yAxisWidth;
+
   /// Creates a [CrosshairPainter].
   CrosshairPainter({
     required this.state,
     this.color = Colors.grey,
     this.strokeWidth = 1.0,
+    this.yAxisWidth = 0.0,
   });
 
   @override
@@ -32,10 +36,12 @@ class CrosshairPainter extends CustomPainter {
       ..strokeWidth = strokeWidth
       ..style = PaintingStyle.stroke;
 
+    final double chartWidth = size.width - yAxisWidth;
+
     // Draw vertical line (if dx is within bounds)
     if (currentState.dx != null &&
         currentState.dx! >= 0 &&
-        currentState.dx! <= size.width) {
+        currentState.dx! <= chartWidth) {
       canvas.drawLine(
         Offset(currentState.dx!, 0),
         Offset(currentState.dx!, size.height),
@@ -44,17 +50,12 @@ class CrosshairPainter extends CustomPainter {
     }
 
     // Draw horizontal line (if dy is within bounds)
-    // dy is provided relative to the KChart root.
-    // We assume the painter is rendered in a panel that starts at some offset.
-    // However, since we don't know the panel's offset here,
-    // we should have dy be relative to the panel, or use a better approach.
-    // For now, we'll draw it if dy is between 0 and size.height (local coords).
     if (currentState.dy != null &&
         currentState.dy! >= 0 &&
         currentState.dy! <= size.height) {
       canvas.drawLine(
         Offset(0, currentState.dy!),
-        Offset(size.width, currentState.dy!),
+        Offset(chartWidth, currentState.dy!),
         paint,
       );
     }
@@ -64,6 +65,7 @@ class CrosshairPainter extends CustomPainter {
   bool shouldRepaint(covariant CrosshairPainter oldDelegate) {
     return oldDelegate.state != state ||
         oldDelegate.color != color ||
-        oldDelegate.strokeWidth != strokeWidth;
+        oldDelegate.strokeWidth != strokeWidth ||
+        oldDelegate.yAxisWidth != yAxisWidth;
   }
 }

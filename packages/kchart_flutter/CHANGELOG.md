@@ -21,3 +21,12 @@
     - Keyboard navigation support (Arrow keys) for precise crosshair movement.
 - Support for `MediaQuery.disableAnimations` to respect system-level animation preferences.
 - Enhanced accessibility for UI controls including draggable dividers and AI panels.
+
+## [0.1.0-dev.3] - 2024-05-22
+
+### Added
+- Dynamic Y-Axis (Price Scale) rendering in the main panel.
+- Automatic calculation of human-readable price intervals (ticks).
+- Horizontal grid lines aligned with price labels.
+- Synchronized Y-axis margin across all chart components (candles, grid, annotations, and crosshair).
+- Updated `ChartTheme` with `yAxisWidth` configuration.
