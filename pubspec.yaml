@@ -92,10 +92,14 @@ melos:
         dependsOn: build_runner
 
     analyze:
-      description: "Static analysis across the workspace."
-      run: dart analyze .
-      exec:
-        concurrency: 4
+      description: "Static analysis exhaustively across all nested packages."
+      run: |
+        dart analyze . && \
+        dart analyze examples/crypto_dashboard && \
+        dart analyze packages/kchart_core/example && \
+        dart analyze packages/kchart_flutter/example && \
+        dart analyze packages/kchart_riverpod/example && \
+        melos exec -- "dart analyze ."
 
     test:flutter:
       description: "Run Flutter tests."

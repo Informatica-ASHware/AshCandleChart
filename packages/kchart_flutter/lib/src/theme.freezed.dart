@@ -42,7 +42,7 @@ mixin _$ChartTheme {
   double get yAxisWidth;
 
   /// Height of the X-axis (time scale) at the bottom.
-  double get xAxisHeight => throw _privateConstructorUsedError;
+  double get xAxisHeight;
 
   /// Color for Volume Profile buy bars.
   Color get vpBuyColor;
@@ -92,6 +92,8 @@ mixin _$ChartTheme {
                 other.backgroundColor == backgroundColor) &&
             (identical(other.yAxisWidth, yAxisWidth) ||
                 other.yAxisWidth == yAxisWidth) &&
+            (identical(other.xAxisHeight, xAxisHeight) ||
+                other.xAxisHeight == xAxisHeight) &&
             (identical(other.vpBuyColor, vpBuyColor) ||
                 other.vpBuyColor == vpBuyColor) &&
             (identical(other.vpSellColor, vpSellColor) ||
@@ -118,6 +120,7 @@ mixin _$ChartTheme {
       tradeLineColor,
       backgroundColor,
       yAxisWidth,
+      xAxisHeight,
       vpBuyColor,
       vpSellColor,
       vpPocColor,
@@ -127,7 +130,7 @@ mixin _$ChartTheme {
 
   @override
   String toString() {
-    return 'ChartTheme(gridColor: $gridColor, bullColor: $bullColor, bearColor: $bearColor, crosshairColor: $crosshairColor, axisTextStyle: $axisTextStyle, crosshairTextStyle: $crosshairTextStyle, tradeLineColor: $tradeLineColor, backgroundColor: $backgroundColor, yAxisWidth: $yAxisWidth, vpBuyColor: $vpBuyColor, vpSellColor: $vpSellColor, vpPocColor: $vpPocColor, bidColor: $bidColor, askColor: $askColor, liquidationColor: $liquidationColor)';
+    return 'ChartTheme(gridColor: $gridColor, bullColor: $bullColor, bearColor: $bearColor, crosshairColor: $crosshairColor, axisTextStyle: $axisTextStyle, crosshairTextStyle: $crosshairTextStyle, tradeLineColor: $tradeLineColor, backgroundColor: $backgroundColor, yAxisWidth: $yAxisWidth, xAxisHeight: $xAxisHeight, vpBuyColor: $vpBuyColor, vpSellColor: $vpSellColor, vpPocColor: $vpPocColor, bidColor: $bidColor, askColor: $askColor, liquidationColor: $liquidationColor)';
   }
 }
 
@@ -223,7 +226,7 @@ class _$ChartThemeCopyWithImpl<$Res> implements $ChartThemeCopyWith<$Res> {
           : yAxisWidth // ignore: cast_nullable_to_non_nullable
               as double,
       xAxisHeight: null == xAxisHeight
-          ? _value.xAxisHeight
+          ? _self.xAxisHeight
           : xAxisHeight // ignore: cast_nullable_to_non_nullable
               as double,
       vpBuyColor: null == vpBuyColor
@@ -357,6 +360,7 @@ extension ChartThemePatterns on ChartTheme {
             Color tradeLineColor,
             Color backgroundColor,
             double yAxisWidth,
+            double xAxisHeight,
             Color vpBuyColor,
             Color vpSellColor,
             Color vpPocColor,
@@ -379,6 +383,7 @@ extension ChartThemePatterns on ChartTheme {
             _that.tradeLineColor,
             _that.backgroundColor,
             _that.yAxisWidth,
+            _that.xAxisHeight,
             _that.vpBuyColor,
             _that.vpSellColor,
             _that.vpPocColor,
@@ -415,6 +420,7 @@ extension ChartThemePatterns on ChartTheme {
             Color tradeLineColor,
             Color backgroundColor,
             double yAxisWidth,
+            double xAxisHeight,
             Color vpBuyColor,
             Color vpSellColor,
             Color vpPocColor,
@@ -436,6 +442,7 @@ extension ChartThemePatterns on ChartTheme {
             _that.tradeLineColor,
             _that.backgroundColor,
             _that.yAxisWidth,
+            _that.xAxisHeight,
             _that.vpBuyColor,
             _that.vpSellColor,
             _that.vpPocColor,
@@ -471,6 +478,7 @@ extension ChartThemePatterns on ChartTheme {
             Color tradeLineColor,
             Color backgroundColor,
             double yAxisWidth,
+            double xAxisHeight,
             Color vpBuyColor,
             Color vpSellColor,
             Color vpPocColor,
@@ -492,6 +500,7 @@ extension ChartThemePatterns on ChartTheme {
             _that.tradeLineColor,
             _that.backgroundColor,
             _that.yAxisWidth,
+            _that.xAxisHeight,
             _that.vpBuyColor,
             _that.vpSellColor,
             _that.vpPocColor,
@@ -660,7 +669,7 @@ class _ChartTheme implements ChartTheme {
 
   @override
   String toString() {
-    return 'ChartTheme(gridColor: $gridColor, bullColor: $bullColor, bearColor: $bearColor, crosshairColor: $crosshairColor, axisTextStyle: $axisTextStyle, crosshairTextStyle: $crosshairTextStyle, tradeLineColor: $tradeLineColor, backgroundColor: $backgroundColor, yAxisWidth: $yAxisWidth, vpBuyColor: $vpBuyColor, vpSellColor: $vpSellColor, vpPocColor: $vpPocColor, bidColor: $bidColor, askColor: $askColor, liquidationColor: $liquidationColor)';
+    return 'ChartTheme(gridColor: $gridColor, bullColor: $bullColor, bearColor: $bearColor, crosshairColor: $crosshairColor, axisTextStyle: $axisTextStyle, crosshairTextStyle: $crosshairTextStyle, tradeLineColor: $tradeLineColor, backgroundColor: $backgroundColor, yAxisWidth: $yAxisWidth, xAxisHeight: $xAxisHeight, vpBuyColor: $vpBuyColor, vpSellColor: $vpSellColor, vpPocColor: $vpPocColor, bidColor: $bidColor, askColor: $askColor, liquidationColor: $liquidationColor)';
   }
 }
 
@@ -682,6 +691,7 @@ abstract mixin class _$ChartThemeCopyWith<$Res>
       Color tradeLineColor,
       Color backgroundColor,
       double yAxisWidth,
+      double xAxisHeight,
       Color vpBuyColor,
       Color vpSellColor,
       Color vpPocColor,
@@ -711,6 +721,7 @@ class __$ChartThemeCopyWithImpl<$Res> implements _$ChartThemeCopyWith<$Res> {
     Object? tradeLineColor = null,
     Object? backgroundColor = null,
     Object? yAxisWidth = null,
+    Object? xAxisHeight = null,
     Object? vpBuyColor = null,
     Object? vpSellColor = null,
     Object? vpPocColor = null,
@@ -754,6 +765,10 @@ class __$ChartThemeCopyWithImpl<$Res> implements _$ChartThemeCopyWith<$Res> {
       yAxisWidth: null == yAxisWidth
           ? _self.yAxisWidth
           : yAxisWidth // ignore: cast_nullable_to_non_nullable
+              as double,
+      xAxisHeight: null == xAxisHeight
+          ? _self.xAxisHeight
+          : xAxisHeight // ignore: cast_nullable_to_non_nullable
               as double,
       vpBuyColor: null == vpBuyColor
           ? _self.vpBuyColor
