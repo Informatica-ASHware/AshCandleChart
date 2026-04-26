@@ -24,3 +24,7 @@ build/
 .idea/
 *.iml
 .vscode/
+
+# Flutter plugin and cache files
+.flutter-plugins
+.flutter-plugins-dependencies
