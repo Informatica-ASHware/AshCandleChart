@@ -13,13 +13,13 @@ environment:
   sdk: ">=3.6.0 <4.0.0"
 
 dependencies:
-  meta: any
-  freezed_annotation: any
-  json_annotation: any
+  meta: ^1.16.0
+  freezed_annotation: ^3.0.0
+  json_annotation: ^4.9.0
 
 dev_dependencies:
-  build_runner: any
-  freezed: any
-  json_serializable: any
-  test: any
-  glados: any
+  build_runner: ^2.4.13
+  freezed: ^3.0.0
+  json_serializable: ^6.8.0
+  test: ^1.25.15
+  glados: ^1.1.7

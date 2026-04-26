@@ -20,15 +20,13 @@ dependencies:
     sdk: flutter
   kchart_core: any
   kchart_flutter: any
-  riverpod: any
-  flutter_riverpod: any
-  riverpod_annotation: any
-  meta: any
+  riverpod: ^3.2.1
+  flutter_riverpod: ^3.3.1
+  riverpod_annotation: ^4.0.2
+  meta: ^1.16.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: any
-  riverpod_generator: any
-  riverpod_lint: any
-  custom_lint: any
+  build_runner: ^2.4.13
+  riverpod_generator: ^4.0.3
