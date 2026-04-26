@@ -5,7 +5,7 @@ part 'export_config.freezed.dart';
 
 /// Configuration for chart image export.
 @freezed
-class ExportConfig with _$ExportConfig {
+abstract class ExportConfig with _$ExportConfig {
   /// Creates an [ExportConfig].
   const factory ExportConfig({
     /// The pixel ratio for the exported image. Defaults to 2.0.

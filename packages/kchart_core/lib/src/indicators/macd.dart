@@ -8,7 +8,7 @@ part 'macd.freezed.dart';
 
 /// Configuration for the Moving Average Convergence Divergence (MACD) indicator.
 @freezed
-class MACDConfig with _$MACDConfig implements IndicatorConfig {
+abstract class MACDConfig with _$MACDConfig implements IndicatorConfig {
   /// Creates a [MACDConfig].
   const factory MACDConfig({
     required String id,

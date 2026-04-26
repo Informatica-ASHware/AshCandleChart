@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,86 +9,56 @@ part of 'sma.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SMAConfig {
-  String get id => throw _privateConstructorUsedError;
-  int get period => throw _privateConstructorUsedError;
-  List<String> get dependsOn => throw _privateConstructorUsedError;
+  String get id;
+  int get period;
+  List<String> get dependsOn;
 
   /// Create a copy of SMAConfig
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $SMAConfigCopyWith<SMAConfig> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $SMAConfigCopyWith<$Res> {
-  factory $SMAConfigCopyWith(SMAConfig value, $Res Function(SMAConfig) then) =
-      _$SMAConfigCopyWithImpl<$Res, SMAConfig>;
-  @useResult
-  $Res call({String id, int period, List<String> dependsOn});
-}
-
-/// @nodoc
-class _$SMAConfigCopyWithImpl<$Res, $Val extends SMAConfig>
-    implements $SMAConfigCopyWith<$Res> {
-  _$SMAConfigCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of SMAConfig
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $SMAConfigCopyWith<SMAConfig> get copyWith =>
+      _$SMAConfigCopyWithImpl<SMAConfig>(this as SMAConfig, _$identity);
+
   @override
-  $Res call({
-    Object? id = null,
-    Object? period = null,
-    Object? dependsOn = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      period: null == period
-          ? _value.period
-          : period // ignore: cast_nullable_to_non_nullable
-              as int,
-      dependsOn: null == dependsOn
-          ? _value.dependsOn
-          : dependsOn // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is SMAConfig &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.period, period) || other.period == period) &&
+            const DeepCollectionEquality().equals(other.dependsOn, dependsOn));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, id, period, const DeepCollectionEquality().hash(dependsOn));
+
+  @override
+  String toString() {
+    return 'SMAConfig(id: $id, period: $period, dependsOn: $dependsOn)';
   }
 }
 
 /// @nodoc
-abstract class _$$SMAConfigImplCopyWith<$Res>
-    implements $SMAConfigCopyWith<$Res> {
-  factory _$$SMAConfigImplCopyWith(
-          _$SMAConfigImpl value, $Res Function(_$SMAConfigImpl) then) =
-      __$$SMAConfigImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $SMAConfigCopyWith<$Res> {
+  factory $SMAConfigCopyWith(SMAConfig value, $Res Function(SMAConfig) _then) =
+      _$SMAConfigCopyWithImpl;
   @useResult
   $Res call({String id, int period, List<String> dependsOn});
 }
 
 /// @nodoc
-class __$$SMAConfigImplCopyWithImpl<$Res>
-    extends _$SMAConfigCopyWithImpl<$Res, _$SMAConfigImpl>
-    implements _$$SMAConfigImplCopyWith<$Res> {
-  __$$SMAConfigImplCopyWithImpl(
-      _$SMAConfigImpl _value, $Res Function(_$SMAConfigImpl) _then)
-      : super(_value, _then);
+class _$SMAConfigCopyWithImpl<$Res> implements $SMAConfigCopyWith<$Res> {
+  _$SMAConfigCopyWithImpl(this._self, this._then);
+
+  final SMAConfig _self;
+  final $Res Function(SMAConfig) _then;
 
   /// Create a copy of SMAConfig
   /// with the given fields replaced by the non-null parameter values.
@@ -99,27 +69,184 @@ class __$$SMAConfigImplCopyWithImpl<$Res>
     Object? period = null,
     Object? dependsOn = null,
   }) {
-    return _then(_$SMAConfigImpl(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       period: null == period
-          ? _value.period
+          ? _self.period
           : period // ignore: cast_nullable_to_non_nullable
               as int,
       dependsOn: null == dependsOn
-          ? _value._dependsOn
+          ? _self.dependsOn
           : dependsOn // ignore: cast_nullable_to_non_nullable
               as List<String>,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [SMAConfig].
+extension SMAConfigPatterns on SMAConfig {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_SMAConfig value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _SMAConfig() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_SMAConfig value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _SMAConfig():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_SMAConfig value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _SMAConfig() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String id, int period, List<String> dependsOn)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _SMAConfig() when $default != null:
+        return $default(_that.id, _that.period, _that.dependsOn);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String id, int period, List<String> dependsOn) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _SMAConfig():
+        return $default(_that.id, _that.period, _that.dependsOn);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(String id, int period, List<String> dependsOn)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _SMAConfig() when $default != null:
+        return $default(_that.id, _that.period, _that.dependsOn);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 
-class _$SMAConfigImpl implements _SMAConfig {
-  const _$SMAConfigImpl(
+class _SMAConfig implements SMAConfig {
+  const _SMAConfig(
       {required this.id,
       this.period = 20,
       final List<String> dependsOn = const []})
@@ -139,16 +266,19 @@ class _$SMAConfigImpl implements _SMAConfig {
     return EqualUnmodifiableListView(_dependsOn);
   }
 
+  /// Create a copy of SMAConfig
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'SMAConfig(id: $id, period: $period, dependsOn: $dependsOn)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$SMAConfigCopyWith<_SMAConfig> get copyWith =>
+      __$SMAConfigCopyWithImpl<_SMAConfig>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SMAConfigImpl &&
+            other is _SMAConfig &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.period, period) || other.period == period) &&
             const DeepCollectionEquality()
@@ -159,32 +289,54 @@ class _$SMAConfigImpl implements _SMAConfig {
   int get hashCode => Object.hash(
       runtimeType, id, period, const DeepCollectionEquality().hash(_dependsOn));
 
+  @override
+  String toString() {
+    return 'SMAConfig(id: $id, period: $period, dependsOn: $dependsOn)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$SMAConfigCopyWith<$Res>
+    implements $SMAConfigCopyWith<$Res> {
+  factory _$SMAConfigCopyWith(
+          _SMAConfig value, $Res Function(_SMAConfig) _then) =
+      __$SMAConfigCopyWithImpl;
+  @override
+  @useResult
+  $Res call({String id, int period, List<String> dependsOn});
+}
+
+/// @nodoc
+class __$SMAConfigCopyWithImpl<$Res> implements _$SMAConfigCopyWith<$Res> {
+  __$SMAConfigCopyWithImpl(this._self, this._then);
+
+  final _SMAConfig _self;
+  final $Res Function(_SMAConfig) _then;
+
   /// Create a copy of SMAConfig
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$SMAConfigImplCopyWith<_$SMAConfigImpl> get copyWith =>
-      __$$SMAConfigImplCopyWithImpl<_$SMAConfigImpl>(this, _$identity);
+  $Res call({
+    Object? id = null,
+    Object? period = null,
+    Object? dependsOn = null,
+  }) {
+    return _then(_SMAConfig(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      period: null == period
+          ? _self.period
+          : period // ignore: cast_nullable_to_non_nullable
+              as int,
+      dependsOn: null == dependsOn
+          ? _self._dependsOn
+          : dependsOn // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
 }
 
-abstract class _SMAConfig implements SMAConfig {
-  const factory _SMAConfig(
-      {required final String id,
-      final int period,
-      final List<String> dependsOn}) = _$SMAConfigImpl;
-
-  @override
-  String get id;
-  @override
-  int get period;
-  @override
-  List<String> get dependsOn;
-
-  /// Create a copy of SMAConfig
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SMAConfigImplCopyWith<_$SMAConfigImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,139 +9,33 @@ part of 'annotation.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-AnnotationPoint _$AnnotationPointFromJson(Map<String, dynamic> json) {
-  return _AnnotationPoint.fromJson(json);
-}
 
 /// @nodoc
 mixin _$AnnotationPoint {
   /// Unix timestamp in milliseconds.
-  int get timestamp => throw _privateConstructorUsedError;
+  int get timestamp;
 
   /// Price value.
-  double get price => throw _privateConstructorUsedError;
-
-  /// Serializes this AnnotationPoint to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  double get price;
 
   /// Create a copy of AnnotationPoint
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $AnnotationPointCopyWith<AnnotationPoint> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$AnnotationPointCopyWithImpl<AnnotationPoint>(
+          this as AnnotationPoint, _$identity);
 
-/// @nodoc
-abstract class $AnnotationPointCopyWith<$Res> {
-  factory $AnnotationPointCopyWith(
-          AnnotationPoint value, $Res Function(AnnotationPoint) then) =
-      _$AnnotationPointCopyWithImpl<$Res, AnnotationPoint>;
-  @useResult
-  $Res call({int timestamp, double price});
-}
-
-/// @nodoc
-class _$AnnotationPointCopyWithImpl<$Res, $Val extends AnnotationPoint>
-    implements $AnnotationPointCopyWith<$Res> {
-  _$AnnotationPointCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of AnnotationPoint
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? timestamp = null,
-    Object? price = null,
-  }) {
-    return _then(_value.copyWith(
-      timestamp: null == timestamp
-          ? _value.timestamp
-          : timestamp // ignore: cast_nullable_to_non_nullable
-              as int,
-      price: null == price
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as double,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$AnnotationPointImplCopyWith<$Res>
-    implements $AnnotationPointCopyWith<$Res> {
-  factory _$$AnnotationPointImplCopyWith(_$AnnotationPointImpl value,
-          $Res Function(_$AnnotationPointImpl) then) =
-      __$$AnnotationPointImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({int timestamp, double price});
-}
-
-/// @nodoc
-class __$$AnnotationPointImplCopyWithImpl<$Res>
-    extends _$AnnotationPointCopyWithImpl<$Res, _$AnnotationPointImpl>
-    implements _$$AnnotationPointImplCopyWith<$Res> {
-  __$$AnnotationPointImplCopyWithImpl(
-      _$AnnotationPointImpl _value, $Res Function(_$AnnotationPointImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of AnnotationPoint
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? timestamp = null,
-    Object? price = null,
-  }) {
-    return _then(_$AnnotationPointImpl(
-      timestamp: null == timestamp
-          ? _value.timestamp
-          : timestamp // ignore: cast_nullable_to_non_nullable
-              as int,
-      price: null == price
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as double,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$AnnotationPointImpl implements _AnnotationPoint {
-  const _$AnnotationPointImpl({required this.timestamp, required this.price});
-
-  factory _$AnnotationPointImpl.fromJson(Map<String, dynamic> json) =>
-      _$$AnnotationPointImplFromJson(json);
-
-  /// Unix timestamp in milliseconds.
-  @override
-  final int timestamp;
-
-  /// Price value.
-  @override
-  final double price;
-
-  @override
-  String toString() {
-    return 'AnnotationPoint(timestamp: $timestamp, price: $price)';
-  }
+  /// Serializes this AnnotationPoint to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AnnotationPointImpl &&
+            other is AnnotationPoint &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
             (identical(other.price, price) || other.price == price));
@@ -151,114 +45,349 @@ class _$AnnotationPointImpl implements _AnnotationPoint {
   @override
   int get hashCode => Object.hash(runtimeType, timestamp, price);
 
-  /// Create a copy of AnnotationPoint
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$AnnotationPointImplCopyWith<_$AnnotationPointImpl> get copyWith =>
-      __$$AnnotationPointImplCopyWithImpl<_$AnnotationPointImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$AnnotationPointImplToJson(
-      this,
-    );
+  String toString() {
+    return 'AnnotationPoint(timestamp: $timestamp, price: $price)';
   }
 }
 
-abstract class _AnnotationPoint implements AnnotationPoint {
-  const factory _AnnotationPoint(
-      {required final int timestamp,
-      required final double price}) = _$AnnotationPointImpl;
+/// @nodoc
+abstract mixin class $AnnotationPointCopyWith<$Res> {
+  factory $AnnotationPointCopyWith(
+          AnnotationPoint value, $Res Function(AnnotationPoint) _then) =
+      _$AnnotationPointCopyWithImpl;
+  @useResult
+  $Res call({int timestamp, double price});
+}
 
-  factory _AnnotationPoint.fromJson(Map<String, dynamic> json) =
-      _$AnnotationPointImpl.fromJson;
+/// @nodoc
+class _$AnnotationPointCopyWithImpl<$Res>
+    implements $AnnotationPointCopyWith<$Res> {
+  _$AnnotationPointCopyWithImpl(this._self, this._then);
+
+  final AnnotationPoint _self;
+  final $Res Function(AnnotationPoint) _then;
+
+  /// Create a copy of AnnotationPoint
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? timestamp = null,
+    Object? price = null,
+  }) {
+    return _then(_self.copyWith(
+      timestamp: null == timestamp
+          ? _self.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as int,
+      price: null == price
+          ? _self.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
+  }
+}
+
+/// Adds pattern-matching-related methods to [AnnotationPoint].
+extension AnnotationPointPatterns on AnnotationPoint {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_AnnotationPoint value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _AnnotationPoint() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_AnnotationPoint value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AnnotationPoint():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_AnnotationPoint value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AnnotationPoint() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(int timestamp, double price)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _AnnotationPoint() when $default != null:
+        return $default(_that.timestamp, _that.price);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(int timestamp, double price) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AnnotationPoint():
+        return $default(_that.timestamp, _that.price);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(int timestamp, double price)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AnnotationPoint() when $default != null:
+        return $default(_that.timestamp, _that.price);
+      case _:
+        return null;
+    }
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _AnnotationPoint implements AnnotationPoint {
+  const _AnnotationPoint({required this.timestamp, required this.price});
+  factory _AnnotationPoint.fromJson(Map<String, dynamic> json) =>
+      _$AnnotationPointFromJson(json);
 
   /// Unix timestamp in milliseconds.
   @override
-  int get timestamp;
+  final int timestamp;
 
   /// Price value.
   @override
-  double get price;
+  final double price;
 
   /// Create a copy of AnnotationPoint
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AnnotationPointImplCopyWith<_$AnnotationPointImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$AnnotationPointCopyWith<_AnnotationPoint> get copyWith =>
+      __$AnnotationPointCopyWithImpl<_AnnotationPoint>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$AnnotationPointToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _AnnotationPoint &&
+            (identical(other.timestamp, timestamp) ||
+                other.timestamp == timestamp) &&
+            (identical(other.price, price) || other.price == price));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, timestamp, price);
+
+  @override
+  String toString() {
+    return 'AnnotationPoint(timestamp: $timestamp, price: $price)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$AnnotationPointCopyWith<$Res>
+    implements $AnnotationPointCopyWith<$Res> {
+  factory _$AnnotationPointCopyWith(
+          _AnnotationPoint value, $Res Function(_AnnotationPoint) _then) =
+      __$AnnotationPointCopyWithImpl;
+  @override
+  @useResult
+  $Res call({int timestamp, double price});
+}
+
+/// @nodoc
+class __$AnnotationPointCopyWithImpl<$Res>
+    implements _$AnnotationPointCopyWith<$Res> {
+  __$AnnotationPointCopyWithImpl(this._self, this._then);
+
+  final _AnnotationPoint _self;
+  final $Res Function(_AnnotationPoint) _then;
+
+  /// Create a copy of AnnotationPoint
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? timestamp = null,
+    Object? price = null,
+  }) {
+    return _then(_AnnotationPoint(
+      timestamp: null == timestamp
+          ? _self.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as int,
+      price: null == price
+          ? _self.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
+  }
 }
 
 /// @nodoc
 mixin _$Annotation {
   /// Unique identifier for the annotation.
-  String get id => throw _privateConstructorUsedError;
+  String get id;
 
   /// The starting point of the trend line.
-  AnnotationPoint get start => throw _privateConstructorUsedError;
+  AnnotationPoint get start;
 
   /// The ending point of the trend line.
-  AnnotationPoint get end => throw _privateConstructorUsedError;
+  AnnotationPoint get end;
 
   /// Hex color of the line.
-  int get color => throw _privateConstructorUsedError;
+  int get color;
 
   /// Width of the line.
-  double get strokeWidth => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String id, AnnotationPoint start,
-            AnnotationPoint end, int color, double strokeWidth)
-        trendLine,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String id, AnnotationPoint start, AnnotationPoint end,
-            int color, double strokeWidth)?
-        trendLine,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String id, AnnotationPoint start, AnnotationPoint end,
-            int color, double strokeWidth)?
-        trendLine,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(TrendLine value) trendLine,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TrendLine value)? trendLine,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(TrendLine value)? trendLine,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  double get strokeWidth;
 
   /// Create a copy of Annotation
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $AnnotationCopyWith<Annotation> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$AnnotationCopyWithImpl<Annotation>(this as Annotation, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Annotation &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.start, start) || other.start == start) &&
+            (identical(other.end, end) || other.end == end) &&
+            (identical(other.color, color) || other.color == color) &&
+            (identical(other.strokeWidth, strokeWidth) ||
+                other.strokeWidth == strokeWidth));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, id, start, end, color, strokeWidth);
+
+  @override
+  String toString() {
+    return 'Annotation(id: $id, start: $start, end: $end, color: $color, strokeWidth: $strokeWidth)';
+  }
 }
 
 /// @nodoc
-abstract class $AnnotationCopyWith<$Res> {
+abstract mixin class $AnnotationCopyWith<$Res> {
   factory $AnnotationCopyWith(
-          Annotation value, $Res Function(Annotation) then) =
-      _$AnnotationCopyWithImpl<$Res, Annotation>;
+          Annotation value, $Res Function(Annotation) _then) =
+      _$AnnotationCopyWithImpl;
   @useResult
   $Res call(
       {String id,
@@ -272,14 +401,11 @@ abstract class $AnnotationCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AnnotationCopyWithImpl<$Res, $Val extends Annotation>
-    implements $AnnotationCopyWith<$Res> {
-  _$AnnotationCopyWithImpl(this._value, this._then);
+class _$AnnotationCopyWithImpl<$Res> implements $AnnotationCopyWith<$Res> {
+  _$AnnotationCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final Annotation _self;
+  final $Res Function(Annotation) _then;
 
   /// Create a copy of Annotation
   /// with the given fields replaced by the non-null parameter values.
@@ -292,28 +418,28 @@ class _$AnnotationCopyWithImpl<$Res, $Val extends Annotation>
     Object? color = null,
     Object? strokeWidth = null,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       start: null == start
-          ? _value.start
+          ? _self.start
           : start // ignore: cast_nullable_to_non_nullable
               as AnnotationPoint,
       end: null == end
-          ? _value.end
+          ? _self.end
           : end // ignore: cast_nullable_to_non_nullable
               as AnnotationPoint,
       color: null == color
-          ? _value.color
+          ? _self.color
           : color // ignore: cast_nullable_to_non_nullable
               as int,
       strokeWidth: null == strokeWidth
-          ? _value.strokeWidth
+          ? _self.strokeWidth
           : strokeWidth // ignore: cast_nullable_to_non_nullable
               as double,
-    ) as $Val);
+    ));
   }
 
   /// Create a copy of Annotation
@@ -321,8 +447,8 @@ class _$AnnotationCopyWithImpl<$Res, $Val extends Annotation>
   @override
   @pragma('vm:prefer-inline')
   $AnnotationPointCopyWith<$Res> get start {
-    return $AnnotationPointCopyWith<$Res>(_value.start, (value) {
-      return _then(_value.copyWith(start: value) as $Val);
+    return $AnnotationPointCopyWith<$Res>(_self.start, (value) {
+      return _then(_self.copyWith(start: value));
     });
   }
 
@@ -331,81 +457,182 @@ class _$AnnotationCopyWithImpl<$Res, $Val extends Annotation>
   @override
   @pragma('vm:prefer-inline')
   $AnnotationPointCopyWith<$Res> get end {
-    return $AnnotationPointCopyWith<$Res>(_value.end, (value) {
-      return _then(_value.copyWith(end: value) as $Val);
+    return $AnnotationPointCopyWith<$Res>(_self.end, (value) {
+      return _then(_self.copyWith(end: value));
     });
   }
 }
 
-/// @nodoc
-abstract class _$$TrendLineImplCopyWith<$Res>
-    implements $AnnotationCopyWith<$Res> {
-  factory _$$TrendLineImplCopyWith(
-          _$TrendLineImpl value, $Res Function(_$TrendLineImpl) then) =
-      __$$TrendLineImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String id,
-      AnnotationPoint start,
-      AnnotationPoint end,
-      int color,
-      double strokeWidth});
+/// Adds pattern-matching-related methods to [Annotation].
+extension AnnotationPatterns on Annotation {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
 
-  @override
-  $AnnotationPointCopyWith<$Res> get start;
-  @override
-  $AnnotationPointCopyWith<$Res> get end;
-}
-
-/// @nodoc
-class __$$TrendLineImplCopyWithImpl<$Res>
-    extends _$AnnotationCopyWithImpl<$Res, _$TrendLineImpl>
-    implements _$$TrendLineImplCopyWith<$Res> {
-  __$$TrendLineImplCopyWithImpl(
-      _$TrendLineImpl _value, $Res Function(_$TrendLineImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of Annotation
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? start = null,
-    Object? end = null,
-    Object? color = null,
-    Object? strokeWidth = null,
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TrendLine value)? trendLine,
+    required TResult orElse(),
   }) {
-    return _then(_$TrendLineImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      start: null == start
-          ? _value.start
-          : start // ignore: cast_nullable_to_non_nullable
-              as AnnotationPoint,
-      end: null == end
-          ? _value.end
-          : end // ignore: cast_nullable_to_non_nullable
-              as AnnotationPoint,
-      color: null == color
-          ? _value.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as int,
-      strokeWidth: null == strokeWidth
-          ? _value.strokeWidth
-          : strokeWidth // ignore: cast_nullable_to_non_nullable
-              as double,
-    ));
+    final _that = this;
+    switch (_that) {
+      case TrendLine() when trendLine != null:
+        return trendLine(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TrendLine value) trendLine,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case TrendLine():
+        return trendLine(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(TrendLine value)? trendLine,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case TrendLine() when trendLine != null:
+        return trendLine(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String id, AnnotationPoint start, AnnotationPoint end,
+            int color, double strokeWidth)?
+        trendLine,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case TrendLine() when trendLine != null:
+        return trendLine(
+            _that.id, _that.start, _that.end, _that.color, _that.strokeWidth);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String id, AnnotationPoint start,
+            AnnotationPoint end, int color, double strokeWidth)
+        trendLine,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case TrendLine():
+        return trendLine(
+            _that.id, _that.start, _that.end, _that.color, _that.strokeWidth);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String id, AnnotationPoint start, AnnotationPoint end,
+            int color, double strokeWidth)?
+        trendLine,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case TrendLine() when trendLine != null:
+        return trendLine(
+            _that.id, _that.start, _that.end, _that.color, _that.strokeWidth);
+      case _:
+        return null;
+    }
   }
 }
 
 /// @nodoc
 
-class _$TrendLineImpl extends TrendLine {
-  const _$TrendLineImpl(
+class TrendLine extends Annotation {
+  const TrendLine(
       {required this.id,
       required this.start,
       required this.end,
@@ -435,16 +662,19 @@ class _$TrendLineImpl extends TrendLine {
   @JsonKey()
   final double strokeWidth;
 
+  /// Create a copy of Annotation
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'Annotation.trendLine(id: $id, start: $start, end: $end, color: $color, strokeWidth: $strokeWidth)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $TrendLineCopyWith<TrendLine> get copyWith =>
+      _$TrendLineCopyWithImpl<TrendLine>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TrendLineImpl &&
+            other is TrendLine &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.start, start) || other.start == start) &&
             (identical(other.end, end) || other.end == end) &&
@@ -457,179 +687,143 @@ class _$TrendLineImpl extends TrendLine {
   int get hashCode =>
       Object.hash(runtimeType, id, start, end, color, strokeWidth);
 
-  /// Create a copy of Annotation
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$TrendLineImplCopyWith<_$TrendLineImpl> get copyWith =>
-      __$$TrendLineImplCopyWithImpl<_$TrendLineImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String id, AnnotationPoint start,
-            AnnotationPoint end, int color, double strokeWidth)
-        trendLine,
-  }) {
-    return trendLine(id, start, end, color, strokeWidth);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String id, AnnotationPoint start, AnnotationPoint end,
-            int color, double strokeWidth)?
-        trendLine,
-  }) {
-    return trendLine?.call(id, start, end, color, strokeWidth);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String id, AnnotationPoint start, AnnotationPoint end,
-            int color, double strokeWidth)?
-        trendLine,
-    required TResult orElse(),
-  }) {
-    if (trendLine != null) {
-      return trendLine(id, start, end, color, strokeWidth);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(TrendLine value) trendLine,
-  }) {
-    return trendLine(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TrendLine value)? trendLine,
-  }) {
-    return trendLine?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(TrendLine value)? trendLine,
-    required TResult orElse(),
-  }) {
-    if (trendLine != null) {
-      return trendLine(this);
-    }
-    return orElse();
+  String toString() {
+    return 'Annotation.trendLine(id: $id, start: $start, end: $end, color: $color, strokeWidth: $strokeWidth)';
   }
 }
 
-abstract class TrendLine extends Annotation {
-  const factory TrendLine(
-      {required final String id,
-      required final AnnotationPoint start,
-      required final AnnotationPoint end,
-      final int color,
-      final double strokeWidth}) = _$TrendLineImpl;
-  const TrendLine._() : super._();
-
-  /// Unique identifier for the annotation.
+/// @nodoc
+abstract mixin class $TrendLineCopyWith<$Res>
+    implements $AnnotationCopyWith<$Res> {
+  factory $TrendLineCopyWith(TrendLine value, $Res Function(TrendLine) _then) =
+      _$TrendLineCopyWithImpl;
   @override
-  String get id;
+  @useResult
+  $Res call(
+      {String id,
+      AnnotationPoint start,
+      AnnotationPoint end,
+      int color,
+      double strokeWidth});
 
-  /// The starting point of the trend line.
   @override
-  AnnotationPoint get start;
+  $AnnotationPointCopyWith<$Res> get start;
+  @override
+  $AnnotationPointCopyWith<$Res> get end;
+}
 
-  /// The ending point of the trend line.
-  @override
-  AnnotationPoint get end;
+/// @nodoc
+class _$TrendLineCopyWithImpl<$Res> implements $TrendLineCopyWith<$Res> {
+  _$TrendLineCopyWithImpl(this._self, this._then);
 
-  /// Hex color of the line.
-  @override
-  int get color;
-
-  /// Width of the line.
-  @override
-  double get strokeWidth;
+  final TrendLine _self;
+  final $Res Function(TrendLine) _then;
 
   /// Create a copy of Annotation
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$TrendLineImplCopyWith<_$TrendLineImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? start = null,
+    Object? end = null,
+    Object? color = null,
+    Object? strokeWidth = null,
+  }) {
+    return _then(TrendLine(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      start: null == start
+          ? _self.start
+          : start // ignore: cast_nullable_to_non_nullable
+              as AnnotationPoint,
+      end: null == end
+          ? _self.end
+          : end // ignore: cast_nullable_to_non_nullable
+              as AnnotationPoint,
+      color: null == color
+          ? _self.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as int,
+      strokeWidth: null == strokeWidth
+          ? _self.strokeWidth
+          : strokeWidth // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
+  }
+
+  /// Create a copy of Annotation
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AnnotationPointCopyWith<$Res> get start {
+    return $AnnotationPointCopyWith<$Res>(_self.start, (value) {
+      return _then(_self.copyWith(start: value));
+    });
+  }
+
+  /// Create a copy of Annotation
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AnnotationPointCopyWith<$Res> get end {
+    return $AnnotationPointCopyWith<$Res>(_self.end, (value) {
+      return _then(_self.copyWith(end: value));
+    });
+  }
 }
 
 /// @nodoc
 mixin _$AnnotationDocument {
   /// List of annotations in the document.
-  List<Annotation> get annotations => throw _privateConstructorUsedError;
+  List<Annotation> get annotations;
 
   /// Create a copy of AnnotationDocument
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $AnnotationDocumentCopyWith<AnnotationDocument> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $AnnotationDocumentCopyWith<$Res> {
-  factory $AnnotationDocumentCopyWith(
-          AnnotationDocument value, $Res Function(AnnotationDocument) then) =
-      _$AnnotationDocumentCopyWithImpl<$Res, AnnotationDocument>;
-  @useResult
-  $Res call({List<Annotation> annotations});
-}
-
-/// @nodoc
-class _$AnnotationDocumentCopyWithImpl<$Res, $Val extends AnnotationDocument>
-    implements $AnnotationDocumentCopyWith<$Res> {
-  _$AnnotationDocumentCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of AnnotationDocument
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $AnnotationDocumentCopyWith<AnnotationDocument> get copyWith =>
+      _$AnnotationDocumentCopyWithImpl<AnnotationDocument>(
+          this as AnnotationDocument, _$identity);
+
   @override
-  $Res call({
-    Object? annotations = null,
-  }) {
-    return _then(_value.copyWith(
-      annotations: null == annotations
-          ? _value.annotations
-          : annotations // ignore: cast_nullable_to_non_nullable
-              as List<Annotation>,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is AnnotationDocument &&
+            const DeepCollectionEquality()
+                .equals(other.annotations, annotations));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(annotations));
+
+  @override
+  String toString() {
+    return 'AnnotationDocument(annotations: $annotations)';
   }
 }
 
 /// @nodoc
-abstract class _$$AnnotationDocumentImplCopyWith<$Res>
-    implements $AnnotationDocumentCopyWith<$Res> {
-  factory _$$AnnotationDocumentImplCopyWith(_$AnnotationDocumentImpl value,
-          $Res Function(_$AnnotationDocumentImpl) then) =
-      __$$AnnotationDocumentImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $AnnotationDocumentCopyWith<$Res> {
+  factory $AnnotationDocumentCopyWith(
+          AnnotationDocument value, $Res Function(AnnotationDocument) _then) =
+      _$AnnotationDocumentCopyWithImpl;
   @useResult
   $Res call({List<Annotation> annotations});
 }
 
 /// @nodoc
-class __$$AnnotationDocumentImplCopyWithImpl<$Res>
-    extends _$AnnotationDocumentCopyWithImpl<$Res, _$AnnotationDocumentImpl>
-    implements _$$AnnotationDocumentImplCopyWith<$Res> {
-  __$$AnnotationDocumentImplCopyWithImpl(_$AnnotationDocumentImpl _value,
-      $Res Function(_$AnnotationDocumentImpl) _then)
-      : super(_value, _then);
+class _$AnnotationDocumentCopyWithImpl<$Res>
+    implements $AnnotationDocumentCopyWith<$Res> {
+  _$AnnotationDocumentCopyWithImpl(this._self, this._then);
+
+  final AnnotationDocument _self;
+  final $Res Function(AnnotationDocument) _then;
 
   /// Create a copy of AnnotationDocument
   /// with the given fields replaced by the non-null parameter values.
@@ -638,20 +832,176 @@ class __$$AnnotationDocumentImplCopyWithImpl<$Res>
   $Res call({
     Object? annotations = null,
   }) {
-    return _then(_$AnnotationDocumentImpl(
+    return _then(_self.copyWith(
       annotations: null == annotations
-          ? _value._annotations
+          ? _self.annotations
           : annotations // ignore: cast_nullable_to_non_nullable
               as List<Annotation>,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [AnnotationDocument].
+extension AnnotationDocumentPatterns on AnnotationDocument {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_AnnotationDocument value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _AnnotationDocument() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_AnnotationDocument value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AnnotationDocument():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_AnnotationDocument value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AnnotationDocument() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(List<Annotation> annotations)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _AnnotationDocument() when $default != null:
+        return $default(_that.annotations);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(List<Annotation> annotations) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AnnotationDocument():
+        return $default(_that.annotations);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(List<Annotation> annotations)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _AnnotationDocument() when $default != null:
+        return $default(_that.annotations);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 
-class _$AnnotationDocumentImpl extends _AnnotationDocument {
-  const _$AnnotationDocumentImpl(
-      {final List<Annotation> annotations = const []})
+class _AnnotationDocument extends AnnotationDocument {
+  const _AnnotationDocument({final List<Annotation> annotations = const []})
       : _annotations = annotations,
         super._();
 
@@ -667,16 +1017,19 @@ class _$AnnotationDocumentImpl extends _AnnotationDocument {
     return EqualUnmodifiableListView(_annotations);
   }
 
+  /// Create a copy of AnnotationDocument
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'AnnotationDocument(annotations: $annotations)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$AnnotationDocumentCopyWith<_AnnotationDocument> get copyWith =>
+      __$AnnotationDocumentCopyWithImpl<_AnnotationDocument>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AnnotationDocumentImpl &&
+            other is _AnnotationDocument &&
             const DeepCollectionEquality()
                 .equals(other._annotations, _annotations));
   }
@@ -685,29 +1038,45 @@ class _$AnnotationDocumentImpl extends _AnnotationDocument {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_annotations));
 
+  @override
+  String toString() {
+    return 'AnnotationDocument(annotations: $annotations)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$AnnotationDocumentCopyWith<$Res>
+    implements $AnnotationDocumentCopyWith<$Res> {
+  factory _$AnnotationDocumentCopyWith(
+          _AnnotationDocument value, $Res Function(_AnnotationDocument) _then) =
+      __$AnnotationDocumentCopyWithImpl;
+  @override
+  @useResult
+  $Res call({List<Annotation> annotations});
+}
+
+/// @nodoc
+class __$AnnotationDocumentCopyWithImpl<$Res>
+    implements _$AnnotationDocumentCopyWith<$Res> {
+  __$AnnotationDocumentCopyWithImpl(this._self, this._then);
+
+  final _AnnotationDocument _self;
+  final $Res Function(_AnnotationDocument) _then;
+
   /// Create a copy of AnnotationDocument
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$AnnotationDocumentImplCopyWith<_$AnnotationDocumentImpl> get copyWith =>
-      __$$AnnotationDocumentImplCopyWithImpl<_$AnnotationDocumentImpl>(
-          this, _$identity);
+  $Res call({
+    Object? annotations = null,
+  }) {
+    return _then(_AnnotationDocument(
+      annotations: null == annotations
+          ? _self._annotations
+          : annotations // ignore: cast_nullable_to_non_nullable
+              as List<Annotation>,
+    ));
+  }
 }
 
-abstract class _AnnotationDocument extends AnnotationDocument {
-  const factory _AnnotationDocument({final List<Annotation> annotations}) =
-      _$AnnotationDocumentImpl;
-  const _AnnotationDocument._() : super._();
-
-  /// List of annotations in the document.
-  @override
-  List<Annotation> get annotations;
-
-  /// Create a copy of AnnotationDocument
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AnnotationDocumentImplCopyWith<_$AnnotationDocumentImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

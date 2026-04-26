@@ -4,7 +4,7 @@ part 'viewport.freezed.dart';
 
 /// Represents the visible range and state of the chart.
 @freezed
-class Viewport with _$Viewport {
+abstract class Viewport with _$Viewport {
   const Viewport._();
 
   /// Creates a [Viewport] with the given parameters.

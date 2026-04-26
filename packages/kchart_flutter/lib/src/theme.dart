@@ -8,7 +8,7 @@ part 'theme.freezed.dart';
 /// Contains all color and text style configurations used by the chart
 /// painters and UI components.
 @freezed
-class ChartTheme with _$ChartTheme {
+abstract class ChartTheme with _$ChartTheme {
   /// Creates a [ChartTheme] with the specified colors and styles.
   const factory ChartTheme({
     /// Color for the grid lines.

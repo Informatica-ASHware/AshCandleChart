@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,94 +9,61 @@ part of 'export_config.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ExportConfig {
   /// The pixel ratio for the exported image. Defaults to 2.0.
-  double get pixelRatio => throw _privateConstructorUsedError;
+  double get pixelRatio;
 
   /// Optional watermark text to be displayed on the image.
-  String? get watermark => throw _privateConstructorUsedError;
+  String? get watermark;
 
   /// Whether the image background should be opaque. Defaults to true.
-  bool get opaque => throw _privateConstructorUsedError;
+  bool get opaque;
 
   /// The background color for the exported image.
   /// Only used if [opaque] is true. Defaults to [Colors.white].
-  Color get backgroundColor => throw _privateConstructorUsedError;
+  Color get backgroundColor;
 
   /// Create a copy of ExportConfig
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $ExportConfigCopyWith<ExportConfig> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ExportConfigCopyWith<$Res> {
-  factory $ExportConfigCopyWith(
-          ExportConfig value, $Res Function(ExportConfig) then) =
-      _$ExportConfigCopyWithImpl<$Res, ExportConfig>;
-  @useResult
-  $Res call(
-      {double pixelRatio,
-      String? watermark,
-      bool opaque,
-      Color backgroundColor});
-}
-
-/// @nodoc
-class _$ExportConfigCopyWithImpl<$Res, $Val extends ExportConfig>
-    implements $ExportConfigCopyWith<$Res> {
-  _$ExportConfigCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of ExportConfig
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $ExportConfigCopyWith<ExportConfig> get copyWith =>
+      _$ExportConfigCopyWithImpl<ExportConfig>(
+          this as ExportConfig, _$identity);
+
   @override
-  $Res call({
-    Object? pixelRatio = null,
-    Object? watermark = freezed,
-    Object? opaque = null,
-    Object? backgroundColor = null,
-  }) {
-    return _then(_value.copyWith(
-      pixelRatio: null == pixelRatio
-          ? _value.pixelRatio
-          : pixelRatio // ignore: cast_nullable_to_non_nullable
-              as double,
-      watermark: freezed == watermark
-          ? _value.watermark
-          : watermark // ignore: cast_nullable_to_non_nullable
-              as String?,
-      opaque: null == opaque
-          ? _value.opaque
-          : opaque // ignore: cast_nullable_to_non_nullable
-              as bool,
-      backgroundColor: null == backgroundColor
-          ? _value.backgroundColor
-          : backgroundColor // ignore: cast_nullable_to_non_nullable
-              as Color,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is ExportConfig &&
+            (identical(other.pixelRatio, pixelRatio) ||
+                other.pixelRatio == pixelRatio) &&
+            (identical(other.watermark, watermark) ||
+                other.watermark == watermark) &&
+            (identical(other.opaque, opaque) || other.opaque == opaque) &&
+            (identical(other.backgroundColor, backgroundColor) ||
+                other.backgroundColor == backgroundColor));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, pixelRatio, watermark, opaque, backgroundColor);
+
+  @override
+  String toString() {
+    return 'ExportConfig(pixelRatio: $pixelRatio, watermark: $watermark, opaque: $opaque, backgroundColor: $backgroundColor)';
   }
 }
 
 /// @nodoc
-abstract class _$$ExportConfigImplCopyWith<$Res>
-    implements $ExportConfigCopyWith<$Res> {
-  factory _$$ExportConfigImplCopyWith(
-          _$ExportConfigImpl value, $Res Function(_$ExportConfigImpl) then) =
-      __$$ExportConfigImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $ExportConfigCopyWith<$Res> {
+  factory $ExportConfigCopyWith(
+          ExportConfig value, $Res Function(ExportConfig) _then) =
+      _$ExportConfigCopyWithImpl;
   @useResult
   $Res call(
       {double pixelRatio,
@@ -106,12 +73,11 @@ abstract class _$$ExportConfigImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$ExportConfigImplCopyWithImpl<$Res>
-    extends _$ExportConfigCopyWithImpl<$Res, _$ExportConfigImpl>
-    implements _$$ExportConfigImplCopyWith<$Res> {
-  __$$ExportConfigImplCopyWithImpl(
-      _$ExportConfigImpl _value, $Res Function(_$ExportConfigImpl) _then)
-      : super(_value, _then);
+class _$ExportConfigCopyWithImpl<$Res> implements $ExportConfigCopyWith<$Res> {
+  _$ExportConfigCopyWithImpl(this._self, this._then);
+
+  final ExportConfig _self;
+  final $Res Function(ExportConfig) _then;
 
   /// Create a copy of ExportConfig
   /// with the given fields replaced by the non-null parameter values.
@@ -123,31 +89,197 @@ class __$$ExportConfigImplCopyWithImpl<$Res>
     Object? opaque = null,
     Object? backgroundColor = null,
   }) {
-    return _then(_$ExportConfigImpl(
+    return _then(_self.copyWith(
       pixelRatio: null == pixelRatio
-          ? _value.pixelRatio
+          ? _self.pixelRatio
           : pixelRatio // ignore: cast_nullable_to_non_nullable
               as double,
       watermark: freezed == watermark
-          ? _value.watermark
+          ? _self.watermark
           : watermark // ignore: cast_nullable_to_non_nullable
               as String?,
       opaque: null == opaque
-          ? _value.opaque
+          ? _self.opaque
           : opaque // ignore: cast_nullable_to_non_nullable
               as bool,
       backgroundColor: null == backgroundColor
-          ? _value.backgroundColor
+          ? _self.backgroundColor
           : backgroundColor // ignore: cast_nullable_to_non_nullable
               as Color,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [ExportConfig].
+extension ExportConfigPatterns on ExportConfig {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_ExportConfig value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _ExportConfig() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_ExportConfig value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _ExportConfig():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_ExportConfig value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _ExportConfig() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(double pixelRatio, String? watermark, bool opaque,
+            Color backgroundColor)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _ExportConfig() when $default != null:
+        return $default(_that.pixelRatio, _that.watermark, _that.opaque,
+            _that.backgroundColor);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(double pixelRatio, String? watermark, bool opaque,
+            Color backgroundColor)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _ExportConfig():
+        return $default(_that.pixelRatio, _that.watermark, _that.opaque,
+            _that.backgroundColor);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(double pixelRatio, String? watermark, bool opaque,
+            Color backgroundColor)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _ExportConfig() when $default != null:
+        return $default(_that.pixelRatio, _that.watermark, _that.opaque,
+            _that.backgroundColor);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 
-class _$ExportConfigImpl implements _ExportConfig {
-  const _$ExportConfigImpl(
+class _ExportConfig implements ExportConfig {
+  const _ExportConfig(
       {this.pixelRatio = 2.0,
       this.watermark,
       this.opaque = true,
@@ -173,16 +305,19 @@ class _$ExportConfigImpl implements _ExportConfig {
   @JsonKey()
   final Color backgroundColor;
 
+  /// Create a copy of ExportConfig
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'ExportConfig(pixelRatio: $pixelRatio, watermark: $watermark, opaque: $opaque, backgroundColor: $backgroundColor)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ExportConfigCopyWith<_ExportConfig> get copyWith =>
+      __$ExportConfigCopyWithImpl<_ExportConfig>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ExportConfigImpl &&
+            other is _ExportConfig &&
             (identical(other.pixelRatio, pixelRatio) ||
                 other.pixelRatio == pixelRatio) &&
             (identical(other.watermark, watermark) ||
@@ -196,43 +331,64 @@ class _$ExportConfigImpl implements _ExportConfig {
   int get hashCode =>
       Object.hash(runtimeType, pixelRatio, watermark, opaque, backgroundColor);
 
+  @override
+  String toString() {
+    return 'ExportConfig(pixelRatio: $pixelRatio, watermark: $watermark, opaque: $opaque, backgroundColor: $backgroundColor)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$ExportConfigCopyWith<$Res>
+    implements $ExportConfigCopyWith<$Res> {
+  factory _$ExportConfigCopyWith(
+          _ExportConfig value, $Res Function(_ExportConfig) _then) =
+      __$ExportConfigCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {double pixelRatio,
+      String? watermark,
+      bool opaque,
+      Color backgroundColor});
+}
+
+/// @nodoc
+class __$ExportConfigCopyWithImpl<$Res>
+    implements _$ExportConfigCopyWith<$Res> {
+  __$ExportConfigCopyWithImpl(this._self, this._then);
+
+  final _ExportConfig _self;
+  final $Res Function(_ExportConfig) _then;
+
   /// Create a copy of ExportConfig
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ExportConfigImplCopyWith<_$ExportConfigImpl> get copyWith =>
-      __$$ExportConfigImplCopyWithImpl<_$ExportConfigImpl>(this, _$identity);
+  $Res call({
+    Object? pixelRatio = null,
+    Object? watermark = freezed,
+    Object? opaque = null,
+    Object? backgroundColor = null,
+  }) {
+    return _then(_ExportConfig(
+      pixelRatio: null == pixelRatio
+          ? _self.pixelRatio
+          : pixelRatio // ignore: cast_nullable_to_non_nullable
+              as double,
+      watermark: freezed == watermark
+          ? _self.watermark
+          : watermark // ignore: cast_nullable_to_non_nullable
+              as String?,
+      opaque: null == opaque
+          ? _self.opaque
+          : opaque // ignore: cast_nullable_to_non_nullable
+              as bool,
+      backgroundColor: null == backgroundColor
+          ? _self.backgroundColor
+          : backgroundColor // ignore: cast_nullable_to_non_nullable
+              as Color,
+    ));
+  }
 }
 
-abstract class _ExportConfig implements ExportConfig {
-  const factory _ExportConfig(
-      {final double pixelRatio,
-      final String? watermark,
-      final bool opaque,
-      final Color backgroundColor}) = _$ExportConfigImpl;
-
-  /// The pixel ratio for the exported image. Defaults to 2.0.
-  @override
-  double get pixelRatio;
-
-  /// Optional watermark text to be displayed on the image.
-  @override
-  String? get watermark;
-
-  /// Whether the image background should be opaque. Defaults to true.
-  @override
-  bool get opaque;
-
-  /// The background color for the exported image.
-  /// Only used if [opaque] is true. Defaults to [Colors.white].
-  @override
-  Color get backgroundColor;
-
-  /// Create a copy of ExportConfig
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ExportConfigImplCopyWith<_$ExportConfigImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

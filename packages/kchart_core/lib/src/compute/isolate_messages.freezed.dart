@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,33 +9,173 @@ part of 'isolate_messages.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ComputeRequest {
   /// Unique identifier for the request, used for correlation and cancellation.
-  String get requestId => throw _privateConstructorUsedError;
+  String get requestId;
+
+  /// Create a copy of ComputeRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $ComputeRequestCopyWith<ComputeRequest> get copyWith =>
+      _$ComputeRequestCopyWithImpl<ComputeRequest>(
+          this as ComputeRequest, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is ComputeRequest &&
+            (identical(other.requestId, requestId) ||
+                other.requestId == requestId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, requestId);
+
+  @override
+  String toString() {
+    return 'ComputeRequest(requestId: $requestId)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $ComputeRequestCopyWith<$Res> {
+  factory $ComputeRequestCopyWith(
+          ComputeRequest value, $Res Function(ComputeRequest) _then) =
+      _$ComputeRequestCopyWithImpl;
+  @useResult
+  $Res call({String requestId});
+}
+
+/// @nodoc
+class _$ComputeRequestCopyWithImpl<$Res>
+    implements $ComputeRequestCopyWith<$Res> {
+  _$ComputeRequestCopyWithImpl(this._self, this._then);
+
+  final ComputeRequest _self;
+  final $Res Function(ComputeRequest) _then;
+
+  /// Create a copy of ComputeRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? requestId = null,
+  }) {
+    return _then(_self.copyWith(
+      requestId: null == requestId
+          ? _self.requestId
+          : requestId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// Adds pattern-matching-related methods to [ComputeRequest].
+extension ComputeRequestPatterns on ComputeRequest {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
   @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(String requestId, String method, Object? payload)
-        $default, {
-    required TResult Function(
-            String requestId, List<IndicatorConfig> configs, Series series)
-        indicatorBatch,
-  }) =>
-      throw _privateConstructorUsedError;
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_ComputeRequest value)? $default, {
+    TResult Function(_IndicatorBatchRequest value)? indicatorBatch,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _ComputeRequest() when $default != null:
+        return $default(_that);
+      case _IndicatorBatchRequest() when indicatorBatch != null:
+        return indicatorBatch(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(String requestId, String method, Object? payload)?
-        $default, {
-    TResult? Function(
-            String requestId, List<IndicatorConfig> configs, Series series)?
-        indicatorBatch,
-  }) =>
-      throw _privateConstructorUsedError;
+  TResult map<TResult extends Object?>(
+    TResult Function(_ComputeRequest value) $default, {
+    required TResult Function(_IndicatorBatchRequest value) indicatorBatch,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _ComputeRequest():
+        return $default(_that);
+      case _IndicatorBatchRequest():
+        return indicatorBatch(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_ComputeRequest value)? $default, {
+    TResult? Function(_IndicatorBatchRequest value)? indicatorBatch,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _ComputeRequest() when $default != null:
+        return $default(_that);
+      case _IndicatorBatchRequest() when indicatorBatch != null:
+        return indicatorBatch(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(String requestId, String method, Object? payload)?
@@ -44,116 +184,86 @@ mixin _$ComputeRequest {
             String requestId, List<IndicatorConfig> configs, Series series)?
         indicatorBatch,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_ComputeRequest value) $default, {
-    required TResult Function(_IndicatorBatchRequest value) indicatorBatch,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_ComputeRequest value)? $default, {
-    TResult? Function(_IndicatorBatchRequest value)? indicatorBatch,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_ComputeRequest value)? $default, {
-    TResult Function(_IndicatorBatchRequest value)? indicatorBatch,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-
-  /// Create a copy of ComputeRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $ComputeRequestCopyWith<ComputeRequest> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ComputeRequestCopyWith<$Res> {
-  factory $ComputeRequestCopyWith(
-          ComputeRequest value, $Res Function(ComputeRequest) then) =
-      _$ComputeRequestCopyWithImpl<$Res, ComputeRequest>;
-  @useResult
-  $Res call({String requestId});
-}
-
-/// @nodoc
-class _$ComputeRequestCopyWithImpl<$Res, $Val extends ComputeRequest>
-    implements $ComputeRequestCopyWith<$Res> {
-  _$ComputeRequestCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of ComputeRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? requestId = null,
   }) {
-    return _then(_value.copyWith(
-      requestId: null == requestId
-          ? _value.requestId
-          : requestId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+    final _that = this;
+    switch (_that) {
+      case _ComputeRequest() when $default != null:
+        return $default(_that.requestId, _that.method, _that.payload);
+      case _IndicatorBatchRequest() when indicatorBatch != null:
+        return indicatorBatch(_that.requestId, _that.configs, _that.series);
+      case _:
+        return orElse();
+    }
   }
-}
 
-/// @nodoc
-abstract class _$$ComputeRequestImplCopyWith<$Res>
-    implements $ComputeRequestCopyWith<$Res> {
-  factory _$$ComputeRequestImplCopyWith(_$ComputeRequestImpl value,
-          $Res Function(_$ComputeRequestImpl) then) =
-      __$$ComputeRequestImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String requestId, String method, Object? payload});
-}
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
 
-/// @nodoc
-class __$$ComputeRequestImplCopyWithImpl<$Res>
-    extends _$ComputeRequestCopyWithImpl<$Res, _$ComputeRequestImpl>
-    implements _$$ComputeRequestImplCopyWith<$Res> {
-  __$$ComputeRequestImplCopyWithImpl(
-      _$ComputeRequestImpl _value, $Res Function(_$ComputeRequestImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ComputeRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? requestId = null,
-    Object? method = null,
-    Object? payload = freezed,
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String requestId, String method, Object? payload)
+        $default, {
+    required TResult Function(
+            String requestId, List<IndicatorConfig> configs, Series series)
+        indicatorBatch,
   }) {
-    return _then(_$ComputeRequestImpl(
-      requestId: null == requestId
-          ? _value.requestId
-          : requestId // ignore: cast_nullable_to_non_nullable
-              as String,
-      method: null == method
-          ? _value.method
-          : method // ignore: cast_nullable_to_non_nullable
-              as String,
-      payload: freezed == payload ? _value.payload : payload,
-    ));
+    final _that = this;
+    switch (_that) {
+      case _ComputeRequest():
+        return $default(_that.requestId, _that.method, _that.payload);
+      case _IndicatorBatchRequest():
+        return indicatorBatch(_that.requestId, _that.configs, _that.series);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(String requestId, String method, Object? payload)?
+        $default, {
+    TResult? Function(
+            String requestId, List<IndicatorConfig> configs, Series series)?
+        indicatorBatch,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _ComputeRequest() when $default != null:
+        return $default(_that.requestId, _that.method, _that.payload);
+      case _IndicatorBatchRequest() when indicatorBatch != null:
+        return indicatorBatch(_that.requestId, _that.configs, _that.series);
+      case _:
+        return null;
+    }
   }
 }
 
 /// @nodoc
 
-class _$ComputeRequestImpl implements _ComputeRequest {
-  const _$ComputeRequestImpl(
+class _ComputeRequest implements ComputeRequest {
+  const _ComputeRequest(
       {required this.requestId, required this.method, required this.payload});
 
   /// Unique identifier for the request, used for correlation and cancellation.
@@ -161,24 +271,25 @@ class _$ComputeRequestImpl implements _ComputeRequest {
   final String requestId;
 
   /// The method or operation to perform.
-  @override
   final String method;
 
   /// The payload for the request.
   /// Should ideally contain [TransferableTypedData] for large data.
-  @override
   final Object? payload;
 
+  /// Create a copy of ComputeRequest
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'ComputeRequest(requestId: $requestId, method: $method, payload: $payload)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ComputeRequestCopyWith<_ComputeRequest> get copyWith =>
+      __$ComputeRequestCopyWithImpl<_ComputeRequest>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ComputeRequestImpl &&
+            other is _ComputeRequest &&
             (identical(other.requestId, requestId) ||
                 other.requestId == requestId) &&
             (identical(other.method, method) || other.method == method) &&
@@ -189,162 +300,58 @@ class _$ComputeRequestImpl implements _ComputeRequest {
   int get hashCode => Object.hash(runtimeType, requestId, method,
       const DeepCollectionEquality().hash(payload));
 
-  /// Create a copy of ComputeRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$ComputeRequestImplCopyWith<_$ComputeRequestImpl> get copyWith =>
-      __$$ComputeRequestImplCopyWithImpl<_$ComputeRequestImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(String requestId, String method, Object? payload)
-        $default, {
-    required TResult Function(
-            String requestId, List<IndicatorConfig> configs, Series series)
-        indicatorBatch,
-  }) {
-    return $default(requestId, method, payload);
+  String toString() {
+    return 'ComputeRequest(requestId: $requestId, method: $method, payload: $payload)';
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(String requestId, String method, Object? payload)?
-        $default, {
-    TResult? Function(
-            String requestId, List<IndicatorConfig> configs, Series series)?
-        indicatorBatch,
-  }) {
-    return $default?.call(requestId, method, payload);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(String requestId, String method, Object? payload)?
-        $default, {
-    TResult Function(
-            String requestId, List<IndicatorConfig> configs, Series series)?
-        indicatorBatch,
-    required TResult orElse(),
-  }) {
-    if ($default != null) {
-      return $default(requestId, method, payload);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_ComputeRequest value) $default, {
-    required TResult Function(_IndicatorBatchRequest value) indicatorBatch,
-  }) {
-    return $default(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_ComputeRequest value)? $default, {
-    TResult? Function(_IndicatorBatchRequest value)? indicatorBatch,
-  }) {
-    return $default?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_ComputeRequest value)? $default, {
-    TResult Function(_IndicatorBatchRequest value)? indicatorBatch,
-    required TResult orElse(),
-  }) {
-    if ($default != null) {
-      return $default(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _ComputeRequest implements ComputeRequest {
-  const factory _ComputeRequest(
-      {required final String requestId,
-      required final String method,
-      required final Object? payload}) = _$ComputeRequestImpl;
-
-  /// Unique identifier for the request, used for correlation and cancellation.
-  @override
-  String get requestId;
-
-  /// The method or operation to perform.
-  String get method;
-
-  /// The payload for the request.
-  /// Should ideally contain [TransferableTypedData] for large data.
-  Object? get payload;
-
-  /// Create a copy of ComputeRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ComputeRequestImplCopyWith<_$ComputeRequestImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$IndicatorBatchRequestImplCopyWith<$Res>
+abstract mixin class _$ComputeRequestCopyWith<$Res>
     implements $ComputeRequestCopyWith<$Res> {
-  factory _$$IndicatorBatchRequestImplCopyWith(
-          _$IndicatorBatchRequestImpl value,
-          $Res Function(_$IndicatorBatchRequestImpl) then) =
-      __$$IndicatorBatchRequestImplCopyWithImpl<$Res>;
+  factory _$ComputeRequestCopyWith(
+          _ComputeRequest value, $Res Function(_ComputeRequest) _then) =
+      __$ComputeRequestCopyWithImpl;
   @override
   @useResult
-  $Res call({String requestId, List<IndicatorConfig> configs, Series series});
+  $Res call({String requestId, String method, Object? payload});
 }
 
 /// @nodoc
-class __$$IndicatorBatchRequestImplCopyWithImpl<$Res>
-    extends _$ComputeRequestCopyWithImpl<$Res, _$IndicatorBatchRequestImpl>
-    implements _$$IndicatorBatchRequestImplCopyWith<$Res> {
-  __$$IndicatorBatchRequestImplCopyWithImpl(_$IndicatorBatchRequestImpl _value,
-      $Res Function(_$IndicatorBatchRequestImpl) _then)
-      : super(_value, _then);
+class __$ComputeRequestCopyWithImpl<$Res>
+    implements _$ComputeRequestCopyWith<$Res> {
+  __$ComputeRequestCopyWithImpl(this._self, this._then);
+
+  final _ComputeRequest _self;
+  final $Res Function(_ComputeRequest) _then;
 
   /// Create a copy of ComputeRequest
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
   @override
+  @pragma('vm:prefer-inline')
   $Res call({
     Object? requestId = null,
-    Object? configs = null,
-    Object? series = null,
+    Object? method = null,
+    Object? payload = freezed,
   }) {
-    return _then(_$IndicatorBatchRequestImpl(
+    return _then(_ComputeRequest(
       requestId: null == requestId
-          ? _value.requestId
+          ? _self.requestId
           : requestId // ignore: cast_nullable_to_non_nullable
               as String,
-      configs: null == configs
-          ? _value._configs
-          : configs // ignore: cast_nullable_to_non_nullable
-              as List<IndicatorConfig>,
-      series: null == series
-          ? _value.series
-          : series // ignore: cast_nullable_to_non_nullable
-              as Series,
+      method: null == method
+          ? _self.method
+          : method // ignore: cast_nullable_to_non_nullable
+              as String,
+      payload: freezed == payload ? _self.payload : payload,
     ));
   }
 }
 
 /// @nodoc
 
-class _$IndicatorBatchRequestImpl implements _IndicatorBatchRequest {
-  const _$IndicatorBatchRequestImpl(
+class _IndicatorBatchRequest implements ComputeRequest {
+  const _IndicatorBatchRequest(
       {required this.requestId,
       required final List<IndicatorConfig> configs,
       required this.series})
@@ -353,26 +360,28 @@ class _$IndicatorBatchRequestImpl implements _IndicatorBatchRequest {
   @override
   final String requestId;
   final List<IndicatorConfig> _configs;
-  @override
   List<IndicatorConfig> get configs {
     if (_configs is EqualUnmodifiableListView) return _configs;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_configs);
   }
 
-  @override
   final Series series;
 
+  /// Create a copy of ComputeRequest
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'ComputeRequest.indicatorBatch(requestId: $requestId, configs: $configs, series: $series)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$IndicatorBatchRequestCopyWith<_IndicatorBatchRequest> get copyWith =>
+      __$IndicatorBatchRequestCopyWithImpl<_IndicatorBatchRequest>(
+          this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$IndicatorBatchRequestImpl &&
+            other is _IndicatorBatchRequest &&
             (identical(other.requestId, requestId) ||
                 other.requestId == requestId) &&
             const DeepCollectionEquality().equals(other._configs, _configs) &&
@@ -383,185 +392,114 @@ class _$IndicatorBatchRequestImpl implements _IndicatorBatchRequest {
   int get hashCode => Object.hash(runtimeType, requestId,
       const DeepCollectionEquality().hash(_configs), series);
 
-  /// Create a copy of ComputeRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$IndicatorBatchRequestImplCopyWith<_$IndicatorBatchRequestImpl>
-      get copyWith => __$$IndicatorBatchRequestImplCopyWithImpl<
-          _$IndicatorBatchRequestImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>(
-    TResult Function(String requestId, String method, Object? payload)
-        $default, {
-    required TResult Function(
-            String requestId, List<IndicatorConfig> configs, Series series)
-        indicatorBatch,
-  }) {
-    return indicatorBatch(requestId, configs, series);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(String requestId, String method, Object? payload)?
-        $default, {
-    TResult? Function(
-            String requestId, List<IndicatorConfig> configs, Series series)?
-        indicatorBatch,
-  }) {
-    return indicatorBatch?.call(requestId, configs, series);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>(
-    TResult Function(String requestId, String method, Object? payload)?
-        $default, {
-    TResult Function(
-            String requestId, List<IndicatorConfig> configs, Series series)?
-        indicatorBatch,
-    required TResult orElse(),
-  }) {
-    if (indicatorBatch != null) {
-      return indicatorBatch(requestId, configs, series);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_ComputeRequest value) $default, {
-    required TResult Function(_IndicatorBatchRequest value) indicatorBatch,
-  }) {
-    return indicatorBatch(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_ComputeRequest value)? $default, {
-    TResult? Function(_IndicatorBatchRequest value)? indicatorBatch,
-  }) {
-    return indicatorBatch?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_ComputeRequest value)? $default, {
-    TResult Function(_IndicatorBatchRequest value)? indicatorBatch,
-    required TResult orElse(),
-  }) {
-    if (indicatorBatch != null) {
-      return indicatorBatch(this);
-    }
-    return orElse();
+  String toString() {
+    return 'ComputeRequest.indicatorBatch(requestId: $requestId, configs: $configs, series: $series)';
   }
 }
 
-abstract class _IndicatorBatchRequest implements ComputeRequest {
-  const factory _IndicatorBatchRequest(
-      {required final String requestId,
-      required final List<IndicatorConfig> configs,
-      required final Series series}) = _$IndicatorBatchRequestImpl;
-
+/// @nodoc
+abstract mixin class _$IndicatorBatchRequestCopyWith<$Res>
+    implements $ComputeRequestCopyWith<$Res> {
+  factory _$IndicatorBatchRequestCopyWith(_IndicatorBatchRequest value,
+          $Res Function(_IndicatorBatchRequest) _then) =
+      __$IndicatorBatchRequestCopyWithImpl;
   @override
-  String get requestId;
-  List<IndicatorConfig> get configs;
-  Series get series;
+  @useResult
+  $Res call({String requestId, List<IndicatorConfig> configs, Series series});
+}
+
+/// @nodoc
+class __$IndicatorBatchRequestCopyWithImpl<$Res>
+    implements _$IndicatorBatchRequestCopyWith<$Res> {
+  __$IndicatorBatchRequestCopyWithImpl(this._self, this._then);
+
+  final _IndicatorBatchRequest _self;
+  final $Res Function(_IndicatorBatchRequest) _then;
 
   /// Create a copy of ComputeRequest
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$IndicatorBatchRequestImplCopyWith<_$IndicatorBatchRequestImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? requestId = null,
+    Object? configs = null,
+    Object? series = null,
+  }) {
+    return _then(_IndicatorBatchRequest(
+      requestId: null == requestId
+          ? _self.requestId
+          : requestId // ignore: cast_nullable_to_non_nullable
+              as String,
+      configs: null == configs
+          ? _self._configs
+          : configs // ignore: cast_nullable_to_non_nullable
+              as List<IndicatorConfig>,
+      series: null == series
+          ? _self.series
+          : series // ignore: cast_nullable_to_non_nullable
+              as Series,
+    ));
+  }
 }
 
 /// @nodoc
 mixin _$ComputeResponse {
   /// Unique identifier correlated with the [ComputeRequest].
-  String get requestId => throw _privateConstructorUsedError;
+  String get requestId;
 
   /// The result of the computation.
   /// Should ideally contain [TransferableTypedData] for large data.
-  Object? get payload => throw _privateConstructorUsedError;
+  Object? get payload;
 
   /// Error message if the computation failed.
-  String? get error => throw _privateConstructorUsedError;
+  String? get error;
 
   /// Create a copy of ComputeResponse
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $ComputeResponseCopyWith<ComputeResponse> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ComputeResponseCopyWith<$Res> {
-  factory $ComputeResponseCopyWith(
-          ComputeResponse value, $Res Function(ComputeResponse) then) =
-      _$ComputeResponseCopyWithImpl<$Res, ComputeResponse>;
-  @useResult
-  $Res call({String requestId, Object? payload, String? error});
-}
-
-/// @nodoc
-class _$ComputeResponseCopyWithImpl<$Res, $Val extends ComputeResponse>
-    implements $ComputeResponseCopyWith<$Res> {
-  _$ComputeResponseCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of ComputeResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $ComputeResponseCopyWith<ComputeResponse> get copyWith =>
+      _$ComputeResponseCopyWithImpl<ComputeResponse>(
+          this as ComputeResponse, _$identity);
+
   @override
-  $Res call({
-    Object? requestId = null,
-    Object? payload = freezed,
-    Object? error = freezed,
-  }) {
-    return _then(_value.copyWith(
-      requestId: null == requestId
-          ? _value.requestId
-          : requestId // ignore: cast_nullable_to_non_nullable
-              as String,
-      payload: freezed == payload ? _value.payload : payload,
-      error: freezed == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is ComputeResponse &&
+            (identical(other.requestId, requestId) ||
+                other.requestId == requestId) &&
+            const DeepCollectionEquality().equals(other.payload, payload) &&
+            (identical(other.error, error) || other.error == error));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, requestId,
+      const DeepCollectionEquality().hash(payload), error);
+
+  @override
+  String toString() {
+    return 'ComputeResponse(requestId: $requestId, payload: $payload, error: $error)';
   }
 }
 
 /// @nodoc
-abstract class _$$ComputeResponseImplCopyWith<$Res>
-    implements $ComputeResponseCopyWith<$Res> {
-  factory _$$ComputeResponseImplCopyWith(_$ComputeResponseImpl value,
-          $Res Function(_$ComputeResponseImpl) then) =
-      __$$ComputeResponseImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $ComputeResponseCopyWith<$Res> {
+  factory $ComputeResponseCopyWith(
+          ComputeResponse value, $Res Function(ComputeResponse) _then) =
+      _$ComputeResponseCopyWithImpl;
   @useResult
   $Res call({String requestId, Object? payload, String? error});
 }
 
 /// @nodoc
-class __$$ComputeResponseImplCopyWithImpl<$Res>
-    extends _$ComputeResponseCopyWithImpl<$Res, _$ComputeResponseImpl>
-    implements _$$ComputeResponseImplCopyWith<$Res> {
-  __$$ComputeResponseImplCopyWithImpl(
-      _$ComputeResponseImpl _value, $Res Function(_$ComputeResponseImpl) _then)
-      : super(_value, _then);
+class _$ComputeResponseCopyWithImpl<$Res>
+    implements $ComputeResponseCopyWith<$Res> {
+  _$ComputeResponseCopyWithImpl(this._self, this._then);
+
+  final ComputeResponse _self;
+  final $Res Function(ComputeResponse) _then;
 
   /// Create a copy of ComputeResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -572,25 +510,183 @@ class __$$ComputeResponseImplCopyWithImpl<$Res>
     Object? payload = freezed,
     Object? error = freezed,
   }) {
-    return _then(_$ComputeResponseImpl(
+    return _then(_self.copyWith(
       requestId: null == requestId
-          ? _value.requestId
+          ? _self.requestId
           : requestId // ignore: cast_nullable_to_non_nullable
               as String,
-      payload: freezed == payload ? _value.payload : payload,
+      payload: freezed == payload ? _self.payload : payload,
       error: freezed == error
-          ? _value.error
+          ? _self.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [ComputeResponse].
+extension ComputeResponsePatterns on ComputeResponse {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_ComputeResponse value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _ComputeResponse() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_ComputeResponse value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _ComputeResponse():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_ComputeResponse value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _ComputeResponse() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String requestId, Object? payload, String? error)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _ComputeResponse() when $default != null:
+        return $default(_that.requestId, _that.payload, _that.error);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String requestId, Object? payload, String? error) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _ComputeResponse():
+        return $default(_that.requestId, _that.payload, _that.error);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(String requestId, Object? payload, String? error)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _ComputeResponse() when $default != null:
+        return $default(_that.requestId, _that.payload, _that.error);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 
-class _$ComputeResponseImpl implements _ComputeResponse {
-  const _$ComputeResponseImpl(
-      {required this.requestId, this.payload, this.error});
+class _ComputeResponse implements ComputeResponse {
+  const _ComputeResponse({required this.requestId, this.payload, this.error});
 
   /// Unique identifier correlated with the [ComputeRequest].
   @override
@@ -605,16 +701,19 @@ class _$ComputeResponseImpl implements _ComputeResponse {
   @override
   final String? error;
 
+  /// Create a copy of ComputeResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'ComputeResponse(requestId: $requestId, payload: $payload, error: $error)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ComputeResponseCopyWith<_ComputeResponse> get copyWith =>
+      __$ComputeResponseCopyWithImpl<_ComputeResponse>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ComputeResponseImpl &&
+            other is _ComputeResponse &&
             (identical(other.requestId, requestId) ||
                 other.requestId == requestId) &&
             const DeepCollectionEquality().equals(other.payload, payload) &&
@@ -625,261 +724,290 @@ class _$ComputeResponseImpl implements _ComputeResponse {
   int get hashCode => Object.hash(runtimeType, requestId,
       const DeepCollectionEquality().hash(payload), error);
 
-  /// Create a copy of ComputeResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$ComputeResponseImplCopyWith<_$ComputeResponseImpl> get copyWith =>
-      __$$ComputeResponseImplCopyWithImpl<_$ComputeResponseImpl>(
-          this, _$identity);
+  String toString() {
+    return 'ComputeResponse(requestId: $requestId, payload: $payload, error: $error)';
+  }
 }
 
-abstract class _ComputeResponse implements ComputeResponse {
-  const factory _ComputeResponse(
-      {required final String requestId,
-      final Object? payload,
-      final String? error}) = _$ComputeResponseImpl;
-
-  /// Unique identifier correlated with the [ComputeRequest].
+/// @nodoc
+abstract mixin class _$ComputeResponseCopyWith<$Res>
+    implements $ComputeResponseCopyWith<$Res> {
+  factory _$ComputeResponseCopyWith(
+          _ComputeResponse value, $Res Function(_ComputeResponse) _then) =
+      __$ComputeResponseCopyWithImpl;
   @override
-  String get requestId;
+  @useResult
+  $Res call({String requestId, Object? payload, String? error});
+}
 
-  /// The result of the computation.
-  /// Should ideally contain [TransferableTypedData] for large data.
-  @override
-  Object? get payload;
+/// @nodoc
+class __$ComputeResponseCopyWithImpl<$Res>
+    implements _$ComputeResponseCopyWith<$Res> {
+  __$ComputeResponseCopyWithImpl(this._self, this._then);
 
-  /// Error message if the computation failed.
-  @override
-  String? get error;
+  final _ComputeResponse _self;
+  final $Res Function(_ComputeResponse) _then;
 
   /// Create a copy of ComputeResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ComputeResponseImplCopyWith<_$ComputeResponseImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? requestId = null,
+    Object? payload = freezed,
+    Object? error = freezed,
+  }) {
+    return _then(_ComputeResponse(
+      requestId: null == requestId
+          ? _self.requestId
+          : requestId // ignore: cast_nullable_to_non_nullable
+              as String,
+      payload: freezed == payload ? _self.payload : payload,
+      error: freezed == error
+          ? _self.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
 /// @nodoc
 mixin _$ControlMessage {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() exit,
-    required TResult Function(String requestId) cancel,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? exit,
-    TResult? Function(String requestId)? cancel,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? exit,
-    TResult Function(String requestId)? cancel,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Exit value) exit,
-    required TResult Function(_Cancel value) cancel,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Exit value)? exit,
-    TResult? Function(_Cancel value)? cancel,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Exit value)? exit,
-    TResult Function(_Cancel value)? cancel,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ControlMessageCopyWith<$Res> {
-  factory $ControlMessageCopyWith(
-          ControlMessage value, $Res Function(ControlMessage) then) =
-      _$ControlMessageCopyWithImpl<$Res, ControlMessage>;
-}
-
-/// @nodoc
-class _$ControlMessageCopyWithImpl<$Res, $Val extends ControlMessage>
-    implements $ControlMessageCopyWith<$Res> {
-  _$ControlMessageCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of ControlMessage
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-abstract class _$$ExitImplCopyWith<$Res> {
-  factory _$$ExitImplCopyWith(
-          _$ExitImpl value, $Res Function(_$ExitImpl) then) =
-      __$$ExitImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$ExitImplCopyWithImpl<$Res>
-    extends _$ControlMessageCopyWithImpl<$Res, _$ExitImpl>
-    implements _$$ExitImplCopyWith<$Res> {
-  __$$ExitImplCopyWithImpl(_$ExitImpl _value, $Res Function(_$ExitImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ControlMessage
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$ExitImpl implements _Exit {
-  const _$ExitImpl();
-
-  @override
-  String toString() {
-    return 'ControlMessage.exit()';
-  }
-
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ExitImpl);
+        (other.runtimeType == runtimeType && other is ControlMessage);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
 
   @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() exit,
-    required TResult Function(String requestId) cancel,
-  }) {
-    return exit();
+  String toString() {
+    return 'ControlMessage()';
   }
+}
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? exit,
-    TResult? Function(String requestId)? cancel,
-  }) {
-    return exit?.call();
-  }
+/// @nodoc
+class $ControlMessageCopyWith<$Res> {
+  $ControlMessageCopyWith(ControlMessage _, $Res Function(ControlMessage) __);
+}
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? exit,
-    TResult Function(String requestId)? cancel,
-    required TResult orElse(),
-  }) {
-    if (exit != null) {
-      return exit();
-    }
-    return orElse();
-  }
+/// Adds pattern-matching-related methods to [ControlMessage].
+extension ControlMessagePatterns on ControlMessage {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
 
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Exit value) exit,
-    required TResult Function(_Cancel value) cancel,
-  }) {
-    return exit(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Exit value)? exit,
-    TResult? Function(_Cancel value)? cancel,
-  }) {
-    return exit?.call(this);
-  }
-
-  @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Exit value)? exit,
     TResult Function(_Cancel value)? cancel,
     required TResult orElse(),
   }) {
-    if (exit != null) {
-      return exit(this);
+    final _that = this;
+    switch (_that) {
+      case _Exit() when exit != null:
+        return exit(_that);
+      case _Cancel() when cancel != null:
+        return cancel(_that);
+      case _:
+        return orElse();
     }
-    return orElse();
   }
-}
 
-abstract class _Exit implements ControlMessage {
-  const factory _Exit() = _$ExitImpl;
-}
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
 
-/// @nodoc
-abstract class _$$CancelImplCopyWith<$Res> {
-  factory _$$CancelImplCopyWith(
-          _$CancelImpl value, $Res Function(_$CancelImpl) then) =
-      __$$CancelImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String requestId});
-}
-
-/// @nodoc
-class __$$CancelImplCopyWithImpl<$Res>
-    extends _$ControlMessageCopyWithImpl<$Res, _$CancelImpl>
-    implements _$$CancelImplCopyWith<$Res> {
-  __$$CancelImplCopyWithImpl(
-      _$CancelImpl _value, $Res Function(_$CancelImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ControlMessage
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? requestId = null,
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Exit value) exit,
+    required TResult Function(_Cancel value) cancel,
   }) {
-    return _then(_$CancelImpl(
-      requestId: null == requestId
-          ? _value.requestId
-          : requestId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+    final _that = this;
+    switch (_that) {
+      case _Exit():
+        return exit(_that);
+      case _Cancel():
+        return cancel(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Exit value)? exit,
+    TResult? Function(_Cancel value)? cancel,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _Exit() when exit != null:
+        return exit(_that);
+      case _Cancel() when cancel != null:
+        return cancel(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? exit,
+    TResult Function(String requestId)? cancel,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _Exit() when exit != null:
+        return exit();
+      case _Cancel() when cancel != null:
+        return cancel(_that.requestId);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() exit,
+    required TResult Function(String requestId) cancel,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _Exit():
+        return exit();
+      case _Cancel():
+        return cancel(_that.requestId);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? exit,
+    TResult? Function(String requestId)? cancel,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _Exit() when exit != null:
+        return exit();
+      case _Cancel() when cancel != null:
+        return cancel(_that.requestId);
+      case _:
+        return null;
+    }
   }
 }
 
 /// @nodoc
 
-class _$CancelImpl implements _Cancel {
-  const _$CancelImpl({required this.requestId});
+class _Exit implements ControlMessage {
+  const _Exit();
 
   @override
-  final String requestId;
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _Exit);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
 
   @override
   String toString() {
-    return 'ControlMessage.cancel(requestId: $requestId)';
+    return 'ControlMessage.exit()';
   }
+}
+
+/// @nodoc
+
+class _Cancel implements ControlMessage {
+  const _Cancel({required this.requestId});
+
+  final String requestId;
+
+  /// Create a copy of ControlMessage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$CancelCopyWith<_Cancel> get copyWith =>
+      __$CancelCopyWithImpl<_Cancel>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CancelImpl &&
+            other is _Cancel &&
             (identical(other.requestId, requestId) ||
                 other.requestId == requestId));
   }
@@ -887,85 +1015,41 @@ class _$CancelImpl implements _Cancel {
   @override
   int get hashCode => Object.hash(runtimeType, requestId);
 
+  @override
+  String toString() {
+    return 'ControlMessage.cancel(requestId: $requestId)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$CancelCopyWith<$Res>
+    implements $ControlMessageCopyWith<$Res> {
+  factory _$CancelCopyWith(_Cancel value, $Res Function(_Cancel) _then) =
+      __$CancelCopyWithImpl;
+  @useResult
+  $Res call({String requestId});
+}
+
+/// @nodoc
+class __$CancelCopyWithImpl<$Res> implements _$CancelCopyWith<$Res> {
+  __$CancelCopyWithImpl(this._self, this._then);
+
+  final _Cancel _self;
+  final $Res Function(_Cancel) _then;
+
   /// Create a copy of ControlMessage
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
   @pragma('vm:prefer-inline')
-  _$$CancelImplCopyWith<_$CancelImpl> get copyWith =>
-      __$$CancelImplCopyWithImpl<_$CancelImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() exit,
-    required TResult Function(String requestId) cancel,
+  $Res call({
+    Object? requestId = null,
   }) {
-    return cancel(requestId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? exit,
-    TResult? Function(String requestId)? cancel,
-  }) {
-    return cancel?.call(requestId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? exit,
-    TResult Function(String requestId)? cancel,
-    required TResult orElse(),
-  }) {
-    if (cancel != null) {
-      return cancel(requestId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Exit value) exit,
-    required TResult Function(_Cancel value) cancel,
-  }) {
-    return cancel(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Exit value)? exit,
-    TResult? Function(_Cancel value)? cancel,
-  }) {
-    return cancel?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Exit value)? exit,
-    TResult Function(_Cancel value)? cancel,
-    required TResult orElse(),
-  }) {
-    if (cancel != null) {
-      return cancel(this);
-    }
-    return orElse();
+    return _then(_Cancel(
+      requestId: null == requestId
+          ? _self.requestId
+          : requestId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
-abstract class _Cancel implements ControlMessage {
-  const factory _Cancel({required final String requestId}) = _$CancelImpl;
-
-  String get requestId;
-
-  /// Create a copy of ControlMessage
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CancelImplCopyWith<_$CancelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

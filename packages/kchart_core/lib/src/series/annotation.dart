@@ -5,7 +5,7 @@ part 'annotation.g.dart';
 
 /// Represents a point in the chart coordinates.
 @freezed
-class AnnotationPoint with _$AnnotationPoint {
+abstract class AnnotationPoint with _$AnnotationPoint {
   /// Creates an [AnnotationPoint] with the given [timestamp] and [price].
   const factory AnnotationPoint({
     /// Unix timestamp in milliseconds.
@@ -25,7 +25,7 @@ class AnnotationPoint with _$AnnotationPoint {
 /// Annotations are visual elements drawn on the chart that are anchored
 /// to specific time and price coordinates.
 @Freezed(unionKey: 'type', unionValueCase: FreezedUnionCase.snake)
-class Annotation with _$Annotation {
+abstract class Annotation with _$Annotation {
   /// Base constructor for [Annotation].
   const Annotation._();
 
@@ -81,7 +81,7 @@ class Annotation with _$Annotation {
 
 /// A document containing a collection of annotations.
 @freezed
-class AnnotationDocument with _$AnnotationDocument {
+abstract class AnnotationDocument with _$AnnotationDocument {
   const AnnotationDocument._();
 
   /// Creates an [AnnotationDocument] with a list of [annotations].

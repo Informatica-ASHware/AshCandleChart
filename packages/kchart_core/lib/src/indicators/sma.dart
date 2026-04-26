@@ -7,7 +7,7 @@ part 'sma.freezed.dart';
 
 /// Configuration for the Simple Moving Average (SMA) indicator.
 @freezed
-class SMAConfig with _$SMAConfig implements IndicatorConfig {
+abstract class SMAConfig with _$SMAConfig implements IndicatorConfig {
   /// Creates an [SMAConfig].
   const factory SMAConfig({
     required String id,

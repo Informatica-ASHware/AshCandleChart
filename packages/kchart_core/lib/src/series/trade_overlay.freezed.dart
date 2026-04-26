@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,35 +9,171 @@ part of 'trade_overlay.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$TradeOverlay {
   /// Unique identifier for the overlay.
-  String get id => throw _privateConstructorUsedError;
+  String get id;
+
+  /// Create a copy of TradeOverlay
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $TradeOverlayCopyWith<TradeOverlay> get copyWith =>
+      _$TradeOverlayCopyWithImpl<TradeOverlay>(
+          this as TradeOverlay, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is TradeOverlay &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id);
+
+  @override
+  String toString() {
+    return 'TradeOverlay(id: $id)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $TradeOverlayCopyWith<$Res> {
+  factory $TradeOverlayCopyWith(
+          TradeOverlay value, $Res Function(TradeOverlay) _then) =
+      _$TradeOverlayCopyWithImpl;
+  @useResult
+  $Res call({String id});
+}
+
+/// @nodoc
+class _$TradeOverlayCopyWithImpl<$Res> implements $TradeOverlayCopyWith<$Res> {
+  _$TradeOverlayCopyWithImpl(this._self, this._then);
+
+  final TradeOverlay _self;
+  final $Res Function(TradeOverlay) _then;
+
+  /// Create a copy of TradeOverlay
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_self.copyWith(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// Adds pattern-matching-related methods to [TradeOverlay].
+extension TradeOverlayPatterns on TradeOverlay {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
   @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String id, AnnotationPoint point, int color,
-            double size, String? label)
-        marker,
-    required TResult Function(String id, double entryPrice, double? stopLoss,
-            double? takeProfit, int profitColor, int lossColor, int entryColor)
-        position,
-  }) =>
-      throw _privateConstructorUsedError;
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TradeMarker value)? marker,
+    TResult Function(PositionOverlay value)? position,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case TradeMarker() when marker != null:
+        return marker(_that);
+      case PositionOverlay() when position != null:
+        return position(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String id, AnnotationPoint point, int color, double size,
-            String? label)?
-        marker,
-    TResult? Function(String id, double entryPrice, double? stopLoss,
-            double? takeProfit, int profitColor, int lossColor, int entryColor)?
-        position,
-  }) =>
-      throw _privateConstructorUsedError;
+  TResult map<TResult extends Object?>({
+    required TResult Function(TradeMarker value) marker,
+    required TResult Function(PositionOverlay value) position,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case TradeMarker():
+        return marker(_that);
+      case PositionOverlay():
+        return position(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(TradeMarker value)? marker,
+    TResult? Function(PositionOverlay value)? position,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case TradeMarker() when marker != null:
+        return marker(_that);
+      case PositionOverlay() when position != null:
+        return position(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id, AnnotationPoint point, int color, double size,
@@ -47,76 +183,172 @@ mixin _$TradeOverlay {
             double? takeProfit, int profitColor, int lossColor, int entryColor)?
         position,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(TradeMarker value) marker,
-    required TResult Function(PositionOverlay value) position,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TradeMarker value)? marker,
-    TResult? Function(PositionOverlay value)? position,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(TradeMarker value)? marker,
-    TResult Function(PositionOverlay value)? position,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-
-  /// Create a copy of TradeOverlay
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $TradeOverlayCopyWith<TradeOverlay> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $TradeOverlayCopyWith<$Res> {
-  factory $TradeOverlayCopyWith(
-          TradeOverlay value, $Res Function(TradeOverlay) then) =
-      _$TradeOverlayCopyWithImpl<$Res, TradeOverlay>;
-  @useResult
-  $Res call({String id});
-}
-
-/// @nodoc
-class _$TradeOverlayCopyWithImpl<$Res, $Val extends TradeOverlay>
-    implements $TradeOverlayCopyWith<$Res> {
-  _$TradeOverlayCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of TradeOverlay
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
   }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+    final _that = this;
+    switch (_that) {
+      case TradeMarker() when marker != null:
+        return marker(
+            _that.id, _that.point, _that.color, _that.size, _that.label);
+      case PositionOverlay() when position != null:
+        return position(
+            _that.id,
+            _that.entryPrice,
+            _that.stopLoss,
+            _that.takeProfit,
+            _that.profitColor,
+            _that.lossColor,
+            _that.entryColor);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String id, AnnotationPoint point, int color,
+            double size, String? label)
+        marker,
+    required TResult Function(String id, double entryPrice, double? stopLoss,
+            double? takeProfit, int profitColor, int lossColor, int entryColor)
+        position,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case TradeMarker():
+        return marker(
+            _that.id, _that.point, _that.color, _that.size, _that.label);
+      case PositionOverlay():
+        return position(
+            _that.id,
+            _that.entryPrice,
+            _that.stopLoss,
+            _that.takeProfit,
+            _that.profitColor,
+            _that.lossColor,
+            _that.entryColor);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String id, AnnotationPoint point, int color, double size,
+            String? label)?
+        marker,
+    TResult? Function(String id, double entryPrice, double? stopLoss,
+            double? takeProfit, int profitColor, int lossColor, int entryColor)?
+        position,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case TradeMarker() when marker != null:
+        return marker(
+            _that.id, _that.point, _that.color, _that.size, _that.label);
+      case PositionOverlay() when position != null:
+        return position(
+            _that.id,
+            _that.entryPrice,
+            _that.stopLoss,
+            _that.takeProfit,
+            _that.profitColor,
+            _that.lossColor,
+            _that.entryColor);
+      case _:
+        return null;
+    }
   }
 }
 
 /// @nodoc
-abstract class _$$TradeMarkerImplCopyWith<$Res>
+
+class TradeMarker extends TradeOverlay {
+  const TradeMarker(
+      {required this.id,
+      required this.point,
+      this.color = 0xFF4CAF50,
+      this.size = 8.0,
+      this.label})
+      : super._();
+
+  /// Unique identifier for the overlay.
+  @override
+  final String id;
+
+  /// The point in time and price where the marker is placed.
+  final AnnotationPoint point;
+
+  /// Hex color of the marker.
+  @JsonKey()
+  final int color;
+
+  /// Size of the marker in pixels.
+  @JsonKey()
+  final double size;
+
+  /// Optional label to display next to the marker.
+  final String? label;
+
+  /// Create a copy of TradeOverlay
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $TradeMarkerCopyWith<TradeMarker> get copyWith =>
+      _$TradeMarkerCopyWithImpl<TradeMarker>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is TradeMarker &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.point, point) || other.point == point) &&
+            (identical(other.color, color) || other.color == color) &&
+            (identical(other.size, size) || other.size == size) &&
+            (identical(other.label, label) || other.label == label));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id, point, color, size, label);
+
+  @override
+  String toString() {
+    return 'TradeOverlay.marker(id: $id, point: $point, color: $color, size: $size, label: $label)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $TradeMarkerCopyWith<$Res>
     implements $TradeOverlayCopyWith<$Res> {
-  factory _$$TradeMarkerImplCopyWith(
-          _$TradeMarkerImpl value, $Res Function(_$TradeMarkerImpl) then) =
-      __$$TradeMarkerImplCopyWithImpl<$Res>;
+  factory $TradeMarkerCopyWith(
+          TradeMarker value, $Res Function(TradeMarker) _then) =
+      _$TradeMarkerCopyWithImpl;
   @override
   @useResult
   $Res call(
@@ -130,17 +362,16 @@ abstract class _$$TradeMarkerImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$TradeMarkerImplCopyWithImpl<$Res>
-    extends _$TradeOverlayCopyWithImpl<$Res, _$TradeMarkerImpl>
-    implements _$$TradeMarkerImplCopyWith<$Res> {
-  __$$TradeMarkerImplCopyWithImpl(
-      _$TradeMarkerImpl _value, $Res Function(_$TradeMarkerImpl) _then)
-      : super(_value, _then);
+class _$TradeMarkerCopyWithImpl<$Res> implements $TradeMarkerCopyWith<$Res> {
+  _$TradeMarkerCopyWithImpl(this._self, this._then);
+
+  final TradeMarker _self;
+  final $Res Function(TradeMarker) _then;
 
   /// Create a copy of TradeOverlay
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
   @override
+  @pragma('vm:prefer-inline')
   $Res call({
     Object? id = null,
     Object? point = null,
@@ -148,25 +379,25 @@ class __$$TradeMarkerImplCopyWithImpl<$Res>
     Object? size = null,
     Object? label = freezed,
   }) {
-    return _then(_$TradeMarkerImpl(
+    return _then(TradeMarker(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       point: null == point
-          ? _value.point
+          ? _self.point
           : point // ignore: cast_nullable_to_non_nullable
               as AnnotationPoint,
       color: null == color
-          ? _value.color
+          ? _self.color
           : color // ignore: cast_nullable_to_non_nullable
               as int,
       size: null == size
-          ? _value.size
+          ? _self.size
           : size // ignore: cast_nullable_to_non_nullable
               as double,
       label: freezed == label
-          ? _value.label
+          ? _self.label
           : label // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
@@ -177,257 +408,16 @@ class __$$TradeMarkerImplCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $AnnotationPointCopyWith<$Res> get point {
-    return $AnnotationPointCopyWith<$Res>(_value.point, (value) {
-      return _then(_value.copyWith(point: value));
+    return $AnnotationPointCopyWith<$Res>(_self.point, (value) {
+      return _then(_self.copyWith(point: value));
     });
   }
 }
 
 /// @nodoc
 
-class _$TradeMarkerImpl extends TradeMarker {
-  const _$TradeMarkerImpl(
-      {required this.id,
-      required this.point,
-      this.color = 0xFF4CAF50,
-      this.size = 8.0,
-      this.label})
-      : super._();
-
-  /// Unique identifier for the overlay.
-  @override
-  final String id;
-
-  /// The point in time and price where the marker is placed.
-  @override
-  final AnnotationPoint point;
-
-  /// Hex color of the marker.
-  @override
-  @JsonKey()
-  final int color;
-
-  /// Size of the marker in pixels.
-  @override
-  @JsonKey()
-  final double size;
-
-  /// Optional label to display next to the marker.
-  @override
-  final String? label;
-
-  @override
-  String toString() {
-    return 'TradeOverlay.marker(id: $id, point: $point, color: $color, size: $size, label: $label)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$TradeMarkerImpl &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.point, point) || other.point == point) &&
-            (identical(other.color, color) || other.color == color) &&
-            (identical(other.size, size) || other.size == size) &&
-            (identical(other.label, label) || other.label == label));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, id, point, color, size, label);
-
-  /// Create a copy of TradeOverlay
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$TradeMarkerImplCopyWith<_$TradeMarkerImpl> get copyWith =>
-      __$$TradeMarkerImplCopyWithImpl<_$TradeMarkerImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String id, AnnotationPoint point, int color,
-            double size, String? label)
-        marker,
-    required TResult Function(String id, double entryPrice, double? stopLoss,
-            double? takeProfit, int profitColor, int lossColor, int entryColor)
-        position,
-  }) {
-    return marker(id, point, color, size, label);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String id, AnnotationPoint point, int color, double size,
-            String? label)?
-        marker,
-    TResult? Function(String id, double entryPrice, double? stopLoss,
-            double? takeProfit, int profitColor, int lossColor, int entryColor)?
-        position,
-  }) {
-    return marker?.call(id, point, color, size, label);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String id, AnnotationPoint point, int color, double size,
-            String? label)?
-        marker,
-    TResult Function(String id, double entryPrice, double? stopLoss,
-            double? takeProfit, int profitColor, int lossColor, int entryColor)?
-        position,
-    required TResult orElse(),
-  }) {
-    if (marker != null) {
-      return marker(id, point, color, size, label);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(TradeMarker value) marker,
-    required TResult Function(PositionOverlay value) position,
-  }) {
-    return marker(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TradeMarker value)? marker,
-    TResult? Function(PositionOverlay value)? position,
-  }) {
-    return marker?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(TradeMarker value)? marker,
-    TResult Function(PositionOverlay value)? position,
-    required TResult orElse(),
-  }) {
-    if (marker != null) {
-      return marker(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class TradeMarker extends TradeOverlay {
-  const factory TradeMarker(
-      {required final String id,
-      required final AnnotationPoint point,
-      final int color,
-      final double size,
-      final String? label}) = _$TradeMarkerImpl;
-  const TradeMarker._() : super._();
-
-  /// Unique identifier for the overlay.
-  @override
-  String get id;
-
-  /// The point in time and price where the marker is placed.
-  AnnotationPoint get point;
-
-  /// Hex color of the marker.
-  int get color;
-
-  /// Size of the marker in pixels.
-  double get size;
-
-  /// Optional label to display next to the marker.
-  String? get label;
-
-  /// Create a copy of TradeOverlay
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$TradeMarkerImplCopyWith<_$TradeMarkerImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$PositionOverlayImplCopyWith<$Res>
-    implements $TradeOverlayCopyWith<$Res> {
-  factory _$$PositionOverlayImplCopyWith(_$PositionOverlayImpl value,
-          $Res Function(_$PositionOverlayImpl) then) =
-      __$$PositionOverlayImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String id,
-      double entryPrice,
-      double? stopLoss,
-      double? takeProfit,
-      int profitColor,
-      int lossColor,
-      int entryColor});
-}
-
-/// @nodoc
-class __$$PositionOverlayImplCopyWithImpl<$Res>
-    extends _$TradeOverlayCopyWithImpl<$Res, _$PositionOverlayImpl>
-    implements _$$PositionOverlayImplCopyWith<$Res> {
-  __$$PositionOverlayImplCopyWithImpl(
-      _$PositionOverlayImpl _value, $Res Function(_$PositionOverlayImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of TradeOverlay
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? entryPrice = null,
-    Object? stopLoss = freezed,
-    Object? takeProfit = freezed,
-    Object? profitColor = null,
-    Object? lossColor = null,
-    Object? entryColor = null,
-  }) {
-    return _then(_$PositionOverlayImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      entryPrice: null == entryPrice
-          ? _value.entryPrice
-          : entryPrice // ignore: cast_nullable_to_non_nullable
-              as double,
-      stopLoss: freezed == stopLoss
-          ? _value.stopLoss
-          : stopLoss // ignore: cast_nullable_to_non_nullable
-              as double?,
-      takeProfit: freezed == takeProfit
-          ? _value.takeProfit
-          : takeProfit // ignore: cast_nullable_to_non_nullable
-              as double?,
-      profitColor: null == profitColor
-          ? _value.profitColor
-          : profitColor // ignore: cast_nullable_to_non_nullable
-              as int,
-      lossColor: null == lossColor
-          ? _value.lossColor
-          : lossColor // ignore: cast_nullable_to_non_nullable
-              as int,
-      entryColor: null == entryColor
-          ? _value.entryColor
-          : entryColor // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$PositionOverlayImpl extends PositionOverlay {
-  const _$PositionOverlayImpl(
+class PositionOverlay extends TradeOverlay {
+  const PositionOverlay(
       {required this.id,
       required this.entryPrice,
       this.stopLoss,
@@ -442,42 +432,39 @@ class _$PositionOverlayImpl extends PositionOverlay {
   final String id;
 
   /// The entry price of the position.
-  @override
   final double entryPrice;
 
   /// Optional stop loss price.
-  @override
   final double? stopLoss;
 
   /// Optional take profit price.
-  @override
   final double? takeProfit;
 
   /// Hex color for the profit zone (entry to TP).
-  @override
   @JsonKey()
   final int profitColor;
 
   /// Hex color for the loss zone (entry to SL).
-  @override
   @JsonKey()
   final int lossColor;
 
   /// Hex color for the entry line.
-  @override
   @JsonKey()
   final int entryColor;
 
+  /// Create a copy of TradeOverlay
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'TradeOverlay.position(id: $id, entryPrice: $entryPrice, stopLoss: $stopLoss, takeProfit: $takeProfit, profitColor: $profitColor, lossColor: $lossColor, entryColor: $entryColor)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $PositionOverlayCopyWith<PositionOverlay> get copyWith =>
+      _$PositionOverlayCopyWithImpl<PositionOverlay>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PositionOverlayImpl &&
+            other is PositionOverlay &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.entryPrice, entryPrice) ||
                 other.entryPrice == entryPrice) &&
@@ -497,200 +484,131 @@ class _$PositionOverlayImpl extends PositionOverlay {
   int get hashCode => Object.hash(runtimeType, id, entryPrice, stopLoss,
       takeProfit, profitColor, lossColor, entryColor);
 
-  /// Create a copy of TradeOverlay
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$PositionOverlayImplCopyWith<_$PositionOverlayImpl> get copyWith =>
-      __$$PositionOverlayImplCopyWithImpl<_$PositionOverlayImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String id, AnnotationPoint point, int color,
-            double size, String? label)
-        marker,
-    required TResult Function(String id, double entryPrice, double? stopLoss,
-            double? takeProfit, int profitColor, int lossColor, int entryColor)
-        position,
-  }) {
-    return position(id, entryPrice, stopLoss, takeProfit, profitColor,
-        lossColor, entryColor);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String id, AnnotationPoint point, int color, double size,
-            String? label)?
-        marker,
-    TResult? Function(String id, double entryPrice, double? stopLoss,
-            double? takeProfit, int profitColor, int lossColor, int entryColor)?
-        position,
-  }) {
-    return position?.call(id, entryPrice, stopLoss, takeProfit, profitColor,
-        lossColor, entryColor);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String id, AnnotationPoint point, int color, double size,
-            String? label)?
-        marker,
-    TResult Function(String id, double entryPrice, double? stopLoss,
-            double? takeProfit, int profitColor, int lossColor, int entryColor)?
-        position,
-    required TResult orElse(),
-  }) {
-    if (position != null) {
-      return position(id, entryPrice, stopLoss, takeProfit, profitColor,
-          lossColor, entryColor);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(TradeMarker value) marker,
-    required TResult Function(PositionOverlay value) position,
-  }) {
-    return position(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TradeMarker value)? marker,
-    TResult? Function(PositionOverlay value)? position,
-  }) {
-    return position?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(TradeMarker value)? marker,
-    TResult Function(PositionOverlay value)? position,
-    required TResult orElse(),
-  }) {
-    if (position != null) {
-      return position(this);
-    }
-    return orElse();
+  String toString() {
+    return 'TradeOverlay.position(id: $id, entryPrice: $entryPrice, stopLoss: $stopLoss, takeProfit: $takeProfit, profitColor: $profitColor, lossColor: $lossColor, entryColor: $entryColor)';
   }
 }
 
-abstract class PositionOverlay extends TradeOverlay {
-  const factory PositionOverlay(
-      {required final String id,
-      required final double entryPrice,
-      final double? stopLoss,
-      final double? takeProfit,
-      final int profitColor,
-      final int lossColor,
-      final int entryColor}) = _$PositionOverlayImpl;
-  const PositionOverlay._() : super._();
-
-  /// Unique identifier for the overlay.
+/// @nodoc
+abstract mixin class $PositionOverlayCopyWith<$Res>
+    implements $TradeOverlayCopyWith<$Res> {
+  factory $PositionOverlayCopyWith(
+          PositionOverlay value, $Res Function(PositionOverlay) _then) =
+      _$PositionOverlayCopyWithImpl;
   @override
-  String get id;
+  @useResult
+  $Res call(
+      {String id,
+      double entryPrice,
+      double? stopLoss,
+      double? takeProfit,
+      int profitColor,
+      int lossColor,
+      int entryColor});
+}
 
-  /// The entry price of the position.
-  double get entryPrice;
+/// @nodoc
+class _$PositionOverlayCopyWithImpl<$Res>
+    implements $PositionOverlayCopyWith<$Res> {
+  _$PositionOverlayCopyWithImpl(this._self, this._then);
 
-  /// Optional stop loss price.
-  double? get stopLoss;
-
-  /// Optional take profit price.
-  double? get takeProfit;
-
-  /// Hex color for the profit zone (entry to TP).
-  int get profitColor;
-
-  /// Hex color for the loss zone (entry to SL).
-  int get lossColor;
-
-  /// Hex color for the entry line.
-  int get entryColor;
+  final PositionOverlay _self;
+  final $Res Function(PositionOverlay) _then;
 
   /// Create a copy of TradeOverlay
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$PositionOverlayImplCopyWith<_$PositionOverlayImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? entryPrice = null,
+    Object? stopLoss = freezed,
+    Object? takeProfit = freezed,
+    Object? profitColor = null,
+    Object? lossColor = null,
+    Object? entryColor = null,
+  }) {
+    return _then(PositionOverlay(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      entryPrice: null == entryPrice
+          ? _self.entryPrice
+          : entryPrice // ignore: cast_nullable_to_non_nullable
+              as double,
+      stopLoss: freezed == stopLoss
+          ? _self.stopLoss
+          : stopLoss // ignore: cast_nullable_to_non_nullable
+              as double?,
+      takeProfit: freezed == takeProfit
+          ? _self.takeProfit
+          : takeProfit // ignore: cast_nullable_to_non_nullable
+              as double?,
+      profitColor: null == profitColor
+          ? _self.profitColor
+          : profitColor // ignore: cast_nullable_to_non_nullable
+              as int,
+      lossColor: null == lossColor
+          ? _self.lossColor
+          : lossColor // ignore: cast_nullable_to_non_nullable
+              as int,
+      entryColor: null == entryColor
+          ? _self.entryColor
+          : entryColor // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 mixin _$TradeOverlayDocument {
   /// List of trade overlays in the document.
-  List<TradeOverlay> get overlays => throw _privateConstructorUsedError;
+  List<TradeOverlay> get overlays;
 
   /// Create a copy of TradeOverlayDocument
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $TradeOverlayDocumentCopyWith<TradeOverlayDocument> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $TradeOverlayDocumentCopyWith<$Res> {
-  factory $TradeOverlayDocumentCopyWith(TradeOverlayDocument value,
-          $Res Function(TradeOverlayDocument) then) =
-      _$TradeOverlayDocumentCopyWithImpl<$Res, TradeOverlayDocument>;
-  @useResult
-  $Res call({List<TradeOverlay> overlays});
-}
-
-/// @nodoc
-class _$TradeOverlayDocumentCopyWithImpl<$Res,
-        $Val extends TradeOverlayDocument>
-    implements $TradeOverlayDocumentCopyWith<$Res> {
-  _$TradeOverlayDocumentCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of TradeOverlayDocument
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $TradeOverlayDocumentCopyWith<TradeOverlayDocument> get copyWith =>
+      _$TradeOverlayDocumentCopyWithImpl<TradeOverlayDocument>(
+          this as TradeOverlayDocument, _$identity);
+
   @override
-  $Res call({
-    Object? overlays = null,
-  }) {
-    return _then(_value.copyWith(
-      overlays: null == overlays
-          ? _value.overlays
-          : overlays // ignore: cast_nullable_to_non_nullable
-              as List<TradeOverlay>,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is TradeOverlayDocument &&
+            const DeepCollectionEquality().equals(other.overlays, overlays));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(overlays));
+
+  @override
+  String toString() {
+    return 'TradeOverlayDocument(overlays: $overlays)';
   }
 }
 
 /// @nodoc
-abstract class _$$TradeOverlayDocumentImplCopyWith<$Res>
-    implements $TradeOverlayDocumentCopyWith<$Res> {
-  factory _$$TradeOverlayDocumentImplCopyWith(_$TradeOverlayDocumentImpl value,
-          $Res Function(_$TradeOverlayDocumentImpl) then) =
-      __$$TradeOverlayDocumentImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $TradeOverlayDocumentCopyWith<$Res> {
+  factory $TradeOverlayDocumentCopyWith(TradeOverlayDocument value,
+          $Res Function(TradeOverlayDocument) _then) =
+      _$TradeOverlayDocumentCopyWithImpl;
   @useResult
   $Res call({List<TradeOverlay> overlays});
 }
 
 /// @nodoc
-class __$$TradeOverlayDocumentImplCopyWithImpl<$Res>
-    extends _$TradeOverlayDocumentCopyWithImpl<$Res, _$TradeOverlayDocumentImpl>
-    implements _$$TradeOverlayDocumentImplCopyWith<$Res> {
-  __$$TradeOverlayDocumentImplCopyWithImpl(_$TradeOverlayDocumentImpl _value,
-      $Res Function(_$TradeOverlayDocumentImpl) _then)
-      : super(_value, _then);
+class _$TradeOverlayDocumentCopyWithImpl<$Res>
+    implements $TradeOverlayDocumentCopyWith<$Res> {
+  _$TradeOverlayDocumentCopyWithImpl(this._self, this._then);
+
+  final TradeOverlayDocument _self;
+  final $Res Function(TradeOverlayDocument) _then;
 
   /// Create a copy of TradeOverlayDocument
   /// with the given fields replaced by the non-null parameter values.
@@ -699,20 +617,176 @@ class __$$TradeOverlayDocumentImplCopyWithImpl<$Res>
   $Res call({
     Object? overlays = null,
   }) {
-    return _then(_$TradeOverlayDocumentImpl(
+    return _then(_self.copyWith(
       overlays: null == overlays
-          ? _value._overlays
+          ? _self.overlays
           : overlays // ignore: cast_nullable_to_non_nullable
               as List<TradeOverlay>,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [TradeOverlayDocument].
+extension TradeOverlayDocumentPatterns on TradeOverlayDocument {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_TradeOverlayDocument value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _TradeOverlayDocument() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_TradeOverlayDocument value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _TradeOverlayDocument():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_TradeOverlayDocument value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _TradeOverlayDocument() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(List<TradeOverlay> overlays)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _TradeOverlayDocument() when $default != null:
+        return $default(_that.overlays);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(List<TradeOverlay> overlays) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _TradeOverlayDocument():
+        return $default(_that.overlays);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(List<TradeOverlay> overlays)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _TradeOverlayDocument() when $default != null:
+        return $default(_that.overlays);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 
-class _$TradeOverlayDocumentImpl extends _TradeOverlayDocument {
-  const _$TradeOverlayDocumentImpl(
-      {final List<TradeOverlay> overlays = const []})
+class _TradeOverlayDocument extends TradeOverlayDocument {
+  const _TradeOverlayDocument({final List<TradeOverlay> overlays = const []})
       : _overlays = overlays,
         super._();
 
@@ -728,16 +802,20 @@ class _$TradeOverlayDocumentImpl extends _TradeOverlayDocument {
     return EqualUnmodifiableListView(_overlays);
   }
 
+  /// Create a copy of TradeOverlayDocument
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'TradeOverlayDocument(overlays: $overlays)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$TradeOverlayDocumentCopyWith<_TradeOverlayDocument> get copyWith =>
+      __$TradeOverlayDocumentCopyWithImpl<_TradeOverlayDocument>(
+          this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TradeOverlayDocumentImpl &&
+            other is _TradeOverlayDocument &&
             const DeepCollectionEquality().equals(other._overlays, _overlays));
   }
 
@@ -745,30 +823,45 @@ class _$TradeOverlayDocumentImpl extends _TradeOverlayDocument {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_overlays));
 
+  @override
+  String toString() {
+    return 'TradeOverlayDocument(overlays: $overlays)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$TradeOverlayDocumentCopyWith<$Res>
+    implements $TradeOverlayDocumentCopyWith<$Res> {
+  factory _$TradeOverlayDocumentCopyWith(_TradeOverlayDocument value,
+          $Res Function(_TradeOverlayDocument) _then) =
+      __$TradeOverlayDocumentCopyWithImpl;
+  @override
+  @useResult
+  $Res call({List<TradeOverlay> overlays});
+}
+
+/// @nodoc
+class __$TradeOverlayDocumentCopyWithImpl<$Res>
+    implements _$TradeOverlayDocumentCopyWith<$Res> {
+  __$TradeOverlayDocumentCopyWithImpl(this._self, this._then);
+
+  final _TradeOverlayDocument _self;
+  final $Res Function(_TradeOverlayDocument) _then;
+
   /// Create a copy of TradeOverlayDocument
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$TradeOverlayDocumentImplCopyWith<_$TradeOverlayDocumentImpl>
-      get copyWith =>
-          __$$TradeOverlayDocumentImplCopyWithImpl<_$TradeOverlayDocumentImpl>(
-              this, _$identity);
+  $Res call({
+    Object? overlays = null,
+  }) {
+    return _then(_TradeOverlayDocument(
+      overlays: null == overlays
+          ? _self._overlays
+          : overlays // ignore: cast_nullable_to_non_nullable
+              as List<TradeOverlay>,
+    ));
+  }
 }
 
-abstract class _TradeOverlayDocument extends TradeOverlayDocument {
-  const factory _TradeOverlayDocument({final List<TradeOverlay> overlays}) =
-      _$TradeOverlayDocumentImpl;
-  const _TradeOverlayDocument._() : super._();
-
-  /// List of trade overlays in the document.
-  @override
-  List<TradeOverlay> get overlays;
-
-  /// Create a copy of TradeOverlayDocument
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$TradeOverlayDocumentImplCopyWith<_$TradeOverlayDocumentImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
+// dart format on

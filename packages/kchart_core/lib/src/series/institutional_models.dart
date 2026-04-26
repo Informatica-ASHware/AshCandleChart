@@ -5,7 +5,7 @@ part 'institutional_models.g.dart';
 
 /// Represents a single bin in a volume profile.
 @freezed
-class VolumeProfileBin with _$VolumeProfileBin {
+abstract class VolumeProfileBin with _$VolumeProfileBin {
   /// Creates a [VolumeProfileBin].
   const factory VolumeProfileBin({
     /// The center price of this bin.
@@ -28,7 +28,7 @@ class VolumeProfileBin with _$VolumeProfileBin {
 
 /// Represents the volume profile for a specific range.
 @freezed
-class VolumeProfile with _$VolumeProfile {
+abstract class VolumeProfile with _$VolumeProfile {
   /// Creates a [VolumeProfile].
   const factory VolumeProfile({
     /// List of bins ordered by price.
@@ -48,7 +48,7 @@ class VolumeProfile with _$VolumeProfile {
 
 /// Represents an entry in the order book.
 @freezed
-class OrderBookEntry with _$OrderBookEntry {
+abstract class OrderBookEntry with _$OrderBookEntry {
   /// Creates an [OrderBookEntry].
   const factory OrderBookEntry({
     /// The price of the order.
@@ -68,7 +68,7 @@ class OrderBookEntry with _$OrderBookEntry {
 
 /// Represents the real-time state of an order book.
 @freezed
-class OrderBook with _$OrderBook {
+abstract class OrderBook with _$OrderBook {
   /// Creates an [OrderBook].
   const factory OrderBook({
     /// List of buy orders (bids), sorted by price descending.
@@ -88,7 +88,7 @@ class OrderBook with _$OrderBook {
 
 /// Represents a liquidation zone on the chart.
 @freezed
-class LiquidationArea with _$LiquidationArea {
+abstract class LiquidationArea with _$LiquidationArea {
   /// Creates a [LiquidationArea].
   const factory LiquidationArea({
     /// The price level of the liquidation.
