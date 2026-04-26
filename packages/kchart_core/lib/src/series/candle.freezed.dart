@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,108 +9,64 @@ part of 'candle.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$Candle {
   /// Unix timestamp in milliseconds.
-  int get timestamp => throw _privateConstructorUsedError;
+  int get timestamp;
 
   /// Opening price.
-  double get open => throw _privateConstructorUsedError;
+  double get open;
 
   /// Highest price reached during the interval.
-  double get high => throw _privateConstructorUsedError;
+  double get high;
 
   /// Lowest price reached during the interval.
-  double get low => throw _privateConstructorUsedError;
+  double get low;
 
   /// Closing price.
-  double get close => throw _privateConstructorUsedError;
+  double get close;
 
   /// Volume traded during the interval.
-  double get volume => throw _privateConstructorUsedError;
+  double get volume;
 
   /// Create a copy of Candle
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $CandleCopyWith<Candle> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $CandleCopyWith<$Res> {
-  factory $CandleCopyWith(Candle value, $Res Function(Candle) then) =
-      _$CandleCopyWithImpl<$Res, Candle>;
-  @useResult
-  $Res call(
-      {int timestamp,
-      double open,
-      double high,
-      double low,
-      double close,
-      double volume});
-}
-
-/// @nodoc
-class _$CandleCopyWithImpl<$Res, $Val extends Candle>
-    implements $CandleCopyWith<$Res> {
-  _$CandleCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of Candle
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $CandleCopyWith<Candle> get copyWith =>
+      _$CandleCopyWithImpl<Candle>(this as Candle, _$identity);
+
   @override
-  $Res call({
-    Object? timestamp = null,
-    Object? open = null,
-    Object? high = null,
-    Object? low = null,
-    Object? close = null,
-    Object? volume = null,
-  }) {
-    return _then(_value.copyWith(
-      timestamp: null == timestamp
-          ? _value.timestamp
-          : timestamp // ignore: cast_nullable_to_non_nullable
-              as int,
-      open: null == open
-          ? _value.open
-          : open // ignore: cast_nullable_to_non_nullable
-              as double,
-      high: null == high
-          ? _value.high
-          : high // ignore: cast_nullable_to_non_nullable
-              as double,
-      low: null == low
-          ? _value.low
-          : low // ignore: cast_nullable_to_non_nullable
-              as double,
-      close: null == close
-          ? _value.close
-          : close // ignore: cast_nullable_to_non_nullable
-              as double,
-      volume: null == volume
-          ? _value.volume
-          : volume // ignore: cast_nullable_to_non_nullable
-              as double,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Candle &&
+            (identical(other.timestamp, timestamp) ||
+                other.timestamp == timestamp) &&
+            (identical(other.open, open) || other.open == open) &&
+            (identical(other.high, high) || other.high == high) &&
+            (identical(other.low, low) || other.low == low) &&
+            (identical(other.close, close) || other.close == close) &&
+            (identical(other.volume, volume) || other.volume == volume));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, timestamp, open, high, low, close, volume);
+
+  @override
+  String toString() {
+    return 'Candle(timestamp: $timestamp, open: $open, high: $high, low: $low, close: $close, volume: $volume)';
   }
 }
 
 /// @nodoc
-abstract class _$$CandleImplCopyWith<$Res> implements $CandleCopyWith<$Res> {
-  factory _$$CandleImplCopyWith(
-          _$CandleImpl value, $Res Function(_$CandleImpl) then) =
-      __$$CandleImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $CandleCopyWith<$Res> {
+  factory $CandleCopyWith(Candle value, $Res Function(Candle) _then) =
+      _$CandleCopyWithImpl;
   @useResult
   $Res call(
       {int timestamp,
@@ -122,12 +78,11 @@ abstract class _$$CandleImplCopyWith<$Res> implements $CandleCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$CandleImplCopyWithImpl<$Res>
-    extends _$CandleCopyWithImpl<$Res, _$CandleImpl>
-    implements _$$CandleImplCopyWith<$Res> {
-  __$$CandleImplCopyWithImpl(
-      _$CandleImpl _value, $Res Function(_$CandleImpl) _then)
-      : super(_value, _then);
+class _$CandleCopyWithImpl<$Res> implements $CandleCopyWith<$Res> {
+  _$CandleCopyWithImpl(this._self, this._then);
+
+  final Candle _self;
+  final $Res Function(Candle) _then;
 
   /// Create a copy of Candle
   /// with the given fields replaced by the non-null parameter values.
@@ -141,39 +96,205 @@ class __$$CandleImplCopyWithImpl<$Res>
     Object? close = null,
     Object? volume = null,
   }) {
-    return _then(_$CandleImpl(
+    return _then(_self.copyWith(
       timestamp: null == timestamp
-          ? _value.timestamp
+          ? _self.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
               as int,
       open: null == open
-          ? _value.open
+          ? _self.open
           : open // ignore: cast_nullable_to_non_nullable
               as double,
       high: null == high
-          ? _value.high
+          ? _self.high
           : high // ignore: cast_nullable_to_non_nullable
               as double,
       low: null == low
-          ? _value.low
+          ? _self.low
           : low // ignore: cast_nullable_to_non_nullable
               as double,
       close: null == close
-          ? _value.close
+          ? _self.close
           : close // ignore: cast_nullable_to_non_nullable
               as double,
       volume: null == volume
-          ? _value.volume
+          ? _self.volume
           : volume // ignore: cast_nullable_to_non_nullable
               as double,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [Candle].
+extension CandlePatterns on Candle {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_Candle value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _Candle() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_Candle value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _Candle():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_Candle value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _Candle() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(int timestamp, double open, double high, double low,
+            double close, double volume)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _Candle() when $default != null:
+        return $default(_that.timestamp, _that.open, _that.high, _that.low,
+            _that.close, _that.volume);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(int timestamp, double open, double high, double low,
+            double close, double volume)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _Candle():
+        return $default(_that.timestamp, _that.open, _that.high, _that.low,
+            _that.close, _that.volume);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(int timestamp, double open, double high, double low,
+            double close, double volume)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _Candle() when $default != null:
+        return $default(_that.timestamp, _that.open, _that.high, _that.low,
+            _that.close, _that.volume);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 
-class _$CandleImpl implements _Candle {
-  const _$CandleImpl(
+class _Candle implements Candle {
+  const _Candle(
       {required this.timestamp,
       required this.open,
       required this.high,
@@ -205,16 +326,19 @@ class _$CandleImpl implements _Candle {
   @override
   final double volume;
 
+  /// Create a copy of Candle
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'Candle(timestamp: $timestamp, open: $open, high: $high, low: $low, close: $close, volume: $volume)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$CandleCopyWith<_Candle> get copyWith =>
+      __$CandleCopyWithImpl<_Candle>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CandleImpl &&
+            other is _Candle &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
             (identical(other.open, open) || other.open == open) &&
@@ -228,52 +352,73 @@ class _$CandleImpl implements _Candle {
   int get hashCode =>
       Object.hash(runtimeType, timestamp, open, high, low, close, volume);
 
+  @override
+  String toString() {
+    return 'Candle(timestamp: $timestamp, open: $open, high: $high, low: $low, close: $close, volume: $volume)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$CandleCopyWith<$Res> implements $CandleCopyWith<$Res> {
+  factory _$CandleCopyWith(_Candle value, $Res Function(_Candle) _then) =
+      __$CandleCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {int timestamp,
+      double open,
+      double high,
+      double low,
+      double close,
+      double volume});
+}
+
+/// @nodoc
+class __$CandleCopyWithImpl<$Res> implements _$CandleCopyWith<$Res> {
+  __$CandleCopyWithImpl(this._self, this._then);
+
+  final _Candle _self;
+  final $Res Function(_Candle) _then;
+
   /// Create a copy of Candle
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$CandleImplCopyWith<_$CandleImpl> get copyWith =>
-      __$$CandleImplCopyWithImpl<_$CandleImpl>(this, _$identity);
+  $Res call({
+    Object? timestamp = null,
+    Object? open = null,
+    Object? high = null,
+    Object? low = null,
+    Object? close = null,
+    Object? volume = null,
+  }) {
+    return _then(_Candle(
+      timestamp: null == timestamp
+          ? _self.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as int,
+      open: null == open
+          ? _self.open
+          : open // ignore: cast_nullable_to_non_nullable
+              as double,
+      high: null == high
+          ? _self.high
+          : high // ignore: cast_nullable_to_non_nullable
+              as double,
+      low: null == low
+          ? _self.low
+          : low // ignore: cast_nullable_to_non_nullable
+              as double,
+      close: null == close
+          ? _self.close
+          : close // ignore: cast_nullable_to_non_nullable
+              as double,
+      volume: null == volume
+          ? _self.volume
+          : volume // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
+  }
 }
 
-abstract class _Candle implements Candle {
-  const factory _Candle(
-      {required final int timestamp,
-      required final double open,
-      required final double high,
-      required final double low,
-      required final double close,
-      required final double volume}) = _$CandleImpl;
-
-  /// Unix timestamp in milliseconds.
-  @override
-  int get timestamp;
-
-  /// Opening price.
-  @override
-  double get open;
-
-  /// Highest price reached during the interval.
-  @override
-  double get high;
-
-  /// Lowest price reached during the interval.
-  @override
-  double get low;
-
-  /// Closing price.
-  @override
-  double get close;
-
-  /// Volume traded during the interval.
-  @override
-  double get volume;
-
-  /// Create a copy of Candle
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CandleImplCopyWith<_$CandleImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

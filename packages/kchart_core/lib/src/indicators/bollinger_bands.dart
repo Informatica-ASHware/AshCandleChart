@@ -9,7 +9,7 @@ part 'bollinger_bands.freezed.dart';
 
 /// Configuration for the Bollinger Bands indicator.
 @freezed
-class BollingerBandsConfig
+abstract class BollingerBandsConfig
     with _$BollingerBandsConfig
     implements IndicatorConfig {
   /// Creates a [BollingerBandsConfig].

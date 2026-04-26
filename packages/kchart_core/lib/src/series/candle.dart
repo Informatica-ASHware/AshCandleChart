@@ -8,7 +8,7 @@ part 'candle.freezed.dart';
 /// operations, use [Series] which stores data in a columnar format to
 /// optimize CPU cache usage.
 @freezed
-class Candle with _$Candle {
+abstract class Candle with _$Candle {
   /// Creates a [Candle] with the given parameters.
   const factory Candle({
     /// Unix timestamp in milliseconds.

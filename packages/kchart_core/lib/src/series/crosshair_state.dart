@@ -6,7 +6,7 @@ part 'crosshair_state.freezed.dart';
 ///
 /// Contains the position and data associated with the current tracking point.
 @freezed
-class CrosshairState with _$CrosshairState {
+abstract class CrosshairState with _$CrosshairState {
   /// Creates a [CrosshairState].
   const factory CrosshairState({
     /// Horizontal position in local pixels.

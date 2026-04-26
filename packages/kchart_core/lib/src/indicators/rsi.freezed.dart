@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,86 +9,56 @@ part of 'rsi.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$RSIConfig {
-  String get id => throw _privateConstructorUsedError;
-  int get period => throw _privateConstructorUsedError;
-  List<String> get dependsOn => throw _privateConstructorUsedError;
+  String get id;
+  int get period;
+  List<String> get dependsOn;
 
   /// Create a copy of RSIConfig
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $RSIConfigCopyWith<RSIConfig> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $RSIConfigCopyWith<$Res> {
-  factory $RSIConfigCopyWith(RSIConfig value, $Res Function(RSIConfig) then) =
-      _$RSIConfigCopyWithImpl<$Res, RSIConfig>;
-  @useResult
-  $Res call({String id, int period, List<String> dependsOn});
-}
-
-/// @nodoc
-class _$RSIConfigCopyWithImpl<$Res, $Val extends RSIConfig>
-    implements $RSIConfigCopyWith<$Res> {
-  _$RSIConfigCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of RSIConfig
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $RSIConfigCopyWith<RSIConfig> get copyWith =>
+      _$RSIConfigCopyWithImpl<RSIConfig>(this as RSIConfig, _$identity);
+
   @override
-  $Res call({
-    Object? id = null,
-    Object? period = null,
-    Object? dependsOn = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      period: null == period
-          ? _value.period
-          : period // ignore: cast_nullable_to_non_nullable
-              as int,
-      dependsOn: null == dependsOn
-          ? _value.dependsOn
-          : dependsOn // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is RSIConfig &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.period, period) || other.period == period) &&
+            const DeepCollectionEquality().equals(other.dependsOn, dependsOn));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, id, period, const DeepCollectionEquality().hash(dependsOn));
+
+  @override
+  String toString() {
+    return 'RSIConfig(id: $id, period: $period, dependsOn: $dependsOn)';
   }
 }
 
 /// @nodoc
-abstract class _$$RSIConfigImplCopyWith<$Res>
-    implements $RSIConfigCopyWith<$Res> {
-  factory _$$RSIConfigImplCopyWith(
-          _$RSIConfigImpl value, $Res Function(_$RSIConfigImpl) then) =
-      __$$RSIConfigImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $RSIConfigCopyWith<$Res> {
+  factory $RSIConfigCopyWith(RSIConfig value, $Res Function(RSIConfig) _then) =
+      _$RSIConfigCopyWithImpl;
   @useResult
   $Res call({String id, int period, List<String> dependsOn});
 }
 
 /// @nodoc
-class __$$RSIConfigImplCopyWithImpl<$Res>
-    extends _$RSIConfigCopyWithImpl<$Res, _$RSIConfigImpl>
-    implements _$$RSIConfigImplCopyWith<$Res> {
-  __$$RSIConfigImplCopyWithImpl(
-      _$RSIConfigImpl _value, $Res Function(_$RSIConfigImpl) _then)
-      : super(_value, _then);
+class _$RSIConfigCopyWithImpl<$Res> implements $RSIConfigCopyWith<$Res> {
+  _$RSIConfigCopyWithImpl(this._self, this._then);
+
+  final RSIConfig _self;
+  final $Res Function(RSIConfig) _then;
 
   /// Create a copy of RSIConfig
   /// with the given fields replaced by the non-null parameter values.
@@ -99,27 +69,184 @@ class __$$RSIConfigImplCopyWithImpl<$Res>
     Object? period = null,
     Object? dependsOn = null,
   }) {
-    return _then(_$RSIConfigImpl(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       period: null == period
-          ? _value.period
+          ? _self.period
           : period // ignore: cast_nullable_to_non_nullable
               as int,
       dependsOn: null == dependsOn
-          ? _value._dependsOn
+          ? _self.dependsOn
           : dependsOn // ignore: cast_nullable_to_non_nullable
               as List<String>,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [RSIConfig].
+extension RSIConfigPatterns on RSIConfig {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_RSIConfig value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _RSIConfig() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_RSIConfig value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _RSIConfig():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_RSIConfig value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _RSIConfig() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String id, int period, List<String> dependsOn)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _RSIConfig() when $default != null:
+        return $default(_that.id, _that.period, _that.dependsOn);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String id, int period, List<String> dependsOn) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _RSIConfig():
+        return $default(_that.id, _that.period, _that.dependsOn);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(String id, int period, List<String> dependsOn)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _RSIConfig() when $default != null:
+        return $default(_that.id, _that.period, _that.dependsOn);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 
-class _$RSIConfigImpl implements _RSIConfig {
-  const _$RSIConfigImpl(
+class _RSIConfig implements RSIConfig {
+  const _RSIConfig(
       {required this.id,
       this.period = 14,
       final List<String> dependsOn = const []})
@@ -139,16 +266,19 @@ class _$RSIConfigImpl implements _RSIConfig {
     return EqualUnmodifiableListView(_dependsOn);
   }
 
+  /// Create a copy of RSIConfig
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'RSIConfig(id: $id, period: $period, dependsOn: $dependsOn)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$RSIConfigCopyWith<_RSIConfig> get copyWith =>
+      __$RSIConfigCopyWithImpl<_RSIConfig>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RSIConfigImpl &&
+            other is _RSIConfig &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.period, period) || other.period == period) &&
             const DeepCollectionEquality()
@@ -159,32 +289,54 @@ class _$RSIConfigImpl implements _RSIConfig {
   int get hashCode => Object.hash(
       runtimeType, id, period, const DeepCollectionEquality().hash(_dependsOn));
 
+  @override
+  String toString() {
+    return 'RSIConfig(id: $id, period: $period, dependsOn: $dependsOn)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$RSIConfigCopyWith<$Res>
+    implements $RSIConfigCopyWith<$Res> {
+  factory _$RSIConfigCopyWith(
+          _RSIConfig value, $Res Function(_RSIConfig) _then) =
+      __$RSIConfigCopyWithImpl;
+  @override
+  @useResult
+  $Res call({String id, int period, List<String> dependsOn});
+}
+
+/// @nodoc
+class __$RSIConfigCopyWithImpl<$Res> implements _$RSIConfigCopyWith<$Res> {
+  __$RSIConfigCopyWithImpl(this._self, this._then);
+
+  final _RSIConfig _self;
+  final $Res Function(_RSIConfig) _then;
+
   /// Create a copy of RSIConfig
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$RSIConfigImplCopyWith<_$RSIConfigImpl> get copyWith =>
-      __$$RSIConfigImplCopyWithImpl<_$RSIConfigImpl>(this, _$identity);
+  $Res call({
+    Object? id = null,
+    Object? period = null,
+    Object? dependsOn = null,
+  }) {
+    return _then(_RSIConfig(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      period: null == period
+          ? _self.period
+          : period // ignore: cast_nullable_to_non_nullable
+              as int,
+      dependsOn: null == dependsOn
+          ? _self._dependsOn
+          : dependsOn // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
 }
 
-abstract class _RSIConfig implements RSIConfig {
-  const factory _RSIConfig(
-      {required final String id,
-      final int period,
-      final List<String> dependsOn}) = _$RSIConfigImpl;
-
-  @override
-  String get id;
-  @override
-  int get period;
-  @override
-  List<String> get dependsOn;
-
-  /// Create a copy of RSIConfig
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$RSIConfigImplCopyWith<_$RSIConfigImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

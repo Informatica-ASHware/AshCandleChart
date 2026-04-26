@@ -7,7 +7,7 @@ part 'rsi.freezed.dart';
 
 /// Configuration for the Relative Strength Index (RSI) indicator.
 @freezed
-class RSIConfig with _$RSIConfig implements IndicatorConfig {
+abstract class RSIConfig with _$RSIConfig implements IndicatorConfig {
   /// Creates an [RSIConfig].
   const factory RSIConfig({
     required String id,

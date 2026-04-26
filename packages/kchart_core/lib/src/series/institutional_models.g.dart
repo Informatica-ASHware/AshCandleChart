@@ -6,17 +6,15 @@ part of 'institutional_models.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$VolumeProfileBinImpl _$$VolumeProfileBinImplFromJson(
-        Map<String, dynamic> json) =>
-    _$VolumeProfileBinImpl(
+_VolumeProfileBin _$VolumeProfileBinFromJson(Map<String, dynamic> json) =>
+    _VolumeProfileBin(
       price: (json['price'] as num).toDouble(),
       volume: (json['volume'] as num).toDouble(),
       buyVolume: (json['buyVolume'] as num?)?.toDouble() ?? 0.0,
       sellVolume: (json['sellVolume'] as num?)?.toDouble() ?? 0.0,
     );
 
-Map<String, dynamic> _$$VolumeProfileBinImplToJson(
-        _$VolumeProfileBinImpl instance) =>
+Map<String, dynamic> _$VolumeProfileBinToJson(_VolumeProfileBin instance) =>
     <String, dynamic>{
       'price': instance.price,
       'volume': instance.volume,
@@ -24,8 +22,8 @@ Map<String, dynamic> _$$VolumeProfileBinImplToJson(
       'sellVolume': instance.sellVolume,
     };
 
-_$VolumeProfileImpl _$$VolumeProfileImplFromJson(Map<String, dynamic> json) =>
-    _$VolumeProfileImpl(
+_VolumeProfile _$VolumeProfileFromJson(Map<String, dynamic> json) =>
+    _VolumeProfile(
       bins: (json['bins'] as List<dynamic>)
           .map((e) => VolumeProfileBin.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -33,30 +31,28 @@ _$VolumeProfileImpl _$$VolumeProfileImplFromJson(Map<String, dynamic> json) =>
       maxVolume: (json['maxVolume'] as num).toDouble(),
     );
 
-Map<String, dynamic> _$$VolumeProfileImplToJson(_$VolumeProfileImpl instance) =>
+Map<String, dynamic> _$VolumeProfileToJson(_VolumeProfile instance) =>
     <String, dynamic>{
       'bins': instance.bins,
       'pocPrice': instance.pocPrice,
       'maxVolume': instance.maxVolume,
     };
 
-_$OrderBookEntryImpl _$$OrderBookEntryImplFromJson(Map<String, dynamic> json) =>
-    _$OrderBookEntryImpl(
+_OrderBookEntry _$OrderBookEntryFromJson(Map<String, dynamic> json) =>
+    _OrderBookEntry(
       price: (json['price'] as num).toDouble(),
       size: (json['size'] as num).toDouble(),
       cumulativeSize: (json['cumulativeSize'] as num?)?.toDouble() ?? 0.0,
     );
 
-Map<String, dynamic> _$$OrderBookEntryImplToJson(
-        _$OrderBookEntryImpl instance) =>
+Map<String, dynamic> _$OrderBookEntryToJson(_OrderBookEntry instance) =>
     <String, dynamic>{
       'price': instance.price,
       'size': instance.size,
       'cumulativeSize': instance.cumulativeSize,
     };
 
-_$OrderBookImpl _$$OrderBookImplFromJson(Map<String, dynamic> json) =>
-    _$OrderBookImpl(
+_OrderBook _$OrderBookFromJson(Map<String, dynamic> json) => _OrderBook(
       bids: (json['bids'] as List<dynamic>)
           .map((e) => OrderBookEntry.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -66,23 +62,21 @@ _$OrderBookImpl _$$OrderBookImplFromJson(Map<String, dynamic> json) =>
       timestamp: (json['timestamp'] as num).toInt(),
     );
 
-Map<String, dynamic> _$$OrderBookImplToJson(_$OrderBookImpl instance) =>
+Map<String, dynamic> _$OrderBookToJson(_OrderBook instance) =>
     <String, dynamic>{
       'bids': instance.bids,
       'asks': instance.asks,
       'timestamp': instance.timestamp,
     };
 
-_$LiquidationAreaImpl _$$LiquidationAreaImplFromJson(
-        Map<String, dynamic> json) =>
-    _$LiquidationAreaImpl(
+_LiquidationArea _$LiquidationAreaFromJson(Map<String, dynamic> json) =>
+    _LiquidationArea(
       price: (json['price'] as num).toDouble(),
       size: (json['size'] as num).toDouble(),
       intensity: (json['intensity'] as num).toDouble(),
     );
 
-Map<String, dynamic> _$$LiquidationAreaImplToJson(
-        _$LiquidationAreaImpl instance) =>
+Map<String, dynamic> _$LiquidationAreaToJson(_LiquidationArea instance) =>
     <String, dynamic>{
       'price': instance.price,
       'size': instance.size,

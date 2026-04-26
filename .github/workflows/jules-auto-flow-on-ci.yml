@@ -1,0 +1,131 @@
+name: 'Secuencia Jules: On CI Auto-Merge y Siguiente Tarea'
+
+# 1. Disparadores: Se activa al COMPLETARSE el workflow llamado "CI"
+on:
+  workflow_run:
+    workflows: ["CI"] # Debe coincidir con el valor de 'name:' de tu ci.yml
+    types:
+      - completed
+
+jobs:
+  auto-merge-and-tag:
+    name: 'Fusionar sin conflictos y asignar a Jules'
+    runs-on: ubuntu-latest
+
+    # 2. Solo ejecutamos si el CI PASÓ (success) y si el CI fue originado por un Pull Request
+    if: >
+      github.event.workflow_run.conclusion == 'success' && 
+      github.event.workflow_run.event == 'pull_request'
+
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+
+    env:
+      GH_TOKEN: ${{ secrets.JULES_PAT }}
+      REPO: ${{ github.repository }}
+      # 3. Extraemos el PR number desde el payload del workflow_run
+      PR_NUMBER: ${{ github.event.workflow_run.pull_requests[0].number }}
+
+    steps:
+      - name: '📥 Descargar código (Checkout)'
+        uses: actions/checkout@v4
+
+      - name: '🔀 Comprobar conflictos e intentar Merge'
+        id: merge_step
+        run: |
+          # Validación de seguridad: Asegurarse de que tenemos un número de PR
+          if[ -z "$PR_NUMBER" ] || [ "$PR_NUMBER" == "null" ]; then
+            echo "❌ No se encontró un número de PR asociado a este workflow_run. Abortando."
+            exit 0
+          fi
+
+          echo "Comprobando si el PR #$PR_NUMBER es un borrador..."
+          # 4. Validamos si el PR es un Draft directamente con la CLI de GitHub
+          IS_DRAFT=$(gh pr view "$PR_NUMBER" --repo "$REPO" --json isDraft --jq '.isDraft')
+          if[ "$IS_DRAFT" == "true" ]; then
+            echo "💤 El PR es un borrador (draft). Se omite el merge automático."
+            exit 0
+          fi
+
+          echo "Comprobando el estado general del PR #$PR_NUMBER..."
+          
+          # Bucle para esperar a que GitHub termine de calcular los conflictos
+          for i in {1..12}; do
+            STATE=$(gh pr view "$PR_NUMBER" --repo "$REPO" --json state --jq '.state')
+          
+            if [ "$STATE" == "MERGED" ]; then
+              echo "✅ El PR ya se encuentra fusionado. Continuando con el flujo..."
+              exit 0
+            fi
+
+            if [ "$STATE" == "CLOSED" ]; then
+              echo "❌ El PR está cerrado pero NO fusionado. Abortando proceso."
+              exit 1
+            fi
+
+            MERGE_STATE=$(gh pr view "$PR_NUMBER" --repo "$REPO" --json mergeable --jq '.mergeable')
+          
+            if [ "$MERGE_STATE" == "MERGEABLE" ]; then
+              echo "✅ El PR no tiene conflictos. Procediendo a hacer merge..."
+          
+              if gh pr merge "$PR_NUMBER" --repo "$REPO" --merge --delete-branch; then
+                echo "🚀 Merge completado exitosamente."
+                exit 0
+              else
+                echo "⚠️ Fallo al ejecutar el comando merge. Esperando 5 segundos para verificar si GitHub lo procesó de fondo..."
+                sleep 5
+                continue
+              fi
+          
+            elif [ "$MERGE_STATE" == "CONFLICTING" ]; then
+              echo "❌ El PR tiene conflictos. Se aborta el merge automático."
+              exit 1
+          
+            else
+              echo "⏳ GitHub está calculando los conflictos (Estado: $MERGE_STATE). Esperando 5 segundos... (Intento $i de 12)"
+              sleep 5
+            fi
+          done
+          
+          echo "⚠️ Tiempo de espera agotado. No se pudo confirmar el estado del PR tras 60 segundos."
+          exit 1
+
+      - name: '✅ Cerrar el issue completado por Jules'
+        if: success()
+        run: |
+          echo "⏳ Esperando unos 5 segundos para cerrar cualquier issue activo que esté asignado a Jules..."
+          sleep 5
+          echo "Buscando el issue en el que Jules estaba trabajando (abierto y con etiqueta 'jules')...."
+          
+          ACTIVE_ISSUE=$(gh issue list --repo "$REPO" --state open --label "jules" --limit 50 --json number,createdAt --jq 'sort_by(.createdAt) | .[0].number')
+          
+          if[ -n "$ACTIVE_ISSUE" ] && [ "$ACTIVE_ISSUE" != "null" ]; then
+            echo "Cerrando el issue completado: #$ACTIVE_ISSUE..."
+            gh issue close "$ACTIVE_ISSUE" --repo "$REPO" --reason "completed"
+            echo "✅ Issue #$ACTIVE_ISSUE cerrado correctamente."
+          else
+            echo "⚠️ No se encontró ningún issue abierto con la etiqueta 'jules'. Quizás se cerró manualmente on automáticamente con el PR. Continuando..."
+          fi
+
+      - name: '🏷️ Buscar issue más antiguo y etiquetar con "jules"'
+        if: success()
+        run: |
+          echo "⏳ Esperando unos 5 segundos para asignar el siguiente issue a Jules..."
+          sleep 5
+          echo "Buscando el issue abierto más antiguo..."
+          
+          OLDEST_ISSUE=$(gh issue list --repo "$REPO" --state open --limit 500 --json number,createdAt --jq 'sort_by(.createdAt) | .[0].number')
+          
+          if [ -z "$OLDEST_ISSUE" ] || [ "$OLDEST_ISSUE" == "null" ]; then
+            echo "🎉 No hay más issues abiertos en el repositorio. ¡Trabajo terminado!"
+            exit 0
+          fi
+          
+          echo "Issue más antiguo encontrado: #$OLDEST_ISSUE"
+          echo "Añadiendo la etiqueta 'jules'..."
+          
+          gh issue edit "$OLDEST_ISSUE" --repo "$REPO" --add-label "jules"
+          
+          echo "✅ ¡Etiqueta añadida al issue #$OLDEST_ISSUE! Jules ya tiene su próxima tarea."
