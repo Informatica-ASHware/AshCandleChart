@@ -38,6 +38,9 @@ abstract class ChartTheme with _$ChartTheme {
     /// Width of the Y-axis (price scale) on the right.
     @Default(60.0) double yAxisWidth,
 
+    /// Height of the X-axis (time scale) at the bottom.
+    @Default(25.0) double xAxisHeight,
+
     /// Color for Volume Profile buy bars.
     required Color vpBuyColor,
 
@@ -68,6 +71,7 @@ abstract class ChartTheme with _$ChartTheme {
         tradeLineColor: Colors.blue,
         backgroundColor: Colors.white,
         yAxisWidth: 60.0,
+        xAxisHeight: 25.0,
         vpBuyColor: const Color(0x804CAF50),
         vpSellColor: const Color(0x80E91E63),
         vpPocColor: Colors.orange,
@@ -87,6 +91,7 @@ abstract class ChartTheme with _$ChartTheme {
         tradeLineColor: Colors.blueAccent,
         backgroundColor: const Color(0xFF121212),
         yAxisWidth: 60.0,
+        xAxisHeight: 25.0,
         vpBuyColor: const Color(0x8026A69A),
         vpSellColor: const Color(0x80EF5350),
         vpPocColor: Colors.orangeAccent,

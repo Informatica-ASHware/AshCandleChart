@@ -8,6 +8,7 @@ import 'painting/main_panel_painter.dart';
 import 'panels/panel_stack.dart';
 import 'panels/ai/ai_insights_panel.dart';
 import 'widgets/kchart_scope.dart';
+import 'widgets/time_axis_panel.dart';
 import 'interaction/replay/replay_slider.dart';
 import 'package:flutter/physics.dart';
 import 'package:flutter/services.dart';
@@ -500,6 +501,7 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
                                     },
                                   ),
                                 ),
+                                TimeAxisPanel(controller: widget.controller),
                                 if (widget.controller.replayCoordinator != null)
                                   ReplaySlider(
                                     coordinator:

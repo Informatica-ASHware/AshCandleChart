@@ -30,3 +30,11 @@
 - Horizontal grid lines aligned with price labels.
 - Synchronized Y-axis margin across all chart components (candles, grid, annotations, and crosshair).
 - Updated `ChartTheme` with `yAxisWidth` configuration.
+
+## [0.1.0-dev.4] - 2024-05-23
+
+### Added
+- X-Axis (Timeline) rendering at the bottom of the chart.
+- Dynamic time labels ("HH:mm" or "dd/MM") distributed equitably across the visible range.
+- High-performance timeline rendering with `LayerCache`.
+- Updated `ChartTheme` with `xAxisHeight` configuration.

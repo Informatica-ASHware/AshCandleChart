@@ -41,6 +41,9 @@ mixin _$ChartTheme {
   /// Width of the Y-axis (price scale) on the right.
   double get yAxisWidth;
 
+  /// Height of the X-axis (time scale) at the bottom.
+  double get xAxisHeight => throw _privateConstructorUsedError;
+
   /// Color for Volume Profile buy bars.
   Color get vpBuyColor;
 
@@ -144,6 +147,7 @@ abstract mixin class $ChartThemeCopyWith<$Res> {
       Color tradeLineColor,
       Color backgroundColor,
       double yAxisWidth,
+      double xAxisHeight,
       Color vpBuyColor,
       Color vpSellColor,
       Color vpPocColor,
@@ -173,6 +177,7 @@ class _$ChartThemeCopyWithImpl<$Res> implements $ChartThemeCopyWith<$Res> {
     Object? tradeLineColor = null,
     Object? backgroundColor = null,
     Object? yAxisWidth = null,
+    Object? xAxisHeight = null,
     Object? vpBuyColor = null,
     Object? vpSellColor = null,
     Object? vpPocColor = null,
@@ -216,6 +221,10 @@ class _$ChartThemeCopyWithImpl<$Res> implements $ChartThemeCopyWith<$Res> {
       yAxisWidth: null == yAxisWidth
           ? _self.yAxisWidth
           : yAxisWidth // ignore: cast_nullable_to_non_nullable
+              as double,
+      xAxisHeight: null == xAxisHeight
+          ? _value.xAxisHeight
+          : xAxisHeight // ignore: cast_nullable_to_non_nullable
               as double,
       vpBuyColor: null == vpBuyColor
           ? _self.vpBuyColor
@@ -508,6 +517,7 @@ class _ChartTheme implements ChartTheme {
       required this.tradeLineColor,
       required this.backgroundColor,
       this.yAxisWidth = 60.0,
+      this.xAxisHeight = 25.0,
       required this.vpBuyColor,
       required this.vpSellColor,
       required this.vpPocColor,
@@ -551,6 +561,11 @@ class _ChartTheme implements ChartTheme {
   @override
   @JsonKey()
   final double yAxisWidth;
+
+  /// Height of the X-axis (time scale) at the bottom.
+  @override
+  @JsonKey()
+  final double xAxisHeight;
 
   /// Color for Volume Profile buy bars.
   @override
@@ -607,6 +622,8 @@ class _ChartTheme implements ChartTheme {
                 other.backgroundColor == backgroundColor) &&
             (identical(other.yAxisWidth, yAxisWidth) ||
                 other.yAxisWidth == yAxisWidth) &&
+            (identical(other.xAxisHeight, xAxisHeight) ||
+                other.xAxisHeight == xAxisHeight) &&
             (identical(other.vpBuyColor, vpBuyColor) ||
                 other.vpBuyColor == vpBuyColor) &&
             (identical(other.vpSellColor, vpSellColor) ||
@@ -633,6 +650,7 @@ class _ChartTheme implements ChartTheme {
       tradeLineColor,
       backgroundColor,
       yAxisWidth,
+      xAxisHeight,
       vpBuyColor,
       vpSellColor,
       vpPocColor,
