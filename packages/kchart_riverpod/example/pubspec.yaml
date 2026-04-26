@@ -10,12 +10,22 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_riverpod: ^3.0.0-dev.0
-  kchart_riverpod:
-    path: ..
-  kchart_flutter:
-    path: ../../kchart_flutter
   kchart_core:
-    path: ../../kchart_core
+    git:
+      url: https://github.com/Informatica-ASHware/KChart2.git
+      path: packages/kchart_core
+      ref: 44fd566306e5bae7027991770b355a107fed1693  # ref: PIN_TO_SHA_AFTER_FIRST_TAG
+  kchart_flutter:
+    git:
+      url: https://github.com/Informatica-ASHware/KChart2.git
+      path: packages/kchart_flutter
+      ref: 44fd566306e5bae7027991770b355a107fed1693  # ref: PIN_TO_SHA_AFTER_FIRST_TAG
+  kchart_riverpod:
+    git:
+      url: https://github.com/Informatica-ASHware/KChart2.git
+      path: packages/kchart_riverpod
+      ref: 44fd566306e5bae7027991770b355a107fed1693  # ref: PIN_TO_SHA_AFTER_FIRST_TAG
+
 
 dev_dependencies:
   flutter_test:

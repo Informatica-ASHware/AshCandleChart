@@ -13,9 +13,106 @@ environment:
 
 # === Pub Workspaces ===
 workspace:
-  - kchart_core
-  - kchart_flutter
-  - kchart_riverpod
+  - packages/kchart_core
+  - packages/kchart_flutter
+  - packages/kchart_riverpod
 
 dev_dependencies:
   melos: ^7.0.0
+
+melos:
+  name: kchart_workspace
+
+  packages:
+    - packages/*
+
+  command:
+    bootstrap:
+      environment:
+        sdk: ">=3.6.0 <4.0.0"
+        flutter: ">=3.27.0"
+      # Versiones COMPARTIDAS para todo el workspace
+      dependencies:
+        meta: ^1.16.0
+        intl: ^0.19.0
+        # Codegen toolchain — la trinidad
+        freezed_annotation: ^3.0.0
+        json_annotation: ^4.9.0
+        # Riverpod 3.x (última estable)
+        riverpod: ^3.2.1
+        flutter_riverpod: ^3.3.1
+        riverpod_annotation: ^4.0.2
+      dev_dependencies:
+        build_runner: ^2.4.13
+        freezed: ^2.5.7
+        json_serializable: ^6.8.0
+        riverpod_generator: ^4.0.3
+        riverpod_lint: ^3.1.3
+        custom_lint: ^0.7.5
+        test: ^1.25.15
+        glados: ^1.1.7
+
+    version:
+      message: "chore(release): publish kchart packages"
+      includeCommitId: true
+
+  scripts:
+    format:
+      run: dart run melos exec -- "dart format ."
+      description: Run `dart format` in all packages.
+
+    #  analyze:
+    #    run: dart run melos exec -- "dart analyze --fatal-infos"
+    #    description: Run `dart analyze` in all packages.
+
+    #  test:
+    #    run: dart run melos exec --dir-exists="test" -- "flutter test || dart test"
+    #    description: Run tests in all packages.
+
+    pana:
+      run: dart run melos exec -- "pana --no-warning"
+      description: Run `pana` in all packages.
+
+    #  bootstrap:
+    #    run: dart run melos bootstrap
+    #    description: Bootstrap the workspace.
+
+    build:
+      description: "Run build_runner once across packages that need it."
+      run: dart run build_runner build --delete-conflicting-outputs
+      exec:
+        concurrency: 1
+      packageFilters:
+        dependsOn: build_runner
+
+    watch:
+      description: "Run build_runner in watch mode."
+      run: dart run build_runner watch --delete-conflicting-outputs
+      exec:
+        concurrency: 1
+      packageFilters:
+        dependsOn: build_runner
+
+    analyze:
+      description: "Static analysis across the workspace."
+      run: dart analyze .
+      exec:
+        concurrency: 4
+
+    test:flutter:
+      description: "Run Flutter tests."
+      run: flutter test
+      exec:
+        concurrency: 1
+      packageFilters:
+        flutter: true
+        dirExists: test
+
+    test:dart:
+      description: "Run pure Dart tests."
+      run: dart test
+      exec:
+        concurrency: 4
+      packageFilters:
+        no-flutter: true
+        dirExists: test
