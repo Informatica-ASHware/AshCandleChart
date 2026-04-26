@@ -83,7 +83,11 @@ class _VolumePanelWidgetState extends State<_VolumePanelWidget> {
         ValueListenableBuilder<CrosshairState?>(
           valueListenable: widget.controller.crosshair.state,
           builder: (context, state, child) {
-            return CrosshairOverlay(state: state);
+            return CrosshairOverlay(
+              state: state,
+              frame: widget.controller.frame,
+              indicatorId: 'volume',
+            );
           },
         ),
       ],

@@ -38,3 +38,11 @@
 - Dynamic time labels ("HH:mm" or "dd/MM") distributed equitably across the visible range.
 - High-performance timeline rendering with `LayerCache`.
 - Updated `ChartTheme` with `xAxisHeight` configuration.
+
+## [0.1.0-dev.5] - 2024-05-24
+
+### Added
+- Interactive Crosshair with dashed vertical and horizontal lines.
+- Real-time X-axis and Y-axis labels highlighting values under the cursor.
+- Multi-panel crosshair support: Y-axis label automatically adapts to Price, Volume, or Indicator values depending on the active panel.
+- Enhanced coordinate mapping in `KChartController` with robust boundary guards.
