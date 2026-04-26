@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,100 +9,68 @@ part of 'crosshair_state.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CrosshairState {
   /// Horizontal position in local pixels.
-  double? get dx => throw _privateConstructorUsedError;
+  double? get dx;
 
   /// Vertical position in local pixels.
-  double? get dy => throw _privateConstructorUsedError;
+  double? get dy;
 
   /// The timestamp at the current horizontal position.
-  int? get timestamp => throw _privateConstructorUsedError;
+  int? get timestamp;
 
   /// The price (or value) at the current vertical position.
-  double? get price => throw _privateConstructorUsedError;
+  double? get price;
 
   /// Create a copy of CrosshairState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $CrosshairStateCopyWith<CrosshairState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $CrosshairStateCopyWith<$Res> {
-  factory $CrosshairStateCopyWith(
-          CrosshairState value, $Res Function(CrosshairState) then) =
-      _$CrosshairStateCopyWithImpl<$Res, CrosshairState>;
-  @useResult
-  $Res call({double? dx, double? dy, int? timestamp, double? price});
-}
-
-/// @nodoc
-class _$CrosshairStateCopyWithImpl<$Res, $Val extends CrosshairState>
-    implements $CrosshairStateCopyWith<$Res> {
-  _$CrosshairStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of CrosshairState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $CrosshairStateCopyWith<CrosshairState> get copyWith =>
+      _$CrosshairStateCopyWithImpl<CrosshairState>(
+          this as CrosshairState, _$identity);
+
   @override
-  $Res call({
-    Object? dx = freezed,
-    Object? dy = freezed,
-    Object? timestamp = freezed,
-    Object? price = freezed,
-  }) {
-    return _then(_value.copyWith(
-      dx: freezed == dx
-          ? _value.dx
-          : dx // ignore: cast_nullable_to_non_nullable
-              as double?,
-      dy: freezed == dy
-          ? _value.dy
-          : dy // ignore: cast_nullable_to_non_nullable
-              as double?,
-      timestamp: freezed == timestamp
-          ? _value.timestamp
-          : timestamp // ignore: cast_nullable_to_non_nullable
-              as int?,
-      price: freezed == price
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as double?,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is CrosshairState &&
+            (identical(other.dx, dx) || other.dx == dx) &&
+            (identical(other.dy, dy) || other.dy == dy) &&
+            (identical(other.timestamp, timestamp) ||
+                other.timestamp == timestamp) &&
+            (identical(other.price, price) || other.price == price));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, dx, dy, timestamp, price);
+
+  @override
+  String toString() {
+    return 'CrosshairState(dx: $dx, dy: $dy, timestamp: $timestamp, price: $price)';
   }
 }
 
 /// @nodoc
-abstract class _$$CrosshairStateImplCopyWith<$Res>
-    implements $CrosshairStateCopyWith<$Res> {
-  factory _$$CrosshairStateImplCopyWith(_$CrosshairStateImpl value,
-          $Res Function(_$CrosshairStateImpl) then) =
-      __$$CrosshairStateImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $CrosshairStateCopyWith<$Res> {
+  factory $CrosshairStateCopyWith(
+          CrosshairState value, $Res Function(CrosshairState) _then) =
+      _$CrosshairStateCopyWithImpl;
   @useResult
   $Res call({double? dx, double? dy, int? timestamp, double? price});
 }
 
 /// @nodoc
-class __$$CrosshairStateImplCopyWithImpl<$Res>
-    extends _$CrosshairStateCopyWithImpl<$Res, _$CrosshairStateImpl>
-    implements _$$CrosshairStateImplCopyWith<$Res> {
-  __$$CrosshairStateImplCopyWithImpl(
-      _$CrosshairStateImpl _value, $Res Function(_$CrosshairStateImpl) _then)
-      : super(_value, _then);
+class _$CrosshairStateCopyWithImpl<$Res>
+    implements $CrosshairStateCopyWith<$Res> {
+  _$CrosshairStateCopyWithImpl(this._self, this._then);
+
+  final CrosshairState _self;
+  final $Res Function(CrosshairState) _then;
 
   /// Create a copy of CrosshairState
   /// with the given fields replaced by the non-null parameter values.
@@ -114,31 +82,191 @@ class __$$CrosshairStateImplCopyWithImpl<$Res>
     Object? timestamp = freezed,
     Object? price = freezed,
   }) {
-    return _then(_$CrosshairStateImpl(
+    return _then(_self.copyWith(
       dx: freezed == dx
-          ? _value.dx
+          ? _self.dx
           : dx // ignore: cast_nullable_to_non_nullable
               as double?,
       dy: freezed == dy
-          ? _value.dy
+          ? _self.dy
           : dy // ignore: cast_nullable_to_non_nullable
               as double?,
       timestamp: freezed == timestamp
-          ? _value.timestamp
+          ? _self.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
               as int?,
       price: freezed == price
-          ? _value.price
+          ? _self.price
           : price // ignore: cast_nullable_to_non_nullable
               as double?,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [CrosshairState].
+extension CrosshairStatePatterns on CrosshairState {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_CrosshairState value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _CrosshairState() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_CrosshairState value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _CrosshairState():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_CrosshairState value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _CrosshairState() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(double? dx, double? dy, int? timestamp, double? price)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _CrosshairState() when $default != null:
+        return $default(_that.dx, _that.dy, _that.timestamp, _that.price);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(double? dx, double? dy, int? timestamp, double? price)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _CrosshairState():
+        return $default(_that.dx, _that.dy, _that.timestamp, _that.price);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(double? dx, double? dy, int? timestamp, double? price)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _CrosshairState() when $default != null:
+        return $default(_that.dx, _that.dy, _that.timestamp, _that.price);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 
-class _$CrosshairStateImpl implements _CrosshairState {
-  const _$CrosshairStateImpl({this.dx, this.dy, this.timestamp, this.price});
+class _CrosshairState implements CrosshairState {
+  const _CrosshairState({this.dx, this.dy, this.timestamp, this.price});
 
   /// Horizontal position in local pixels.
   @override
@@ -156,16 +284,19 @@ class _$CrosshairStateImpl implements _CrosshairState {
   @override
   final double? price;
 
+  /// Create a copy of CrosshairState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'CrosshairState(dx: $dx, dy: $dy, timestamp: $timestamp, price: $price)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$CrosshairStateCopyWith<_CrosshairState> get copyWith =>
+      __$CrosshairStateCopyWithImpl<_CrosshairState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CrosshairStateImpl &&
+            other is _CrosshairState &&
             (identical(other.dx, dx) || other.dx == dx) &&
             (identical(other.dy, dy) || other.dy == dy) &&
             (identical(other.timestamp, timestamp) ||
@@ -176,43 +307,60 @@ class _$CrosshairStateImpl implements _CrosshairState {
   @override
   int get hashCode => Object.hash(runtimeType, dx, dy, timestamp, price);
 
+  @override
+  String toString() {
+    return 'CrosshairState(dx: $dx, dy: $dy, timestamp: $timestamp, price: $price)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$CrosshairStateCopyWith<$Res>
+    implements $CrosshairStateCopyWith<$Res> {
+  factory _$CrosshairStateCopyWith(
+          _CrosshairState value, $Res Function(_CrosshairState) _then) =
+      __$CrosshairStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call({double? dx, double? dy, int? timestamp, double? price});
+}
+
+/// @nodoc
+class __$CrosshairStateCopyWithImpl<$Res>
+    implements _$CrosshairStateCopyWith<$Res> {
+  __$CrosshairStateCopyWithImpl(this._self, this._then);
+
+  final _CrosshairState _self;
+  final $Res Function(_CrosshairState) _then;
+
   /// Create a copy of CrosshairState
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$CrosshairStateImplCopyWith<_$CrosshairStateImpl> get copyWith =>
-      __$$CrosshairStateImplCopyWithImpl<_$CrosshairStateImpl>(
-          this, _$identity);
+  $Res call({
+    Object? dx = freezed,
+    Object? dy = freezed,
+    Object? timestamp = freezed,
+    Object? price = freezed,
+  }) {
+    return _then(_CrosshairState(
+      dx: freezed == dx
+          ? _self.dx
+          : dx // ignore: cast_nullable_to_non_nullable
+              as double?,
+      dy: freezed == dy
+          ? _self.dy
+          : dy // ignore: cast_nullable_to_non_nullable
+              as double?,
+      timestamp: freezed == timestamp
+          ? _self.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as int?,
+      price: freezed == price
+          ? _self.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as double?,
+    ));
+  }
 }
 
-abstract class _CrosshairState implements CrosshairState {
-  const factory _CrosshairState(
-      {final double? dx,
-      final double? dy,
-      final int? timestamp,
-      final double? price}) = _$CrosshairStateImpl;
-
-  /// Horizontal position in local pixels.
-  @override
-  double? get dx;
-
-  /// Vertical position in local pixels.
-  @override
-  double? get dy;
-
-  /// The timestamp at the current horizontal position.
-  @override
-  int? get timestamp;
-
-  /// The price (or value) at the current vertical position.
-  @override
-  double? get price;
-
-  /// Create a copy of CrosshairState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CrosshairStateImplCopyWith<_$CrosshairStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

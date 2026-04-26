@@ -26,7 +26,7 @@ class ChartFrameDeserializationException implements Exception {
 /// This model is immutable and contains all the necessary data to render
 /// the chart, including the main series, indicators, and the current viewport.
 @freezed
-class ChartFrame with _$ChartFrame {
+abstract class ChartFrame with _$ChartFrame {
   const ChartFrame._();
 
   /// Creates a [ChartFrame] with the given parameters.

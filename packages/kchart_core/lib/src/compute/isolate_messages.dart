@@ -7,7 +7,7 @@ part 'isolate_messages.freezed.dart';
 
 /// Base class for messages sent to the isolate.
 @freezed
-class ComputeRequest with _$ComputeRequest {
+abstract class ComputeRequest with _$ComputeRequest {
   /// Creates a compute request.
   const factory ComputeRequest({
     /// Unique identifier for the request, used for correlation and cancellation.
@@ -31,7 +31,7 @@ class ComputeRequest with _$ComputeRequest {
 
 /// Base class for messages received from the isolate.
 @freezed
-class ComputeResponse with _$ComputeResponse {
+abstract class ComputeResponse with _$ComputeResponse {
   /// Creates a compute response.
   const factory ComputeResponse({
     /// Unique identifier correlated with the [ComputeRequest].
@@ -48,7 +48,7 @@ class ComputeResponse with _$ComputeResponse {
 
 /// Internal message to control the isolate worker.
 @freezed
-class ControlMessage with _$ControlMessage {
+abstract class ControlMessage with _$ControlMessage {
   /// Sent to the worker to stop processing and exit.
   const factory ControlMessage.exit() = _Exit;
 

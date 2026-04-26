@@ -11,7 +11,7 @@ part 'trade_overlay.freezed.dart';
   unionKey: 'type',
   unionValueCase: FreezedUnionCase.snake,
 )
-class TradeOverlay with _$TradeOverlay {
+abstract class TradeOverlay with _$TradeOverlay {
   /// Base constructor for [TradeOverlay].
   const TradeOverlay._();
 
@@ -115,7 +115,7 @@ class TradeOverlay with _$TradeOverlay {
 /// Used to group multiple [TradeOverlay] objects for efficient serialization
 /// and state management.
 @freezed
-class TradeOverlayDocument with _$TradeOverlayDocument {
+abstract class TradeOverlayDocument with _$TradeOverlayDocument {
   /// Base constructor for [TradeOverlayDocument].
   const TradeOverlayDocument._();
 

@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,60 +9,105 @@ part of 'chart_frame.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ChartFrame {
   /// The main price [Series].
-  Series get series => throw _privateConstructorUsedError;
+  Series get series;
 
   /// Map of indicator names to their respective [Series].
-  Map<String, Series> get indicators => throw _privateConstructorUsedError;
+  Map<String, Series> get indicators;
 
   /// The current [Viewport] state.
-  Viewport get viewport => throw _privateConstructorUsedError;
+  Viewport get viewport;
 
   /// The collection of annotations (drawings) in the chart.
-  AnnotationDocument get annotations => throw _privateConstructorUsedError;
+  AnnotationDocument get annotations;
 
   /// The collection of trade-related overlays.
-  TradeOverlayDocument get tradeOverlays => throw _privateConstructorUsedError;
+  TradeOverlayDocument get tradeOverlays;
 
   /// List of overlays (e.g., drawings, alerts, etc.) to be rendered.
-  List<dynamic> get overlays => throw _privateConstructorUsedError;
+  List<dynamic> get overlays;
 
   /// Optional volume profile data.
-  VolumeProfile? get volumeProfile => throw _privateConstructorUsedError;
+  VolumeProfile? get volumeProfile;
 
   /// Optional order book data.
-  OrderBook? get orderBook => throw _privateConstructorUsedError;
+  OrderBook? get orderBook;
 
   /// Optional list of liquidation areas for heatmap.
-  List<LiquidationArea> get liquidations => throw _privateConstructorUsedError;
+  List<LiquidationArea> get liquidations;
 
   /// Sequential number to track frame updates and ensure consistent state.
-  int get sequenceNumber => throw _privateConstructorUsedError;
+  int get sequenceNumber;
 
   /// Granular sequence numbers per panel to optimize repaints.
   /// Key can be 'main', 'volume', or indicator IDs.
-  Map<String, int> get panelSequenceNumbers =>
-      throw _privateConstructorUsedError;
+  Map<String, int> get panelSequenceNumbers;
 
   /// Create a copy of ChartFrame
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $ChartFrameCopyWith<ChartFrame> get copyWith =>
-      throw _privateConstructorUsedError;
+      _$ChartFrameCopyWithImpl<ChartFrame>(this as ChartFrame, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is ChartFrame &&
+            (identical(other.series, series) || other.series == series) &&
+            const DeepCollectionEquality()
+                .equals(other.indicators, indicators) &&
+            (identical(other.viewport, viewport) ||
+                other.viewport == viewport) &&
+            (identical(other.annotations, annotations) ||
+                other.annotations == annotations) &&
+            (identical(other.tradeOverlays, tradeOverlays) ||
+                other.tradeOverlays == tradeOverlays) &&
+            const DeepCollectionEquality().equals(other.overlays, overlays) &&
+            (identical(other.volumeProfile, volumeProfile) ||
+                other.volumeProfile == volumeProfile) &&
+            (identical(other.orderBook, orderBook) ||
+                other.orderBook == orderBook) &&
+            const DeepCollectionEquality()
+                .equals(other.liquidations, liquidations) &&
+            (identical(other.sequenceNumber, sequenceNumber) ||
+                other.sequenceNumber == sequenceNumber) &&
+            const DeepCollectionEquality()
+                .equals(other.panelSequenceNumbers, panelSequenceNumbers));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      series,
+      const DeepCollectionEquality().hash(indicators),
+      viewport,
+      annotations,
+      tradeOverlays,
+      const DeepCollectionEquality().hash(overlays),
+      volumeProfile,
+      orderBook,
+      const DeepCollectionEquality().hash(liquidations),
+      sequenceNumber,
+      const DeepCollectionEquality().hash(panelSequenceNumbers));
+
+  @override
+  String toString() {
+    return 'ChartFrame(series: $series, indicators: $indicators, viewport: $viewport, annotations: $annotations, tradeOverlays: $tradeOverlays, overlays: $overlays, volumeProfile: $volumeProfile, orderBook: $orderBook, liquidations: $liquidations, sequenceNumber: $sequenceNumber, panelSequenceNumbers: $panelSequenceNumbers)';
+  }
 }
 
 /// @nodoc
-abstract class $ChartFrameCopyWith<$Res> {
+abstract mixin class $ChartFrameCopyWith<$Res> {
   factory $ChartFrameCopyWith(
-          ChartFrame value, $Res Function(ChartFrame) then) =
-      _$ChartFrameCopyWithImpl<$Res, ChartFrame>;
+          ChartFrame value, $Res Function(ChartFrame) _then) =
+      _$ChartFrameCopyWithImpl;
   @useResult
   $Res call(
       {Series series,
@@ -85,14 +130,11 @@ abstract class $ChartFrameCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ChartFrameCopyWithImpl<$Res, $Val extends ChartFrame>
-    implements $ChartFrameCopyWith<$Res> {
-  _$ChartFrameCopyWithImpl(this._value, this._then);
+class _$ChartFrameCopyWithImpl<$Res> implements $ChartFrameCopyWith<$Res> {
+  _$ChartFrameCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final ChartFrame _self;
+  final $Res Function(ChartFrame) _then;
 
   /// Create a copy of ChartFrame
   /// with the given fields replaced by the non-null parameter values.
@@ -111,52 +153,52 @@ class _$ChartFrameCopyWithImpl<$Res, $Val extends ChartFrame>
     Object? sequenceNumber = null,
     Object? panelSequenceNumbers = null,
   }) {
-    return _then(_value.copyWith(
+    return _then(_self.copyWith(
       series: null == series
-          ? _value.series
+          ? _self.series
           : series // ignore: cast_nullable_to_non_nullable
               as Series,
       indicators: null == indicators
-          ? _value.indicators
+          ? _self.indicators
           : indicators // ignore: cast_nullable_to_non_nullable
               as Map<String, Series>,
       viewport: null == viewport
-          ? _value.viewport
+          ? _self.viewport
           : viewport // ignore: cast_nullable_to_non_nullable
               as Viewport,
       annotations: null == annotations
-          ? _value.annotations
+          ? _self.annotations
           : annotations // ignore: cast_nullable_to_non_nullable
               as AnnotationDocument,
       tradeOverlays: null == tradeOverlays
-          ? _value.tradeOverlays
+          ? _self.tradeOverlays
           : tradeOverlays // ignore: cast_nullable_to_non_nullable
               as TradeOverlayDocument,
       overlays: null == overlays
-          ? _value.overlays
+          ? _self.overlays
           : overlays // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
       volumeProfile: freezed == volumeProfile
-          ? _value.volumeProfile
+          ? _self.volumeProfile
           : volumeProfile // ignore: cast_nullable_to_non_nullable
               as VolumeProfile?,
       orderBook: freezed == orderBook
-          ? _value.orderBook
+          ? _self.orderBook
           : orderBook // ignore: cast_nullable_to_non_nullable
               as OrderBook?,
       liquidations: null == liquidations
-          ? _value.liquidations
+          ? _self.liquidations
           : liquidations // ignore: cast_nullable_to_non_nullable
               as List<LiquidationArea>,
       sequenceNumber: null == sequenceNumber
-          ? _value.sequenceNumber
+          ? _self.sequenceNumber
           : sequenceNumber // ignore: cast_nullable_to_non_nullable
               as int,
       panelSequenceNumbers: null == panelSequenceNumbers
-          ? _value.panelSequenceNumbers
+          ? _self.panelSequenceNumbers
           : panelSequenceNumbers // ignore: cast_nullable_to_non_nullable
               as Map<String, int>,
-    ) as $Val);
+    ));
   }
 
   /// Create a copy of ChartFrame
@@ -164,8 +206,8 @@ class _$ChartFrameCopyWithImpl<$Res, $Val extends ChartFrame>
   @override
   @pragma('vm:prefer-inline')
   $ViewportCopyWith<$Res> get viewport {
-    return $ViewportCopyWith<$Res>(_value.viewport, (value) {
-      return _then(_value.copyWith(viewport: value) as $Val);
+    return $ViewportCopyWith<$Res>(_self.viewport, (value) {
+      return _then(_self.copyWith(viewport: value));
     });
   }
 
@@ -174,8 +216,8 @@ class _$ChartFrameCopyWithImpl<$Res, $Val extends ChartFrame>
   @override
   @pragma('vm:prefer-inline')
   $AnnotationDocumentCopyWith<$Res> get annotations {
-    return $AnnotationDocumentCopyWith<$Res>(_value.annotations, (value) {
-      return _then(_value.copyWith(annotations: value) as $Val);
+    return $AnnotationDocumentCopyWith<$Res>(_self.annotations, (value) {
+      return _then(_self.copyWith(annotations: value));
     });
   }
 
@@ -184,8 +226,8 @@ class _$ChartFrameCopyWithImpl<$Res, $Val extends ChartFrame>
   @override
   @pragma('vm:prefer-inline')
   $TradeOverlayDocumentCopyWith<$Res> get tradeOverlays {
-    return $TradeOverlayDocumentCopyWith<$Res>(_value.tradeOverlays, (value) {
-      return _then(_value.copyWith(tradeOverlays: value) as $Val);
+    return $TradeOverlayDocumentCopyWith<$Res>(_self.tradeOverlays, (value) {
+      return _then(_self.copyWith(tradeOverlays: value));
     });
   }
 
@@ -194,12 +236,12 @@ class _$ChartFrameCopyWithImpl<$Res, $Val extends ChartFrame>
   @override
   @pragma('vm:prefer-inline')
   $VolumeProfileCopyWith<$Res>? get volumeProfile {
-    if (_value.volumeProfile == null) {
+    if (_self.volumeProfile == null) {
       return null;
     }
 
-    return $VolumeProfileCopyWith<$Res>(_value.volumeProfile!, (value) {
-      return _then(_value.copyWith(volumeProfile: value) as $Val);
+    return $VolumeProfileCopyWith<$Res>(_self.volumeProfile!, (value) {
+      return _then(_self.copyWith(volumeProfile: value));
     });
   }
 
@@ -208,127 +250,246 @@ class _$ChartFrameCopyWithImpl<$Res, $Val extends ChartFrame>
   @override
   @pragma('vm:prefer-inline')
   $OrderBookCopyWith<$Res>? get orderBook {
-    if (_value.orderBook == null) {
+    if (_self.orderBook == null) {
       return null;
     }
 
-    return $OrderBookCopyWith<$Res>(_value.orderBook!, (value) {
-      return _then(_value.copyWith(orderBook: value) as $Val);
+    return $OrderBookCopyWith<$Res>(_self.orderBook!, (value) {
+      return _then(_self.copyWith(orderBook: value));
     });
   }
 }
 
-/// @nodoc
-abstract class _$$ChartFrameImplCopyWith<$Res>
-    implements $ChartFrameCopyWith<$Res> {
-  factory _$$ChartFrameImplCopyWith(
-          _$ChartFrameImpl value, $Res Function(_$ChartFrameImpl) then) =
-      __$$ChartFrameImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {Series series,
-      Map<String, Series> indicators,
-      Viewport viewport,
-      AnnotationDocument annotations,
-      TradeOverlayDocument tradeOverlays,
-      List<dynamic> overlays,
-      VolumeProfile? volumeProfile,
-      OrderBook? orderBook,
-      List<LiquidationArea> liquidations,
-      int sequenceNumber,
-      Map<String, int> panelSequenceNumbers});
+/// Adds pattern-matching-related methods to [ChartFrame].
+extension ChartFramePatterns on ChartFrame {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
 
-  @override
-  $ViewportCopyWith<$Res> get viewport;
-  @override
-  $AnnotationDocumentCopyWith<$Res> get annotations;
-  @override
-  $TradeOverlayDocumentCopyWith<$Res> get tradeOverlays;
-  @override
-  $VolumeProfileCopyWith<$Res>? get volumeProfile;
-  @override
-  $OrderBookCopyWith<$Res>? get orderBook;
-}
-
-/// @nodoc
-class __$$ChartFrameImplCopyWithImpl<$Res>
-    extends _$ChartFrameCopyWithImpl<$Res, _$ChartFrameImpl>
-    implements _$$ChartFrameImplCopyWith<$Res> {
-  __$$ChartFrameImplCopyWithImpl(
-      _$ChartFrameImpl _value, $Res Function(_$ChartFrameImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ChartFrame
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? series = null,
-    Object? indicators = null,
-    Object? viewport = null,
-    Object? annotations = null,
-    Object? tradeOverlays = null,
-    Object? overlays = null,
-    Object? volumeProfile = freezed,
-    Object? orderBook = freezed,
-    Object? liquidations = null,
-    Object? sequenceNumber = null,
-    Object? panelSequenceNumbers = null,
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_ChartFrame value)? $default, {
+    required TResult orElse(),
   }) {
-    return _then(_$ChartFrameImpl(
-      series: null == series
-          ? _value.series
-          : series // ignore: cast_nullable_to_non_nullable
-              as Series,
-      indicators: null == indicators
-          ? _value._indicators
-          : indicators // ignore: cast_nullable_to_non_nullable
-              as Map<String, Series>,
-      viewport: null == viewport
-          ? _value.viewport
-          : viewport // ignore: cast_nullable_to_non_nullable
-              as Viewport,
-      annotations: null == annotations
-          ? _value.annotations
-          : annotations // ignore: cast_nullable_to_non_nullable
-              as AnnotationDocument,
-      tradeOverlays: null == tradeOverlays
-          ? _value.tradeOverlays
-          : tradeOverlays // ignore: cast_nullable_to_non_nullable
-              as TradeOverlayDocument,
-      overlays: null == overlays
-          ? _value._overlays
-          : overlays // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
-      volumeProfile: freezed == volumeProfile
-          ? _value.volumeProfile
-          : volumeProfile // ignore: cast_nullable_to_non_nullable
-              as VolumeProfile?,
-      orderBook: freezed == orderBook
-          ? _value.orderBook
-          : orderBook // ignore: cast_nullable_to_non_nullable
-              as OrderBook?,
-      liquidations: null == liquidations
-          ? _value._liquidations
-          : liquidations // ignore: cast_nullable_to_non_nullable
-              as List<LiquidationArea>,
-      sequenceNumber: null == sequenceNumber
-          ? _value.sequenceNumber
-          : sequenceNumber // ignore: cast_nullable_to_non_nullable
-              as int,
-      panelSequenceNumbers: null == panelSequenceNumbers
-          ? _value._panelSequenceNumbers
-          : panelSequenceNumbers // ignore: cast_nullable_to_non_nullable
-              as Map<String, int>,
-    ));
+    final _that = this;
+    switch (_that) {
+      case _ChartFrame() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_ChartFrame value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _ChartFrame():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_ChartFrame value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _ChartFrame() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            Series series,
+            Map<String, Series> indicators,
+            Viewport viewport,
+            AnnotationDocument annotations,
+            TradeOverlayDocument tradeOverlays,
+            List<dynamic> overlays,
+            VolumeProfile? volumeProfile,
+            OrderBook? orderBook,
+            List<LiquidationArea> liquidations,
+            int sequenceNumber,
+            Map<String, int> panelSequenceNumbers)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _ChartFrame() when $default != null:
+        return $default(
+            _that.series,
+            _that.indicators,
+            _that.viewport,
+            _that.annotations,
+            _that.tradeOverlays,
+            _that.overlays,
+            _that.volumeProfile,
+            _that.orderBook,
+            _that.liquidations,
+            _that.sequenceNumber,
+            _that.panelSequenceNumbers);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            Series series,
+            Map<String, Series> indicators,
+            Viewport viewport,
+            AnnotationDocument annotations,
+            TradeOverlayDocument tradeOverlays,
+            List<dynamic> overlays,
+            VolumeProfile? volumeProfile,
+            OrderBook? orderBook,
+            List<LiquidationArea> liquidations,
+            int sequenceNumber,
+            Map<String, int> panelSequenceNumbers)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _ChartFrame():
+        return $default(
+            _that.series,
+            _that.indicators,
+            _that.viewport,
+            _that.annotations,
+            _that.tradeOverlays,
+            _that.overlays,
+            _that.volumeProfile,
+            _that.orderBook,
+            _that.liquidations,
+            _that.sequenceNumber,
+            _that.panelSequenceNumbers);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            Series series,
+            Map<String, Series> indicators,
+            Viewport viewport,
+            AnnotationDocument annotations,
+            TradeOverlayDocument tradeOverlays,
+            List<dynamic> overlays,
+            VolumeProfile? volumeProfile,
+            OrderBook? orderBook,
+            List<LiquidationArea> liquidations,
+            int sequenceNumber,
+            Map<String, int> panelSequenceNumbers)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _ChartFrame() when $default != null:
+        return $default(
+            _that.series,
+            _that.indicators,
+            _that.viewport,
+            _that.annotations,
+            _that.tradeOverlays,
+            _that.overlays,
+            _that.volumeProfile,
+            _that.orderBook,
+            _that.liquidations,
+            _that.sequenceNumber,
+            _that.panelSequenceNumbers);
+      case _:
+        return null;
+    }
   }
 }
 
 /// @nodoc
 
-class _$ChartFrameImpl extends _ChartFrame {
-  const _$ChartFrameImpl(
+class _ChartFrame extends ChartFrame {
+  const _ChartFrame(
       {required this.series,
       required final Map<String, Series> indicators,
       required this.viewport,
@@ -424,16 +585,19 @@ class _$ChartFrameImpl extends _ChartFrame {
     return EqualUnmodifiableMapView(_panelSequenceNumbers);
   }
 
+  /// Create a copy of ChartFrame
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'ChartFrame(series: $series, indicators: $indicators, viewport: $viewport, annotations: $annotations, tradeOverlays: $tradeOverlays, overlays: $overlays, volumeProfile: $volumeProfile, orderBook: $orderBook, liquidations: $liquidations, sequenceNumber: $sequenceNumber, panelSequenceNumbers: $panelSequenceNumbers)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ChartFrameCopyWith<_ChartFrame> get copyWith =>
+      __$ChartFrameCopyWithImpl<_ChartFrame>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ChartFrameImpl &&
+            other is _ChartFrame &&
             (identical(other.series, series) || other.series == series) &&
             const DeepCollectionEquality()
                 .equals(other._indicators, _indicators) &&
@@ -471,79 +635,174 @@ class _$ChartFrameImpl extends _ChartFrame {
       sequenceNumber,
       const DeepCollectionEquality().hash(_panelSequenceNumbers));
 
+  @override
+  String toString() {
+    return 'ChartFrame(series: $series, indicators: $indicators, viewport: $viewport, annotations: $annotations, tradeOverlays: $tradeOverlays, overlays: $overlays, volumeProfile: $volumeProfile, orderBook: $orderBook, liquidations: $liquidations, sequenceNumber: $sequenceNumber, panelSequenceNumbers: $panelSequenceNumbers)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$ChartFrameCopyWith<$Res>
+    implements $ChartFrameCopyWith<$Res> {
+  factory _$ChartFrameCopyWith(
+          _ChartFrame value, $Res Function(_ChartFrame) _then) =
+      __$ChartFrameCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {Series series,
+      Map<String, Series> indicators,
+      Viewport viewport,
+      AnnotationDocument annotations,
+      TradeOverlayDocument tradeOverlays,
+      List<dynamic> overlays,
+      VolumeProfile? volumeProfile,
+      OrderBook? orderBook,
+      List<LiquidationArea> liquidations,
+      int sequenceNumber,
+      Map<String, int> panelSequenceNumbers});
+
+  @override
+  $ViewportCopyWith<$Res> get viewport;
+  @override
+  $AnnotationDocumentCopyWith<$Res> get annotations;
+  @override
+  $TradeOverlayDocumentCopyWith<$Res> get tradeOverlays;
+  @override
+  $VolumeProfileCopyWith<$Res>? get volumeProfile;
+  @override
+  $OrderBookCopyWith<$Res>? get orderBook;
+}
+
+/// @nodoc
+class __$ChartFrameCopyWithImpl<$Res> implements _$ChartFrameCopyWith<$Res> {
+  __$ChartFrameCopyWithImpl(this._self, this._then);
+
+  final _ChartFrame _self;
+  final $Res Function(_ChartFrame) _then;
+
   /// Create a copy of ChartFrame
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ChartFrameImplCopyWith<_$ChartFrameImpl> get copyWith =>
-      __$$ChartFrameImplCopyWithImpl<_$ChartFrameImpl>(this, _$identity);
-}
-
-abstract class _ChartFrame extends ChartFrame {
-  const factory _ChartFrame(
-      {required final Series series,
-      required final Map<String, Series> indicators,
-      required final Viewport viewport,
-      final AnnotationDocument annotations,
-      final TradeOverlayDocument tradeOverlays,
-      required final List<dynamic> overlays,
-      final VolumeProfile? volumeProfile,
-      final OrderBook? orderBook,
-      final List<LiquidationArea> liquidations,
-      required final int sequenceNumber,
-      required final Map<String, int> panelSequenceNumbers}) = _$ChartFrameImpl;
-  const _ChartFrame._() : super._();
-
-  /// The main price [Series].
-  @override
-  Series get series;
-
-  /// Map of indicator names to their respective [Series].
-  @override
-  Map<String, Series> get indicators;
-
-  /// The current [Viewport] state.
-  @override
-  Viewport get viewport;
-
-  /// The collection of annotations (drawings) in the chart.
-  @override
-  AnnotationDocument get annotations;
-
-  /// The collection of trade-related overlays.
-  @override
-  TradeOverlayDocument get tradeOverlays;
-
-  /// List of overlays (e.g., drawings, alerts, etc.) to be rendered.
-  @override
-  List<dynamic> get overlays;
-
-  /// Optional volume profile data.
-  @override
-  VolumeProfile? get volumeProfile;
-
-  /// Optional order book data.
-  @override
-  OrderBook? get orderBook;
-
-  /// Optional list of liquidation areas for heatmap.
-  @override
-  List<LiquidationArea> get liquidations;
-
-  /// Sequential number to track frame updates and ensure consistent state.
-  @override
-  int get sequenceNumber;
-
-  /// Granular sequence numbers per panel to optimize repaints.
-  /// Key can be 'main', 'volume', or indicator IDs.
-  @override
-  Map<String, int> get panelSequenceNumbers;
+  $Res call({
+    Object? series = null,
+    Object? indicators = null,
+    Object? viewport = null,
+    Object? annotations = null,
+    Object? tradeOverlays = null,
+    Object? overlays = null,
+    Object? volumeProfile = freezed,
+    Object? orderBook = freezed,
+    Object? liquidations = null,
+    Object? sequenceNumber = null,
+    Object? panelSequenceNumbers = null,
+  }) {
+    return _then(_ChartFrame(
+      series: null == series
+          ? _self.series
+          : series // ignore: cast_nullable_to_non_nullable
+              as Series,
+      indicators: null == indicators
+          ? _self._indicators
+          : indicators // ignore: cast_nullable_to_non_nullable
+              as Map<String, Series>,
+      viewport: null == viewport
+          ? _self.viewport
+          : viewport // ignore: cast_nullable_to_non_nullable
+              as Viewport,
+      annotations: null == annotations
+          ? _self.annotations
+          : annotations // ignore: cast_nullable_to_non_nullable
+              as AnnotationDocument,
+      tradeOverlays: null == tradeOverlays
+          ? _self.tradeOverlays
+          : tradeOverlays // ignore: cast_nullable_to_non_nullable
+              as TradeOverlayDocument,
+      overlays: null == overlays
+          ? _self._overlays
+          : overlays // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
+      volumeProfile: freezed == volumeProfile
+          ? _self.volumeProfile
+          : volumeProfile // ignore: cast_nullable_to_non_nullable
+              as VolumeProfile?,
+      orderBook: freezed == orderBook
+          ? _self.orderBook
+          : orderBook // ignore: cast_nullable_to_non_nullable
+              as OrderBook?,
+      liquidations: null == liquidations
+          ? _self._liquidations
+          : liquidations // ignore: cast_nullable_to_non_nullable
+              as List<LiquidationArea>,
+      sequenceNumber: null == sequenceNumber
+          ? _self.sequenceNumber
+          : sequenceNumber // ignore: cast_nullable_to_non_nullable
+              as int,
+      panelSequenceNumbers: null == panelSequenceNumbers
+          ? _self._panelSequenceNumbers
+          : panelSequenceNumbers // ignore: cast_nullable_to_non_nullable
+              as Map<String, int>,
+    ));
+  }
 
   /// Create a copy of ChartFrame
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ChartFrameImplCopyWith<_$ChartFrameImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $ViewportCopyWith<$Res> get viewport {
+    return $ViewportCopyWith<$Res>(_self.viewport, (value) {
+      return _then(_self.copyWith(viewport: value));
+    });
+  }
+
+  /// Create a copy of ChartFrame
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AnnotationDocumentCopyWith<$Res> get annotations {
+    return $AnnotationDocumentCopyWith<$Res>(_self.annotations, (value) {
+      return _then(_self.copyWith(annotations: value));
+    });
+  }
+
+  /// Create a copy of ChartFrame
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $TradeOverlayDocumentCopyWith<$Res> get tradeOverlays {
+    return $TradeOverlayDocumentCopyWith<$Res>(_self.tradeOverlays, (value) {
+      return _then(_self.copyWith(tradeOverlays: value));
+    });
+  }
+
+  /// Create a copy of ChartFrame
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $VolumeProfileCopyWith<$Res>? get volumeProfile {
+    if (_self.volumeProfile == null) {
+      return null;
+    }
+
+    return $VolumeProfileCopyWith<$Res>(_self.volumeProfile!, (value) {
+      return _then(_self.copyWith(volumeProfile: value));
+    });
+  }
+
+  /// Create a copy of ChartFrame
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $OrderBookCopyWith<$Res>? get orderBook {
+    if (_self.orderBook == null) {
+      return null;
+    }
+
+    return $OrderBookCopyWith<$Res>(_self.orderBook!, (value) {
+      return _then(_self.copyWith(orderBook: value));
+    });
+  }
 }
+
+// dart format on

@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,94 +9,61 @@ part of 'bollinger_bands.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$BollingerBandsConfig {
-  String get id => throw _privateConstructorUsedError;
-  int get period => throw _privateConstructorUsedError;
-  double get stdDev => throw _privateConstructorUsedError;
-  List<String> get dependsOn => throw _privateConstructorUsedError;
+  String get id;
+  int get period;
+  double get stdDev;
+  List<String> get dependsOn;
 
   /// Create a copy of BollingerBandsConfig
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $BollingerBandsConfigCopyWith<BollingerBandsConfig> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $BollingerBandsConfigCopyWith<$Res> {
-  factory $BollingerBandsConfigCopyWith(BollingerBandsConfig value,
-          $Res Function(BollingerBandsConfig) then) =
-      _$BollingerBandsConfigCopyWithImpl<$Res, BollingerBandsConfig>;
-  @useResult
-  $Res call({String id, int period, double stdDev, List<String> dependsOn});
-}
-
-/// @nodoc
-class _$BollingerBandsConfigCopyWithImpl<$Res,
-        $Val extends BollingerBandsConfig>
-    implements $BollingerBandsConfigCopyWith<$Res> {
-  _$BollingerBandsConfigCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of BollingerBandsConfig
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $BollingerBandsConfigCopyWith<BollingerBandsConfig> get copyWith =>
+      _$BollingerBandsConfigCopyWithImpl<BollingerBandsConfig>(
+          this as BollingerBandsConfig, _$identity);
+
   @override
-  $Res call({
-    Object? id = null,
-    Object? period = null,
-    Object? stdDev = null,
-    Object? dependsOn = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      period: null == period
-          ? _value.period
-          : period // ignore: cast_nullable_to_non_nullable
-              as int,
-      stdDev: null == stdDev
-          ? _value.stdDev
-          : stdDev // ignore: cast_nullable_to_non_nullable
-              as double,
-      dependsOn: null == dependsOn
-          ? _value.dependsOn
-          : dependsOn // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is BollingerBandsConfig &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.period, period) || other.period == period) &&
+            (identical(other.stdDev, stdDev) || other.stdDev == stdDev) &&
+            const DeepCollectionEquality().equals(other.dependsOn, dependsOn));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id, period, stdDev,
+      const DeepCollectionEquality().hash(dependsOn));
+
+  @override
+  String toString() {
+    return 'BollingerBandsConfig(id: $id, period: $period, stdDev: $stdDev, dependsOn: $dependsOn)';
   }
 }
 
 /// @nodoc
-abstract class _$$BollingerBandsConfigImplCopyWith<$Res>
-    implements $BollingerBandsConfigCopyWith<$Res> {
-  factory _$$BollingerBandsConfigImplCopyWith(_$BollingerBandsConfigImpl value,
-          $Res Function(_$BollingerBandsConfigImpl) then) =
-      __$$BollingerBandsConfigImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $BollingerBandsConfigCopyWith<$Res> {
+  factory $BollingerBandsConfigCopyWith(BollingerBandsConfig value,
+          $Res Function(BollingerBandsConfig) _then) =
+      _$BollingerBandsConfigCopyWithImpl;
   @useResult
   $Res call({String id, int period, double stdDev, List<String> dependsOn});
 }
 
 /// @nodoc
-class __$$BollingerBandsConfigImplCopyWithImpl<$Res>
-    extends _$BollingerBandsConfigCopyWithImpl<$Res, _$BollingerBandsConfigImpl>
-    implements _$$BollingerBandsConfigImplCopyWith<$Res> {
-  __$$BollingerBandsConfigImplCopyWithImpl(_$BollingerBandsConfigImpl _value,
-      $Res Function(_$BollingerBandsConfigImpl) _then)
-      : super(_value, _then);
+class _$BollingerBandsConfigCopyWithImpl<$Res>
+    implements $BollingerBandsConfigCopyWith<$Res> {
+  _$BollingerBandsConfigCopyWithImpl(this._self, this._then);
+
+  final BollingerBandsConfig _self;
+  final $Res Function(BollingerBandsConfig) _then;
 
   /// Create a copy of BollingerBandsConfig
   /// with the given fields replaced by the non-null parameter values.
@@ -108,31 +75,194 @@ class __$$BollingerBandsConfigImplCopyWithImpl<$Res>
     Object? stdDev = null,
     Object? dependsOn = null,
   }) {
-    return _then(_$BollingerBandsConfigImpl(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       period: null == period
-          ? _value.period
+          ? _self.period
           : period // ignore: cast_nullable_to_non_nullable
               as int,
       stdDev: null == stdDev
-          ? _value.stdDev
+          ? _self.stdDev
           : stdDev // ignore: cast_nullable_to_non_nullable
               as double,
       dependsOn: null == dependsOn
-          ? _value._dependsOn
+          ? _self.dependsOn
           : dependsOn // ignore: cast_nullable_to_non_nullable
               as List<String>,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [BollingerBandsConfig].
+extension BollingerBandsConfigPatterns on BollingerBandsConfig {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BollingerBandsConfig value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _BollingerBandsConfig() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BollingerBandsConfig value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _BollingerBandsConfig():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BollingerBandsConfig value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _BollingerBandsConfig() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            String id, int period, double stdDev, List<String> dependsOn)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _BollingerBandsConfig() when $default != null:
+        return $default(_that.id, _that.period, _that.stdDev, _that.dependsOn);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            String id, int period, double stdDev, List<String> dependsOn)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _BollingerBandsConfig():
+        return $default(_that.id, _that.period, _that.stdDev, _that.dependsOn);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            String id, int period, double stdDev, List<String> dependsOn)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _BollingerBandsConfig() when $default != null:
+        return $default(_that.id, _that.period, _that.stdDev, _that.dependsOn);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 
-class _$BollingerBandsConfigImpl implements _BollingerBandsConfig {
-  const _$BollingerBandsConfigImpl(
+class _BollingerBandsConfig implements BollingerBandsConfig {
+  const _BollingerBandsConfig(
       {required this.id,
       this.period = 20,
       this.stdDev = 2.0,
@@ -156,16 +286,20 @@ class _$BollingerBandsConfigImpl implements _BollingerBandsConfig {
     return EqualUnmodifiableListView(_dependsOn);
   }
 
+  /// Create a copy of BollingerBandsConfig
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'BollingerBandsConfig(id: $id, period: $period, stdDev: $stdDev, dependsOn: $dependsOn)';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$BollingerBandsConfigCopyWith<_BollingerBandsConfig> get copyWith =>
+      __$BollingerBandsConfigCopyWithImpl<_BollingerBandsConfig>(
+          this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$BollingerBandsConfigImpl &&
+            other is _BollingerBandsConfig &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.period, period) || other.period == period) &&
             (identical(other.stdDev, stdDev) || other.stdDev == stdDev) &&
@@ -177,37 +311,60 @@ class _$BollingerBandsConfigImpl implements _BollingerBandsConfig {
   int get hashCode => Object.hash(runtimeType, id, period, stdDev,
       const DeepCollectionEquality().hash(_dependsOn));
 
+  @override
+  String toString() {
+    return 'BollingerBandsConfig(id: $id, period: $period, stdDev: $stdDev, dependsOn: $dependsOn)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$BollingerBandsConfigCopyWith<$Res>
+    implements $BollingerBandsConfigCopyWith<$Res> {
+  factory _$BollingerBandsConfigCopyWith(_BollingerBandsConfig value,
+          $Res Function(_BollingerBandsConfig) _then) =
+      __$BollingerBandsConfigCopyWithImpl;
+  @override
+  @useResult
+  $Res call({String id, int period, double stdDev, List<String> dependsOn});
+}
+
+/// @nodoc
+class __$BollingerBandsConfigCopyWithImpl<$Res>
+    implements _$BollingerBandsConfigCopyWith<$Res> {
+  __$BollingerBandsConfigCopyWithImpl(this._self, this._then);
+
+  final _BollingerBandsConfig _self;
+  final $Res Function(_BollingerBandsConfig) _then;
+
   /// Create a copy of BollingerBandsConfig
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$BollingerBandsConfigImplCopyWith<_$BollingerBandsConfigImpl>
-      get copyWith =>
-          __$$BollingerBandsConfigImplCopyWithImpl<_$BollingerBandsConfigImpl>(
-              this, _$identity);
+  $Res call({
+    Object? id = null,
+    Object? period = null,
+    Object? stdDev = null,
+    Object? dependsOn = null,
+  }) {
+    return _then(_BollingerBandsConfig(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      period: null == period
+          ? _self.period
+          : period // ignore: cast_nullable_to_non_nullable
+              as int,
+      stdDev: null == stdDev
+          ? _self.stdDev
+          : stdDev // ignore: cast_nullable_to_non_nullable
+              as double,
+      dependsOn: null == dependsOn
+          ? _self._dependsOn
+          : dependsOn // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
 }
 
-abstract class _BollingerBandsConfig implements BollingerBandsConfig {
-  const factory _BollingerBandsConfig(
-      {required final String id,
-      final int period,
-      final double stdDev,
-      final List<String> dependsOn}) = _$BollingerBandsConfigImpl;
-
-  @override
-  String get id;
-  @override
-  int get period;
-  @override
-  double get stdDev;
-  @override
-  List<String> get dependsOn;
-
-  /// Create a copy of BollingerBandsConfig
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$BollingerBandsConfigImplCopyWith<_$BollingerBandsConfigImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
+// dart format on

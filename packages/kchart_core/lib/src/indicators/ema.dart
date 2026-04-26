@@ -7,7 +7,7 @@ part 'ema.freezed.dart';
 
 /// Configuration for the Exponential Moving Average (EMA) indicator.
 @freezed
-class EMAConfig with _$EMAConfig implements IndicatorConfig {
+abstract class EMAConfig with _$EMAConfig implements IndicatorConfig {
   /// Creates an [EMAConfig].
   const factory EMAConfig({
     required String id,
