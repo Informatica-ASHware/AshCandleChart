@@ -46,3 +46,10 @@
 - Real-time X-axis and Y-axis labels highlighting values under the cursor.
 - Multi-panel crosshair support: Y-axis label automatically adapts to Price, Volume, or Indicator values depending on the active panel.
 - Enhanced coordinate mapping in `KChartController` with robust boundary guards.
+
+## [0.1.0-dev.6] - 2024-05-25
+
+### Added
+- OHLCV Overlay: Displays real-time candle data (Open, High, Low, Close, Volume) at the top of the main panel.
+- Colors in OHLCV overlay dynamically inherit bull/bear logic from the chart theme.
+- Support for both default (last candle) and interactive (crosshair-selected candle) data modes.

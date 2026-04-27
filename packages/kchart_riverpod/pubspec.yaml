@@ -2,20 +2,18 @@
 # path: KChart2/kchart_riverpod/pubspec.yaml
 # IMPORTANTE: borra cualquier KChart2/kchart_riverpod/pubspec_overrides.yaml versionado.
 # Riverpod 3.x con codegen.
-
 name: kchart_riverpod
 description: Riverpod 3 integration for kchart.
 version: 0.1.0-dev.1
 resolution: workspace
+
 publish_to: none
 repository: https://github.com/Informatica-ASHware/KChart2
 homepage: https://github.com/Informatica-ASHware/KChart2/tree/main/packages/kchart_riverpod
 issue_tracker: https://github.com/Informatica-ASHware/KChart2/issues
-
 environment:
-  sdk: ">=3.11.5 <4.0.0"
+  sdk: ">=3.11.0 <4.0.0"
   flutter: ">=3.41.0"
-
 dependencies:
   flutter:
     sdk: flutter
@@ -24,8 +22,7 @@ dependencies:
   riverpod: ^3.2.1
   flutter_riverpod: ^3.3.1
   riverpod_annotation: ^4.0.2
-  meta: 1.15.0
-
+  meta: ^1.16.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

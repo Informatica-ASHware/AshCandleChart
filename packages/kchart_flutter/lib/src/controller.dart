@@ -121,8 +121,8 @@ class KChartController extends ChangeNotifier {
       isInsightsLoading.value = true;
 
       try {
-        final startIdx = _findTimestampIndex(startTimestamp, nearest: true);
-        final endIdx = _findTimestampIndex(endTimestamp, nearest: true);
+        final startIdx = findTimestampIndex(startTimestamp, nearest: true);
+        final endIdx = findTimestampIndex(endTimestamp, nearest: true);
 
         // Ensure at least one element if startIdx == endIdx
         final sliceEnd = (endIdx + 1).clamp(0, _frame.series.length);
@@ -458,7 +458,7 @@ class KChartController extends ChangeNotifier {
     if (series.length == 0) return null;
 
     final viewport = _frame.viewport;
-    final index = _findTimestampIndex(timestamp);
+    final index = findTimestampIndex(timestamp);
 
     if (index == -1) return null;
 
@@ -489,8 +489,8 @@ class KChartController extends ChangeNotifier {
     final series = _frame.series;
     if (series.length == 0) return;
 
-    final int startIdx = _findTimestampIndex(startTimestamp, nearest: true);
-    final int endIdx = _findTimestampIndex(endTimestamp, nearest: true);
+    final int startIdx = findTimestampIndex(startTimestamp, nearest: true);
+    final int endIdx = findTimestampIndex(endTimestamp, nearest: true);
 
     updateViewport(
       _frame.viewport.copyWith(
@@ -501,7 +501,8 @@ class KChartController extends ChangeNotifier {
     );
   }
 
-  int _findTimestampIndex(int timestamp, {bool nearest = false}) {
+  /// Finds the index of a timestamp in the series.
+  int findTimestampIndex(int timestamp, {bool nearest = false}) {
     final series = _frame.series;
     int low = 0;
     int high = series.length - 1;
@@ -583,7 +584,7 @@ class KChartController extends ChangeNotifier {
 
   /// Announces candle data for accessibility.
   void announceCandle(int timestamp, ChartNumberFormatters formatters) {
-    final index = _findTimestampIndex(timestamp, nearest: true);
+    final index = findTimestampIndex(timestamp, nearest: true);
     if (index == -1) return;
 
     final label = ChartSemanticsBuilder.buildCandleDescription(

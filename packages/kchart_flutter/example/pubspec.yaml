@@ -4,22 +4,16 @@ description: Minimal example for kchart_flutter.
 publish_to: none
 
 environment:
-  sdk: ">=3.11.5 <4.0.0"
+  sdk: ">=3.11.0 <4.0.0"
   flutter: ">=3.41.0"
 
 dependencies:
   flutter:
     sdk: flutter
   kchart_core:
-    git:
-      url: https://github.com/Informatica-ASHware/KChart2.git
-      path: packages/kchart_core
-      ref: 44fd566306e5bae7027991770b355a107fed1693  # ref: PIN_TO_SHA_AFTER_FIRST_TAG
+    path: ../../kchart_core
   kchart_flutter:
-    git:
-      url: https://github.com/Informatica-ASHware/KChart2.git
-      path: packages/kchart_flutter
-      ref: 44fd566306e5bae7027991770b355a107fed1693  # ref: PIN_TO_SHA_AFTER_FIRST_TAG
+    path: ..
 #  kchart_riverpod:
 #    git:
 #      url: https://github.com/Informatica-ASHware/KChart2.git
