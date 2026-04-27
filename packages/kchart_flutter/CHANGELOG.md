@@ -45,4 +45,6 @@
 - Interactive Crosshair with dashed vertical and horizontal lines.
 - Real-time X-axis and Y-axis labels highlighting values under the cursor.
 - Multi-panel crosshair support: Y-axis label automatically adapts to Price, Volume, or Indicator values depending on the active panel.
+- Top information bar (OHLCV Overlay) in `MainPanel` displaying precise data for the selected or last candle.
 - Enhanced coordinate mapping in `KChartController` with robust boundary guards.
+- Public `findTimestampIndex` method in `KChartController` for external data retrieval.
