@@ -7,13 +7,15 @@ name: kchart_flutter
 description: Flutter implementation of kchart, optimized for high performance.
 version: 0.1.0-dev.1
 resolution: workspace
+resolution: workspace
+
 publish_to: none
 repository: https://github.com/Informatica-ASHware/KChart2
 homepage: https://github.com/Informatica-ASHware/KChart2/tree/main/packages/kchart_flutter
 issue_tracker: https://github.com/Informatica-ASHware/KChart2/issues
 
 environment:
-  sdk: ">=3.11.5 <4.0.0"
+  sdk: ">=3.11.0 <4.0.0"
   flutter: ">=3.41.0"
 
 dependencies:
