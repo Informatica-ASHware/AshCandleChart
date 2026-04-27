@@ -300,7 +300,7 @@ class KChartController extends ChangeNotifier {
     final double priceRange = maxPrice - minPrice;
     final double price = maxPrice - (localOffset.dy / size.height * priceRange);
 
-    if (magnetMode && localOffset.dx <= chartWidth) {
+    if (magnetMode && localOffset.dx >= 0 && localOffset.dx <= chartWidth) {
       return series.findNearestPoint(timestamp, price);
     } else {
       return AnnotationPoint(timestamp: timestamp, price: price);
@@ -424,7 +424,7 @@ class KChartController extends ChangeNotifier {
   /// Converts a horizontal pixel position to a timestamp.
   int? getTimestampAt(double dx) {
     final size = lastViewSize;
-    if (size == null || size.width <= 0) return null;
+    if (size == null || size.width <= 0 || dx < 0) return null;
 
     final double chartWidth = size.width - yAxisWidth;
     if (dx > chartWidth) return null;
@@ -452,6 +452,7 @@ class KChartController extends ChangeNotifier {
     if (size == null || size.width <= 0) return null;
 
     final double chartWidth = size.width - yAxisWidth;
+    if (chartWidth <= 0) return null;
 
     final series = _frame.series;
     if (series.length == 0) return null;
@@ -466,7 +467,9 @@ class KChartController extends ChangeNotifier {
     final int visibleCount = endIdx - startIdx + 1;
     final double candleWidth = (chartWidth / visibleCount);
 
-    return (index - startIdx) * candleWidth + candleWidth / 2;
+    final dx = (index - startIdx) * candleWidth + candleWidth / 2;
+    if (dx < 0 || dx > chartWidth) return null;
+    return dx;
   }
 
   /// Returns the start and end timestamps of the visible range.
