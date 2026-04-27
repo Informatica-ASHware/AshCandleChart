@@ -11,7 +11,7 @@ homepage: https://github.com/Informatica-ASHware/KChart2/tree/main/packages/kcha
 issue_tracker: https://github.com/Informatica-ASHware/KChart2/issues
 
 environment:
-  sdk: ">=3.6.0 <4.0.0"
+  sdk: ">=3.11.5 <4.0.0"
 
 dependencies:
   meta: ^1.16.0

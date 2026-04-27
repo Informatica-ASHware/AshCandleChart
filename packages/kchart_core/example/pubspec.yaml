@@ -4,7 +4,7 @@ description: Minimal example for kchart_core.
 publish_to: none
 
 environment:
-  sdk: ">=3.6.0 <4.0.0"
+  sdk: ">=3.11.5 <4.0.0"
 
 dependencies:
   kchart_core:

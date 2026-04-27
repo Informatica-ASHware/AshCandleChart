@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.1.0-dev.1] - 2024-05-20
+## [0.1.0-dev.1] - 2026-04-23
 
 ### Added
 - Institutional panels: `VolumeProfilePanel`, `DepthPanel`, and `LiquidationHeatmapPanel`.
@@ -12,7 +12,7 @@
 - AI Annotations Plugin Contract: `AiAnnotationProvider`, `AiInsight` models, and `AiInsightsPanel`.
 - Range selection support via Shift+Drag gesture.
 
-## [0.1.0-dev.2] - 2024-05-21
+## [0.1.0-dev.2] - 2026-04-24
 
 ### Added
 - Native Accessibility (a11y) support:
@@ -22,7 +22,7 @@
 - Support for `MediaQuery.disableAnimations` to respect system-level animation preferences.
 - Enhanced accessibility for UI controls including draggable dividers and AI panels.
 
-## [0.1.0-dev.3] - 2024-05-22
+## [0.1.0-dev.3] - 2026-04-25
 
 ### Added
 - Dynamic Y-Axis (Price Scale) rendering in the main panel.
@@ -31,7 +31,7 @@
 - Synchronized Y-axis margin across all chart components (candles, grid, annotations, and crosshair).
 - Updated `ChartTheme` with `yAxisWidth` configuration.
 
-## [0.1.0-dev.4] - 2024-05-23
+## [0.1.0-dev.4] - 2026-04-26
 
 ### Added
 - X-Axis (Timeline) rendering at the bottom of the chart.

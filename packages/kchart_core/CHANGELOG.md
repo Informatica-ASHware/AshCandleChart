@@ -8,7 +8,7 @@
 - Fuzz testing for binary reconstructors with 1000+ random iterations.
 - `Viewport.normalize` method to ensure indices remain within valid bounds.
 
-## [0.1.0-dev.1] - 2024-05-20
+## [0.1.0-dev.1] - 2026-04-23
 
 ### Added
 - Institutional data models: `VolumeProfile`, `OrderBook`, and `LiquidationArea`.
