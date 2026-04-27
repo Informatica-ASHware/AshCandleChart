@@ -10,7 +10,7 @@ publish_to: none
 
 environment:
   sdk: ">=3.11.5 <4.0.0"
-  flutter: ">=3.41.0"
+  flutter: ">=3.41.7"
 
 # === Pub Workspaces ===
 workspace:
@@ -31,7 +31,7 @@ melos:
     bootstrap:
       environment:
         sdk: ">=3.11.5 <4.0.0"
-        flutter: ">=3.41.0"
+        flutter: ">=3.41.7"
       # Versiones COMPARTIDAS para todo el workspace
       dependencies:
         meta: ^1.16.0
