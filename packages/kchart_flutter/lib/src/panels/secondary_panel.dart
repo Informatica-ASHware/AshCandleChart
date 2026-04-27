@@ -94,7 +94,11 @@ class _SecondaryPanelWidgetState extends State<_SecondaryPanelWidget> {
         ValueListenableBuilder<CrosshairState?>(
           valueListenable: widget.controller.crosshair.state,
           builder: (context, state, child) {
-            return CrosshairOverlay(state: state);
+            return CrosshairOverlay(
+              state: state,
+              frame: widget.controller.frame,
+              indicatorId: widget.indicatorId,
+            );
           },
         ),
       ],

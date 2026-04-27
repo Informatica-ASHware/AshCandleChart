@@ -518,14 +518,16 @@ class _KChartState extends State<KChart> with SingleTickerProviderStateMixin {
                                   return const SizedBox.shrink();
                                 }
                                 final scope = KChartScope.of(context);
+                                if (scope == null) return const SizedBox.shrink();
+
                                 return IgnorePointer(
                                   child: CustomPaint(
                                     size: Size.infinite,
                                     painter: CrosshairPainter(
-                                      state: CrosshairState(dx: state.dx),
-                                      color: scope?.theme.crosshairColor ??
-                                          Colors.grey,
-                                      yAxisWidth: scope?.theme.yAxisWidth ?? 0.0,
+                                      state: state,
+                                      theme: scope.theme,
+                                      formatters: scope.formatters,
+                                      yAxisWidth: scope.theme.yAxisWidth,
                                     ),
                                   ),
                                 );
