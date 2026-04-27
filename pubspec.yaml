@@ -1,3 +1,4 @@
+# PROTECTED: No cambiar versiones ni flujos de CI sin justificacion en PR_JUSTIFICATION.md
 # path: KChart2/pubspec.yaml
 # Workspace ROOT. Pub Workspaces (Dart 3.6+) + Melos 7.x.
 # Riverpod 3.x + freezed 2.x estable + última versión de codegen.

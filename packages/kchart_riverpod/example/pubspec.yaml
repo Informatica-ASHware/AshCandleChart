@@ -1,3 +1,4 @@
+# PROTECTED: No cambiar versiones ni flujos de CI sin justificacion en PR_JUSTIFICATION.md
 name: kchart_riverpod_example
 description: Minimal example for kchart_riverpod.
 publish_to: none

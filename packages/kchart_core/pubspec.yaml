@@ -1,3 +1,4 @@
+# PROTECTED: No cambiar versiones ni flujos de CI sin justificacion en PR_JUSTIFICATION.md
 # path: KChart2/kchart_core/pubspec.yaml
 
 name: kchart_core

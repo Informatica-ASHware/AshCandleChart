@@ -1,3 +1,4 @@
+# PROTECTED: No cambiar versiones ni flujos de CI sin justificacion en PR_JUSTIFICATION.md
 name: crypto_dashboard
 description: A complex crypto dashboard example using KChart.
 publish_to: none
