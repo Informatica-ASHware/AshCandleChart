@@ -65,6 +65,12 @@ class Series {
   /// Number of data points in the series.
   int get length => timestamps.length;
 
+  /// Whether the series is empty.
+  bool get isEmpty => timestamps.isEmpty;
+
+  /// Whether the series is not empty.
+  bool get isNotEmpty => timestamps.isNotEmpty;
+
   /// Creates a copy of this [Series] but with the given fields replaced
   /// with the new values.
   Series copyWith({

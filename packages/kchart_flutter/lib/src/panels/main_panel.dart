@@ -4,6 +4,7 @@ import 'package:kchart_core/kchart_core.dart';
 import '../controller.dart';
 import '../painting/main_panel_painter.dart';
 import 'crosshair_overlay.dart';
+import 'ohlcv_overlay.dart';
 import '../painting/paint_pool.dart';
 import '../painting/layer_cache.dart';
 import '../widgets/kchart_scope.dart';
@@ -103,6 +104,11 @@ class _MainPanelWidgetState extends State<_MainPanelWidget> {
               frame: widget.controller.frame,
             );
           },
+        ),
+        Positioned(
+          top: 0,
+          left: 0,
+          child: OhlcvOverlay(controller: widget.controller),
         ),
       ],
     );
