@@ -141,25 +141,24 @@ melos:
 
     pkg:release:core:patch:
       description: "Force patch on CORE (cascades to State & Flutter)."
-      run: melos version ash_candle_chart_core patch --yes && melos run pkg:publish
+      run: melos version ash_candle_chart_core patch --yes && melos publish --yes --no-dry-run --no-published --scope="*core*" --scope="*state*" --scope="*flutter*"
 
     pkg:release:state:patch:
       description: "Force patch on STATE (cascades to Flutter)."
-      run: melos version ash_candle_chart_state patch --yes && melos run pkg:publish
+      run: melos version ash_candle_chart_state patch --yes && melos publish --yes --no-dry-run --no-published --scope="*state*" --scope="*flutter*"
 
     pkg:release:flutter:patch:
       description: "Force patch on FLUTTER (only flutter)."
-      run: melos version ash_candle_chart_flutter patch --yes && melos run pkg:publish
+      run: melos version ash_candle_chart_flutter patch --yes && melos publish --yes --no-dry-run --no-published --scope="*flutter*"
 
-    pkg:release:dev:
-      description: "Pre-release cycle: version bump (dev) + publish."
-      run: melos version --prerelease=dev --yes && melos run pkg:publish
+    pkg:release:core:dev:
+      description: "Force dev patch on CORE (cascades to State & Flutter)."
+      run: melos version ash_candle_chart_core patch --preid=dev --yes && melos publish --yes --no-dry-run --no-published --scope="*core*" --scope="*state*" --scope="*flutter*"
 
-    pkg:release:patch:dev:
-      description: "Force a patch dev version bump on ALL packages and publish."
-      run: >
-        melos version --yes --preid=dev
-        --manual-version="ash_candle_chart_core:patch"
-        --manual-version="ash_candle_chart_flutter:patch"
-        --manual-version="ash_candle_chart_state:patch"
-        && melos run pkg:publish
+    pkg:release:state:dev:
+      description: "Force dev patch on STATE (cascades to Flutter)."
+      run: melos version ash_candle_chart_state patch --preid=dev --yes && melos publish --yes --no-dry-run --no-published --scope="*state*" --scope="*flutter*"
+
+    pkg:release:flutter:dev:
+      description: "Force dev patch on FLUTTER (only flutter)."
+      run: melos version ash_candle_chart_flutter patch --preid=dev --yes && melos publish --yes --no-dry-run --no-published --scope="*flutter*"
