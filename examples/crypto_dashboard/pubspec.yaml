@@ -11,7 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  ash_candle_chart_core: ^0.1.0-dev.1
+  ash_candle_chart_core: ^0.1.0-dev.2
   ash_candle_chart_flutter: ^0.1.0-dev.1
   ash_candle_chart_state: ^0.1.0-dev.1
 

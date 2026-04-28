@@ -1,3 +1,7 @@
+## 0.1.0-dev.2
+
+ - Bump "ash_candle_chart_core" to `0.1.0-dev.2`.
+
 # Changelog
 
 ## [0.1.0-dev.1] - 2026-04-27
