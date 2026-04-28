@@ -2,26 +2,25 @@
 import 'package:flutter/material.dart' hide Viewport;
 import 'package:ash_candle_chart_flutter/ash_candle_chart_flutter.dart';
 import 'package:ash_candle_chart_core/ash_candle_chart_core.dart';
+import 'package:ash_candle_chart_core/src/indicators/ema.dart';
 
-/// Example application class.
 void main() {
   runApp(const MyApp());
 }
 
-/// Example application class.
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
       home: const ChartScreen(),
     );
   }
 }
 
-/// Example application class.
 class ChartScreen extends StatefulWidget {
   const ChartScreen({super.key});
 
@@ -29,7 +28,6 @@ class ChartScreen extends StatefulWidget {
   State<ChartScreen> createState() => _ChartScreenState();
 }
 
-/// Example application class.
 class _ChartScreenState extends State<ChartScreen> {
   late KChartController controller;
 
@@ -37,27 +35,35 @@ class _ChartScreenState extends State<ChartScreen> {
   void initState() {
     super.initState();
 
-    // Generate some mock data
     final candles = List.generate(100, (i) {
+      final basePrice = 100.0 + i;
       return Candle(
         timestamp: 1600000000000 + (i * 60000),
-        open: 100.0 + i,
-        high: 105.0 + i,
-        low: 95.0 + i,
-        close: 102.0 + i,
+        open: basePrice,
+        high: basePrice + 5,
+        low: basePrice - 5,
+        close: basePrice + 2,
         volume: 1000.0,
       );
     });
 
+    final mainSeries = Series.fromCandles(candles);
+    
+    // Demonstrate real indicator usage
+    final ema20 = EMAIndicator(const EMAConfig(id: 'ema20', period: 20))
+        .compute(mainSeries, {});
+
     controller = KChartController(
       frame: ChartFrame(
-        series: Series.fromCandles(candles),
+        series: mainSeries,
         viewport: Viewport(
             startIdx: 0, endIdx: candles.length - 1, scale: 1.0, scrollX: 0.0),
-        indicators: {},
+        indicators: {
+          'ema20': Series.fromData(timestamps: mainSeries.timestamps, values: ema20),
+        },
         overlays: [],
         sequenceNumber: 0,
-        panelSequenceNumbers: {'main': 0, 'volume': 0},
+        panelSequenceNumbers: {'main': 0, 'volume': 0, 'ema20': 0},
       ),
     );
   }

@@ -71,8 +71,9 @@ class _DepthPanelWidgetState extends State<_DepthPanelWidget> {
             ValueListenableBuilder<CrosshairState?>(
               valueListenable: widget.controller.crosshair.state,
               builder: (context, state, child) {
-                if (state == null || orderBook == null)
+                if (state == null || orderBook == null) {
                   return const SizedBox.shrink();
+                }
                 return _buildCrosshairHighlight(state, orderBook, theme);
               },
             ),
@@ -152,10 +153,12 @@ class DepthPainter extends CustomPainter {
     }
 
     double maxTotalSize = 0;
-    if (orderBook.bids.isNotEmpty)
+    if (orderBook.bids.isNotEmpty) {
       maxTotalSize = math.max(maxTotalSize, orderBook.bids.last.cumulativeSize);
-    if (orderBook.asks.isNotEmpty)
+    }
+    if (orderBook.asks.isNotEmpty) {
       maxTotalSize = math.max(maxTotalSize, orderBook.asks.last.cumulativeSize);
+    }
 
     if (maxTotalSize == 0) return;
 

@@ -2,6 +2,7 @@
 name: ash_candle_chart_core_example
 description: Minimal example for ash_candle_chart_core.
 publish_to: none
+resolution: workspace
 
 environment:
   sdk: ">=3.11.5 <4.0.0"
@@ -9,3 +10,6 @@ environment:
 dependencies:
   ash_candle_chart_core:
     path: ..
+
+dev_dependencies:
+  lints: ^5.0.0

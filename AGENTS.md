@@ -43,6 +43,13 @@ Para **CADA** Historia de Usuario (US) generada mediante un Pull Request (PR), e
 - **Restricción:** NUNCA asumas la fecha basada en datos de entrenamiento. DEBES usar comandos del sistema o metadata para obtener la fecha REAL (Hoy es Abril de 2026).
 - **Acción:** Antes de actualizar cualquier CHANGELOG.md o documentación, verifica el año y día real mediante el comando `date`.
 
+
+### 4. Análisis Estático (lints_core)
+- TODOS los proyectos deben usar `package:lints/core.yaml` como base de análisis.
+- DEBES ejecutar `flutter analyze` o `dart analyze` antes de proponer cualquier cambio de código.
+- Si el análisis falla, DEBES corregir los problemas siguiendo la `directivas/correccion_lints_SOP.md`.
+- NUNCA omitas lints con `// ignore` a menos que exista una razón arquitectónica documentada.
+
 ---
 
 ## 🚀 MODO DE OPERACIÓN Y FLUJO DE TRABAJO DEL AGENTE

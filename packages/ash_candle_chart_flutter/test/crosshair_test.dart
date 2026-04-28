@@ -58,13 +58,29 @@ void main() {
   group('CrosshairOverlay', () {
     testWidgets('should render without error', (WidgetTester tester) async {
       const state = CrosshairState(dx: 50, dy: 50);
+      final series = Series(
+        timestamps: Int64List(0),
+        open: Float64List(0),
+        high: Float64List(0),
+        low: Float64List(0),
+        close: Float64List(0),
+        volume: Float64List(0),
+      );
+      final frame = ChartFrame(
+        series: series,
+        indicators: {},
+        viewport: const Viewport(startIdx: 0, endIdx: 0, scale: 1.0, scrollX: 0.0),
+        overlays: [],
+        sequenceNumber: 0,
+        panelSequenceNumbers: {'main': 0},
+      );
       await tester.pumpWidget(
-        const MaterialApp(
+        MaterialApp(
           home: Scaffold(
             body: SizedBox(
               width: 100,
               height: 100,
-              child: CrosshairOverlay(state: state),
+              child: CrosshairOverlay(state: state, frame: frame),
             ),
           ),
         ),

@@ -2,57 +2,65 @@
 import 'package:flutter/material.dart' hide Viewport;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ash_candle_chart_state/ash_candle_chart_state.dart';
+import 'package:ash_candle_chart_core/src/indicators/bollinger_bands.dart';
 
-/// Example application class.
 void main() {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-/// Example application class.
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
       home: const ChartScreen(),
     );
   }
 }
 
-/// Example application class.
 class ChartScreen extends ConsumerWidget {
   const ChartScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // Usually you would initialize data in a real provider
     final candles = List.generate(100, (i) {
+      final basePrice = 100.0 + i;
       return Candle(
         timestamp: 1600000000000 + (i * 60000),
-        open: 100.0 + i,
-        high: 105.0 + i,
-        low: 95.0 + i,
-        close: 102.0 + i,
+        open: basePrice,
+        high: basePrice + 5,
+        low: basePrice - 5,
+        close: basePrice + 2,
         volume: 1000.0,
       );
     });
 
+    final series = Series.fromCandles(candles);
+    
+    // Add Bollinger Bands to demonstrate state-managed indicator logic
+    final bb = BollingerBandsIndicator(const BollingerBandsConfig(id: 'bb', period: 20, stdDev: 2.0))
+        .compute(series, {});
+
     final controller = ref.watch(kchartControllerProvider(
       ChartFrame(
-        series: Series.fromCandles(candles),
+        series: series,
         viewport: Viewport(
             startIdx: 0, endIdx: candles.length - 1, scale: 1.0, scrollX: 0.0),
-        indicators: {},
+        indicators: {
+          'bb_upper': Series.fromData(timestamps: series.timestamps, values: bb.upper),
+          'bb_lower': Series.fromData(timestamps: series.timestamps, values: bb.lower),
+        },
         overlays: [],
         sequenceNumber: 0,
-        panelSequenceNumbers: {'main': 0, 'volume': 0},
+        panelSequenceNumbers: {'main': 0, 'volume': 0, 'bb_upper': 0, 'bb_lower': 0},
       ),
     ));
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Ash Candle Chart State Example')),
+      appBar: AppBar(title: const Text('State Managed Chart Example')),
       body: KChart(controller: controller),
     );
   }

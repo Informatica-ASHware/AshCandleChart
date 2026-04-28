@@ -53,14 +53,14 @@ Map<String, dynamic> _$OrderBookEntryToJson(_OrderBookEntry instance) =>
     };
 
 _OrderBook _$OrderBookFromJson(Map<String, dynamic> json) => _OrderBook(
-      bids: (json['bids'] as List<dynamic>)
-          .map((e) => OrderBookEntry.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      asks: (json['asks'] as List<dynamic>)
-          .map((e) => OrderBookEntry.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      timestamp: (json['timestamp'] as num).toInt(),
-    );
+  bids: (json['bids'] as List<dynamic>)
+      .map((e) => OrderBookEntry.fromJson(e as Map<String, dynamic>))
+      .toList(),
+  asks: (json['asks'] as List<dynamic>)
+      .map((e) => OrderBookEntry.fromJson(e as Map<String, dynamic>))
+      .toList(),
+  timestamp: (json['timestamp'] as num).toInt(),
+);
 
 Map<String, dynamic> _$OrderBookToJson(_OrderBook instance) =>
     <String, dynamic>{

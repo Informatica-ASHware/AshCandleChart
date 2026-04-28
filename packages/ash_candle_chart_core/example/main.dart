@@ -34,8 +34,11 @@ void main() async {
   ];
 
   final results = await pool.computeIndicatorBatch(configs, series);
-  // ignore: avoid_print
-  print('Computed SMA: ${results['sma20']}');
+  
+  // Verify results without using print
+  assert(results.containsKey('sma20'));
+  final smaValues = results['sma20'] as List<double?>;
+  assert(smaValues.length == series.length);
 
   await pool.dispose();
 }

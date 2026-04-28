@@ -13,7 +13,4 @@ _AnnotationPoint _$AnnotationPointFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$AnnotationPointToJson(_AnnotationPoint instance) =>
-    <String, dynamic>{
-      'timestamp': instance.timestamp,
-      'price': instance.price,
-    };
+    <String, dynamic>{'timestamp': instance.timestamp, 'price': instance.price};

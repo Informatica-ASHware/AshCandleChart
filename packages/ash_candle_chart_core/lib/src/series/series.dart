@@ -117,6 +117,26 @@ class Series {
     );
   }
 
+  /// Factory that creates a [Series] from a list of timestamps and values.
+  ///
+  /// This is useful for indicators where only one value per timestamp is needed.
+  /// Other fields (open, high, low, volume) are filled with zero.
+  factory Series.fromData({
+    required Int64List timestamps,
+    required Float64List values,
+  }) {
+    final n = timestamps.length;
+    final zeros = Float64List(n);
+    return Series(
+      timestamps: timestamps,
+      open: zeros,
+      high: zeros,
+      low: zeros,
+      close: values,
+      volume: zeros,
+    );
+  }
+
   /// Finds the nearest OHLC value to the given [targetTimestamp] and [targetPrice].
   ///
   /// Returns an [AnnotationPoint] with the snapped timestamp and price.

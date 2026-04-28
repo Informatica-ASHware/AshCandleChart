@@ -17,6 +17,10 @@ workspace:
   - packages/ash_candle_chart_core
   - packages/ash_candle_chart_flutter
   - packages/ash_candle_chart_state
+  - examples/crypto_dashboard
+  - packages/ash_candle_chart_core/example
+  - packages/ash_candle_chart_flutter/example
+  - packages/ash_candle_chart_state/example
 
 dev_dependencies:
   melos: ^7.0.0
@@ -26,6 +30,8 @@ melos:
 
   packages:
     - packages/*
+    - examples/*
+    - packages/*/example
 
   command:
     bootstrap:
@@ -44,6 +50,7 @@ melos:
         flutter_riverpod: ^3.3.1
         riverpod_annotation: ^4.0.2
       dev_dependencies:
+        lints: ^5.0.0
         build_runner: ^2.4.13
         freezed: ^3.0.0
         json_serializable: ^6.8.0
