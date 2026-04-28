@@ -18,9 +18,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  ash_candle_chart_core: any         # workspace member
+  ash_candle_chart_core: ^0.1.0-dev.1
   intl: ^0.19.0
-  meta: ^1.16.0
+  meta: ^1.18.2
   freezed_annotation: ^3.0.0
 
 dev_dependencies:

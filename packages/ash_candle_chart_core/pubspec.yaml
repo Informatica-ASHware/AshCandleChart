@@ -13,7 +13,7 @@ environment:
   sdk: ">=3.11.5 <4.0.0"
 
 dependencies:
-  meta: ^1.16.0
+  meta: ^1.18.2
   freezed_annotation: ^3.0.0
   json_annotation: ^4.9.0
 

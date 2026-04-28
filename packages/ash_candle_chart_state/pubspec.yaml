@@ -18,12 +18,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  ash_candle_chart_core: any
-  ash_candle_chart_flutter: any
+  ash_candle_chart_core: ^0.1.0-dev.1
+  ash_candle_chart_flutter: ^0.1.0-dev.1
   riverpod: ^3.2.1
   flutter_riverpod: ^3.3.1
   riverpod_annotation: ^4.0.2
-  meta: ^1.16.0
+  meta: ^1.18.2
 
 dev_dependencies:
   flutter_test:
