@@ -5,7 +5,7 @@
 
 name: ash_candle_chart_state
 description: Riverpod 3 integration for Ash Candle Chart state management.
-version: 0.1.0-dev.1
+version: 0.1.0-dev.2
 resolution: workspace
 repository: https://github.com/Informatica-ASHware/AshCandleChart
 homepage: https://github.com/Informatica-ASHware/AshCandleChart/tree/main/packages/ash_candle_chart_state
