@@ -140,8 +140,13 @@ melos:
       run: melos run pkg:version && melos run pkg:publish
 
     pkg:release:core:patch:
-      description: "Force patch on CORE (cascades to State & Flutter)."
-      run: melos version ash_candle_chart_core patch --yes && melos publish --yes --no-dry-run --no-published --scope="*core*" --scope="*state*" --scope="*flutter*"
+      description: "Force patch on ALL packages (Core, State, Flutter) and publish."
+      run: >
+        melos version --yes
+        --manual-version="ash_candle_chart_core:patch"
+        --manual-version="ash_candle_chart_state:patch"
+        --manual-version="ash_candle_chart_flutter:patch"
+        && melos publish --yes --no-dry-run --no-published --scope="*core*" --scope="*state*" --scope="*flutter*"
 
     pkg:release:state:patch:
       description: "Force patch on STATE (cascades to Flutter)."
@@ -152,8 +157,13 @@ melos:
       run: melos version ash_candle_chart_flutter patch --yes && melos publish --yes --no-dry-run --no-published --scope="*flutter*"
 
     pkg:release:core:dev:
-      description: "Force dev patch on CORE (cascades to State & Flutter)."
-      run: melos version ash_candle_chart_core patch --preid=dev --yes && melos publish --yes --no-dry-run --no-published --scope="*core*" --scope="*state*" --scope="*flutter*"
+      description: "Force dev patch on ALL packages (Core, State, Flutter) and publish."
+      run: >
+        melos version --yes --preid=dev
+        --manual-version="ash_candle_chart_core:patch"
+        --manual-version="ash_candle_chart_state:patch"
+        --manual-version="ash_candle_chart_flutter:patch"
+        && melos publish --yes --no-dry-run --no-published --scope="*core*" --scope="*state*" --scope="*flutter*"
 
     pkg:release:state:dev:
       description: "Force dev patch on STATE (cascades to Flutter)."
