@@ -1,4 +1,4 @@
-# KChart Flutter
+# Ash Candle Chart Flutter
 
 High-performance financial charting library for Flutter.
 
@@ -14,7 +14,7 @@ High-performance financial charting library for Flutter.
 1. **Add dependencies**:
    ```yaml
    dependencies:
-     ash_candle_chart_flutter: ^0.1.0
+     ash_candle_chart_flutter: ^0.1.0-dev.1
    ```
 
 2. **Initialize Controller**:

@@ -1,4 +1,4 @@
-/// Core logic for kchart, including data structures and compute engine.
+/// Core logic for Ash Candle Chart, including data structures and compute engine.
 library ash_candle_chart_core;
 
 export 'src/series/annotation.dart';

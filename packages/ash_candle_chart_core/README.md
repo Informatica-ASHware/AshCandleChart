@@ -1,6 +1,6 @@
-# KChart Core
+# Ash Candle Chart Core
 
-Core logic, data structures, and compute engine for KChart.
+Core logic, data structures, and compute engine for Ash Candle Chart.
 
 ## Features
 
