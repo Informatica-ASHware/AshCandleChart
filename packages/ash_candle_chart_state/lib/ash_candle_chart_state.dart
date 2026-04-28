@@ -1,3 +1,6 @@
+/// Riverpod 3 integration for Ash Candle Chart state management.
+library ash_candle_chart_state;
+
 import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ash_candle_chart_core/ash_candle_chart_core.dart';

@@ -1,4 +1,4 @@
-/// Flutter implementation of kchart, optimized for high performance.
+/// Flutter implementation of Ash Candle Chart, optimized for high performance.
 library ash_candle_chart_flutter;
 
 export 'src/controller.dart';

@@ -1,6 +1,6 @@
-# KChart Riverpod
+# Ash Candle Chart State
 
-Riverpod 3 integration for KChart.
+Riverpod 3 integration for Ash Candle Chart.
 
 ## Features
 
@@ -13,7 +13,7 @@ Riverpod 3 integration for KChart.
 1. **Add dependencies**:
    ```yaml
    dependencies:
-     ash_candle_chart_state: ^0.1.0
+     ash_candle_chart_state: ^0.1.0-dev.1
    ```
 
 2. **Wrap your app**:
