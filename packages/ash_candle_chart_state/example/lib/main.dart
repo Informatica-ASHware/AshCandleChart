@@ -52,7 +52,7 @@ class ChartScreen extends ConsumerWidget {
     ));
 
     return Scaffold(
-      appBar: AppBar(title: const Text('KChart Riverpod Example')),
+      appBar: AppBar(title: const Text('Ash Candle Chart State Example')),
       body: KChart(controller: controller),
     );
   }
