@@ -1,9 +1,9 @@
 # PROTECTED: No cambiar versiones ni flujos de CI sin justificacion en PR_JUSTIFICATION.md
-# path: KChart2/pubspec.yaml
+# path: AshCandleChart/pubspec.yaml
 # Workspace ROOT. Pub Workspaces (Dart 3.6+) + Melos 7.x.
 # Riverpod 3.x + freezed 2.x estable + última versión de codegen.
 
-name: kchart_workspace
+name: ash_candle_chart_workspace
 description: Workspace root for KChart V2 packages.
 version: 0.1.0-dev.1
 publish_to: none
@@ -14,15 +14,15 @@ environment:
 
 # === Pub Workspaces ===
 workspace:
-  - packages/kchart_core
-  - packages/kchart_flutter
-  - packages/kchart_riverpod
+  - packages/ash_candle_chart_core
+  - packages/ash_candle_chart_flutter
+  - packages/ash_candle_chart_state
 
 dev_dependencies:
   melos: ^7.0.0
 
 melos:
-  name: kchart_workspace
+  name: ash_candle_chart_workspace
 
   packages:
     - packages/*
@@ -97,9 +97,9 @@ melos:
       run: |
         dart analyze . && \
         dart analyze examples/crypto_dashboard && \
-        dart analyze packages/kchart_core/example && \
-        dart analyze packages/kchart_flutter/example && \
-        dart analyze packages/kchart_riverpod/example && \
+        dart analyze packages/ash_candle_chart_core/example && \
+        dart analyze packages/ash_candle_chart_flutter/example && \
+        dart analyze packages/ash_candle_chart_state/example && \
         melos exec -- "dart analyze ."
 
     test:flutter:

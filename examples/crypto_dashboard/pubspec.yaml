@@ -10,20 +10,20 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  kchart_core:
+  ash_candle_chart_core:
     git:
-      url: https://github.com/Informatica-ASHware/KChart2.git
-      path: packages/kchart_core
+      url: https://github.com/Informatica-ASHware/AshCandleChart.git
+      path: packages/ash_candle_chart_core
       ref: 44fd566306e5bae7027991770b355a107fed1693  # ref: PIN_TO_SHA_AFTER_FIRST_TAG
-  kchart_flutter:
+  ash_candle_chart_flutter:
     git:
-      url: https://github.com/Informatica-ASHware/KChart2.git
-      path: packages/kchart_flutter
+      url: https://github.com/Informatica-ASHware/AshCandleChart.git
+      path: packages/ash_candle_chart_flutter
       ref: 44fd566306e5bae7027991770b355a107fed1693  # ref: PIN_TO_SHA_AFTER_FIRST_TAG
-  kchart_riverpod:
+  ash_candle_chart_state:
     git:
-      url: https://github.com/Informatica-ASHware/KChart2.git
-      path: packages/kchart_riverpod
+      url: https://github.com/Informatica-ASHware/AshCandleChart.git
+      path: packages/ash_candle_chart_state
       ref: 44fd566306e5bae7027991770b355a107fed1693  # ref: PIN_TO_SHA_AFTER_FIRST_TAG
 
   flutter_riverpod: ^3.0.0-dev.0

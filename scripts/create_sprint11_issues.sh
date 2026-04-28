@@ -13,7 +13,7 @@ set -euo pipefail
 # CONFIGURACIÓN
 # ---------------------------------------------------------------------------
 OWNER="Informatica-ASHware"
-REPO="KChart2"
+REPO="AshCandleChart"
 FULL_REPO="${OWNER}/${REPO}"
 
 # Colores para output
@@ -46,7 +46,7 @@ create_labels() {
 
     LABELS=(
         "agent-ready|0E8A16|Lista para ser procesada por el Agente IA"
-        "package:flutter|FBCA04|Afecta al paquete kchart_flutter"
+        "package:flutter|FBCA04|Afecta al paquete ash_candle_chart_flutter"
         "sprint:11|8058FF|Sprint 11: QA-1 mejoras y correcciones"
         "type:enhancement|A2EEEF|Nueva funcionalidad o mejora"
         "type:bug|D73A4A|Algo no funciona correctamente"
@@ -119,7 +119,7 @@ create_issue \
     "## Contexto
 El gráfico actual renderiza las velas correctamente pero carece de referencias visuales verticales. Es indispensable mostrar la escala de precios en el margen derecho.
 
-## Especificación Técnica (\`kchart_flutter/lib/src/painting/\`)
+## Especificación Técnica (\`ash_candle_chart_flutter/lib/src/painting/\`)
 - Implementar \`YAxisLayer\` dentro del panel principal.
 - Calcular los valores máximo y mínimo visibles en el \`Viewport\`.
 - Dibujar textos (precios) formateados equitativamente distribuidos en el eje Y (margen derecho).
@@ -137,7 +137,7 @@ create_issue \
     "## Contexto
 El usuario no tiene noción de la fecha/hora de las velas que está observando. Se debe implementar el eje temporal en la parte inferior.
 
-## Especificación Técnica (\`kchart_flutter/lib/src/painting/\`)
+## Especificación Técnica (\`ash_candle_chart_flutter/lib/src/painting/\`)
 - Implementar \`TimeAxisPanel\` o \`XAxisLayer\` anclado en la parte inferior del KChart.
 - Mapear el índice de la vela visible (\`startIdx\` a \`endIdx\`) a su \`timestamp\` correspondiente.
 - Renderizar etiquetas de texto (HH:mm o DD/MM dependiendo del marco temporal) distribuidas equitativamente.
@@ -153,7 +153,7 @@ create_issue \
     "## Contexto
 Se requiere un indicador de posición tipo \"mira\" (crosshair) compuesto por una línea horizontal y una vertical punteadas (\`- - - -\`), que sigan el puntero del usuario para inspeccionar valores específicos.
 
-## Especificación Técnica (\`kchart_flutter/lib/src/interaction/\` y \`painting/\`)
+## Especificación Técnica (\`ash_candle_chart_flutter/lib/src/interaction/\` y \`painting/\`)
 - Capturar la posición \`(x, y)\` a través del \`GestureArbiter\` (Hover en desktop, Touch sostenido en mobile).
 - Implementar \`CrosshairLayer\` que dibuje:
   1. Línea vertical discontinua.
@@ -172,7 +172,7 @@ create_issue \
     "## Contexto
 Al pasar el puntero sobre el gráfico (o tener el crosshair activo), se deben mostrar los datos técnicos exactos de la vela seleccionada en la parte superior del panel.
 
-## Especificación Técnica (\`kchart_flutter/lib/src/panels/\`)
+## Especificación Técnica (\`ash_candle_chart_flutter/lib/src/panels/\`)
 - Implementar una superposición de texto en la parte superior izquierda del \`MainPanel\` (o en un widget contenedor superior).
 - El texto debe mostrar: \`O: <Open> H: <High> L: <Low> C: <Close> Vol: <Volume>\`.
 - Si el usuario no tiene el crosshair activo, debe mostrar los datos de la **última vela** del dataset.
@@ -189,7 +189,7 @@ create_issue \
     "## Contexto
 Actualmente se permite el scroll, pero el usuario necesita poder hacer zoom vertical explícito utilizando la gestura de dos dedos (pinch) para contraer o expandir la escala de precios visible.
 
-## Especificación Técnica (\`kchart_flutter/lib/src/interaction/\`)
+## Especificación Técnica (\`ash_candle_chart_flutter/lib/src/interaction/\`)
 - Extender el \`GestureArbiter\` para identificar el evento \`ScaleUpdate\` de Flutter focalizado en el eje Y.
 - Calcular el factor de escala vertical independiente del factor horizontal.
 - Actualizar el estado del \`Viewport\` (o parámetros de rango Y del panel) para reflejar la contracción/expansión.

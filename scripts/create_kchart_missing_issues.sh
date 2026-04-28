@@ -13,7 +13,7 @@ set -euo pipefail
 # CONFIGURACIÓN — Edita estas variables con tu usuario/organización y repo
 # ---------------------------------------------------------------------------
 OWNER="Informatica-ASHware"
-REPO="KChart2"
+REPO="AshCandleChart"
 FULL_REPO="${OWNER}/${REPO}"
 
 # Colores para output
@@ -47,9 +47,9 @@ create_labels() {
 
     LABELS=(
         "agent-ready|0E8A16|Lista para ser procesada por el Agente IA"
-        "package:core|D93F0B|Afecta al paquete kchart_core"
-        "package:flutter|FBCA04|Afecta al paquete kchart_flutter"
-        "package:riverpod|006B75|Afecta al paquete kchart_riverpod"
+        "package:core|D93F0B|Afecta al paquete ash_candle_chart_core"
+        "package:flutter|FBCA04|Afecta al paquete ash_candle_chart_flutter"
+        "package:riverpod|006B75|Afecta al paquete ash_candle_chart_state"
         "type:infra|C5DEF5|Infraestructura, CI/CD y Monorepo"
         "sprint:1|1D76DB|Sprint 1: Fundación y Primitivas"
         "sprint:2|1D76DB|Sprint 2: IsolatePool"
@@ -157,7 +157,7 @@ create_issue \
     "## Contexto
 Mostrar entradas, stop losses y take profits.
 
-## Especificación Técnica (\`kchart_flutter/lib/src/overlays/\`)
+## Especificación Técnica (\`ash_candle_chart_flutter/lib/src/overlays/\`)
 - Implementar \`TradeMarker\` (Point en Time X, Price Y).
 - Implementar \`PositionOverlay\` (Zona de rango Y con línea extendida al infinito en X).
 

@@ -2,9 +2,9 @@
 import 'package:flutter/material.dart' hide Viewport;
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:kchart_riverpod/kchart_riverpod.dart';
-// import 'package:kchart_core/src/indicators/sma.dart';
-// import 'package:kchart_core/src/indicators/rsi.dart';
+import 'package:ash_candle_chart_state/ash_candle_chart_state.dart';
+// import 'package:ash_candle_chart_core/src/indicators/sma.dart';
+// import 'package:ash_candle_chart_core/src/indicators/rsi.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));

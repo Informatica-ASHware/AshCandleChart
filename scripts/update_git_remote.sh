@@ -9,7 +9,7 @@ set -e
 
 # Configuración
 ORG_NAME="Informatica-ASHware"
-REPO_NAME="KChart2"
+REPO_NAME="AshCandleChart"
 
 echo "🔄 Actualizando configuración de Git para: $REPO_NAME"
 

@@ -13,7 +13,7 @@ set -euo pipefail
 # CONFIGURACIÓN — Edita estas variables con tu usuario/organización y repo
 # ---------------------------------------------------------------------------
 OWNER="Informatica-ASHware"
-REPO="KChart2"
+REPO="AshCandleChart"
 FULL_REPO="${OWNER}/${REPO}"
 
 # Colores para output
@@ -47,9 +47,9 @@ create_labels() {
 
     LABELS=(
         "agent-ready|0E8A16|Lista para ser procesada por el Agente IA"
-        "package:core|D93F0B|Afecta al paquete kchart_core"
-        "package:flutter|FBCA04|Afecta al paquete kchart_flutter"
-        "package:riverpod|006B75|Afecta al paquete kchart_riverpod"
+        "package:core|D93F0B|Afecta al paquete ash_candle_chart_core"
+        "package:flutter|FBCA04|Afecta al paquete ash_candle_chart_flutter"
+        "package:riverpod|006B75|Afecta al paquete ash_candle_chart_state"
         "type:infra|C5DEF5|Infraestructura, CI/CD y Monorepo"
         "sprint:1|1D76DB|Sprint 1: Fundación y Primitivas"
         "sprint:2|1D76DB|Sprint 2: IsolatePool"
@@ -132,7 +132,7 @@ Preparar la infraestructura base para los paquetes e integrarla con GitHub Actio
 
 ## Especificación Técnica
 - Crear \`melos.yaml\` en la raíz con scripts para \`format\`, \`analyze\`, \`test\` y \`pana\`.
-- Crear directorios: \`packages/kchart_core\`, \`packages/kchart_flutter\`, \`packages/kchart_riverpod\`.
+- Crear directorios: \`packages/ash_candle_chart_core\`, \`packages/ash_candle_chart_flutter\`, \`packages/ash_candle_chart_state\`.
 - Crear archivos \`pubspec.yaml\` iniciales. Restricción SDK: \`>=3.24.0 <4.0.0\`.
 - Crear \`.github/workflows/ci.yml\` ejecutando matrices de test.
 
@@ -148,7 +148,7 @@ create_issue \
     "## Contexto
 Definir cómo viajan los datos evitando instanciación de objetos masivos en memoria (usar arrays contiguos).
 
-## Especificación Técnica (\`kchart_core/lib/src/series/\`)
+## Especificación Técnica (\`ash_candle_chart_core/lib/src/series/\`)
 - Implementar \`Candle\` (timestamp, open, high, low, close, volume). Todos \`double\` excepto timestamp (\`int\`).
 - Implementar \`Series\`: Wrapper inmutable alrededor de \`Float64List\` (y \`Int64List\` para tiempo). Incluir fábrica \`Series.fromCandles(List<Candle>)\`.
 - Implementar \`Viewport\`: \`int startIdx\`, \`int endIdx\`, \`double scale\`, \`double scrollX\`.
@@ -170,7 +170,7 @@ create_issue \
     "## Contexto
 Infraestructura para enviar data columnar entre aislamientos para liberar la UI.
 
-## Especificación Técnica (\`kchart_core/lib/src/compute/\`)
+## Especificación Técnica (\`ash_candle_chart_core/lib/src/compute/\`)
 - Implementar \`IsolatePool\` (por defecto \`Platform.numberOfProcessors - 1\`).
 - Implementar payload de envío usando \`TransferableTypedData\` para evitar copia de memoria RAM-to-RAM.
 - Protocolo request/response con correlación por \`requestId\`.
@@ -206,7 +206,7 @@ create_issue \
     "## Contexto
 Validar que Flutter puede pintar 100,000 velas en 60fps usando primitivas.
 
-## Especificación Técnica (\`kchart_flutter/lib/src/painting/\`)
+## Especificación Técnica (\`ash_candle_chart_flutter/lib/src/painting/\`)
 - Crear \`KChartController\` (ChangeNotifier) y \`KChart\` (Widget).
 - Implementar \`MainPanelPainter\`. **Obligatorio:** Usar \`canvas.drawVertices\` con \`VertexMode.triangles\`. NO USAR \`canvas.drawRect\`.
 - Búsqueda binaria O(log N) para renderizar solo lo visible en el Viewport.
@@ -222,7 +222,7 @@ create_issue \
     "## Contexto
 Asegurar el pipeline contra regresiones de rendimiento visual.
 
-## Especificación Técnica (\`kchart_flutter/test/\`)
+## Especificación Técnica (\`ash_candle_chart_flutter/test/\`)
 - Generar fixture JSON determinista de 50k velas.
 - Crear Golden Test con \`matchesGoldenFile\`.
 - Crear script benchmark simulando scroll programático para medir tiempos del \`paint()\`.
@@ -243,7 +243,7 @@ create_issue \
     "## Contexto
 Implementar matemática estricta.
 
-## Especificación Técnica (\`kchart_core/lib/src/indicators/\`)
+## Especificación Técnica (\`ash_candle_chart_core/lib/src/indicators/\`)
 - SMA, EMA, MACD, Bollinger Bands, RSI. Toda matemática en \`double\`.
 - Implementar cómputo incremental: \`computeAppend\` para la última vela de los Websockets.
 
@@ -257,7 +257,7 @@ create_issue \
     "## Contexto
 Optimizar recolección de basura (GC) en cada frame.
 
-## Especificación Técnica (\`kchart_flutter/lib/src/painting/\`)
+## Especificación Técnica (\`ash_candle_chart_flutter/lib/src/painting/\`)
 - \`LayerCache\` usando \`PictureRecorder\`. El histórico estático y el grid se graban en un \`ui.Picture\`.
 - \`PaintPool\` para reusar objetos \`Paint\`.
 
@@ -315,11 +315,11 @@ $DOD_TEMPLATE" \
     "sprint:7,package:flutter,agent-ready"
 
 create_issue \
-    "[US 8.02] Adaptador Riverpod 3 (kchart_riverpod)" \
+    "[US 8.02] Adaptador Riverpod 3 (ash_candle_chart_state)" \
     "## Contexto
 Integración limpia con \`riverpod: ^3.0.0\`.
 
-## Especificación Técnica (\`packages/kchart_riverpod\`)
+## Especificación Técnica (\`packages/ash_candle_chart_state\`)
 - Exponer \`StreamProvider\` para \`ChartFrame\`.
 - Usar \`.autoPause\` para optimizar recursos cuando el chart no es visible.
 

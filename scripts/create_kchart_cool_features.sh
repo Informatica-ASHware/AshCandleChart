@@ -13,7 +13,7 @@ set -euo pipefail
 # CONFIGURACIÓN — Edita estas variables con tu usuario/organización y repo
 # ---------------------------------------------------------------------------
 OWNER="Informatica-ASHware"
-REPO="KChart2"
+REPO="AshCandleChart"
 FULL_REPO="${OWNER}/${REPO}"
 
 # Colores para output
@@ -47,8 +47,8 @@ create_labels() {
 
     LABELS=(
         "agent-ready|0E8A16|Lista para ser procesada por el Agente IA"
-        "package:core|D93F0B|Afecta al paquete kchart_core"
-        "package:flutter|FBCA04|Afecta al paquete kchart_flutter"
+        "package:core|D93F0B|Afecta al paquete ash_candle_chart_core"
+        "package:flutter|FBCA04|Afecta al paquete ash_candle_chart_flutter"
         "type:infra|C5DEF5|Infraestructura, CI/CD y Monorepo"
         "sprint:9|1D76DB|Sprint 9: Cool Features y Diferenciadores"
         "sprint:10|1D76DB|Sprint 10: Calidad Enterprise y Resiliencia"
@@ -123,7 +123,7 @@ create_issue \
     "## Contexto
 Permitir el escrutinio histórico reproduciendo la acción del precio pasada vela por vela o tick a tick, crucial para backtesting visual y auditoría de bots.
 
-## Especificación Técnica (\`kchart_flutter/lib/src/interaction/replay/\`)
+## Especificación Técnica (\`ash_candle_chart_flutter/lib/src/interaction/replay/\`)
 - Implementar \`ReplayCoordinator\` que intercepte el \`Stream<ChartFrame>\` original.
 - Crear un controlador UI (Slider temporal) anclado en la parte inferior del KChart.
 - Estados de reproducción: Play, Pause, Scrubbing. Soporte para velocidades múltiples (1x, 2x, 10x).
@@ -140,7 +140,7 @@ create_issue \
     "## Contexto
 Soportar flujos de trabajo de multi-timeframe o pares correlacionados en la misma vista.
 
-## Especificación Técnica (\`kchart_flutter/lib/src/widgets/grid/\`)
+## Especificación Técnica (\`ash_candle_chart_flutter/lib/src/widgets/grid/\`)
 - Implementar \`KChartGrid\` configurable (ej. 2x2, 1 principal + 3 secundarios).
 - Implementar \`SyncEngine\` opcional que actúe sobre múltiples \`KChartController\`.
 - Configuraciones de sincronización: \`syncTimeAxis\` (el paneo/zoom X se refleja en todos los charts de la cuadrícula), \`syncCrosshair\` (mostrar la cruz en todos los gráficos exactamente en el mismo timestamp).
@@ -155,7 +155,7 @@ create_issue \
     "## Contexto
 Añadir herramientas visuales para análisis de Order Flow y liquidez.
 
-## Especificación Técnica (\`kchart_flutter/lib/src/panels/advanced/\`)
+## Especificación Técnica (\`ash_candle_chart_flutter/lib/src/panels/advanced/\`)
 - Implementar \`VolumeProfilePanel\`: Histograma renderizado horizontalmente sobre el eje Y (precio), calculado a partir del rango temporal visible.
 - Implementar \`DepthPanel\`: Renderizado lateral en tiempo real de un Order Book bid/ask sincronizado al crosshair.
 - Implementar \`LiquidationHeatmapPanel\`: Capa densa renderizada mediante shaders (si es soportado) o gradientes escalados sobre áreas de precio para representar zonas de alta liquidación.
@@ -170,7 +170,7 @@ create_issue \
     "## Contexto
 Preparar el paquete para la integración de LLMs, proveyendo un espacio UI estandarizado para \"insights\".
 
-## Especificación Técnica (\`kchart_flutter/lib/src/panels/ai/\`)
+## Especificación Técnica (\`ash_candle_chart_flutter/lib/src/panels/ai/\`)
 - Implementar la interfaz abstracta \`AiAnnotationProvider\`. (El paquete *no* incluye el cliente HTTP para OpenAI/Anthropic, solo el contrato).
 - Crear un panel lateral/inferior \`AiInsightsPanel\` que reaccione a la selección de rangos en el gráfico (Drag selection).
 - El provider recibe el chunk columnar del rango seleccionado y retorna un listado estructurado de \`AiInsight\` (texto, tipo de patrón, severidad).
@@ -185,7 +185,7 @@ create_issue \
     "## Contexto
 Funcionalidad social y de reportes; permitir al usuario guardar una captura del análisis.
 
-## Especificación Técnica (\`kchart_flutter/lib/src/utils/export/\`)
+## Especificación Técnica (\`ash_candle_chart_flutter/lib/src/utils/export/\`)
 - Implementar método \`exportToImage()\` en \`KChartController\`.
 - Usar \`RenderRepaintBoundary.toImage()\` para el layout visible.
 - Implementar opciones de configuración: Marca de agua (watermark), background color (transparente u opaco), y resolución (pixel ratio).
@@ -205,7 +205,7 @@ create_issue \
     "## Contexto
 Los gráficos en canvas ignoran por defecto a los lectores de pantalla. Un paquete comercial en 2026 debe cumplir normativas AA/AAA de accesibilidad.
 
-## Especificación Técnica (\`kchart_flutter/lib/src/accessibility/\`)
+## Especificación Técnica (\`ash_candle_chart_flutter/lib/src/accessibility/\`)
 - Inyectar nodos \`Semantics\` virtuales para el gráfico.
 - Al mover el crosshair o hacer tap sobre una vela, exponer un \`SemanticsEvent\` que anuncie los datos relevantes (\"14 de marzo, apertura 65000, cierre 65800, alcista\").
 - Soporte completo de navegación por teclado (Flechas izq/der para mover un crosshair virtual paso a paso temporalmente).
@@ -222,7 +222,7 @@ create_issue \
     "## Contexto
 Los websockets cripto pueden enviar payloads corruptos; el parser Cero-Copia y las estructuras columnares no deben crashear el Isolate o la UI.
 
-## Especificación Técnica (\`kchart_core/test/resilience/\`)
+## Especificación Técnica (\`ash_candle_chart_core/test/resilience/\`)
 - Implementar fuzz testing enviando flujos de bytes aleatorios a los reconstructores de \`ChartFrame\` y \`TransferableTypedData\`.
 - Integrar pruebas basadas en propiedades (e.g. \`glados\` o equivalente). Definir invariantes como: \"Independientemente del \`scale\` o \`scrollX\` generado, \`startIdx\` siempre es <= \`endIdx\` y ambos están dentro de \`0..N\`\".
 
@@ -236,7 +236,7 @@ create_issue \
     "## Contexto
 Garantizar que los gestos arbitrados por \`Listener\` funcionen consistentemente a través de motores de renderizado y hardware distinto.
 
-## Especificación Técnica (\`kchart_flutter/integration_test/\`)
+## Especificación Técnica (\`ash_candle_chart_flutter/integration_test/\`)
 - Usar \`integration_test\` (o \`patrol\`) para lanzar una app de prueba con la vista pre-cargada.
 - Simular eventos táctiles nativos de pan (arrastre), pinch (pellizco) y long-press, verificando los cambios resultantes en el \`Viewport\`.
 

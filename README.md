@@ -4,21 +4,21 @@ A high-performance financial charting library for Flutter, optimized for Desktop
 
 ## Packages
 
-- [kchart_core](./packages/kchart_core): Core logic, data structures, and compute engine.
-- [kchart_flutter](./packages/kchart_flutter): Flutter implementation and UI components.
-- [kchart_riverpod](./packages/kchart_riverpod): Riverpod 3 integration for KChart.
+- [ash_candle_chart_core](./packages/ash_candle_chart_core): Core logic, data structures, and compute engine.
+- [ash_candle_chart_flutter](./packages/ash_candle_chart_flutter): Flutter implementation and UI components.
+- [ash_candle_chart_state](./packages/ash_candle_chart_state): Riverpod 3 integration for KChart.
 
 ## Status
 
-[![CI](https://github.com/Informatica-ASHware/KChart2/actions/workflows/ci.yml/badge.svg)](https://github.com/Informatica-ASHware/KChart2/actions/workflows/ci.yml)
+[![CI](https://github.com/Informatica-ASHware/AshCandleChart/actions/workflows/ci.yml/badge.svg)](https://github.com/Informatica-ASHware/AshCandleChart/actions/workflows/ci.yml)
 
 ## Quick Start (3 Minutes)
 
 1. **Add dependencies**:
    ```yaml
    dependencies:
-     kchart_flutter: ^0.1.0
-     kchart_core: ^0.1.0
+     ash_candle_chart_flutter: ^0.1.0
+     ash_candle_chart_core: ^0.1.0
    ```
 
 2. **Initialize Controller**:
@@ -50,11 +50,11 @@ A high-performance financial charting library for Flutter, optimized for Desktop
 
 ## Screenshots / GIFs
 
-![KChart Demo](https://raw.githubusercontent.com/Informatica-ASHware/KChart2/main/docs/assets/demo.gif)
+![KChart Demo](https://raw.githubusercontent.com/Informatica-ASHware/AshCandleChart/main/docs/assets/demo.gif)
 
 ## Examples
 
-- [Minimal Flutter Example](./packages/kchart_flutter/example)
+- [Minimal Flutter Example](./packages/ash_candle_chart_flutter/example)
 - [Crypto Dashboard (Complex)](./examples/crypto_dashboard) - Shows multi-chart setup, indicators, and trade overlays.
 
 ## Development

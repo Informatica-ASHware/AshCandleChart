@@ -31,12 +31,12 @@ void main() {
   }
 
   final String jsonString = jsonEncode(candles);
-  final directory = Directory('packages/kchart_flutter/test/fixtures');
+  final directory = Directory('packages/ash_candle_chart_flutter/test/fixtures');
   if (!directory.existsSync()) {
     directory.createSync(recursive: true);
   }
 
-  File('packages/kchart_flutter/test/fixtures/candles_50k.json').writeAsStringSync(jsonString);
+  File('packages/ash_candle_chart_flutter/test/fixtures/candles_50k.json').writeAsStringSync(jsonString);
   // ignore: avoid_print
-  print('Generated 50000 candles to packages/kchart_flutter/test/fixtures/candles_50k.json');
+  print('Generated 50000 candles to packages/ash_candle_chart_flutter/test/fixtures/candles_50k.json');
 }

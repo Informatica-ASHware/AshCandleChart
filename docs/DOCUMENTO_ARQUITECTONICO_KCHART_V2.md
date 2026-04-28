@@ -1,6 +1,6 @@
 # K-Chart V2 — Documento Arquitectónico y Backlog de Épicas
 
-> **Nombre provisional del paquete:** `kchart` (monorepo: `kchart_core` + `kchart_flutter` + adaptador opcional `kchart_riverpod`)
+> **Nombre provisional del paquete:** `kchart` (monorepo: `ash_candle_chart_core` + `ash_candle_chart_flutter` + adaptador opcional `ash_candle_chart_state`)
 > **Tipo de entregable:** Librería Flutter de visualización financiera, publicable en **pub.dev**.
 > **Licencia objetivo:** MIT o Apache-2.0 (a decidir).
 > **Posicionamiento:** Sucesor espiritual de `k_chart` / `k_chart_plus` y análogo en Flutter de TradingView Lightweight Charts — con énfasis en extensibilidad de indicadores, paneles componibles y rendimiento a 60fps con datasets grandes.
@@ -26,12 +26,12 @@ Cualquier propuesta de diseño futura que viole alguno de estos puntos se rechaz
 
 ### 1.1 Separación estricta compute ↔ render
 
-El motor de cálculo de indicadores vive en **Dart puro** (`kchart_core`, sin dependencia de Flutter). Esto permite:
+El motor de cálculo de indicadores vive en **Dart puro** (`ash_candle_chart_core`, sin dependencia de Flutter). Esto permite:
 - Ejecutar en Isolates sin restricciones de `BuildContext`.
 - Hacer benchmarks y tests numéricos sin framework gráfico.
 - Reutilizar el motor para backtesting offline, server-side, CLIs.
 
-El motor de renderizado vive en **Flutter** (`kchart_flutter`) y consume artefactos inmutables del core. Nunca accede a tipos mutables compartidos con el cálculo.
+El motor de renderizado vive en **Flutter** (`ash_candle_chart_flutter`) y consume artefactos inmutables del core. Nunca accede a tipos mutables compartidos con el cálculo.
 
 ### 1.2 Inmutabilidad radical del frame
 
@@ -60,9 +60,9 @@ Desglose:
 
 | Paquete | Depende de Riverpod v3? | Justificación |
 |---|---|---|
-| `kchart_core` | **No.** Pure Dart. | Un paquete de cálculo numérico con dependencia de state management sería absurdo. |
-| `kchart_flutter` | **No.** ChangeNotifier / ValueNotifier / Stream internos. | Forzar Riverpod excluiría usuarios de BLoC, Provider, GetX, setState vanilla, signals_flutter. Un paquete de pub.dev serio se consume desde cualquier arquitectura. |
-| `kchart_riverpod` (opcional, aparte) | **Sí, ^3.0.0.** | Expone `StreamProvider<ChartFrame>`, `NotifierProvider<IndicatorRegistry>`, helpers idiomáticos para apps Riverpod. |
+| `ash_candle_chart_core` | **No.** Pure Dart. | Un paquete de cálculo numérico con dependencia de state management sería absurdo. |
+| `ash_candle_chart_flutter` | **No.** ChangeNotifier / ValueNotifier / Stream internos. | Forzar Riverpod excluiría usuarios de BLoC, Provider, GetX, setState vanilla, signals_flutter. Un paquete de pub.dev serio se consume desde cualquier arquitectura. |
+| `ash_candle_chart_state` (opcional, aparte) | **Sí, ^3.0.0.** | Expone `StreamProvider<ChartFrame>`, `NotifierProvider<IndicatorRegistry>`, helpers idiomáticos para apps Riverpod. |
 
 **Dónde Riverpod 3 SÍ aporta valor si el consumidor lo usa** (y por eso justifica un adaptador):
 - `StreamProvider.autoPause` (nuevo en v3): el feed de frames se pausa cuando el chart no está visible, sin código manual.
@@ -90,14 +90,14 @@ Los indicadores son funciones puras `(Series, Config) → IndicatorSeries`. Dado
 kchart/                               (raíz gestionada con Melos)
 ├── melos.yaml
 ├── packages/
-│   ├── kchart_core/                  Pure Dart
+│   ├── ash_candle_chart_core/                  Pure Dart
 │   │   ├── lib/src/
 │   │   │   ├── series/               Series, Viewport, ChartFrame
 │   │   │   ├── indicators/           Indicator interface + built-ins
 │   │   │   ├── compute/              IsolatePool, worker protocol
 │   │   │   └── drawing_primitives/   Abstract Canvas-agnostic primitives
 │   │   └── test/                     Unit + property-based tests
-│   ├── kchart_flutter/               Flutter
+│   ├── ash_candle_chart_flutter/               Flutter
 │   │   ├── lib/src/
 │   │   │   ├── widgets/              KChart, KChartController
 │   │   │   ├── painting/             Painters, layer cache, shaders
@@ -107,7 +107,7 @@ kchart/                               (raíz gestionada con Melos)
 │   │   │   ├── overlays/             Markers, positions, events
 │   │   │   └── theme/                ChartTheme, typography, palettes
 │   │   └── test/                     Widget + golden tests
-│   └── kchart_riverpod/              Optional adapter (Flutter + Riverpod 3)
+│   └── ash_candle_chart_state/              Optional adapter (Flutter + Riverpod 3)
 │       └── lib/src/
 │           ├── providers.dart         StreamProvider<ChartFrame>, etc.
 │           └── widgets.dart           Consumer-style widgets
@@ -116,7 +116,7 @@ kchart/                               (raíz gestionada con Melos)
 │   ├── crypto_dashboard/             Full-featured showcase app
 │   ├── custom_indicator/             Tutorial: write your own indicator
 │   ├── custom_panel/                 Tutorial: write your own panel
-│   └── backtester_visualizer/        Non-Flutter use of kchart_core
+│   └── backtester_visualizer/        Non-Flutter use of ash_candle_chart_core
 ├── tools/
 │   └── golden_generator/             Regenerate golden fixtures
 └── doc/
@@ -148,7 +148,7 @@ kchart/                               (raíz gestionada con Melos)
                             │ (inbound: candles + config)
                             ▼
 ┌───────────────────────────────────────────────────────────────────────┐
-│                      kchart_core  (pure Dart)                         │
+│                      ash_candle_chart_core  (pure Dart)                         │
 │                                                                       │
 │   ┌─────────────────┐    ┌─────────────────────────────────────┐     │
 │   │ IndicatorRegistry│───▶│ IsolatePool (1..N workers)          │     │
@@ -167,7 +167,7 @@ kchart/                               (raíz gestionada con Melos)
                                            │  TransferableTypedData)
                                            ▼
 ┌───────────────────────────────────────────────────────────────────────┐
-│                    kchart_flutter  (Flutter)                          │
+│                    ash_candle_chart_flutter  (Flutter)                          │
 │                                                                       │
 │   ┌───────────────────────────────────────────────────────────┐      │
 │   │ PanelStack   (vertical stack of panels, each a panel slot)│      │
@@ -220,7 +220,7 @@ Esta sección responde explícitamente a la pregunta: **"¿Cómo se inyectaría 
 ### 4.1 Contrato público del indicador
 
 ```dart
-/// En kchart_core — pure Dart.
+/// En ash_candle_chart_core — pure Dart.
 abstract class Indicator {
   /// ID estable (ej. "macd", "my.company.custom_rsi"). Usado para
   /// persistencia, referencia en panels, resolución en el registry.
@@ -402,7 +402,7 @@ Un panel custom típico (ej. `OrderBookHeatmapPanel`) escribe ~200-400 líneas: 
 
 Checklist y decisiones que condicionan el backlog:
 
-- **Semver estricto, dos dígitos**. `kchart_core: 1.0.0`, `kchart_flutter: 1.0.0`, publicados en lockstep en el primer año; después versiones independientes por paquete.
+- **Semver estricto, dos dígitos**. `ash_candle_chart_core: 1.0.0`, `ash_candle_chart_flutter: 1.0.0`, publicados en lockstep en el primer año; después versiones independientes por paquete.
 - **Pub score objetivo ≥ 140/160** al primer release. Dartdoc 100%, ejemplos en `example/`, `CHANGELOG.md`, `LICENSE`, `README.md` con GIFs en acción.
 - **Flutter SDK constraint**: `>=3.24.0 <4.0.0` al lanzamiento (ventana conservadora), avanzando con Flutter stable.
 - **Platform support declarado**: Android, iOS, macOS, Windows, Linux, Web. Web requiere testing especial (canvas, gestures táctiles, scroll wheel).
@@ -420,9 +420,9 @@ Doce épicas. Cada una es un corte vertical deployable. Ordenadas por dependenci
 
 ---
 
-### Épica 1 — Fundación del Monorepo y Primitivas de `kchart_core`
+### Épica 1 — Fundación del Monorepo y Primitivas de `ash_candle_chart_core`
 
-**Objetivo y alcance.** Establecer el workspace Melos con tres paquetes (`kchart_core`, `kchart_flutter`, placeholder `kchart_riverpod`), convenciones de código, lints estrictos, formatters, git hooks, CI inicial (build + test + analyze + pana). Construir el paquete `kchart_core` puro Dart con los tipos primitivos: `Candle` (OHLCV inmutable), `Series` (column-store sobre `Float64List`/`Int64List`), `Interval`, `TimeRange`, `Viewport` (startIdx/endIdx/scale/scrollX), `ChartFrame` inmutable con sequence number, y el enum `IndicatorOutputKind` (line, histogram, band, area, heatmap). Mecanismo de `TransferableTypedData` para handoff zero-copy.
+**Objetivo y alcance.** Establecer el workspace Melos con tres paquetes (`ash_candle_chart_core`, `ash_candle_chart_flutter`, placeholder `ash_candle_chart_state`), convenciones de código, lints estrictos, formatters, git hooks, CI inicial (build + test + analyze + pana). Construir el paquete `ash_candle_chart_core` puro Dart con los tipos primitivos: `Candle` (OHLCV inmutable), `Series` (column-store sobre `Float64List`/`Int64List`), `Interval`, `TimeRange`, `Viewport` (startIdx/endIdx/scale/scrollX), `ChartFrame` inmutable con sequence number, y el enum `IndicatorOutputKind` (line, histogram, band, area, heatmap). Mecanismo de `TransferableTypedData` para handoff zero-copy.
 
 **NO incluye.** Cálculo de indicadores concretos (Épica 3). Rendering (Épica 4). Widget Flutter (Épica 4).
 
@@ -434,7 +434,7 @@ Doce épicas. Cada una es un corte vertical deployable. Ordenadas por dependenci
 
 ### Épica 2 — Isolate Pool y Runtime de Cómputo
 
-**Objetivo y alcance.** En `kchart_core`, implementar el `IsolatePool` configurable (N workers, typical 2-4 según plataforma y CPU cores). Protocolo de mensajes `ComputeRequest` / `ComputeResponse` serializables, con identificador de correlación y soporte de cancelación (si el consumidor cambia el rango antes de que termine el cómputo, se aborta). `IndicatorPipeline` que toma un grafo de indicadores, resuelve dependencias topológicamente, y despacha trabajo entre workers balanceando carga. Caching interno por `(indicatorId, config, inputFingerprint)`. Mecanismo de **cómputo incremental**: al añadir una vela nueva al final, solo se recomputa la cola, no toda la serie. Fallback a full-recompute si el indicador no declara `IncrementalComputation`.
+**Objetivo y alcance.** En `ash_candle_chart_core`, implementar el `IsolatePool` configurable (N workers, typical 2-4 según plataforma y CPU cores). Protocolo de mensajes `ComputeRequest` / `ComputeResponse` serializables, con identificador de correlación y soporte de cancelación (si el consumidor cambia el rango antes de que termine el cómputo, se aborta). `IndicatorPipeline` que toma un grafo de indicadores, resuelve dependencias topológicamente, y despacha trabajo entre workers balanceando carga. Caching interno por `(indicatorId, config, inputFingerprint)`. Mecanismo de **cómputo incremental**: al añadir una vela nueva al final, solo se recomputa la cola, no toda la serie. Fallback a full-recompute si el indicador no declara `IncrementalComputation`.
 
 **NO incluye.** Indicadores concretos. Dependencia en Flutter. UI.
 
@@ -464,7 +464,7 @@ Cada uno con: test numérico golden contra valores de referencia (TradingView o 
 
 ### Épica 4 — Engine de Renderizado y Widget Raíz
 
-**Objetivo y alcance.** En `kchart_flutter`, el corazón visual del paquete:
+**Objetivo y alcance.** En `ash_candle_chart_flutter`, el corazón visual del paquete:
 
 - `KChart` widget stateless de consumo (`KChart(controller: controller)`).
 - `KChartController` con API pública: `pushFrame(ChartFrame)`, `updateViewport(Viewport)`, `addOverlay(...)`, `removeOverlay(...)`, `dispose()`. `ChangeNotifier`-based, zero-Riverpod.
@@ -629,9 +629,9 @@ Todos los overlays consumen el mismo viewport del chart y se repintan sincroniza
 
 **Objetivo y alcance.** Infraestructura de aseguramiento de calidad:
 
-- **Unit tests** sobre `kchart_core` con cobertura >90%. Golden numerical tests de indicadores contra datasets de referencia.
+- **Unit tests** sobre `ash_candle_chart_core` con cobertura >90%. Golden numerical tests de indicadores contra datasets de referencia.
 - **Property-based tests** (`glados` o custom) sobre series: roundtrip serialización, invariantes de viewport (nunca startIdx > endIdx), conservación bajo merge.
-- **Widget tests** sobre `kchart_flutter` con `flutter_test`.
+- **Widget tests** sobre `ash_candle_chart_flutter` con `flutter_test`.
 - **Golden image tests** por cada combinación (panel × theme × data fixture). Regeneración controlada con aprobación manual. Tolerancia de difference por pixel calibrada.
 - **Performance Lab**: benchmarks automatizados (`flutter_benchmark` o custom) que miden tiempo por paint, tiempo por compute, memoria, dropped frames. Resultados guardados por commit; alertas en CI si regresión > umbral.
 - **Integration tests** en dispositivos (android emulator, iOS simulator, macOS, web) con `patrol` o `integration_test` de Flutter.
@@ -651,7 +651,7 @@ Todos los overlays consumen el mismo viewport del chart y se repintan sincroniza
 
 - **Dartdoc 100%** en API pública, validado en CI.
 - **README principal** con value proposition en 30 segundos, quickstart, GIF animado, matriz de features, comparación honesta con alternativas (`fl_chart`, `syncfusion_flutter_charts`, `candlesticks`).
-- **READMEs por paquete** (`kchart_core`, `kchart_flutter`, `kchart_riverpod`).
+- **READMEs por paquete** (`ash_candle_chart_core`, `ash_candle_chart_flutter`, `ash_candle_chart_state`).
 - **Cookbook** con recipes: "add a custom indicator", "build a custom panel", "persist user annotations", "connect to Binance klines", "hook Riverpod providers", "customize theme", "add a drawing tool".
 - **Site de documentación** estático (docusaurus/mkdocs-material) con API reference cross-linked a Dartdoc.
 - **Playground web**: Flutter Web build desplegado en GitHub Pages o Vercel, mostrando los ejemplos en vivo, editable (con `flutter_dartpad` embed si posible).
@@ -660,8 +660,8 @@ Todos los overlays consumen el mismo viewport del chart y se repintan sincroniza
   - `crypto_dashboard/`: showcase full-featured con todos los paneles "cool".
   - `custom_indicator/`: tutorial paso-a-paso escribiendo un indicador desde cero.
   - `custom_panel/`: tutorial escribiendo `OrderBookHeatmapPanel`.
-  - `backtester_visualizer/`: uso de `kchart_core` sin Flutter (CLI).
-  - `riverpod_integration/`: uso del adapter `kchart_riverpod`.
+  - `backtester_visualizer/`: uso de `ash_candle_chart_core` sin Flutter (CLI).
+  - `riverpod_integration/`: uso del adapter `ash_candle_chart_state`.
 - **Pipeline de publicación**:
   - Semver estricto por paquete.
   - Changelog automático desde Conventional Commits.
@@ -669,7 +669,7 @@ Todos los overlays consumen el mismo viewport del chart y se repintan sincroniza
   - `dart pub publish --dry-run` en CI bloqueante.
   - Monitoreo de `pana` score, alerta si baja de umbral.
 - **`SECURITY.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`**, issue templates, PR templates.
-- **Adapter `kchart_riverpod`** completamente implementado con `StreamProvider<ChartFrame>`, `NotifierProvider<IndicatorRegistry>`, widgets consumer, tests específicos, documentación y ejemplo.
+- **Adapter `ash_candle_chart_state`** completamente implementado con `StreamProvider<ChartFrame>`, `NotifierProvider<IndicatorRegistry>`, widgets consumer, tests específicos, documentación y ejemplo.
 
 **NO incluye.** Traducciones completas de la documentación (se acepta contribución comunitaria). Cursos en video. Libros.
 

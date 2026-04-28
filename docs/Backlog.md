@@ -18,14 +18,14 @@ Para **CADA** Historia de Usuario (US) generada mediante PR, el Agente IA debe c
 
 ---
 
-# 🏃 SPRINT 1: Fundación, CI y Primitivas (kchart_core)
+# 🏃 SPRINT 1: Fundación, CI y Primitivas (ash_candle_chart_core)
 **Objetivo:** Establecer el monorepo y las estructuras de datos columnares y zero-copy.
 
 ### US 1.01: Setup del Monorepo Melos y CI/CD Pipeline
 *   **Contexto:** Preparar la infraestructura base para los paquetes e integrarla con GitHub Actions.
 *   **Especificación Técnica:**
     *   Crear `melos.yaml` en la raíz. Definir scripts para `format`, `analyze`, `test` y `pana`.
-    *   Crear directorios: `packages/kchart_core`, `packages/kchart_flutter`, `packages/kchart_riverpod`.
+    *   Crear directorios: `packages/ash_candle_chart_core`, `packages/ash_candle_chart_flutter`, `packages/ash_candle_chart_state`.
     *   Crear archivos `pubspec.yaml` iniciales. Restricción SDK: `>=3.24.0 <4.0.0`.
     *   Crear `.github/workflows/ci.yml` ejecutando los scripts de melos en matrices (Ubuntu/Mac/Windows).
 *   **Criterios de Aceptación:**
@@ -35,7 +35,7 @@ Para **CADA** Historia de Usuario (US) generada mediante PR, el Agente IA debe c
 
 ### US 1.02: Modelos Primitivos Inmutables y Estructuras Columnares
 *   **Contexto:** Definir cómo viajan los datos. Evitar listas de objetos pesados; usar arrays contiguos en memoria.
-*   **Especificación Técnica (`kchart_core/lib/src/series/`):**
+*   **Especificación Técnica (`ash_candle_chart_core/lib/src/series/`):**
     *   Implementar `Candle` (timestamp, open, high, low, close, volume). Todos `double` excepto timestamp (`int` ms).
     *   Implementar `Series`: Un wrapper inmutable alrededor de 6 `Float64List` (y 1 `Int64List` para tiempo). Incluir fábrica estática `Series.fromCandles(List<Candle>)`.
     *   Implementar `Viewport`: `int startIdx`, `int endIdx`, `double scale`, `double scrollX`.
@@ -47,12 +47,12 @@ Para **CADA** Historia de Usuario (US) generada mediante PR, el Agente IA debe c
 
 ---
 
-# 🏃 SPRINT 2: Motor de Cómputo Isolate & Batching (kchart_core)
+# 🏃 SPRINT 2: Motor de Cómputo Isolate & Batching (ash_candle_chart_core)
 **Objetivo:** Ejecutar cálculos en background sin trabar la UI, mitigando el overhead del IPC (Inter-Process Communication).
 
 ### US 2.01: IsolatePool y Protocolo de Transferencia Zero-Copy
 *   **Contexto:** Infraestructura para enviar data columnar entre aislamientos.
-*   **Especificación Técnica (`kchart_core/lib/src/compute/`):**
+*   **Especificación Técnica (`ash_candle_chart_core/lib/src/compute/`):**
     *   Implementar `IsolatePool` (por defecto `Platform.numberOfProcessors - 1`, min 1, max 4).
     *   Implementar payload de envío usando `TransferableTypedData` para evitar que Dart copie los arrays de 100k velas RAM-to-RAM.
     *   Protocolo request/response con correlación por `requestId`.
@@ -72,12 +72,12 @@ Para **CADA** Historia de Usuario (US) generada mediante PR, el Agente IA debe c
 
 ---
 
-# 🏃 SPRINT 3: Validación Visual Temprana y Perf Lab (kchart_flutter)
+# 🏃 SPRINT 3: Validación Visual Temprana y Perf Lab (ash_candle_chart_flutter)
 **Objetivo:** Probar el cuello de botella visual antes de codificar la matemática final. Mitigación de riesgos arquitectónicos.
 
 ### US 3.01: KChart Render Mock y prueba de drawVertices
 *   **Contexto:** Validar que Flutter puede pintar 100,000 velas en 60fps usando primitivas de bajo nivel.
-*   **Especificación Técnica (`kchart_flutter/lib/src/painting/`):**
+*   **Especificación Técnica (`ash_candle_chart_flutter/lib/src/painting/`):**
     *   Crear `KChartController` (ChangeNotifier).
     *   Implementar `KChart` (Widget).
     *   Implementar `MainPanelPainter`. Usar `canvas.drawVertices` con `VertexMode.triangles` para crear los quads de las velas directamente sobre el GPU. **NO USAR** `canvas.drawRect` en bucle.
@@ -88,7 +88,7 @@ Para **CADA** Historia de Usuario (US) generada mediante PR, el Agente IA debe c
 
 ### US 3.02: Performance Lab y Golden Tests Base
 *   **Contexto:** Asegurar el pipeline de CI contra regresiones de rendimiento visual.
-*   **Especificación Técnica (`kchart_flutter/test/` y `tools/`):**
+*   **Especificación Técnica (`ash_candle_chart_flutter/test/` y `tools/`):**
     *   Generar un fixture JSON determinista de 50k velas de ejemplo.
     *   Crear Golden Test con `matchesGoldenFile`.
     *   Crear script de benchmark (`flutter drive` o custom test) que haga scroll programático de lado a lado y registre tiempos promedios del `paint()`.
@@ -103,7 +103,7 @@ Para **CADA** Historia de Usuario (US) generada mediante PR, el Agente IA debe c
 
 ### US 4.01: Catálogo Base de Indicadores (Full double)
 *   **Contexto:** Implementar la lógica matemática estricta para indicadores universales.
-*   **Especificación Técnica (`kchart_core/lib/src/indicators/built_ins/`):**
+*   **Especificación Técnica (`ash_candle_chart_core/lib/src/indicators/built_ins/`):**
     *   Implementar: SMA, EMA, MACD, Bollinger Bands, RSI.
     *   *Regla estricta:* Toda matemática se hace en `double`. Cero `Decimal`.
     *   Implementar cómputo incremental: método `computeAppend` que solo toma la última vela para actualizar la última posición de salida, evitando el O(N).
@@ -112,7 +112,7 @@ Para **CADA** Historia de Usuario (US) generada mediante PR, el Agente IA debe c
 
 ### US 4.02: LayerCache y Paint Pool
 *   **Contexto:** Optimizar basura de recolección (GC) y re-renderizado estático.
-*   **Especificación Técnica (`kchart_flutter/lib/src/painting/`):**
+*   **Especificación Técnica (`ash_candle_chart_flutter/lib/src/painting/`):**
     *   Implementar `LayerCache` usando `PictureRecorder`. Todo lo que está fuera de la vela actual (histórico) y los grids de fondo, se graban en un `ui.Picture` estático.
     *   Implementar `PaintPool` para reusar objetos `Paint` y evitar instanciación masiva por frame.
 *   **Criterios de Aceptación:**
@@ -125,7 +125,7 @@ Para **CADA** Historia de Usuario (US) generada mediante PR, el Agente IA debe c
 
 ### US 5.01: Arquitectura de PanelStack y Divisores
 *   **Contexto:** Soporte para múltiples gráficos apilados (Velas arriba, Volumen medio, RSI abajo).
-*   **Especificación Técnica (`kchart_flutter/lib/src/panels/`):**
+*   **Especificación Técnica (`ash_candle_chart_flutter/lib/src/panels/`):**
     *   Implementar `PanelStack` y protocolo `ChartPanel`.
     *   Construir Widgets separadores (`DraggableDivider`) para modificar alturas.
     *   Cada Panel debe envolverse automáticamente en un `RepaintBoundary`.
@@ -148,7 +148,7 @@ Para **CADA** Historia de Usuario (US) generada mediante PR, el Agente IA debe c
 
 ### US 6.01: Arbitro de Gestos con Raw Pointer Events
 *   **Contexto:** Mitigar competencia entre paneo, zoom, y toques de dibujos.
-*   **Especificación Técnica (`kchart_flutter/lib/src/interaction/`):**
+*   **Especificación Técnica (`ash_candle_chart_flutter/lib/src/interaction/`):**
     *   **NO** usar `GestureDetector`.
     *   Implementar `GestureArbiter` usando el widget `Listener` para capturar `PointerDownEvent`, `PointerMoveEvent`, `PointerUpEvent`, `PointerCancelEvent`.
     *   Construir máquina de estados manual: Paneo (1 dedo), Zoom (2 dedos), Crosshair (1 dedo presionado > 300ms), Click/Tap.
@@ -170,7 +170,7 @@ Para **CADA** Historia de Usuario (US) generada mediante PR, el Agente IA debe c
 
 ### US 7.01: Abstracciones de Drawing y Líneas de Tendencia
 *   **Contexto:** Permitir al usuario rayar el gráfico y guardarlo.
-*   **Especificación Técnica (`kchart_flutter/lib/src/drawing_tools/`):**
+*   **Especificación Técnica (`ash_candle_chart_flutter/lib/src/drawing_tools/`):**
     *   Definir serialización JSON (in/out).
     *   Implementar clase base interactiva. Los endpoints de las líneas (`handles`) deben tener áreas de impacto expandidas (hitboxes grandes) para touch.
     *   Implementar `TrendLine`. Funcionalidad de *Magnet Mode*: Si el handle está a < N pixeles lógicos de una vela, se acopla a su Close o High.
@@ -180,7 +180,7 @@ Para **CADA** Historia de Usuario (US) generada mediante PR, el Agente IA debe c
 
 ### US 7.02: Overlays de Dominio (Trades y Posiciones)
 *   **Contexto:** Mostrar entradas, stop losses y take profits.
-*   **Especificación Técnica (`kchart_flutter/lib/src/overlays/`):**
+*   **Especificación Técnica (`ash_candle_chart_flutter/lib/src/overlays/`):**
     *   Implementar `TradeMarker` (Point en Time X, Price Y).
     *   Implementar `PositionOverlay` (Zona de rango Y con línea extendida al infinito en X).
 *   **Criterios de Aceptación:**
@@ -199,9 +199,9 @@ Para **CADA** Historia de Usuario (US) generada mediante PR, el Agente IA debe c
 *   **Criterios de Aceptación:**
     *   [ ] Golden tests cubriendo al menos `lightTheme` y `darkTheme`.
 
-### US 8.02: Adaptador Riverpod 3 (kchart_riverpod)
+### US 8.02: Adaptador Riverpod 3 (ash_candle_chart_state)
 *   **Contexto:** Exponer adaptadores idiomáticos sin contaminar el core.
-*   **Especificación Técnica (`packages/kchart_riverpod/`):**
+*   **Especificación Técnica (`packages/ash_candle_chart_state/`):**
     *   Dependencia explícita: `riverpod: ^3.0.0` y `flutter_riverpod: ^3.0.0`.
     *   Exponer `kchartFrameProvider` basado en `StreamProvider`.
     *   Uso de `.autoPause` de Riverpod 3.
