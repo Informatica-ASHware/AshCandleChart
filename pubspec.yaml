@@ -34,7 +34,7 @@ melos:
         flutter: ">=3.41.7"
       # Versiones COMPARTIDAS para todo el workspace
       dependencies:
-        meta: 1.17.0
+        meta: ^1.17.0
         intl: ^0.19.0
         # Codegen toolchain — la trinidad
         freezed_annotation: ^3.0.0
