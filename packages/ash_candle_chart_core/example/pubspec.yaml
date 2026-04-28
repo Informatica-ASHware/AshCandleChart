@@ -1,0 +1,11 @@
+# PROTECTED: No cambiar versiones ni flujos de CI sin justificacion en PR_JUSTIFICATION.md
+name: ash_candle_chart_core_example
+description: Minimal example for ash_candle_chart_core.
+publish_to: none
+
+environment:
+  sdk: ">=3.11.5 <4.0.0"
+
+dependencies:
+  ash_candle_chart_core:
+    path: ..

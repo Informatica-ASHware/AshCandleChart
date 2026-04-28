@@ -1,0 +1,32 @@
+# PROTECTED: No cambiar versiones ni flujos de CI sin justificacion en PR_JUSTIFICATION.md
+name: ash_candle_chart_flutter_example
+description: Minimal example for ash_candle_chart_flutter.
+publish_to: none
+
+environment:
+  sdk: ">=3.11.5 <4.0.0"
+  flutter: ">=3.41.7"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  ash_candle_chart_core:
+    git:
+      url: https://github.com/Informatica-ASHware/AshCandleChart.git
+      path: packages/ash_candle_chart_core
+      ref: 44fd566306e5bae7027991770b355a107fed1693  # ref: PIN_TO_SHA_AFTER_FIRST_TAG
+  ash_candle_chart_flutter:
+    git:
+      url: https://github.com/Informatica-ASHware/AshCandleChart.git
+      path: packages/ash_candle_chart_flutter
+      ref: 44fd566306e5bae7027991770b355a107fed1693  # ref: PIN_TO_SHA_AFTER_FIRST_TAG
+#  ash_candle_chart_state:
+#    git:
+#      url: https://github.com/Informatica-ASHware/AshCandleChart.git
+#      path: packages/ash_candle_chart_state
+#      ref: 44fd566306e5bae7027991770b355a107fed1693  # ref: PIN_TO_SHA_AFTER_FIRST_TAG
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter

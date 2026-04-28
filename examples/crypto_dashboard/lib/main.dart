@@ -13,7 +13,7 @@ void main() {
 final csvDataProvider = FutureProvider<List<Candle>>((ref) async {
   // Asegúrate de tener el archivo CSV registrado en tu pubspec.yaml
   // final csvString = await rootBundle.loadString('assets/CME_MINI_DL_ES1!, 1_d2151.csv');
-  final csvString = await rootBundle.loadString('assets/CME_DL_NKD1!, 1_dc74e.csv');
+  final csvString = await rootBundle.loadString('assets/CME_MINI_DL_ES1!, 1_d2151.csv');
   final lines = csvString.split('\n');
   final candles = <Candle>[];
 
